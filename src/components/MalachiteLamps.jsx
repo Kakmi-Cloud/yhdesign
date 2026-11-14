@@ -95,7 +95,7 @@ export default function MalachiteLamps({ bg = '#0B1512' }) {
           <div className="mb-10 flex items-end justify-between gap-6 border-b border-white/10 pb-6">
             <div>
               <div className="mb-2 flex items-center gap-3">
-                <span className="inline-block -rotate-2 bg-[#E67E33] px-3 py-0.5 text-[10px] font-black tracking-[0.2em] text-[#151515]">
+                <span className="inline-block  bg-[#E67E33] px-3 py-0.5 text-[10px] font-black tracking-[0.2em] text-[#151515]">
                   SERIES 01 · INTERNSHIP
                 </span>
                 <span className="text-[10px] font-bold tracking-[0.3em] text-white/40">2024</span>

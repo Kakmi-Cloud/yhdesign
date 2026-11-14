@@ -489,7 +489,7 @@ h1, h2, h3, .font-display {
   aspect-ratio: 1;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   border-radius: 0.35rem;
-  transform: rotate(12deg);
+  transform: rotate(0deg);
 }
 
 .hero-geo-text {
@@ -865,22 +865,22 @@ h1, h2, h3, .font-display {
 /* Neo-brutalist decorative motion */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(2deg); }
+  50% { transform: translateY(-12px) rotate(0deg); }
 }
 
 @keyframes float-medium {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(0deg); }
 }
 
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
 
 @keyframes wiggle {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(0deg); }
 }
 
 .animate-float-slow {
@@ -934,8 +934,8 @@ h1, h2, h3, .font-display {
 
 /* Organic wobble animation */
 @keyframes wobble {
-  0%, 100% { transform: rotate(-2deg) translateY(0); }
-  50% { transform: rotate(2deg) translateY(-6px); }
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(0deg) translateY(-6px); }
 }
 
 .animate-wobble {
@@ -1035,7 +1035,7 @@ h1, h2, h3, .font-display {
 }
 /* 慢速自转（酸星等图形用） */
 @keyframes acid-spin {
-  to { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
 .acid-spin {
   animation: acid-spin 14s linear infinite;
@@ -1532,11 +1532,11 @@ body::after {
   }
 }
 .acid-tl-marker {
-  transform: rotate(45deg);
+  transform: rotate(0deg);
   border-radius: 2px;
 }
 .acid-tl-marker > span {
-  transform: rotate(-45deg);
+  transform: rotate(0deg);
 }
 
 /* --- 去便当化：整页把圆角柔卡碾成锋利的印刷切边（保留 rounded-full 圆形） --- */
@@ -1916,7 +1916,7 @@ body::after {
   .detail-fold[open] > summary.detail-fold-summary {
     border-bottom: 2px solid #151515;
   }
-  .detail-fold[open] > summary.detail-fold-summary span { transform: rotate(45deg); }
+  .detail-fold[open] > summary.detail-fold-summary span { transform: rotate(0deg); }
   .detail-fold > summary.detail-fold-summary span {
     font-size: 18px;
     line-height: 1;

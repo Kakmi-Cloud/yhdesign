@@ -99,13 +99,13 @@
   transition: transform 0.35s cubic-bezier(0.25, 0.6, 0.25, 1.15);
 }
 .sfg-folder__paper.p1 { bottom: -4px; height: 72%; z-index: 3; }
-.sfg-folder__paper.p2 { bottom: -8px; height: 64%; z-index: 2; transform: rotate(-2.5deg); }
-.sfg-folder__paper.p3 { bottom: -12px; height: 56%; z-index: 1; transform: rotate(3.5deg); }
+.sfg-folder__paper.p2 { bottom: -8px; height: 64%; z-index: 2; transform: rotate(0deg); }
+.sfg-folder__paper.p3 { bottom: -12px; height: 56%; z-index: 1; transform: rotate(0deg); }
 
 /* 点击打开后：纸角大幅下探、扇形展开（hover 不再自主翻开） */
-.sfg-folder.is-active .sfg-folder__paper.p1 { transform: translateY(24px) rotate(-6deg); }
-.sfg-folder.is-active .sfg-folder__paper.p2 { transform: translateY(18px) rotate(4deg); }
-.sfg-folder.is-active .sfg-folder__paper.p3 { transform: translateY(15px) rotate(-3deg); }
+.sfg-folder.is-active .sfg-folder__paper.p1 { transform: translateY(24px) rotate(0deg); }
+.sfg-folder.is-active .sfg-folder__paper.p2 { transform: translateY(18px) rotate(0deg); }
+.sfg-folder.is-active .sfg-folder__paper.p3 { transform: translateY(15px) rotate(0deg); }
 
 .sfg-folder__front {
   position: absolute;

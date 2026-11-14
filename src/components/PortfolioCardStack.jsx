@@ -269,8 +269,8 @@ export default function PortfolioCardStack({
         onMouseMove={(e) => {
           // 舞台视差：半屏/光箱时不干扰，只做 ±2~3° 的轻俯仰；离屏时整段跳过
           if (peekIndex !== null || lightboxImage || !inView) return
-          tiltPointRef.current.x = ((e.clientX / window.innerWidth) * 2 - 1) * 2.6
-          tiltPointRef.current.y = -((e.clientY / window.innerHeight) * 2 - 1) * 1.9
+          tiltPointRef.current.x = 0
+          tiltPointRef.current.y = 0
           if (!tiltRafRef.current) tiltRafRef.current = requestAnimationFrame(flushTilt)
         }}
         onMouseLeave={resetTilt}
@@ -488,9 +488,10 @@ export default function PortfolioCardStack({
           const x = useTransform(dist, [-3, -2, -1, 0, 1, 2, 3], [-X3, -X2, -X1, 0, X1, X2, X3])
           const y = useTransform(dist, [-3, -2, -1, 0, 1, 2, 3], [64, 30, 12, 0, 12, 30, 64])
           // 平面扭角降一档，把视觉重心让给 3D 侧转
-          const rotateZ = useTransform(dist, [-3, -2, -1, 0, 1, 2, 3], [-12, -9, -4, 0, 4, 9, 12])
+          // 全站统一正向：平面扭角归零（保留参数位，方便以后回退）
+          const rotateZ = useTransform(dist, [-3, -2, -1, 0, 1, 2, 3], [0, 0, 0, 0, 0, 0, 0])
           // 3D 侧转：左右两侧的卡向中心转（像立起的封面书脊），焦点卡正对观众
-          const rotateY = useTransform(dist, [-3, -2, -1, 0, 1, 2, 3], [42, 30, 16, 0, -16, -30, -42])
+          const rotateY = useTransform(dist, [-3, -2, -1, 0, 1, 2, 3], [0, 0, 0, 0, 0, 0, 0])
           // 景深对比拉满：焦点卡沿 Z 轴明显拉近，侧卡逐级后退到更深的“后场”
           const z = useTransform(dist, [-3, -2, -1, 0, 1, 2, 3], [-320, -220, -120, 120, -120, -220, -320])
           // 尺寸阶梯拉大：焦点卡 100%，每退一格明显缩小 → 主次一目了然

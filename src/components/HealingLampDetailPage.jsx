@@ -109,7 +109,7 @@ export default function HealingLampDetailPage({ project, onClose }) {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,360px)] lg:items-end">
             <Reveal>
               <div className="mb-5 flex flex-wrap items-center gap-3">
-                <span className="inline-block -rotate-2 px-3 py-0.5 text-[10px] font-black tracking-[0.2em]" style={{ backgroundColor: INK, color: PAPER }}>
+                <span className="inline-block  px-3 py-0.5 text-[10px] font-black tracking-[0.2em]" style={{ backgroundColor: INK, color: PAPER }}>
                   PROJECT 04 · 毕业设计
                 </span>
                 <span className="font-mono text-[10px] font-bold tracking-[0.3em]" style={{ color: 'rgba(21,21,21,0.45)' }}>2024</span>

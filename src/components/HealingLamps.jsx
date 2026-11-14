@@ -131,7 +131,7 @@ export default function HealingLamps() {
             <div>
               <div className="flex flex-wrap items-baseline gap-3">
                 <span
-                  className="inline-block -rotate-2 px-3 py-0.5 text-[10px] font-black tracking-[0.2em]"
+                  className="inline-block  px-3 py-0.5 text-[10px] font-black tracking-[0.2em]"
                   style={{ background: INK, color: PAPER }}
                 >
                   INTERACTION STUDY

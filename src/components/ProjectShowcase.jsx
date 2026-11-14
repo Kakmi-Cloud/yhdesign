@@ -142,7 +142,7 @@ function Signature({ type, cfg, dossier, project, images, value, setValue, activ
       <div className="sw-sig sw-sig--module">
         <div className="sw-module-stage">
           <img className="sw-module-base" src={light.src} alt={light.alt} draggable="false" />
-          <div className="sw-module-pack" style={{ transform: `translateX(${-pct * 0.42}%) rotate(${-pct * 0.012}deg)` }}>
+          <div className="sw-module-pack" style={{ transform: `translateX(${-pct * 0.42}%)` }}>
             <img src={light.src} alt="" aria-hidden="true" draggable="false" />
           </div>
           <span className="sw-module-note" style={{ opacity: 0.25 + pct / 140 }}>软包沿框架内导轨推入 / 抽出</span>

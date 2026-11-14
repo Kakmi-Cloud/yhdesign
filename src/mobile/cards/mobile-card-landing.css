@@ -115,7 +115,7 @@
   transform:
     translate3d(calc(var(--d) * 6px), calc(var(--d) * 13px), 0)
     scale(calc(1 - var(--d) * 0.055))
-    rotate(calc(var(--d) * 1deg));
+    rotate(0deg);
   opacity: calc(1 - var(--d) * 0.17);
   z-index: calc(10 - var(--d));
   transition:
@@ -146,12 +146,12 @@
   transition: none;
 }
 .mcl-card[data-leaving="left"] {
-  transform: translate3d(-116%, -26px, 0) rotate(-9deg);
+  transform: translate3d(-116%, -26px, 0) rotate(0deg);
   opacity: 0;
   transition: transform 190ms ease-in, opacity 190ms ease-in;
 }
 .mcl-card[data-leaving="right"] {
-  transform: translate3d(116%, -26px, 0) rotate(9deg);
+  transform: translate3d(116%, -26px, 0) rotate(0deg);
   opacity: 0;
   transition: transform 190ms ease-in, opacity 190ms ease-in;
 }

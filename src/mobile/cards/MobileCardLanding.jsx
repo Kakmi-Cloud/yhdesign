@@ -142,7 +142,7 @@ export default function MobileCardLanding({
             const far = depth > 3
             const style = { '--d': depth }
             if (isTop && dragging) {
-              style.transform = `translate3d(${dragX}px, 0, 0) rotate(${dragX / 26}deg)`
+              style.transform = `translate3d(${dragX}px, 0, 0)`
             }
             return (
               <article

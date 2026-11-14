@@ -148,9 +148,7 @@ export default function MobileLandingMenu({
         // -4° 是整副牌堆的基准倾角；越靠后越正，离场时向另一侧甩开
         const tilt = leaving ? -4 + depth * 15 : -4 + depth * 2.5
 
-        node.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(${tilt.toFixed(
-          2,
-        )}deg) scale(${scale.toFixed(3)})`
+        node.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(0deg) scale(${scale.toFixed(3)})`
 
         // 最后一张额外压暗一档，让"还有更多"读得出来；离场时线性淡出
         const opacity = leaving

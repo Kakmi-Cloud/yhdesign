@@ -92,7 +92,7 @@
 .xj-bar b { font: 700 15px var(--pp-mono); }
 .xj-bar b small { font-size: 12px; font-weight: 500; }
 .xj-bar span { font-size: 12px; color: var(--pp-dim); }
-.xj-mini-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; width: min(210px, 100%); margin: 0 auto 22px; transform: rotate(-8deg); }
+.xj-mini-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; width: min(210px, 100%); margin: 0 auto 22px; transform: rotate(0deg); }
 .xj-mini-grid i { aspect-ratio: 1; background: #6E685D; border-radius: 2px; }
 .xj-spec-card dl, .xj-spec-card dl div { display: grid; }
 .xj-spec-card dl div { grid-template-columns: 62px 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--pp-line); font-size: 13px; }

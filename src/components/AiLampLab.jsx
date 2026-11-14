@@ -125,7 +125,7 @@ export default function AiLampLab() {
               <div className="mb-3 flex flex-wrap items-center gap-3">
                 {/* 印章倾角统一为 -2°：与封面印记、SERIES 01 的印章同一角度，
                     原先这里是 +2°，两个系列并排看会像两个方向。 */}
-                <span className="inline-block -rotate-2 px-3 py-0.5 text-[10px] font-black tracking-[0.2em] text-white" style={{ background: INK }}>
+                <span className="inline-block  px-3 py-0.5 text-[10px] font-black tracking-[0.2em] text-white" style={{ background: INK }}>
                   SERIES 02 · AI LAB
                 </span>
                 <span className="text-[10px] font-bold tracking-[0.3em]" style={{ color: 'rgba(21,21,21,0.5)' }}>

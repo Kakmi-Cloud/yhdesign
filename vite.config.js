@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -12,6 +13,13 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     rollupOptions: {
+      // 两个入口：桌面主站 index.html + 手机端独立入口 mobile.html。
+      // 手机端不经过 App.jsx 的 isMobile 分支，自带一套极简状态机，
+      // 产物是独立的 dist/mobile.html，可与主站分开部署。
+      input: {
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        mobile: fileURLToPath(new URL('./mobile.html', import.meta.url)),
+      },
       output: {
         // 把"几百年不会改"的依赖单独切块。三个好处：
         //   1. 首屏请求可以并行下载，不用等一个大文件下完才开始解析；

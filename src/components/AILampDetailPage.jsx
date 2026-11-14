@@ -121,7 +121,7 @@ export default function AILampDetailPage({ project, onClose }) {
           <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,430px)] lg:items-end lg:gap-x-10 lg:gap-y-0">
             <Reveal className="max-lg:order-1 lg:col-start-1 lg:row-start-1">
               <div className="mb-5 flex flex-wrap items-center gap-3">
-                <span className="inline-block -rotate-2 px-3 py-0.5 text-[10px] font-black tracking-[0.2em]" style={{ backgroundColor: ACCENT, color: ON_ACCENT }}>
+                <span className="inline-block  px-3 py-0.5 text-[10px] font-black tracking-[0.2em]" style={{ backgroundColor: ACCENT, color: ON_ACCENT }}>
                   PROJECT 03 · 产品设计
                 </span>
                 <span className="font-mono text-[10px] font-bold tracking-[0.3em]" style={{ color: T.ink3 }}>INTERNSHIP ARCHIVE</span>

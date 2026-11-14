@@ -37,8 +37,9 @@ export default function ProfileCard({
   const py = useMotionValue(0)
 
   // 倾斜角：鼠标在哪边，卡面向哪边仰起；低刚度弹簧平滑追位
-  const rotateX = useSpring(useTransform(py, (v) => -v * tiltMax), { stiffness: 160, damping: 18, mass: 0.6 })
-  const rotateY = useSpring(useTransform(px, (v) => v * tiltMax), { stiffness: 160, damping: 18, mass: 0.6 })
+  // 全站统一正向：不再随指针倾斜，tiltMax 仅保留参数位以兼容调用方
+  const rotateX = useSpring(useTransform(py, () => 0), { stiffness: 160, damping: 18, mass: 0.6 })
+  const rotateY = useSpring(useTransform(px, () => 0), { stiffness: 160, damping: 18, mass: 0.6 })
 
   // 辉光锚点（百分比坐标，跟随指针；背面辉光层与卡面反光共用）
   const gxPct = useTransform(px, (v) => `${(v + 1) * 50}%`)

@@ -127,7 +127,7 @@
   padding: 0 16px;
   font: 800 14px/1 'Noto Sans SC', sans-serif;
   letter-spacing: 0.02em;
-  transform: rotate(-1.2deg);
+  transform: rotate(0deg);
 }
 .pf-badge--solid { background: var(--pf-accent); color: var(--pf-paper); }
 .pf-badge--outline { border: 2px solid var(--pf-ink); color: var(--pf-ink); }
@@ -192,7 +192,7 @@
   background: var(--pf-soft);
   border: 2px solid var(--pf-ink);
   box-shadow: 14px 14px 0 var(--pf-accent);
-  transform: rotate(-1.5deg);
+  transform: rotate(0deg);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .pf-hero-figure:hover { transform: rotate(0deg) translate(-3px, -3px); }
@@ -221,7 +221,7 @@
   background: var(--pf-paper);
   border: 2px solid var(--pf-ink);
   box-shadow: 7px 7px 0 var(--pf-ink);
-  transform: rotate(3.2deg);
+  transform: rotate(0deg);
 }
 .pf-mini-figure img { display: block; width: 100%; height: clamp(90px, 12vw, 150px); object-fit: cover; }
 
@@ -408,15 +408,15 @@
   font: 600 11.5px/1.5 'Noto Sans SC', sans-serif;
   color: var(--pf-dim);
 }
-.pf-shot--0 { grid-column: span 7; transform: rotate(-1.2deg); }
+.pf-shot--0 { grid-column: span 7; transform: rotate(0deg); }
 .pf-shot--0 img { height: clamp(240px, 30vw, 400px); }
-.pf-shot--1 { grid-column: span 5; transform: rotate(1.4deg) translateY(38px); }
+.pf-shot--1 { grid-column: span 5; transform: rotate(0deg) translateY(38px); }
 .pf-shot--1 img { height: clamp(190px, 24vw, 320px); }
-.pf-shot--2 { grid-column: span 4; transform: rotate(1deg) translateY(-10px); }
+.pf-shot--2 { grid-column: span 4; transform: rotate(0deg) translateY(-10px); }
 .pf-shot--2 img { height: clamp(180px, 21vw, 280px); }
-.pf-shot--3 { grid-column: span 8; transform: rotate(-0.8deg) translateY(18px); }
+.pf-shot--3 { grid-column: span 8; transform: rotate(0deg) translateY(18px); }
 .pf-shot--3 img { height: clamp(210px, 26vw, 340px); }
-.pf-shot--4 { grid-column: span 6; transform: rotate(1.1deg); }
+.pf-shot--4 { grid-column: span 6; transform: rotate(0deg); }
 .pf-shot--4 img { height: clamp(190px, 22vw, 300px); }
 
 /* ── 08 来源与说明 ────────────────────────────────────────── */

@@ -535,7 +535,7 @@ export default function ProjectDetailPage({ project, onClose }) {
     >
       <style>{`
         .bento-spin { animation: bento-spin 10s linear infinite; }
-        @keyframes bento-spin { to { transform: rotate(360deg); } }
+        @keyframes bento-spin { to { transform: ; } }
         .bento-hover { transition: transform .4s cubic-bezier(.25,1,.5,1), box-shadow .4s; }
         .bento-hover:hover { transform: translateY(-4px); }
         .halftone-bg {
@@ -755,7 +755,7 @@ export default function ProjectDetailPage({ project, onClose }) {
                   <h2 className="inline-block pb-1 text-5xl font-black leading-none md:text-6xl max-lg:text-[32px]" style={{ letterSpacing: '-0.04em', color: INK, borderBottom: '3px solid #111111' }}>{cfg.actionTitle}</h2>
                   <p className="mt-2.5 max-w-[46ch] text-[15px] font-medium leading-[1.55] md:text-sm" style={{ color: INK }}>{cfg.actionDesc}</p>
                 </div>
-                <span className="mt-3 block text-4xl font-black leading-none transition-transform duration-500 group-hover:rotate-45 md:self-end md:text-5xl" style={{ color: INK, transformOrigin: 'center' }}>↗</span>
+                <span className="mt-3 block text-4xl font-black leading-none transition-transform duration-500  md:self-end md:text-5xl" style={{ color: INK, transformOrigin: 'center' }}>↗</span>
               </div>
             </Tile>
           </div>

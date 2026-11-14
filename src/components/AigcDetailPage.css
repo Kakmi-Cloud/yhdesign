@@ -14,7 +14,7 @@
 /* ---------- hero ---------- */
 .aigc-hero{position:relative;background:radial-gradient(120% 88% at 50% 6%,#1c2026 0%,#0c0d0f 62%);border-bottom:1px solid var(--aigc-line)}
 .aigc-nav{height:90px;display:flex;align-items:center;justify-content:space-between;gap:26px;border-bottom:1px solid var(--aigc-line-soft)}
-.aigc-page .aigc-monogram{width:46px;height:46px;border-radius:12px;background:var(--aigc-accent);color:#0c0d0f;font-family:var(--aigc-display);font-size:19px;font-weight:900;letter-spacing:-.07em;line-height:1;display:grid;place-items:center;padding-bottom:2px;transform:rotate(-5deg)}
+.aigc-page .aigc-monogram{width:46px;height:46px;border-radius:12px;background:var(--aigc-accent);color:#0c0d0f;font-family:var(--aigc-display);font-size:19px;font-weight:900;letter-spacing:-.07em;line-height:1;display:grid;place-items:center;padding-bottom:2px;transform:rotate(0deg)}
 .aigc-nav nav{display:flex;gap:32px;font-size:14px}
 .aigc-nav nav button{color:var(--aigc-fog);transition:color .2s}
 .aigc-nav nav button:hover{color:var(--aigc-accent)}

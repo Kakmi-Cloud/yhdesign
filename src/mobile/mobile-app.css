@@ -1,0 +1,122 @@
+/**
+ * mobile-app.css —— 独立入口的最小外壳样式
+ *
+ * 只做三件事，全部是「原文件已有数值的搬移」，不新增视觉语言：
+ *   1. 页面级重置（背景取首访层的暖纸色 #FBF6EC）
+ *   2. 铭牌 .hero-mobile-plate / .hero-mobile-name / .hero-mobile-meta（照抄 index.css 1943-1968）
+ *   3. 桌面浏览器里给这个手机入口加一层 430px 居中边框，方便在电脑上预览；
+ *      ≤767px 真机视口下完全不生效，手机上的渲染与原站逐像素一致。
+ */
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #fbf6ec;
+  color: #42332c;
+  font-family: 'Noto Sans SC', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mobile-app-shell {
+  position: relative;
+  min-height: 100vh;
+  background: #fbf6ec;
+  /* 牌堆的环境光晕宽 120vw，主站靠 position:fixed 把它挡在文档宽度之外；
+     独立入口里牌堆是 absolute，这里显式裁掉横向溢出，避免出现横向滚动条 */
+  overflow-x: hidden;
+}
+
+/* ── 铭牌（数值照抄 index.css，未改动） ── */
+.hero-mobile-plate {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 96px;
+  padding: 34px 20px 14px;
+  border-bottom: 2px solid #151515;
+  background: #ffffff;
+}
+
+.hero-mobile-name {
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: #151515;
+}
+
+.hero-mobile-meta {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  color: #5a5751;
+}
+
+.mobile-long-back {
+  padding: 18px 20px 40px;
+  background: #fcfcfc;
+}
+
+.mobile-long-back button {
+  width: 100%;
+  min-height: 48px;
+  border: 2px solid #151515;
+  background: #ffffff;
+  color: #151515;
+  font: 800 13px/1 'Noto Sans SC', 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.mobile-long-back button:active {
+  background: #f4f2ed;
+}
+
+/* 详情页外壳在主站是 position:absolute + 固定遮罩，独立入口里改为铺满 */
+.mobile-app-shell.is-detail {
+  overflow: hidden;
+}
+
+.mobile-app-shell.is-detail .pp-root {
+  position: relative;
+  height: 100vh;
+}
+
+/* ── 仅桌面预览用：把手机入口装进 430px 的框里 ── */
+@media (min-width: 768px) {
+  body {
+    background: #efe9dd;
+  }
+
+  .mobile-app-shell {
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    border-left: 1px solid #ddd0bc;
+    border-right: 1px solid #ddd0bc;
+    box-shadow: 0 0 60px rgba(66, 51, 44, 0.12);
+  }
+
+  /* 牌堆在主站是 fixed 全屏，这里跟随外壳边界 */
+  .mobile-app-shell .mcl-overlay {
+    position: absolute;
+  }
+
+  .mobile-app-shell.is-detail .pp-root {
+    height: 100vh;
+  }
+
+  .mobile-app-shell .pp-index {
+    right: 12px;
+  }
+}

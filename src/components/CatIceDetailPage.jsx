@@ -221,7 +221,7 @@ export default function CatIceDetailPage({ project, onClose }) {
       const rect = tilt.getBoundingClientRect()
       const x = (event.clientX - rect.left) / rect.width - 0.5
       const y = (event.clientY - rect.top) / rect.height - 0.5
-      tilt.style.transform = `perspective(1200px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`
+      tilt.style.transform = 'none'
     }
     const handleLeave = () => { tilt.style.transform = '' }
     tilt.addEventListener('pointermove', handleMove)
@@ -335,8 +335,8 @@ export default function CatIceDetailPage({ project, onClose }) {
     setMoodResult(`${mood[0]}｜${mood[1]}`)
     moodButtonRef.current?.animate?.([
       { transform: 'rotate(0) scale(1)' },
-      { transform: 'rotate(-3deg) scale(.96)' },
-      { transform: 'rotate(2deg) scale(1.02)' },
+      { transform: 'scale(.96)' },
+      { transform: 'scale(1.02)' },
       { transform: 'rotate(0) scale(1)' },
     ], { duration: 420, easing: 'ease-out' })
   }
