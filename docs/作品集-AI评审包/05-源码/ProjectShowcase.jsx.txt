@@ -1,0 +1,392 @@
+/**
+ * ProjectShowcase —— 项目展示板块（影像优先版）
+ *
+ * 用来整体替换 ProjectDossier 的「文字档案」版式。
+ * 版式规则（直接体现在这一份实现里）：
+ *   · 产品是唯一的视觉主体：首屏整幅产品影像，之后每一屏都由图像推进，
+ *     全页只保留编号、项目名、一句定位、4 个功能短词、2 个数字与页脚出处。
+ *   · 单纸色 + 单墨色 + 单强调色；强调色只出现在极小面积。
+ *   · 编辑式而非网格式：跨栏、负边距叠压、微旋转、描边巨字、竖排标签、
+ *     满幅 / 大留白 / 反相 / 横向胶片交替，形成节奏与对比。
+ *   · 趣味来自交互而非装饰：跟随光标、hover 位移、入场揭示、视差、可拖动胶片。
+ *   · 双端同构：手机端保留同样的影像优先顺序，只把错位改成纵向叠压。
+ *
+ * 数据仍取自 projectDossiers.js 与 App.jsx 的 project.gallery，不新增事实。
+ * 上一轮确认的四条口径以短标签 / 短句形式保留，不恢复长段说明。
+ */
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { asset } from '../assetPath'
+import { getDossier, statusLabel, GLOBAL_NOTE } from '../data/projectDossiers'
+import './projectShowcase.css'
+
+const pad = (n) => String(n).padStart(2, '0')
+const short = (s, n) => (s ? String(s).replace(/\s+/g, ' ').slice(0, n) : '')
+
+export default function ProjectShowcase({ project, allProjects = [], onClose, onSelect }) {
+  const dossier = getDossier(project?.id)
+  const rootRef = useRef(null)
+  const heroImgRef = useRef(null)
+  const filmRef = useRef(null)
+  const cursorRef = useRef(null)
+  const dragRef = useRef({ down: false, x: 0, left: 0 })
+  const [indexOpen, setIndexOpen] = useState(false)
+  const [progress, setProgress] = useState(0)
+
+  // 图像序列：主视觉 → 精选补图 → 项目原有图集；按最终 URL 去重。
+  const images = useMemo(() => {
+    if (!project || !dossier) return []
+    const seen = new Set()
+    const list = [
+      { src: dossier.hero?.src, alt: dossier.hero?.alt || project.title, fit: dossier.hero?.fit },
+      ...(dossier.extraGallery || []),
+      ...(project.gallery || []),
+    ]
+    const all = list.reduce((acc, g) => {
+      if (!g?.src) return acc
+      const url = asset(g.src)
+      if (seen.has(url)) return acc
+      seen.add(url)
+      acc.push({ src: url, alt: g.alt || project.title, fit: g.fit })
+      return acc
+    }, [])
+    if (!all.length) return []
+    // 产品 / 细节 / 成品图排在前面，场景、人物、过程图留给胶片档案。
+    // 主视觉恒为第 0 张，其余做稳定排序，保证 8 个项目的图像顺序口径一致。
+    const score = (g) => {
+      const a = g.alt || ''
+      if (/场景|人物|使用|展板|过程|调研|分镜|旅程|灵感|概念板|空间|包装|示意|草图/.test(a)) return -1
+      if (/细节|特写|产品|发光|主视觉|结构|三视图|设定|效果|造型|渲染|成品/.test(a)) return 1
+      return 0
+    }
+    return [all[0], ...all.slice(1).sort((a, b) => score(b) - score(a))].slice(0, 10)
+  }, [project, dossier])
+
+  // 浮层自己滚，锁定底层页面。
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [])
+
+  // 切换项目回到顶部，收起索引。
+  useEffect(() => {
+    if (rootRef.current) rootRef.current.scrollTop = 0
+    setIndexOpen(false)
+    setProgress(0)
+  }, [project?.id])
+
+  // 进度条 + 首屏视差。视差直接改 transform，避免滚动时反复渲染整棵树。
+  useEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const uiOnly = project?.id === '05'
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        const max = root.scrollHeight - root.clientHeight
+        setProgress(max > 0 ? Math.min(1, root.scrollTop / max) : 0)
+        if (!reduce && !uiOnly && window.innerWidth > 900 && heroImgRef.current) {
+          const y = Math.min(root.scrollTop * 0.16, 150)
+          heroImgRef.current.style.transform = `translate3d(0, ${y}px, 0) scale(1.08)`
+        }
+        ticking = false
+      })
+    }
+    root.addEventListener('scroll', onScroll, { passive: true })
+    return () => root.removeEventListener('scroll', onScroll)
+  }, [project?.id, images.length])
+
+  // 入场揭示：只做一次，减少动效偏好下直接可见。
+  useEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+    const els = root.querySelectorAll('[data-reveal]')
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-in'))
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in')
+            io.unobserve(e.target)
+          }
+        })
+      },
+      { root, rootMargin: '0px 0px -6% 0px', threshold: 0.05 },
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [project?.id, images.length])
+
+  // 跟随式圆形光标（仅精确指针设备）。
+  useEffect(() => {
+    const root = rootRef.current
+    const cur = cursorRef.current
+    if (!root || !cur || window.matchMedia('(pointer: coarse)').matches) return
+    const onMove = (e) => {
+      cur.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
+      cur.classList.add('is-visible')
+    }
+    const onLeave = () => cur.classList.remove('is-visible')
+    root.addEventListener('pointermove', onMove)
+    root.addEventListener('pointerleave', onLeave)
+    return () => {
+      root.removeEventListener('pointermove', onMove)
+      root.removeEventListener('pointerleave', onLeave)
+    }
+  }, [project?.id])
+
+  const onFilmDown = (e) => {
+    const el = filmRef.current
+    if (!el || e.pointerType === 'touch') return
+    dragRef.current = { down: true, x: e.clientX, left: el.scrollLeft }
+    el.setPointerCapture?.(e.pointerId)
+  }
+  const onFilmMove = (e) => {
+    if (!dragRef.current.down || !filmRef.current) return
+    filmRef.current.scrollLeft = dragRef.current.left - (e.clientX - dragRef.current.x)
+  }
+  const onFilmUp = () => {
+    dragRef.current.down = false
+  }
+
+  // hooks 全部声明完再早退，避免条件渲染破坏 hook 顺序。
+  if (!project || !dossier) return null
+
+  const t = dossier.theme
+  const vars = {
+    '--sw-paper': t.paper,
+    '--sw-ink': t.ink,
+    '--sw-accent': t.accent,
+    '--sw-hair': t.dark ? 'rgba(255,255,255,0.20)' : 'rgba(0,0,0,0.16)',
+    '--sw-dim': t.dark ? 'rgba(255,255,255,0.60)' : 'rgba(0,0,0,0.56)',
+    '--sw-soft': t.dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.045)',
+    '--sw-shadow': t.dark ? 'rgba(255,255,255,0.09)' : 'rgba(0,0,0,0.08)',
+    '--sw-bar-bg': t.dark ? 'rgba(16,18,22,0.76)' : 'rgba(248,245,238,0.78)',
+    '--sw-invert-bg': t.dark ? '#F2EFE7' : '#17181B',
+    '--sw-invert-ink': t.dark ? '#17181B' : '#F5F2EB',
+  }
+
+  const pick = (i) => images[i] || images[0] || { src: '', alt: '' }
+  // 主视觉段只放成品 / 细节图：草图、过程、分镜、设定稿留在胶片档案里。
+  // diemu-01 / fig20 经素材核查是线稿与过程图，alt 未写明，按文件名一并归入过程类。
+  const isProcess = (g) =>
+    /草图|线稿|手绘|推演|过程|分镜|旅程|灵感|概念板|示意|三视图/.test(g?.alt || '') ||
+    /diemu-01|fig20|sketch/i.test(g?.src || '')
+  const product = images.filter((g) => !isProcess(g))
+  const main = (i) => product[i] || images[i] || images[0] || { src: '', alt: '' }
+  const uiOnly = project.id === '05'
+  const fitOf = (g) => (uiOnly || g?.fit === 'contain' ? 'contain' : 'cover')
+  const fns = (dossier.functions || []).map((f) => f.t).slice(0, 4)
+  const facts = (dossier.research?.metrics || []).slice(0, 2)
+  const stages = (dossier.build?.stages || []).slice(0, 3)
+  const sources = (dossier.evidence || []).map((e) => e.label).slice(0, 3).join(' · ')
+  const pool = images.length > 1 ? images.slice(1) : images
+  const film = Array.from({ length: 5 }, (_, i) => pool[i % pool.length] || images[0])
+  const idx = allProjects.findIndex((p) => p.id === project.id)
+  const next = allProjects.length ? allProjects[(idx + 1 + allProjects.length) % allProjects.length] : null
+  const nextDossier = next ? getDossier(next.id) : null
+
+  const shot = (g, i) => (
+    <img
+      src={g?.src}
+      alt={g?.alt || project.title}
+      style={{ objectFit: fitOf(g) }}
+      loading={i === 0 ? 'eager' : 'lazy'}
+      decoding="async"
+      draggable="false"
+    />
+  )
+
+  return (
+    <div
+      ref={rootRef}
+      className={`sw-root${t.dark ? ' sw-root--dark' : ''}`}
+      style={vars}
+      data-lenis-prevent
+      role="region"
+      aria-label={`${project.title} · 项目展示`}
+    >
+      <div className="sw-cursor" ref={cursorRef} aria-hidden="true"><span>VIEW</span></div>
+
+      <header className="sw-bar">
+        <button type="button" className="sw-back" onClick={onClose} aria-label="返回作品集">
+          <span aria-hidden="true">←</span> 返回
+        </button>
+        <span className="sw-bar-id">YH <i>/</i> {project.id} — 08</span>
+        <div className="sw-bar-right">
+          <span className="sw-progress" aria-hidden="true"><i style={{ width: `${progress * 100}%` }} /></span>
+          <button
+            type="button"
+            className="sw-index-toggle"
+            onClick={() => setIndexOpen((v) => !v)}
+            aria-expanded={indexOpen}
+            aria-label="打开项目索引"
+          >
+            INDEX <b>{project.id}</b>
+          </button>
+        </div>
+      </header>
+
+      {indexOpen ? (
+        <nav className="sw-index" aria-label="项目索引">
+          <p className="sw-index-head">SELECTED WORKS <i>/</i> 08</p>
+          {allProjects.map((p) => (
+            <button
+              type="button"
+              key={p.id}
+              className={p.id === project.id ? 'is-active' : ''}
+              onClick={() => {
+                setIndexOpen(false)
+                onSelect?.(p)
+              }}
+            >
+              <span>{p.id}</span>
+              <strong>{p.title}</strong>
+              <em>{statusLabel(p.id)}</em>
+            </button>
+          ))}
+        </nav>
+      ) : null}
+
+      <main>
+        {/* 01 — 整幅产品影像：同图的模糊层铺满画面，清晰层完整呈现产品。
+            横图桌面 cover、手机 contain；竖版界面图双端 contain，绝不裁坏产品。 */}
+        <section className={`sw-hero${uiOnly ? ' sw-hero--ui' : ''}`} aria-label="产品主视觉">
+          <div className="sw-hero-media">
+            <img className="sw-hero-bg" src={pick(0).src} alt="" aria-hidden="true" draggable="false" />
+            <div className="sw-hero-stage">
+              <img
+                ref={heroImgRef}
+                className="sw-hero-fg"
+                src={pick(0).src}
+                alt={pick(0).alt}
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+          </div>
+          <span className="sw-hero-scrim" aria-hidden="true" />
+          <span className="sw-hero-ghost" aria-hidden="true">{project.id}</span>
+          <div className="sw-hero-copy">
+            <p className="sw-kicker">PROJECT {project.id} <i>/</i> {project.category}</p>
+            <h1 className="sw-hero-title">{project.title}</h1>
+            <div className="sw-hero-badges">
+              {project.subtitle ? <span className="sw-hero-sub">{short(project.subtitle, 22)}</span> : null}
+              <span className="sw-badge">{dossier.badge}</span>
+            </div>
+          </div>
+          <span className="sw-hero-scroll" aria-hidden="true">SCROLL <b>↓</b></span>
+        </section>
+
+        {/* 02 — 大留白：一句定位 + 两个数字，是全页文字密度最高的地方，也只有两行。 */}
+        <section className="sw-statement sw-sec" data-reveal>
+          <p className="sw-line">{dossier.oneLiner}</p>
+          {facts.length ? (
+            <div className="sw-facts">
+              {facts.map((m, i) => (
+                <div className="sw-fact" key={m.l}>
+                  <b className={i === 1 ? 'is-accent' : ''}>{m.v}</b>
+                  <span>{short(m.l, 14)}</span>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </section>
+
+        {/* 03 — 错位双图：大图跨 8 栏，小图压在右下并轻微旋转。 */}
+        <section className="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+          <figure className={`sw-fig sw-fig--big${fitOf(main(1)) === 'contain' ? ' is-contain' : ''}`}>
+            {shot(main(1), 1)}
+            <figcaption className="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption>
+          </figure>
+          <figure className={`sw-fig sw-fig--small${fitOf(main(2)) === 'contain' ? ' is-contain' : ''}`}>
+            {shot(main(2), 2)}
+          </figure>
+        </section>
+
+        {/* 04 — 反相全幅：底色翻转形成节奏断点，功能只留 4 个短词浮在边缘。 */}
+        <section className="sw-invert" data-reveal aria-label="可实现功能">
+          <div className="sw-invert-head">
+            <span>FUNCTIONS <i>/</i> {pad(fns.length)}</span>
+            <span>功能均可实现</span>
+          </div>
+          <div className="sw-invert-media">
+            <img src={main(3).src} alt={main(3).alt} style={{ objectFit: fitOf(main(3)) }} loading="lazy" decoding="async" draggable="false" />
+            {fns.map((f, i) => (
+              <span className={`sw-fn sw-fn--${i}`} key={f}>{pad(i + 1)} &nbsp;{f}</span>
+            ))}
+            <span className="sw-invert-word" aria-hidden="true">OBJECT</span>
+          </div>
+        </section>
+
+        {/* 05 — 偏栏窄图 + 巨大留白 + 描边巨字，制造疏密对比。 */}
+        <section className="sw-aside sw-sec" data-reveal aria-label="设计细节">
+          <span className="sw-aside-vertical" aria-hidden="true">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+          <span className="sw-aside-outline" aria-hidden="true">{project.id}</span>
+          <figure className={`sw-aside-fig${fitOf(main(4)) === 'contain' ? ' is-contain' : ''}`}>
+            {shot(main(4), 4)}
+          </figure>
+          <div className="sw-aside-meta">
+            <span>{short(dossier.origin, 24)}</span>
+            {stages.length ? <span>{stages.join(' · ')}</span> : null}
+          </div>
+        </section>
+
+        {/* 06 — 横向胶片：纯图，可拖动，不做等距网格。 */}
+        <section className="sw-film-wrap" data-reveal aria-label="图像档案">
+          <div className="sw-film-head">
+            <span>IMAGE ARCHIVE <i>/</i> {pad(pool.length)} FRAMES</span>
+            <span>DRAG <b>↔</b></span>
+          </div>
+          <div
+            className="sw-film"
+            ref={filmRef}
+            onPointerDown={onFilmDown}
+            onPointerMove={onFilmMove}
+            onPointerUp={onFilmUp}
+            onPointerCancel={onFilmUp}
+          >
+            {film.map((g, i) => (
+              <figure className={`sw-frame sw-frame--${i}${fitOf(g) === 'contain' ? ' is-contain' : ''}`} key={`${g?.src}-${i}`}>
+                {shot(g, 5 + i)}
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        {/* 07 — 收尾：只留进展、来源与统一口径，全部小字。 */}
+        <section className="sw-outro" data-reveal>
+          <p className="sw-outro-line"><b>进展</b><span>{dossier.status.label}</span></p>
+          {project.id === '03' ? (
+            <p className="sw-outro-note">孔雀石系列已开始落地 · 其余形态或细节尚未确认</p>
+          ) : null}
+          <div className="sw-outro-fine">
+            <span>{GLOBAL_NOTE.feasibility}</span>
+            {sources ? <span>资料：{sources}</span> : null}
+          </div>
+          <button type="button" className="sw-outro-back" onClick={onClose}>← 返回作品集</button>
+        </section>
+
+        {/* 08 — 下一项目全幅预告，点整块切换。 */}
+        {next && nextDossier ? (
+          <button type="button" className="sw-next" onClick={() => onSelect?.(next)} aria-label={`下一个项目：${next.title}`}>
+            <img src={asset(nextDossier.hero.src)} alt="" loading="lazy" decoding="async" draggable="false" />
+            <span className="sw-next-copy">
+              <span className="sw-next-kicker">NEXT PROJECT <i>/</i> {next.id}</span>
+              <strong>{next.title}</strong>
+              <em aria-hidden="true">→</em>
+            </span>
+          </button>
+        ) : null}
+      </main>
+    </div>
+  )
+}

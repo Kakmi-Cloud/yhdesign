@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { fetchMessages, submitMessage } from '../data/guestbook'
+import { fetchMessages, submitMessage, isPreviewHost, PRIMARY_SITE_URL } from '../data/guestbook'
 import './guestbook.css'
 
 /**
@@ -9,8 +9,9 @@ import './guestbook.css'
  *   · 默认        —— 访客提交表单。只显示「已送达」，不展示别人的留言。
  *   · ?inbox=1    —— 作者收件箱，列出云端全部留言（时间 / 昵称 / 联系方式 / 内容）。
  *
- * 为什么留言能真正到达作者：数据写进部署平台的边缘函数 KV 存储里，不在访客浏览器中。
- * 组件不依赖登录，访客点开就能写；失败时明确提示「没有送达」，不会假装成功。
+ * 留言写到部署平台对应的云端后端，不在访客浏览器里；主站走云数据库，
+ * EdgeOne 预览入口走边缘函数。失败时一定给出明确提示 + 可点的主站链接，
+ * 不会静默失败、也不会假装成功。
  */
 const isInboxMode = () => {
   try {
@@ -31,7 +32,7 @@ const formatTime = (value) => {
   }
 }
 
-function InboxView({ rows, loading, error, onReload }) {
+function InboxView({ rows, loading, error, onReload, fallback }) {
   // 去掉 inbox 参数回到作品集，保留 sharecode 等其它查询串
   const backHref = (() => {
     try {
@@ -59,7 +60,12 @@ function InboxView({ rows, loading, error, onReload }) {
         </button>
       </div>
 
-      {error ? <p className="gb-notice gb-notice--err">{error}</p> : null}
+      {error ? (
+        <p className="gb-notice gb-notice--err" role="status">
+          {error}
+          {fallback ? <a className="gb-fallback" href={fallback}>去主站收件箱 ↗</a> : null}
+        </p>
+      ) : null}
       {!loading && !error && rows.length === 0 ? (
         <p className="gb-empty">还没有收到留言。有新留言时刷新这里就能看到。</p>
       ) : null}
@@ -90,13 +96,18 @@ export default function Guestbook({ compact = false }) {
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
+  const [inboxFallback, setInboxFallback] = useState('')
 
   const reload = useCallback(async () => {
     setLoading(true)
     setLoadError('')
+    setInboxFallback('')
     const res = await fetchMessages(100)
     if (res.ok) setRows(res.messages)
-    else setLoadError(res.error)
+    else {
+      setLoadError(res.error)
+      setInboxFallback(res.fallback || '')
+    }
     setLoading(false)
   }, [])
 
@@ -130,7 +141,7 @@ export default function Guestbook({ compact = false }) {
   if (inbox) {
     return (
       <div className="gb-wrap">
-        <InboxView rows={rows} loading={loading} error={loadError} onReload={reload} />
+        <InboxView rows={rows} loading={loading} error={loadError} onReload={reload} fallback={inboxFallback} />
       </div>
     )
   }
@@ -152,7 +163,7 @@ export default function Guestbook({ compact = false }) {
       setContact('')
       setMessage('')
     } else {
-      setNotice({ type: 'err', text: res.error })
+      setNotice({ type: 'err', text: res.error, fallback: res.fallback || '' })
     }
   }
 
@@ -166,6 +177,13 @@ export default function Guestbook({ compact = false }) {
             看过作品想说点什么？留句话吧。留言会直接发到云端，我能看到，不会只留在你自己的浏览器里。
           </p>
         </header>
+
+        {isPreviewHost() ? (
+          <p className="gb-banner" role="note">
+            这是海外预览入口，留言服务可能未开通。要给我留言，请到
+            <a href={PRIMARY_SITE_URL}>主站 ↗</a>；那里发的消息我一定能收到。
+          </p>
+        ) : null}
 
         <form className="gb-form" onSubmit={onSubmit}>
           <div className="gb-row">
@@ -211,6 +229,9 @@ export default function Guestbook({ compact = false }) {
           {notice ? (
             <p className={`gb-notice ${notice.type === 'ok' ? 'gb-notice--ok' : 'gb-notice--err'}`} role="status">
               {notice.text}
+              {notice.fallback ? (
+                <a className="gb-fallback" href={notice.fallback}>去主站留言 ↗</a>
+              ) : null}
             </p>
           ) : null}
         </form>

@@ -184,6 +184,29 @@
 .gb-item-contact { margin: 5px 0 0; color: #6E6B9B; font-size: 12px; }
 .gb-item-text { margin: 8px 0 0; color: #42332C; font-size: 14px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
 
+/* 预览入口提示 + 失败时的可操作引导链接（明确响应，不静默失败） */
+.gb-banner {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border-left: 3px solid #D97842;
+  background: #FBF0E4;
+  color: #6E5C51;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.gb-banner a { margin-left: 4px; color: #42332C; font-weight: 800; text-underline-offset: 3px; }
+.gb-fallback {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 4px 10px;
+  border: 1px solid currentColor;
+  color: #42332C;
+  font-weight: 800;
+  font-size: 12px;
+  text-decoration: none;
+}
+.gb-fallback:hover { background: #42332C; color: #FFF6E8; }
+
 @media (max-width: 767px) {
   .gb-card { padding: 20px 18px 18px; box-shadow: 4px 4px 0 0 rgba(255,255,255,.10); }
   .gb-row { grid-template-columns: 1fr; }

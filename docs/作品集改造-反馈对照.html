@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作品集改造 · 反馈逐项对照与动画说明</title>
+<style>
+:root{--paper:#F6F3EC;--ink:#1C1B19;--dim:#5C584F;--hair:#D8D2C6;--accent:#C2622C;--soft:#EDE8DC}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.78 "Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:56px 28px 100px}
+header{border-bottom:2px solid var(--ink);padding-bottom:30px;margin-bottom:44px}
+.kicker{font:600 11px/1 "JetBrains Mono",Consolas,monospace;letter-spacing:.24em;color:var(--accent);margin:0 0 18px}
+h1{font-size:clamp(2.1rem,4.6vw,3.6rem);line-height:1.14;letter-spacing:-.045em;margin:0 0 16px;font-weight:900}
+.lede{font-size:17px;line-height:1.8;color:var(--dim);max-width:78ch;margin:0}
+.meta{margin-top:22px;display:flex;gap:10px 26px;flex-wrap:wrap;font:600 12px/1 "JetBrains Mono",Consolas,monospace;letter-spacing:.08em;color:var(--dim)}
+h2{font-size:1.6rem;letter-spacing:-.03em;margin:64px 0 8px;padding-top:20px;border-top:1px solid var(--hair);font-weight:900}
+h2 .n{color:var(--accent);font:600 12px/1 "JetBrains Mono",monospace;letter-spacing:.16em;display:block;margin-bottom:10px}
+h3{font-size:1.08rem;margin:34px 0 10px;font-weight:800;letter-spacing:-.02em}
+p{margin:0 0 14px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:22px}
+table{width:100%;border-collapse:collapse;margin:18px 0 26px;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:12px 13px;border-bottom:1px solid var(--hair)}
+th{background:var(--soft);font-size:12px;letter-spacing:.06em;font-weight:800;white-space:nowrap}
+tbody tr:hover{background:rgba(194,98,44,.045)}
+td:first-child{font-weight:700}
+.tag{display:inline-block;padding:2px 7px;border:1px solid var(--hair);font:600 11px/1.5 "JetBrains Mono",Consolas,monospace;letter-spacing:.04em;white-space:nowrap}
+.tag.bad{background:#F6E1D5;border-color:#D9A98B;color:#8A3D14}
+.tag.ok{background:#DCEBDD;border-color:#A9C7AB;color:#2C5B31}
+.tag.mid{background:#F4E9C8;border-color:#D8C48A;color:#7A5B14}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:20px 0 30px}
+.card{background:#fff;border:1px solid var(--hair);padding:18px 20px}
+.card b{display:block;font:700 2rem/1 "Oswald","Arial Narrow",sans-serif;letter-spacing:-.03em;color:var(--accent)}
+.card span{display:block;margin-top:8px;font-size:13px;color:var(--dim);line-height:1.6}
+.card em{display:block;margin-top:6px;font:600 11px/1.4 "JetBrains Mono",Consolas,monospace;font-style:normal;color:var(--ink)}
+.note{background:var(--soft);border-left:3px solid var(--accent);padding:16px 20px;margin:20px 0;font-size:14px;line-height:1.8}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:20px 0}
+figure{margin:0;background:#fff;border:1px solid var(--hair)}
+figure img{display:block;width:100%;height:auto}
+figcaption{padding:10px 13px;font-size:12.5px;line-height:1.6;color:var(--dim);border-top:1px solid var(--hair)}
+figcaption b{color:var(--ink)}
+ul{margin:0 0 16px;padding-left:20px}li{margin-bottom:7px}
+code{font:12.5px/1.5 "JetBrains Mono",Consolas,monospace;background:var(--soft);padding:1px 5px}
+.foot{margin-top:70px;padding-top:22px;border-top:2px solid var(--ink);font-size:13px;color:var(--dim)}
+a{color:var(--accent)}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}h2{break-after:avoid}figure{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">YANG HONG / PORTFOLIO / SHOWCASE REVAMP</p>
+  <h1>作品集改造 · 反馈逐项对照<br>与动画应用说明</h1>
+  <p class="lede">依据六大版面维度逐项核对结论与 P0/P1/P2 修改意见，对「项目展示板块」做了结构性重做：段落按品类换序、真实信息回填、字阶与图文比例重排，并把动画落在与作品气质对应的具体页面上。全部结论基于本地构建与无头浏览器实测，不依赖印象判断。</p>
+  <div class="meta">
+    <span>对象：8 个项目 × 9 段</span><span>桌面 1256×808</span><span>手机 414×896 / DPR2</span>
+    <span>构建：Vite 5 通过</span><span>验证：18 场景 / 67 帧</span>
+  </div>
+</header>
+
+<h2><span class="n">01</span>量化变化（同一口径实测）</h2>
+<div class="cards">
+  <div class="card"><b>124–214 → 615–772</b><span>单页可见中文字符数。旧值取上一版静态 HTML 的 <code>.sw-page.innerText</code>，新值取新版 <code>.sw-root.innerText</code>，口径一致。</span><em>拒绝以留白替代信息</em></div>
+  <div class="card"><b>10–13 → 13–17px</b><span>正文与说明文字字号；中文正文小于 12px 的节点实测为 0。</span><em>补齐可读字阶</em></div>
+  <div class="card"><b>7 种编排 / 8 套装置</b><span>8 个项目不再 100% 套同一模板：7 种段落顺序、8 套品类标签、8 个专属互动装置。</span><em>破除模板化</em></div>
+  <div class="card"><b>0 / 0 / 0</b><span>坏图 0、横向溢出 0、小于 44px 的可点击控件 0；运行时 JS 异常 0。</span><em>双端 18 场景</em></div>
+</div>
+<p class="sub">其他收敛值：次级文字透明度 <code>.56–.60 → .78–.80</code>；装饰巨字上限 <code>40rem / 26rem / 16rem → 22rem / 14rem / 10rem</code>；首屏高度 <code>92svh / 82svh → 84svh / 76svh</code> 并新增完整副标题、主图说明与两条真实数据。</p>
+
+<h2><span class="n">02</span>六大版面维度：反馈 → 调整 → 动画场景 → 表达意图</h2>
+<table>
+<thead><tr><th style="width:15%">反馈维度 / 原判定</th><th style="width:30%">本次调整</th><th style="width:26%">动画应用场景</th><th style="width:29%">表达意图</th></tr></thead>
+<tbody>
+<tr>
+  <td><span class="tag ok">基本符合</span><br>1. 高级感与趣味性<br><small>扣分：8 项目机械套用单一模板</small></td>
+  <td>抽出 <code>SEQUENCES</code> 按品类换序，形成 7 种段落节奏；每个项目一套英文标签（05 UI 用 <code>INTERFACE / FLOW / SYSTEM / INTERACTION</code>，08 用 <code>CHARACTER / STATE / EXPRESSION / MERCH</code>）；每个项目一个只属于自己的互动装置。三色令牌与强调色极小面积规则保留。</td>
+  <td>项目转场蓝图幕布；INDEX 3D 抽屉扇入；品类专属装置段。</td>
+  <td>高级感来自克制的色彩与字阶，趣味来自「每个项目玩法不同」而不是贴更多装饰；避免把同一套破格贴到所有品类上。</td>
+</tr>
+<tr>
+  <td><span class="tag bad">不符合</span><br>2. 排版简洁而内容充实<br><small>扣分：单页中文仅 123–209 字，留白替代信息</small></td>
+  <td>02 段无调研数据的项目改用 <code>project.specs</code> 真实规格摘录填栏；03 段把图像 <code>alt</code> 渲染为可见图注；04 段 hover 展开真实功能机制说明；05 段新增可旋转四面标本盒，四面承载材质 / 结构 / 工艺 / 边界，左栏补 60–100 字设计推导；首屏新增完整副标题与两条数据。</td>
+  <td>逐字重组定位句；解剖滑杆双图注；引线热区展开；3D 标本盒；翻牌胶片背面图注。</td>
+  <td>信息不再以段落形式堆回来，而是「附在产品上、藏在可玩动作里」：想看细节就拖、想读图注就翻、想看参数就转盒子。</td>
+</tr>
+<tr>
+  <td><span class="tag mid">部分符合</span><br>3. 画面与文字有机融合<br><small>扣分：alt 未渲染、胶囊硬编码、标签语义脱节</small></td>
+  <td>03 段改成成品 / 细节解剖滑杆，两侧各有可见图注；04 段功能胶囊改为 SVG 引线指向产品四个锚点，激活时描线生长并展开说明；按项目品类动态映射英文标签；<code>qimu-01</code>、<code>diemu-01</code> 实测为线稿，按文件名排除出主视觉段，只留在胶片档案。</td>
+  <td>解剖分割线拖动；引线 <code>stroke-dashoffset</code> 生长；取样放大镜仅在产品首屏出现。</td>
+  <td>让文字真的指向画面里的那个部位，而不是飘在四角；取样器只服务于产品细节，滚出首屏即收起，避免遮挡说明文字。</td>
+</tr>
+<tr>
+  <td><span class="tag bad">不符合</span><br>4. 图文比例协调<br><small>扣分：图像 0.91 / 0.82，正文压到 10–13px</small></td>
+  <td>首屏高度下调并补信息带；正文 15–16px、说明 14px、图注 13px、胶囊 14px（手机 13px）；巨型装饰字上限收敛到 22rem / 14rem / 10rem；次级文字透明度提升到 .78–.80；全页建立「巨型标题 → 定位大字 → 14–16px 说明 → 12px 英文标签」四级字阶。</td>
+  <td>首屏光圈揭示；顶栏游标卡尺刻度随滚动填充。</td>
+  <td>保留大图的冲击力，但让读字不再吃力；装饰字退到背景，不再和正文争面积。</td>
+</tr>
+<tr>
+  <td><span class="tag bad">不符合</span><br>5. 留白适度不削弱信息密度<br><small>扣分：05 段 88vh 空白、02 段 6 项目右栏空置</small></td>
+  <td>删掉 05 段整屏描边巨字，换成 3/4 视角四面 3D 标本盒（每面嵌一张产品图与真实参数）；02 段改为跨列双栏，左正文右数据 / 规格摘录，6 个无问卷数据的项目不再空栏。</td>
+  <td>标本盒拖拽旋转与面跳转；02 段逐字揭示。</td>
+  <td>留白仍是疏密节奏，但不再「空着」：转动盒子这件事本身把材质、结构、工艺和资料边界一并交代完。</td>
+</tr>
+<tr>
+  <td><span class="tag mid">部分符合</span><br>6. 表达贴切克制<br><small>扣分：截断残句、数字栏歧义、冗余与帧数不一致</small></td>
+  <td>移除全部 22 / 24 字硬截断，03 副标题为完整句「实习期间完成的灯具设计：材质探索与 AI 形态推演」；03 数字栏由「打样 / 评审结果勾选」改为 <code>2 张外观造型评审表</code> 与 <code>3000K LED 灯板色温</code>；资料行去掉「资料：现有资料」同义反复，03 改为「外观评审表（台灯 / 客厅吊灯）· AI 形态方案」；全页「功能均可实现」只保留 1 次；胶片帧数标注改为实际渲染数 05。</td>
+  <td>卷帘式下一项目预告；翻牌背面图注。</td>
+  <td>文案只写资料里确认过的东西；用括号表达从属关系，避免同级圆点造成的并列歧义。</td>
+</tr>
+</tbody>
+</table>
+
+<h2><span class="n">03</span>P0 / P1 / P2 修改意见逐条落地</h2>
+<table>
+<thead><tr><th style="width:12%">优先级</th><th style="width:32%">反馈要求</th><th style="width:40%">实际改动</th><th style="width:16%">核验</th></tr></thead>
+<tbody>
+<tr><td>P0-1</td><td>解除字数截断，修复 03 残缺文案</td><td>新建 <code>showcaseContent.js</code> 的 <code>fullSubtitle</code>，完整句不截断；05 段出处不再截 24 字，改为完整资料类型描述。</td><td>18 场景 <code>truncated=false</code></td></tr>
+<tr><td>P0-2</td><td>补全 05 段与 03 段核心设计说明、显性渲染图注</td><td>05 段换 3D 标本盒 + 左栏设计推导；03 段解剖滑杆左右各一条可见图注 + 错位第三图图注；所有图注取自现有 <code>alt</code>，不新写事实。</td><td>单页中文 615–772 字</td></tr>
+<tr><td>P0-3</td><td>填补 02 段数字栏、修正歧义冗余措辞</td><td>有数据项目用真实指标（01 <code>209 / 72.25%</code>、03 <code>2 / 3000K</code>、07 <code>6 / 2</code>、08 <code>14 / 2</code>）；无独立问卷数据的 02/04/05/06 用 <code>project.specs</code> 规格摘录，并明写「本项目未附独立问卷数据」；资料行去冗余；可行性声明全页 1 处。</td><td><code>feasibility=1</code>，<code>redundant=false</code></td></tr>
+<tr><td>P1-4</td><td>上调说明字号与对比度、收敛装饰巨字</td><td>见维度 4；中文正文 &lt;12px 节点为 0，剩余 &lt;12px 全是 <code>FACE 01 / 04</code>、<code>YH — 02</code> 一类英文编号标签。</td><td>CDP 逐节点计算样式</td></tr>
+<tr><td>P2-5</td><td>按品类映射英文标签、校准帧数</td><td>8 套标签；05 UI 不再出现 <code>OBJECT / MATERIAL / PROCESS</code>，07 用 <code>CONCEPTS</code>，08 用 <code>CHARACTER</code>；胶片头 <code>05 FRAMES</code> 与实际 5 帧一致。</td><td>切项目实测标签随变</td></tr>
+</tbody>
+</table>
+
+<h2><span class="n">04</span>动画清单：场景 / 形式 / 语境 / 意图</h2>
+<p class="sub">原则：每个动画只在对应语境出现一次，不做全局装饰性堆积；全部支持 <code>prefers-reduced-motion</code> 降级。</p>
+<table>
+<thead><tr><th style="width:16%">应用场景</th><th style="width:26%">形式</th><th style="width:26%">对应作品 / 页面语境</th><th style="width:32%">表达意图</th></tr></thead>
+<tbody>
+<tr><td>转场</td><td>蓝图网格幕布 + 三片快门反向揭膜，切项目与深链进入时播放一次</td><td>03 工程图纸主题延伸到全站切换</td><td>把「换项目」做成打开另一份档案，而不是淡入淡出；<code>App.jsx</code> 按项目 id 加 key 触发重挂载。</td></tr>
+<tr><td>导航</td><td>INDEX 抽屉 3D 扇入、8 行逐行 <code>rotateX</code> 错位、悬停磁吸位移</td><td>标本抽屉 / 档案柜</td><td>索引本身可玩，且进入时就有「翻找」的动作感。</td></tr>
+<tr><td>首屏 · 作品展示</td><td>光圈 <code>clip-path: circle()</code> 揭示 + 双层同图视差 + 跟随鼠标的 132px 取样放大镜（十字线 + 局部 260% 放大）</td><td>灯具 / 材质 / 工业设计取样</td><td>用设计师看细节的动作开场；放大镜只在首屏出现，滚出即收起，不遮挡后文。</td></tr>
+<tr><td>定位句</td><td>逐字 <code>rotateX</code> 重组，静止后完全可读</td><td>02 段一句定位</td><td>一句话也给出「被拆解过」的节奏，不牺牲阅读。</td></tr>
+<tr><td>品类专属装置（8 种）</td><td>01 明暗推杆 / 02 进度轨道 / 03 图纸游标 / 04 推入木楔开关 / 05 流程节点 / 06 软包拆解 / 07 六向罗盘 / 08 温度轴</td><td>每个项目自己的核心机制</td><td>把「功能可实现」从一句声明变成可以亲手试的动作；参数全部取自该项目已有资料（如 08 的 −18°C — +38°C、03 的 450 / Ø1000 / 2.5mm）。</td></tr>
+<tr><td>成品 / 细节</td><td>可拖动解剖滑杆，左右两图 <code>clip-path: inset()</code> 对照，两侧可见图注</td><td>产品整体与局部对照</td><td>把原来只存在 <code>alt</code> 里的说明搬到版面上，图与字互相指认。</td></tr>
+<tr><td>可实现功能</td><td>SVG 引线 <code>stroke-dashoffset</code> 生长，hover / 点按胶囊展开真实机制说明</td><td>图纸引线标注 / 卡尺</td><td>取代原先硬编码在四角的胶囊，让功能词锚定到产品部位。</td></tr>
+<tr><td>结构与材质</td><td>CSS 3D 四面标本盒：拖拽旋转、四枚面标签跳转、初始 3/4 视角、每面嵌产品图</td><td>网页内建模展示（不引入 3D 引擎）</td><td>用「转动盒子」替代整屏空白，同时把材质 / 结构 / 工艺 / 边界四类信息装进去；轻量、可离线、可读屏。</td></tr>
+<tr><td>图像档案</td><td>5 帧横向胶片不等宽错落 + 点击 <code>rotateY</code> 翻牌，背面是该图中文图注</td><td>相片背面写字</td><td>图注不再缺失，也不铺成说明文字墙；翻牌本身就是一次发现。</td></tr>
+<tr><td>下一项目</td><td>锯齿撕纸边缘的卷帘 <code>clip-path: polygon()</code>，hover 掀开亮图</td><td>翻到下一件作品</td><td>「下一项目」是动作而不是链接，留下收尾记忆点。</td></tr>
+<tr><td>全局进度</td><td>顶栏 3px 进度条 + 游标卡尺刻度随滚动填充</td><td>工程测量</td><td>阅读进度与工程语境一致，且只占极小面积。</td></tr>
+</tbody>
+</table>
+
+<h2><span class="n">05</span>品类换序：破除 8 项目同模板</h2>
+<table>
+<thead><tr><th style="width:14%">项目 / 品类</th><th style="width:52%">段落顺序（9 段）</th><th style="width:18%">专属装置</th><th style="width:16%">英文标签</th></tr></thead>
+<tbody>
+<tr><td>01 心景 · 光</td><td>首屏 → 定位 → <b>明暗推杆</b> → 解剖 → 功能 → 标本盒 → 胶片 → 收尾 → 预告</td><td>睡前渐暗</td><td>LIGHT</td></tr>
+<tr><td>02 慢行者 · 机构</td><td>首屏 → 定位 → <b>进度轨道</b> → 解剖 → 标本盒 → 功能 → 胶片 → 收尾 → 预告</td><td>进度同步</td><td>MECHANISM</td></tr>
+<tr><td>03 实习灯具 · 工程</td><td>首屏 → <b>标本盒</b> → 定位 → 图纸游标 → 解剖 → 功能 → 胶片 → 收尾 → 预告</td><td>图纸尺寸</td><td>ENGINEERING</td></tr>
+<tr><td>04 疗愈灯具 · 光</td><td>首屏 → 定位 → <b>动作开关</b> → 解剖 → 功能 → 标本盒 → 胶片 → 收尾 → 预告</td><td>推入木楔</td><td>GESTURE</td></tr>
+<tr><td>05 UI 流程 · 界面</td><td>首屏 → 定位 → 解剖 → <b>流程节点</b> → 功能 → 标本盒 → 胶片 → 收尾 → 预告</td><td>不绕路的流程</td><td>INTERFACE</td></tr>
+<tr><td>06 模块化座椅 · 家具</td><td>首屏 → 定位 → 解剖 → 标本盒 → <b>软包拆解</b> → 功能 → 胶片 → 收尾 → 预告</td><td>换椅子→换软包</td><td>FRAME</td></tr>
+<tr><td>07 概念发散 · 概念</td><td>首屏 → 定位 → <b>六向罗盘</b> → 标本盒 → 解剖 → 功能 → 胶片 → 收尾 → 预告</td><td>六个方向（径向散点）</td><td>CONCEPTS</td></tr>
+<tr><td>08 猫冰 · 角色</td><td>首屏 → <b>温度轴</b> → 定位 → 标本盒 → 解剖 → 功能 → 胶片 → 收尾 → 预告</td><td>温度决定软硬</td><td>CHARACTER</td></tr>
+</tbody>
+</table>
+<p class="sub">共 7 种顺序（01 / 04 同属「光」品类但主题色与装置不同）；8 套标签、8 个装置、5 浅 3 深主题色。段落编号 <code>SEC. NN / 09</code> 按实际位置动态计算。</p>
+
+<h2><span class="n">06</span>验证结果</h2>
+<div class="cards">
+  <div class="card"><b>18 / 18</b><span>桌面 8 项目 + 2 组完整 9 段序列 + 手机 8 项目，全部渲染成功，运行时 JS 异常 0。</span><em>CDP 会话</em></div>
+  <div class="card"><b>0 坏图</b><span>每页 23–36 张图全部加载；<code>scrollWidth = clientWidth</code>，双端零横向溢出。</span><em>桌面 1241 / 手机 414</em></div>
+  <div class="card"><b>交互闭环</b><span>翻牌、立方体面跳转与拖拽、解剖滑杆、引线热区、明暗推杆、INDEX 切换与转场幕布逐项实测通过。</span><em>真实输入事件</em></div>
+  <div class="card"><b>降级达标</b><span><code>prefers-reduced-motion</code> 下：动画数 0、幕布不渲染、揭示元素全部可见、光圈 clip-path 为 none。</span><em>独立会话 A/B</em></div>
+</div>
+<p class="sub">四条指定口径全部保留且核准：01「毕业设计 · 已落地」、03「已进入打样落地阶段」、03「孔雀石系列已开始落地 · 其余形态或细节尚未确认」、全站「作品集内所有项目所述功能均可实现」（全页仅 1 处）。所有新增文案均摘自 <code>projectDossiers.js</code>、<code>App.jsx</code> 的 <code>details / specs / gallery alt</code> 与论文、评审表已转录内容，未新增事实、未推断未确认参数。</p>
+
+<h2><span class="n">07</span>视觉证据（真实渲染帧，点击查看大图）</h2>
+<div class="gallery">
+  <figure><a href="改版证据/D02-hero.jpg"><img src="改版证据/D02-hero.jpg" alt="桌面首屏"></a><figcaption><b>桌面首屏</b> · 产品主视觉 + 完整副标题 + 状态徽标 + 首屏信息带</figcaption></figure>
+  <figure><a href="改版证据/D01-full-statement.jpg"><img src="改版证据/D01-full-statement.jpg" alt="定位段双栏"></a><figcaption><b>02 段</b> · 正文与真实数据左右并排，右栏不再空置</figcaption></figure>
+  <figure><a href="改版证据/D03-full-hero.jpg"><img src="改版证据/D03-full-hero.jpg" alt="03 完整副标题"></a><figcaption><b>03 深色工程主题</b> · 残句已修，数字栏改为 2 张评审表 / 3000K</figcaption></figure>
+  <figure><a href="改版证据/D02-specimen.jpg"><img src="改版证据/D02-specimen.jpg" alt="3D 标本盒"></a><figcaption><b>3D 标本盒</b> · 3/4 视角、四面真实参数、每面嵌产品图</figcaption></figure>
+  <figure><a href="改版证据/D08-signature.jpg"><img src="改版证据/D08-signature.jpg" alt="温度轴"></a><figcaption><b>08 温度轴</b> · −18°C — +38°C 拖动切换双态</figcaption></figure>
+  <figure><a href="改版证据/D07-signature.jpg"><img src="改版证据/D07-signature.jpg" alt="六向罗盘"></a><figcaption><b>07 六向罗盘</b> · 径向散点替代六格网格</figcaption></figure>
+  <figure><a href="改版证据/D02-signature.jpg"><img src="改版证据/D02-signature.jpg" alt="进度轨道"></a><figcaption><b>02 进度轨道</b> · 产品图叠测量网格，轨道点位随进度移动</figcaption></figure>
+  <figure><a href="改版证据/D01-full-spread.jpg"><img src="改版证据/D01-full-spread.jpg" alt="解剖滑杆"></a><figcaption><b>解剖滑杆</b> · 成品 / 细节对照，两侧可见图注</figcaption></figure>
+  <figure><a href="改版证据/D01-full-invert.jpg"><img src="改版证据/D01-full-invert.jpg" alt="反相功能段"></a><figcaption><b>反相全幅</b> · 产品成品图 + 四枚功能热区 + 描边巨字</figcaption></figure>
+  <figure><a href="改版证据/D01-callout-hover.jpg"><img src="改版证据/D01-callout-hover.jpg" alt="引线热区"></a><figcaption><b>引线热区</b> · 生长描线 + 展开真实机制说明，取样器已收起</figcaption></figure>
+  <figure><a href="改版证据/D01-full-film.jpg"><img src="改版证据/D01-full-film.jpg" alt="翻牌胶片"></a><figcaption><b>横向胶片</b> · 过程图归档，点击翻到背面读图注</figcaption></figure>
+  <figure><a href="改版证据/D01-full-next.jpg"><img src="改版证据/D01-full-next.jpg" alt="卷帘预告"></a><figcaption><b>下一项目</b> · 锯齿撕纸卷帘，hover 掀开亮图</figcaption></figure>
+  <figure><a href="改版证据/M01-hero.jpg"><img src="改版证据/M01-hero.jpg" alt="手机首屏"></a><figcaption><b>手机首屏</b> · 产品完整不裁、副标题与两条数据清晰可读</figcaption></figure>
+  <figure><a href="改版证据/M01-specimen.jpg"><img src="改版证据/M01-specimen.jpg" alt="手机标本盒"></a><figcaption><b>手机标本盒</b> · 纵向排布，无溢出</figcaption></figure>
+</div>
+
+<h2><span class="n">08</span>文件清单与假设</h2>
+<h3>本次改动</h3>
+<ul>
+  <li>新增 <code>src/data/showcaseContent.js</code> — 8 项目的完整副标题、真实指标、规格摘录、标本盒四面参数、品类标签与段落顺序；无新增事实。</li>
+  <li>重写 <code>src/components/ProjectShowcase.jsx</code> 与 <code>projectShowcase.css</code> — 9 段按品类换序、字阶重排、3D 标本盒、解剖滑杆、翻牌胶片、引线热区、转场幕布与 8 种专属装置。</li>
+  <li>改 <code>src/App.jsx</code> — 详情分发加 <code>key={detailPageProject.id}</code>，让切项目触发转场重挂载。</li>
+  <li>新增 <code>改版证据/</code>（20 张压缩截图）与本对照文档；原始指标在 <code>.workbuddy/tmp/evidence-revamp/metrics.json</code>。</li>
+</ul>
+<h3>需要你知道的状态</h3>
+<div class="note">
+  <b>旧的独立静态文件与 AI 评审包是上一版快照，未同步本次改造。</b><code>项目展示板块-改版.html</code>、<code>作品集-AI评审包.zip</code> / <code>…精简上传版.zip</code> 描述的仍是文字极简的 8 段旧版。本次交付以网站源码与预览为准；若要给 Gemini 重新评分，需要按新版重做一份静态包。
+</div>
+<h3>假设与未取证项</h3>
+<ul>
+  <li>论文文件名标注「二次修改中」，数据按当前版本原文转录；定稿若变动需同步资料层。</li>
+  <li>评审表上手写型号与日期字迹不确定，仅作「扫描件标注」描述，未写入任何确定参数。</li>
+  <li>02 / 04 / 05 / 06 无独立调研数据，故 02 段用现有规格摘录而非编造量化指标；其落地状态仍按「未附落地确认资料」表述。</li>
+  <li>未实测真机触摸横滑帧率、弱网大图首屏耗时、读屏器与纯键盘走查；静态截图无法呈现动效，已在动画清单与实测数据中逐条说明。</li>
+  <li>本次未新增产品图，全部取自现有素材；<code>qimu-01</code> / <code>diemu-01</code> 经图像核查为线稿，已从主视觉段排除。</li>
+</ul>
+
+<div class="foot">
+  杨鸿 · 产品设计师作品集 · 项目展示板块反套路改版 · 桌面 1256×808 / 手机 414×896 DPR2 · Vite 5 构建通过 · 18 场景无头浏览器实测
+</div>
+
+</div>
+</body>
+</html>

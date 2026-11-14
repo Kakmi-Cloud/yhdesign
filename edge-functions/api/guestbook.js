@@ -32,6 +32,12 @@ const clean = (v, max) =>
     .trim()
     .slice(0, max)
 
+// KV 没绑定时全局变量不存在。不要吞进笼统的 500，明确回一个
+// 「服务未开通」状态码，前端才能给出可操作的提示（去主站留言）。
+const hasKV = () => typeof guestbook_kv !== 'undefined'
+const KV_MISSING = () =>
+  json({ ok: false, code: 'KV_NOT_BOUND', error: '这个入口的留言存储还没开通' }, 503)
+
 const readList = async () => {
   const raw = await guestbook_kv.get(KEY)
   if (!raw) return []
@@ -40,6 +46,7 @@ const readList = async () => {
 }
 
 export async function onRequestGet({ request }) {
+  if (!hasKV()) return KV_MISSING()
   try {
     const limit = Math.min(Number(new URL(request.url).searchParams.get('limit')) || LIMIT_DEFAULT, MAX_STORE)
     const list = await readList()
@@ -59,6 +66,7 @@ export async function onRequestPost({ request }) {
 
   const message = clean(body?.message, MAX_MESSAGE)
   if (!message) return json({ ok: false, error: '留言内容不能为空' }, 400)
+  if (!hasKV()) return KV_MISSING()
 
   try {
     const list = await readList()

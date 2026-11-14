@@ -1,0 +1,1169 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>项目展示板块 · 改版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #F4EFE6; font-family: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif; }
+.doc-cover { padding: clamp(40px,8vw,120px) clamp(20px,5vw,80px) clamp(60px,9vw,130px); background: #F4EFE6; color: #1B1916; border-bottom: 2px solid #1B1916; }
+.doc-kicker { font: 600 11px/1 'JetBrains Mono',monospace; letter-spacing: .26em; opacity: .62; }
+.doc-cover h1 { margin: 26px 0 10px; font-size: clamp(3rem,10vw,9rem); line-height: .9; font-weight: 900; letter-spacing: -.06em; }
+.doc-lede { margin: 0 0 40px; font-size: clamp(1rem,1.6vw,1.35rem); font-weight: 700; }
+.doc-rules { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 0 0 56px; padding: 0; list-style: none; }
+.doc-rules li { padding: 18px 16px; border: 1px solid rgba(0,0,0,.18); font-size: 12px; line-height: 1.7; }
+.doc-rules b { display: block; margin-bottom: 8px; font: 700 20px/1 'Oswald',sans-serif; color: #D9762B; }
+.doc-index-title { font: 600 10px/1 'JetBrains Mono',monospace; letter-spacing: .24em; opacity: .6; }
+.doc-index { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.doc-index a { display: block; color: inherit; text-decoration: none; border-top: 2px solid #1B1916; padding-top: 12px; transition: transform .3s ease; }
+.doc-index a:hover { transform: translateY(-5px); }
+.doc-index img { display: block; width: 100%; height: 150px; object-fit: cover; margin-bottom: 10px; background: rgba(0,0,0,.05); }
+.doc-index span { display: block; font: 600 11px/1 'JetBrains Mono',monospace; letter-spacing: .14em; color: #D9762B; }
+.doc-index strong { display: block; margin-top: 6px; font-size: 15px; font-weight: 800; }
+.doc-tab { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: 20px; min-height: 52px; padding: 0 clamp(18px,4vw,60px); background: var(--sw-bar-bg); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-bottom: 1px solid var(--sw-hair); color: var(--sw-ink); font: 600 10px/1 'JetBrains Mono',monospace; letter-spacing: .2em; }
+.doc-tab a { color: inherit; text-decoration: none; padding: 14px 0; }
+.doc-tab a:hover { color: var(--sw-accent); }
+.doc-tab em { margin-left: auto; font-style: normal; opacity: .7; }
+.sw-next { text-decoration: none; }
+@media (max-width: 900px) {
+  .doc-rules, .doc-index { grid-template-columns: repeat(2,1fr); }
+  .doc-index img { height: 110px; }
+  .doc-tab { gap: 12px; padding: 0 16px; }
+}
+@media print {
+  .doc-tab, .sw-cursor { display: none !important; }
+  .sw-page { break-before: page; }
+  .sw-hero { min-height: 70vh; }
+}
+
+/* ============================================================
+   ProjectShowcase —— 影像优先的项目展示板块
+   一套纸/墨/强调色走到底；强调色只占极小面积。
+   节奏：满幅 → 大留白 → 错位双图 → 反相全幅 → 偏栏 → 横向胶片 → 全幅预告。
+   所有破格（负边距 / 旋转 / 描边巨字）都由父级 overflow-x: clip 兜住，不产生横向滚动。
+   ============================================================ */
+
+.sw-page {
+  position: relative; overflow-x: clip;
+  background: var(--sw-paper);
+  color: var(--sw-ink);
+  font-family: 'Noto Sans SC', 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+.sw-page *,
+.sw-page *::before,
+.sw-page *::after { box-sizing: border-box; }
+.sw-page i { font-style: normal; opacity: 0.5; padding: 0 0.22em; }
+.sw-page button { font-family: inherit; }
+
+/* ── 顶栏：半透明、只有返回 / 进度 / 索引三个入口 ───────────── */
+.sw-bar { display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 clamp(18px, 4vw, 60px);
+  background: var(--sw-bar-bg);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--sw-hair);
+}
+
+.sw-back {
+  flex: none;
+  min-height: 44px;
+  min-width: 88px;
+  padding: 0 16px;
+  border: 1px solid var(--sw-ink);
+  background: transparent;
+  color: var(--sw-ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.sw-back:hover { background: var(--sw-ink); color: var(--sw-paper); }
+.sw-back span { margin-right: 8px; }
+
+.sw-bar-id {
+  font: 600 11px/1 'JetBrains Mono', 'Oswald', monospace;
+  letter-spacing: 0.24em;
+  opacity: 0.72;
+  white-space: nowrap;
+}
+
+.sw-bar-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.sw-progress { display: block; width: clamp(60px, 12vw, 170px); height: 2px; background: var(--sw-hair); }
+.sw-progress i { display: block; height: 100%; background: var(--sw-accent); transition: width 0.12s linear; }
+
+.sw-index-toggle {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--sw-hair);
+  background: transparent;
+  color: var(--sw-ink);
+  font: 600 10px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+.sw-index-toggle b { color: var(--sw-accent); margin-left: 8px; font-size: 12px; }
+.sw-index-toggle:hover { border-color: var(--sw-ink); }
+
+.sw-index {
+  position: fixed;
+  z-index: 60;
+  top: 64px;
+  right: 0;
+  width: min(430px, 94vw);
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  padding: 18px clamp(16px, 2vw, 26px) 22px;
+  background: var(--sw-paper);
+  color: var(--sw-ink);
+  border: 1px solid var(--sw-hair);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+}
+.sw-index-head { margin: 0 0 10px; font: 600 10px/1 monospace; letter-spacing: 0.24em; opacity: 0.6; }
+.sw-index button {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 2px 12px;
+  width: 100%;
+  min-height: 58px;
+  padding: 10px 6px;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  border-bottom: 1px solid var(--sw-hair);
+  cursor: pointer;
+}
+.sw-index button > span { grid-row: 1 / 3; font: 600 18px/1 'Oswald', sans-serif; color: var(--sw-accent); }
+.sw-index button strong { font-size: 14px; font-weight: 800; letter-spacing: -0.02em; }
+.sw-index button em { grid-column: 2; font-size: 10px; font-style: normal; color: var(--sw-dim); }
+.sw-index button.is-active strong { text-decoration: underline; text-decoration-color: var(--sw-accent); text-underline-offset: 4px; }
+.sw-index button:hover strong { color: var(--sw-accent); }
+
+/* ── 跟随光标 ─────────────────────────────────────────────── */
+.sw-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  font: 600 9px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.18em;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, width 0.3s ease, height 0.3s ease, margin 0.3s ease, background 0.3s ease;
+}
+.sw-cursor.is-visible { opacity: 0.92; }
+.sw-page:has(.sw-fig:hover) .sw-cursor,
+.sw-page:has(.sw-frame:hover) .sw-cursor {
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* ── 01 首屏：整幅产品影像 ────────────────────────────────── */
+/* 双层同图：模糊层把画面铺满，清晰层完整呈现产品。
+   横图桌面 cover、手机 contain；竖版界面图两端都 contain，绝不裁坏。 */
+.sw-hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #111;
+}
+.sw-hero-media { position: absolute; inset: 0; overflow: hidden; }
+.sw-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.18);
+  filter: blur(32px) brightness(0.58) saturate(1.12);
+}
+.sw-hero-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.sw-hero-fg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.08);
+  will-change: transform;
+}
+/* 竖版界面图 / 手机横图：高度锁死在舞台内，宽度按原比例自适应，完整不裁切。 */
+.sw-hero--ui .sw-hero-stage { padding: 7vh 6vw 15vh; }
+.sw-hero--ui .sw-hero-fg { width: auto; max-width: 100%; object-fit: contain; }
+
+.sw-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.06) 30%, transparent 46%, rgba(0, 0, 0, 0.78) 100%);
+}
+
+.sw-hero-ghost {
+  position: absolute;
+  z-index: 2;
+  right: -1.5vw;
+  top: 4vh;
+  font: 700 clamp(15rem, 40vw, 40rem)/0.78 'Oswald', 'Arial Narrow', sans-serif;
+  letter-spacing: -0.07em;
+  color: #fff;
+  opacity: 0.14;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sw-hero-copy {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 0 clamp(20px, 4vw, 64px) clamp(38px, 7vh, 78px);
+  color: #fff;
+}
+.sw-kicker {
+  margin: 0 0 16px;
+  font: 600 11px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.sw-hero-title {
+  margin: 0 0 18px;
+  font-size: clamp(3.4rem, 10vw, 9rem);
+  line-height: 0.88;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  text-shadow: 0 8px 44px rgba(0, 0, 0, 0.5);
+  text-wrap: balance;
+}
+.sw-hero-badges { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.sw-hero-sub { font-size: 13px; letter-spacing: 0.02em; opacity: 0.9; }
+.sw-badge {
+  display: inline-block;
+  padding: 8px 12px;
+  background: var(--sw-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.sw-hero-scroll {
+  position: absolute;
+  z-index: 3;
+  right: clamp(18px, 3vw, 44px);
+  bottom: clamp(38px, 7vh, 78px);
+  writing-mode: vertical-rl;
+  font: 600 10px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.28em;
+  color: #fff;
+  opacity: 0.86;
+}
+.sw-hero-scroll b { display: inline-block; margin-top: 12px; font-size: 16px; }
+
+/* ── 章节通用 ─────────────────────────────────────────────── */
+.sw-sec { position: relative; padding: clamp(70px, 10vw, 150px) clamp(20px, 4vw, 64px); }
+
+/* ── 02 一句定位 + 两个数字 ───────────────────────────────── */
+.sw-statement {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: clamp(30px, 6vw, 100px);
+  align-items: end;
+  padding-top: clamp(90px, 13vw, 180px);
+  padding-bottom: clamp(50px, 8vw, 110px);
+}
+.sw-line {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(1.5rem, 3.1vw, 3.1rem);
+  line-height: 1.32;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.sw-line::before {
+  content: '';
+  display: block;
+  width: 66px;
+  height: 5px;
+  margin-bottom: 30px;
+  background: var(--sw-accent);
+}
+.sw-facts { display: flex; flex-direction: column; gap: 26px; }
+.sw-fact b {
+  display: block;
+  font: 600 clamp(3.2rem, 6vw, 6rem)/0.9 'Oswald', 'Arial Narrow', sans-serif;
+  letter-spacing: -0.045em;
+}
+.sw-fact b.is-accent { color: var(--sw-accent); }
+.sw-fact span { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.06em; color: var(--sw-dim); }
+
+/* ── 03 错位双图 ──────────────────────────────────────────── */
+.sw-spread {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding-top: 0;
+  padding-bottom: clamp(110px, 15vw, 220px);
+}
+.sw-fig { position: relative; margin: 0; overflow: hidden; background: var(--sw-soft); }
+.sw-fig img { display: block; width: 100%; height: 100%; transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.sw-fig:hover img { transform: scale(1.05); }
+.sw-fig--big { grid-column: 1 / 9; grid-row: 1; aspect-ratio: 16 / 10.5; }
+.sw-fig--small {
+  grid-column: 8 / 13;
+  grid-row: 1;
+  z-index: 3;
+  align-self: end;
+  margin-bottom: -11%;
+  aspect-ratio: 4 / 3;
+  transform: rotate(-2.2deg);
+  border: 8px solid var(--sw-paper);
+  box-shadow: 0 26px 64px rgba(0, 0, 0, 0.26);
+}
+.sw-fig--small:hover { transform: rotate(-1deg); }
+.sw-fig.is-contain img,
+.sw-aside-fig.is-contain img,
+.sw-frame.is-contain img,
+.sw-invert-media img[style*='contain'] { object-fit: contain; padding: 3%; }
+.sw-fig-tag {
+  position: absolute;
+  z-index: 4;
+  top: 16px;
+  left: 16px;
+  padding: 9px 11px;
+  background: var(--sw-paper);
+  color: var(--sw-ink);
+  font: 600 10px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.16em;
+}
+
+/* ── 04 反相全幅 ──────────────────────────────────────────── */
+.sw-invert {
+  background: var(--sw-invert-bg);
+  color: var(--sw-invert-ink);
+  padding: clamp(36px, 5vw, 70px) 0 clamp(48px, 7vw, 90px);
+}
+.sw-invert-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 clamp(20px, 4vw, 64px) 24px;
+  font: 600 10px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.22em;
+  opacity: 0.7;
+}
+.sw-invert-media { position: relative; height: clamp(420px, 72vh, 720px); overflow: hidden; }
+.sw-invert-media > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sw-invert-media > img[style*='contain'] { background: rgba(127, 127, 127, 0.1); }
+.sw-fn {
+  position: absolute;
+  z-index: 3;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #14161A;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+.sw-fn--0 { top: 20%; left: 4%; transform: rotate(-3deg); }
+.sw-fn--1 { top: 28%; right: 5%; transform: rotate(2.4deg); }
+.sw-fn--2 { bottom: 25%; left: 8%; transform: rotate(1.8deg); }
+.sw-fn--3 { bottom: 15%; right: 7%; transform: rotate(-2deg); }
+.sw-invert-word {
+  position: absolute;
+  z-index: 2;
+  left: 1.5%;
+  bottom: -5%;
+  font: 700 clamp(6rem, 17vw, 16rem)/1 'Oswald', 'Arial Narrow', sans-serif;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px #fff;
+  mix-blend-mode: difference;
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── 05 偏栏窄图 + 巨大留白 ───────────────────────────────── */
+.sw-aside {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: center;
+  min-height: 88vh;
+  padding-top: clamp(90px, 12vw, 170px);
+  padding-bottom: clamp(90px, 12vw, 170px);
+}
+.sw-aside-outline {
+  grid-column: 1 / 8;
+  grid-row: 1;
+  font: 700 clamp(10rem, 25vw, 26rem)/0.8 'Oswald', 'Arial Narrow', sans-serif;
+  letter-spacing: -0.07em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--sw-ink);
+  opacity: 0.3;
+  user-select: none;
+}
+.sw-aside-vertical {
+  position: absolute;
+  left: clamp(20px, 4vw, 64px);
+  top: 14%;
+  writing-mode: vertical-rl;
+  font: 600 10px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.3em;
+  opacity: 0.6;
+}
+.sw-aside-fig {
+  grid-column: 8 / 13;
+  grid-row: 1;
+  margin: 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  transform: rotate(1.6deg);
+  background: var(--sw-soft);
+  box-shadow: -26px 30px 0 var(--sw-shadow);
+}
+.sw-aside-fig img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.sw-aside-fig:hover img { transform: scale(1.05); }
+.sw-aside-meta {
+  position: absolute;
+  left: clamp(20px, 4vw, 64px);
+  bottom: clamp(60px, 9vw, 120px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 46%;
+  font: 500 11px/1.7 'JetBrains Mono', 'Noto Sans SC', monospace;
+  letter-spacing: 0.04em;
+  color: var(--sw-dim);
+}
+
+/* ── 06 横向胶片 ──────────────────────────────────────────── */
+.sw-film-wrap { padding: clamp(28px, 4vw, 60px) 0 clamp(70px, 9vw, 130px); border-top: 1px solid var(--sw-hair); overflow: hidden; }
+.sw-film-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 clamp(20px, 4vw, 64px) 26px;
+  font: 600 10px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.22em;
+  opacity: 0.7;
+}
+.sw-film-head b { font-size: 15px; }
+.sw-film {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(14px, 2vw, 28px);
+  overflow-x: auto;
+  padding: 12px clamp(20px, 4vw, 64px) 30px;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-x pan-y;
+}
+.sw-film:active { cursor: grabbing; }
+.sw-film::-webkit-scrollbar { display: none; }
+.sw-frame {
+  flex: none;
+  margin: 0;
+  height: clamp(260px, 44vh, 430px);
+  overflow: hidden;
+  background: var(--sw-soft);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sw-frame img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.sw-frame:hover img { transform: scale(1.06); }
+.sw-frame--0 { width: 30vw; transform: rotate(-1.2deg); }
+.sw-frame--1 { width: 44vw; margin-top: 38px; }
+.sw-frame--2 { width: 26vw; transform: rotate(1.4deg); }
+.sw-frame--3 { width: 38vw; margin-top: 20px; }
+.sw-frame--4 { width: 30vw; transform: rotate(-0.8deg); }
+.sw-frame--0:hover, .sw-frame--2:hover, .sw-frame--4:hover { transform: rotate(0deg); }
+
+/* ── 07 收尾 ──────────────────────────────────────────────── */
+.sw-outro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px 40px;
+  align-items: end;
+  padding: clamp(50px, 7vw, 100px) clamp(20px, 4vw, 64px) clamp(60px, 8vw, 110px);
+  border-top: 1px solid var(--sw-hair);
+}
+.sw-outro-line { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 22px; margin: 0; font-size: clamp(1.2rem, 2.4vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; }
+.sw-outro-line b { font: 600 10px/1 'JetBrains Mono', monospace; letter-spacing: 0.22em; color: var(--sw-dim); }
+.sw-outro-note { grid-column: 1 / -1; margin: 0; font-size: 12px; color: var(--sw-dim); }
+.sw-outro-fine {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 30px;
+  padding-top: 18px;
+  border-top: 1px solid var(--sw-hair);
+  font-size: 11px;
+  color: var(--sw-dim);
+}
+.sw-outro-back {
+  grid-column: 1 / -1;
+  justify-self: start;
+  min-height: 48px;
+  margin-top: 10px;
+  padding: 0 22px;
+  border: 1px solid var(--sw-ink);
+  background: transparent;
+  color: var(--sw-ink);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.sw-outro-back:hover { background: var(--sw-ink); color: var(--sw-paper); }
+
+/* ── 08 下一项目 ──────────────────────────────────────────── */
+.sw-next { position: relative; display: block; width: 100%; height: min(62vh, 560px); padding: 0; border: 0; overflow: hidden; background: #111; text-align: left; cursor: pointer; }
+.sw-next > img { display: block; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) saturate(0.92); transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease; }
+.sw-next:hover > img { transform: scale(1.06); filter: brightness(0.7) saturate(1); }
+.sw-next-copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px 30px;
+  flex-wrap: wrap;
+  padding: clamp(24px, 5vw, 70px);
+  color: #fff;
+}
+.sw-next-kicker { width: 100%; font: 600 10px/1 'JetBrains Mono', monospace; letter-spacing: 0.24em; opacity: 0.86; }
+.sw-next-copy strong { font-size: clamp(2.4rem, 7vw, 6.6rem); line-height: 0.9; font-weight: 900; letter-spacing: -0.055em; }
+.sw-next-copy em { margin-left: auto; font-size: clamp(2rem, 5vw, 4rem); font-style: normal; line-height: 1; }
+
+/* ── 入场揭示 ─────────────────────────────────────────────── */
+[data-reveal] { opacity: 1; transform: none; }
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ── 手机端：同一套影像优先顺序，错位改成纵向叠压 ─────────── */
+@media (max-width: 900px) {
+  .sw-bar { height: 60px; gap: 12px; padding: 0 16px; }
+  .sw-bar-id { display: none; }
+  .sw-index { top: 60px; max-height: calc(100vh - 60px); }
+  .sw-progress { width: 54px; }
+  .sw-back { min-width: 72px; padding: 0 12px; }
+
+  .sw-hero { min-height: 82svh; }
+  .sw-hero-bg { filter: blur(24px) brightness(0.5) saturate(1.1); }
+  .sw-hero-stage { padding: 9vh 3vw 25vh; }
+  .sw-hero--ui .sw-hero-stage { padding: 8vh 7vw 25vh; }
+  .sw-hero-fg {
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    transform: rotate(-1.6deg) scale(1.02);
+    filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.45));
+  }
+  .sw-hero-ghost { top: 8vh; font-size: 48vw; opacity: 0.16; }
+  .sw-hero-copy { padding: 0 20px 42px; }
+  .sw-kicker { font-size: 10px; margin-bottom: 12px; }
+  .sw-hero-title { font-size: clamp(2.7rem, 12.5vw, 4.6rem); margin-bottom: 14px; }
+  .sw-hero-badges { gap: 10px; }
+  .sw-hero-sub { font-size: 12px; width: 100%; }
+  .sw-hero-scroll { right: 14px; bottom: 42px; font-size: 9px; }
+
+  .sw-sec { padding: 74px 20px; }
+  .sw-statement { grid-template-columns: 1fr; gap: 40px; padding-top: 86px; padding-bottom: 54px; }
+  .sw-line { font-size: clamp(1.45rem, 6.2vw, 2.1rem); }
+  .sw-line::before { margin-bottom: 22px; }
+  .sw-facts { flex-direction: row; gap: 30px; }
+  .sw-fact b { font-size: clamp(2.6rem, 12vw, 3.6rem); }
+  .sw-fact span { font-size: 10px; }
+
+  .sw-spread { display: block; padding-top: 0; padding-bottom: 128px; }
+  .sw-fig--big { width: 100%; aspect-ratio: 4 / 3.1; }
+  .sw-fig--small { width: 66%; margin: -24% 0 0 auto; aspect-ratio: 4 / 3; border-width: 6px; }
+
+  .sw-invert { padding: 34px 0 52px; }
+  .sw-invert-head { padding: 0 20px 18px; font-size: 9px; }
+  .sw-invert-media { height: 52vh; }
+  .sw-fn { font-size: 10px; padding: 9px 11px; }
+  .sw-fn--0 { top: 20%; left: 3%; }
+  .sw-fn--1 { top: 28%; right: 3%; }
+  .sw-fn--2 { bottom: 25%; left: 4%; }
+  .sw-fn--3 { bottom: 14%; right: 4%; }
+  .sw-invert-word { font-size: 24vw; }
+
+  .sw-aside { display: block; min-height: auto; padding-top: 86px; padding-bottom: 86px; }
+  .sw-aside-vertical { display: none; }
+  .sw-aside-outline { display: block; font-size: 42vw; }
+  .sw-aside-fig { width: 74%; aspect-ratio: 3 / 4; margin: -16% 0 0 auto; box-shadow: -14px 16px 0 var(--sw-shadow); }
+  .sw-aside-meta { position: static; max-width: 100%; margin-top: 34px; font-size: 10px; }
+
+  .sw-film-wrap { padding: 26px 0 62px; }
+  .sw-film-head { padding: 0 20px 18px; font-size: 9px; }
+  .sw-film { gap: 14px; padding: 8px 20px 22px; }
+  .sw-frame { height: 34vh; }
+  .sw-frame--0 { width: 62vw; }
+  .sw-frame--1 { width: 76vw; margin-top: 22px; }
+  .sw-frame--2 { width: 54vw; }
+  .sw-frame--3 { width: 70vw; margin-top: 14px; }
+  .sw-frame--4 { width: 60vw; }
+
+  .sw-outro { grid-template-columns: 1fr; padding: 48px 20px 64px; }
+  .sw-outro-line { font-size: 1.35rem; }
+  .sw-next { height: 46vh; }
+  .sw-next-copy { padding: 24px 20px; }
+  .sw-next-copy strong { font-size: clamp(2rem, 10vw, 3.4rem); }
+}
+
+@media (pointer: coarse) { .sw-cursor { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-page { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .sw-page *, .sw-page *::before, .sw-page *::after { animation: none !important; transition-duration: 0.01ms !important; }
+  .sw-hero-fg { transform: none !important; }
+  .sw-hero-bg { transform: scale(1.18) !important; }
+  .sw-cursor { display: none; }
+}
+</style></head>
+<body><header class="doc-cover" id="cover">
+  <p class="doc-kicker">YANG HONG <i>/</i> PRODUCT DESIGN PORTFOLIO</p>
+  <h1>项目展示板块</h1>
+  <p class="doc-lede">影像优先 · 8 份项目展示 · 可整体替换文字档案版</p>
+  <ul class="doc-rules">
+    <li><b>01</b>产品占据首屏与每一屏，全页仅保留编号、项目名、功能短词与状态。</li>
+    <li><b>02</b>单纸色 + 单墨色 + 单一强调色；强调色只落在极小面积。</li>
+    <li><b>03</b>编辑式破格：跨栏、负边距叠压、微旋转、描边巨字、竖排标签。</li>
+    <li><b>04</b>满幅 / 大留白 / 反相 / 横向胶片交替，节奏与对比由图像推进。</li>
+  </ul>
+  <p class="doc-index-title">PROJECT INDEX <i>/</i> 08</p>
+  <nav class="doc-index"><a href="#p-01"><img src="../public/xinjing/user-01.webp" alt=""><span>01</span><strong>《心景》疗愈灯具</strong></a><a href="#p-02"><img src="../public/slowwalker-hero.webp" alt=""><span>02</span><strong>《慢行者》</strong></a><a href="#p-03"><img src="../public/lamps/01-ring-livingroom.webp" alt=""><span>03</span><strong>实习灯具设计</strong></a><a href="#p-04"><img src="../public/lamps/grad/02-campfire.webp" alt=""><span>04</span><strong>情绪疗愈灯具</strong></a><a href="#p-08"><img src="../public/cat-ice/hero.webp" alt=""><span>08</span><strong>猫冰 CAT-ICE : THERMAL LAB</strong></a><a href="#p-06"><img src="../public/chair/hero.webp" alt=""><span>06</span><strong>模块化木质座椅</strong></a><a href="#p-05"><img src="../public/ui-cos-2.webp" alt=""><span>05</span><strong>UI界面流程设计</strong></a><a href="#p-07"><img src="../public/aigc/aigc-board.webp" alt=""><span>07</span><strong>产品概念设计</strong></a></nav>
+</header><div class="sw-page" id="p-01" style="--sw-paper:#F4EFE6;--sw-ink:#1B1916;--sw-accent:#D9762B;--sw-hair:rgba(0,0,0,.16);--sw-dim:rgba(0,0,0,.56);--sw-soft:rgba(0,0,0,.045);--sw-shadow:rgba(0,0,0,.08);--sw-bar-bg:rgba(248,245,238,.78);--sw-invert-bg:#17181B;--sw-invert-ink:#F5F2EB">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 01 — 08</span><em>《心景》疗愈灯具</em></div>
+  <section class="sw-hero" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/xinjing/user-01.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/xinjing/user-01.webp" alt="《心景》系列灯具聚焦特写" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">01</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 01 <i>/</i> 产品设计</p>
+      <h1 class="sw-hero-title">《心景》疗愈灯具</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">基于独居青年情绪疗愈场景的灯具设计</span><span class="sw-badge">毕业设计 · 已落地</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">把「不可见的情绪需求」，做成可插拔、可堆叠、能回应的光。</p>
+    <div class="sw-facts"><div class="sw-fact"><b class="">209</b><span>份问卷发放 / 回收</span></div><div class="sw-fact"><b class="is-accent">72.25%</b><span>偶尔感到孤独</span></div></div>
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big"><img src="../public/xinjing/user-04.webp" alt="夜间发光效果" style="object-fit:cover" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small"><img src="../public/qimu/qimu-01.webp" alt="《栖木》落地灯细节" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 04</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/xinjing/user-05.webp" alt="整体效果展示" style="object-fit:cover" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;进门即亮</span><span class="sw-fn sw-fn--1">02 &nbsp;睡前渐暗</span><span class="sw-fn sw-fn--2">03 &nbsp;夜起指引</span><span class="sw-fn sw-fn--3">04 &nbsp;模块可动</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">01</span>
+    <figure class="sw-aside-fig"><img src="../public/xinjing/user-02.webp" alt="分层展台式摆放" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>本科毕业设计 · 2026 届毕业设计作品展</span><span>市场调研与问卷 · 概念与草图 · 结构 / 光学验证</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 08 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0"><img src="../public/xinjing/user-04.webp" alt="夜间发光效果" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1"><img src="../public/qimu/qimu-01.webp" alt="《栖木》落地灯细节" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2"><img src="../public/diemu/diemu-01.webp" alt="《叠木》错位壁灯细节" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3"><img src="../public/xinjing/user-05.webp" alt="整体效果展示" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4"><img src="../public/xinjing/user-02.webp" alt="分层展台式摆放" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>毕业设计 · 已落地</span></p>
+    
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：论文 · 展板 / 实物 · 功能可实现</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-02" aria-label="下一个项目：《慢行者》">
+    <img src="../public/slowwalker-hero.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 02</span><strong>《慢行者》</strong><em>→</em></span>
+  </a>
+</div>
+<div class="sw-page" id="p-02" style="--sw-paper:#ECF0EE;--sw-ink:#16201E;--sw-accent:#2F7D6B;--sw-hair:rgba(0,0,0,.16);--sw-dim:rgba(0,0,0,.56);--sw-soft:rgba(0,0,0,.045);--sw-shadow:rgba(0,0,0,.08);--sw-bar-bg:rgba(248,245,238,.78);--sw-invert-bg:#17181B;--sw-invert-ink:#F5F2EB">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 02 — 08</span><em>《慢行者》</em></div>
+  <section class="sw-hero" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/slowwalker-hero.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/slowwalker-hero.webp" alt="《慢行者》桌面摆放效果" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">02</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 02 <i>/</i> 产品设计</p>
+      <h1 class="sw-hero-title">《慢行者》</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">数字化等待的物理疗愈装置</span><span class="sw-badge">设计方案 · 资料完整</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">把下载进度交给一只蜗牛：数字等待，变成看得见的物理旅程。</p>
+    
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big"><img src="../public/slowwalker-render.jpeg" alt="产品渲染图" style="object-fit:cover" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small"><img src="../public/slowwalker-scene-1.webp" alt="使用场景 1" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 03</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/slowwalker-scene-2.png" alt="使用场景 2" style="object-fit:cover" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;进度同步</span><span class="sw-fn sw-fn--1">02 &nbsp;启动与呼吸光</span><span class="sw-fn sw-fn--2">03 &nbsp;完成反馈</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">02</span>
+    <figure class="sw-aside-fig"><img src="../public/slowwalker-inspiration.webp" alt="灵感与概念板" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>桌面交互装置设计</span><span>用户调研 · 概念发散 · 草图深化</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 05 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0"><img src="../public/slowwalker-render.jpeg" alt="产品渲染图" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1"><img src="../public/slowwalker-journey.webp" alt="用户旅程分镜" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2"><img src="../public/slowwalker-scene-1.webp" alt="使用场景 1" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3"><img src="../public/slowwalker-inspiration.webp" alt="灵感与概念板" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4"><img src="../public/slowwalker-scene-2.png" alt="使用场景 2" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>设计方案 · 已完成可视化</span></p>
+    
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：现有资料 · 功能可实现</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-03" aria-label="下一个项目：实习灯具设计">
+    <img src="../public/lamps/01-ring-livingroom.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 03</span><strong>实习灯具设计</strong><em>→</em></span>
+  </a>
+</div>
+<div class="sw-page" id="p-03" style="--sw-paper:#17191C;--sw-ink:#F3F0E9;--sw-accent:#E2A34B;--sw-hair:rgba(255,255,255,.20);--sw-dim:rgba(255,255,255,.60);--sw-soft:rgba(255,255,255,.06);--sw-shadow:rgba(255,255,255,.09);--sw-bar-bg:rgba(16,18,22,.76);--sw-invert-bg:#F2EFE7;--sw-invert-ink:#17181B">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 03 — 08</span><em>实习灯具设计</em></div>
+  <section class="sw-hero" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/lamps/01-ring-livingroom.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/lamps/01-ring-livingroom.webp" alt="孔雀石光环吊灯 · 客厅场景" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">03</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 03 <i>/</i> 产品设计</p>
+      <h1 class="sw-hero-title">实习灯具设计</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">实习期间完成的灯具设计：材质探索与 AI 形</span><span class="sw-badge">实习项目 · 打样落地阶段</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">一边把孔雀石送进工程图纸，一边用 AI 把灯具形态快速铺开。</p>
+    <div class="sw-facts"><div class="sw-fact"><b class="">2</b><span>张外观造型评审表</span></div><div class="sw-fact"><b class="is-accent">打样</b><span>评审结果勾选</span></div></div>
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big"><img src="../public/lamps/hero-malachite-ring.webp" alt="孔雀石环形吊灯主视觉" style="object-fit:cover" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small"><img src="../public/lamps/ai/01-glass-drops.webp" alt="棱纹玻璃水滴吊灯（AI 形态线）" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 04</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/lamps/ai/03-wave-layers.webp" alt="音浪波浪灯（AI 形态线）" style="object-fit:cover" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;3000K 柔光</span><span class="sw-fn sw-fn--1">02 &nbsp;孔雀石贴边</span><span class="sw-fn sw-fn--2">03 &nbsp;金属结构</span><span class="sw-fn sw-fn--3">04 &nbsp;系列化适配</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">03</span>
+    <figure class="sw-aside-fig"><img src="../public/lamps/ai/05-marble-columns.webp" alt="石材柱形灯（AI 形态线）" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>实习期间 · VELUCE 灯具外观设计与 AI</span><span>材质与造型方案 · 工程图纸绘制 · 外观造型评审</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 06 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0"><img src="../public/lamps/hero-malachite-ring.webp" alt="孔雀石环形吊灯主视觉" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1"><img src="../public/lamps/ai/01-glass-drops.webp" alt="棱纹玻璃水滴吊灯（AI 形态线）" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2"><img src="../public/lamps/ai/03-wave-layers.webp" alt="音浪波浪灯（AI 形态线）" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3"><img src="../public/lamps/ai/05-marble-columns.webp" alt="石材柱形灯（AI 形态线）" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4"><img src="../public/lamps/02-petal-bedroom.webp" alt="卧室场景" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>已进入打样落地阶段</span></p>
+    <p class="sw-outro-note">孔雀石系列已开始落地 · 其余形态或细节尚未确认</p>
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：评审表 · 台灯 · 评审表 · 客厅吊灯 · AI 形态线</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-04" aria-label="下一个项目：情绪疗愈灯具">
+    <img src="../public/lamps/grad/02-campfire.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 04</span><strong>情绪疗愈灯具</strong><em>→</em></span>
+  </a>
+</div>
+<div class="sw-page" id="p-04" style="--sw-paper:#F7F3EC;--sw-ink:#24201C;--sw-accent:#C4632E;--sw-hair:rgba(0,0,0,.16);--sw-dim:rgba(0,0,0,.56);--sw-soft:rgba(0,0,0,.045);--sw-shadow:rgba(0,0,0,.08);--sw-bar-bg:rgba(248,245,238,.78);--sw-invert-bg:#17181B;--sw-invert-ink:#F5F2EB">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 04 — 08</span><em>情绪疗愈灯具</em></div>
+  <section class="sw-hero" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/lamps/grad/02-campfire.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/lamps/grad/02-campfire.webp" alt="篝火灯 · 电子火焰与木柴" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">04</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 04 <i>/</i> 产品设计</p>
+      <h1 class="sw-hero-title">情绪疗愈灯具</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">以「手的动作」为开关的交互灯具系列</span><span class="sw-badge">设计方案 · 交互验证</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">不开按钮，开一个动作：推入、握持、添柴，灯才亮。</p>
+    
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big"><img src="../public/lamps/grad/01-fill-hand.webp" alt="填补心空 · 手部交互" style="object-fit:cover" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small"><img src="../public/lamps/grad/07-stacked-logs.webp" alt="胡桃木圆柱层叠灯" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 04</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/lamps/grad/03-cube-states.webp" alt="切割立方灯三态" style="object-fit:cover" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;推入 / 抽出</span><span class="sw-fn sw-fn--1">02 &nbsp;添柴增亮</span><span class="sw-fn sw-fn--2">03 &nbsp;握持变色</span><span class="sw-fn sw-fn--3">04 &nbsp;三态推进</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">04</span>
+    <figure class="sw-aside-fig"><img src="../public/lamps/grad/04-pebble-a.webp" alt="卵石灯" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>交互灯具系列设计</span><span>调研 · 概念草图 · 交互验证</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 05 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0"><img src="../public/lamps/grad/01-fill-hand.webp" alt="填补心空 · 手部交互" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1"><img src="../public/lamps/grad/07-stacked-logs.webp" alt="胡桃木圆柱层叠灯" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2"><img src="../public/lamps/grad/03-cube-states.webp" alt="切割立方灯三态" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3"><img src="../public/lamps/grad/04-pebble-a.webp" alt="卵石灯" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4"><img src="../public/lamps/grad/06-voxel.webp" alt="体素灯" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>设计方案 · 已完成交互验证</span></p>
+    
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：现有资料 · 功能可实现</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-08" aria-label="下一个项目：猫冰 CAT-ICE : THERMAL LAB">
+    <img src="../public/cat-ice/hero.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 08</span><strong>猫冰 CAT-ICE : THERMAL LAB</strong><em>→</em></span>
+  </a>
+</div>
+<div class="sw-page" id="p-08" style="--sw-paper:#0B1C26;--sw-ink:#EAF6F8;--sw-accent:#00D8E8;--sw-hair:rgba(255,255,255,.20);--sw-dim:rgba(255,255,255,.60);--sw-soft:rgba(255,255,255,.06);--sw-shadow:rgba(255,255,255,.09);--sw-bar-bg:rgba(16,18,22,.76);--sw-invert-bg:#F2EFE7;--sw-invert-ink:#17181B">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 08 — 08</span><em>猫冰 CAT-ICE : THERMAL LAB</em></div>
+  <section class="sw-hero" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/cat-ice/hero.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/cat-ice/hero.webp" alt="猫冰 CAT-ICE 主视觉" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">08</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 08 <i>/</i> IP 设计</p>
+      <h1 class="sw-hero-title">猫冰 CAT-ICE : THERMAL LAB</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">用温度决定软硬的 IP 形象</span><span class="sw-badge">IP 设计 · 系统完整</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">温度决定它今天是硬的还是软的。</p>
+    
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big"><img src="../public/cat-ice/character/dual-state.webp" alt="冻结态 / 软化态双态对照" style="object-fit:cover" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small"><img src="../public/cat-ice/scheme1/expression-system.webp" alt="情绪表情系统" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 04</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/cat-ice/scheme1/merchandise.webp" alt="周边应用与色彩规范" style="object-fit:cover" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;温度轴驱动</span><span class="sw-fn sw-fn--1">02 &nbsp;形态联动</span><span class="sw-fn sw-fn--2">03 &nbsp;快捷档位</span><span class="sw-fn sw-fn--3">04 &nbsp;延展系统</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">08</span>
+    <figure class="sw-aside-fig"><img src="../public/cat-ice/views/frozen-front.webp" alt="冻结态正面视图" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>IP 形象 / 潮玩挂卡</span><span>调研 · 草图 · 造型</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 06 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0"><img src="../public/cat-ice/scheme1/character-design.webp" alt="角色设定稿与三视图" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1"><img src="../public/cat-ice/character/dual-state.webp" alt="冻结态 / 软化态双态对照" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2"><img src="../public/cat-ice/scheme1/expression-system.webp" alt="情绪表情系统" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3"><img src="../public/cat-ice/scheme1/merchandise.webp" alt="周边应用与色彩规范" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4"><img src="../public/cat-ice/views/frozen-front.webp" alt="冻结态正面视图" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>IP 方案 · 已完成系统设定</span></p>
+    
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：现有资料 · 功能可实现</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-06" aria-label="下一个项目：模块化木质座椅">
+    <img src="../public/chair/hero.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 06</span><strong>模块化木质座椅</strong><em>→</em></span>
+  </a>
+</div>
+<div class="sw-page" id="p-06" style="--sw-paper:#EEE7DA;--sw-ink:#2A231B;--sw-accent:#8B6B43;--sw-hair:rgba(0,0,0,.16);--sw-dim:rgba(0,0,0,.56);--sw-soft:rgba(0,0,0,.045);--sw-shadow:rgba(0,0,0,.08);--sw-bar-bg:rgba(248,245,238,.78);--sw-invert-bg:#17181B;--sw-invert-ink:#F5F2EB">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 06 — 08</span><em>模块化木质座椅</em></div>
+  <section class="sw-hero" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/chair/hero.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/chair/hero.webp" alt="白橡框架配浅暖灰软包" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">06</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 06 <i>/</i> 产品设计</p>
+      <h1 class="sw-hero-title">模块化木质座椅</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">榫卯实木框架 × 可拆卸软包的一椅多用探索</span><span class="sw-badge">家具设计 · 结构方案</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">把「换椅子」拆成「换软包」：木架长期用，软包承担变化。</p>
+    
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big"><img src="../public/chair/structure.webp" alt="结构解析 · 软包沿框架内导轨推入" style="object-fit:cover" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small"><img src="../public/chair/scene-warm.webp" alt="暖光家居场景" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 04</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/chair/render.webp" alt="整体空间关系" style="object-fit:cover" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;软包可抽换</span><span class="sw-fn sw-fn--1">02 &nbsp;坐垫单用</span><span class="sw-fn sw-fn--2">03 &nbsp;靠背可调</span><span class="sw-fn sw-fn--3">04 &nbsp;无外露五金</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">06</span>
+    <figure class="sw-aside-fig"><img src="../public/chair/scene-dark.webp" alt="深色软包场景" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>产品 / 家具设计</span><span>结构研究 · 草图建模 · 材料实验</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 05 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0"><img src="../public/chair/structure.webp" alt="结构解析 · 软包沿框架内导轨推入" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1"><img src="../public/chair/scene-warm.webp" alt="暖光家居场景" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2"><img src="../public/chair/process.webp" alt="结构与工艺过程" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3"><img src="../public/chair/render.webp" alt="整体空间关系" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4"><img src="../public/chair/scene-dark.webp" alt="深色软包场景" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>结构方案 · 已完成可视化</span></p>
+    
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：现有资料 · 功能可实现</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-05" aria-label="下一个项目：UI界面流程设计">
+    <img src="../public/ui-cos-2.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 05</span><strong>UI界面流程设计</strong><em>→</em></span>
+  </a>
+</div>
+<div class="sw-page" id="p-05" style="--sw-paper:#F5F7FA;--sw-ink:#172033;--sw-accent:#4C5BD4;--sw-hair:rgba(0,0,0,.16);--sw-dim:rgba(0,0,0,.56);--sw-soft:rgba(0,0,0,.045);--sw-shadow:rgba(0,0,0,.08);--sw-bar-bg:rgba(248,245,238,.78);--sw-invert-bg:#17181B;--sw-invert-ink:#F5F2EB">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 05 — 08</span><em>UI界面流程设计</em></div>
+  <section class="sw-hero sw-hero--ui" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/ui-cos-2.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/ui-cos-2.webp" alt="展会信息页" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">05</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 05 <i>/</i> 用户研究</p>
+      <h1 class="sw-hero-title">UI界面流程设计</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">漫展与社区服务流程化界面设计</span><span class="sw-badge">界面设计 · 流程完整</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">把妆娘预约、服装租借、展会日程收进一条不绕路的流程。</p>
+    
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big is-contain"><img src="../public/ui-cos-1.webp" alt="妆娘服务首页" style="object-fit:contain" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small is-contain"><img src="../public/ui-cos-3.webp" alt="服装租赁与服务分类" style="object-fit:contain" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 03</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/ui-cos-4.webp" alt="展会日程与数据" style="object-fit:contain" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;服务聚合</span><span class="sw-fn sw-fn--1">02 &nbsp;决策信息</span><span class="sw-fn sw-fn--2">03 &nbsp;闭环操作</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">05</span>
+    <figure class="sw-aside-fig is-contain"><img src="../public/ui-gallery-1.webp" alt="租借流程" style="object-fit:contain" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>用户研究 / 界面体验</span><span>需求分析 · 信息架构 · 交互设计</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 05 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0 is-contain"><img src="../public/ui-cos-1.webp" alt="妆娘服务首页" style="object-fit:contain" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1 is-contain"><img src="../public/ui-cos-3.webp" alt="服装租赁与服务分类" style="object-fit:contain" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2 is-contain"><img src="../public/ui-cos-4.webp" alt="展会日程与数据" style="object-fit:contain" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3 is-contain"><img src="../public/ui-gallery-1.webp" alt="租借流程" style="object-fit:contain" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4 is-contain"><img src="../public/ui-gallery-2.webp" alt="分类导航" style="object-fit:contain" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>界面方案 · 已完成流程稿</span></p>
+    
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：现有资料 · 功能可实现</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-07" aria-label="下一个项目：产品概念设计">
+    <img src="../public/aigc/aigc-board.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 07</span><strong>产品概念设计</strong><em>→</em></span>
+  </a>
+</div>
+<div class="sw-page" id="p-07" style="--sw-paper:#14161C;--sw-ink:#F2F1EE;--sw-accent:#E67E33;--sw-hair:rgba(255,255,255,.20);--sw-dim:rgba(255,255,255,.60);--sw-soft:rgba(255,255,255,.06);--sw-shadow:rgba(255,255,255,.09);--sw-bar-bg:rgba(16,18,22,.76);--sw-invert-bg:#F2EFE7;--sw-invert-ink:#17181B">
+  <div class="doc-tab"><a href="#cover">← 目录</a><span>YH / 07 — 08</span><em>产品概念设计</em></div>
+  <section class="sw-hero" aria-label="产品主视觉">
+    <div class="sw-hero-media">
+      <img class="sw-hero-bg" src="../public/aigc/aigc-board.webp" alt="" aria-hidden="true">
+      <div class="sw-hero-stage"><img class="sw-hero-fg" src="../public/aigc/aigc-board.webp" alt="六个产品概念总览" decoding="async"></div>
+    </div>
+    <span class="sw-hero-scrim"></span>
+    <span class="sw-hero-ghost">07</span>
+    <div class="sw-hero-copy">
+      <p class="sw-kicker">PROJECT 07 <i>/</i> 产品设计</p>
+      <h1 class="sw-hero-title">产品概念设计</h1>
+      <div class="sw-hero-badges"><span class="sw-hero-sub">运用 AI 工具快速发散多元产品概念</span><span class="sw-badge">概念提案 · 六个方向</span></div>
+    </div>
+    <span class="sw-hero-scroll">SCROLL <b>↓</b></span>
+  </section>
+
+  <section class="sw-statement sw-sec" data-reveal>
+    <p class="sw-line">从摇晃、定时、称重，一路走到云南的针脚、叶脉与林子。</p>
+    
+  </section>
+
+  <section class="sw-spread sw-sec" data-reveal aria-label="产品与细节">
+    <figure class="sw-fig sw-fig--big"><img src="../public/aigc/01-shake.webp" alt="碳酸摇晃趣味灯" style="object-fit:cover" loading="eager" decoding="async" draggable="false"><figcaption class="sw-fig-tag">FIG. 01 <i>/</i> 产品</figcaption></figure>
+    <figure class="sw-fig sw-fig--small"><img src="../public/aigc/02-toaster.webp" alt="面包机定时灯具" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+  </section>
+
+  <section class="sw-invert" data-reveal aria-label="可实现功能">
+    <div class="sw-invert-head"><span>FUNCTIONS <i>/</i> 04</span><span>功能均可实现</span></div>
+    <div class="sw-invert-media">
+      <img src="../public/aigc/03-scale.webp" alt="光渐变重量探测器" style="object-fit:cover" loading="lazy" decoding="async" draggable="false">
+      <span class="sw-fn sw-fn--0">01 &nbsp;摇晃蓄光</span><span class="sw-fn sw-fn--1">02 &nbsp;双控件定时</span><span class="sw-fn sw-fn--2">03 &nbsp;重量可视化</span><span class="sw-fn sw-fn--3">04 &nbsp;在地题材</span>
+      <span class="sw-invert-word">OBJECT</span>
+    </div>
+  </section>
+
+  <section class="sw-aside sw-sec" data-reveal aria-label="设计细节">
+    <span class="sw-aside-vertical">DETAIL <i>/</i> MATERIAL <i>/</i> PROCESS</span>
+    <span class="sw-aside-outline">07</span>
+    <figure class="sw-aside-fig"><img src="../public/aigc/04-backpack.webp" alt="彝族服饰元素背包" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure>
+    <div class="sw-aside-meta"><span>AIGC 辅助产品概念发散</span><span>关键词梳理 · 批量生成 · 风格筛选</span></div>
+  </section>
+
+  <section class="sw-film-wrap" data-reveal aria-label="图像档案">
+    <div class="sw-film-head"><span>IMAGE ARCHIVE <i>/</i> 06 FRAMES</span><span>DRAG <b>↔</b></span></div>
+    <div class="sw-film"><figure class="sw-frame sw-frame--0"><img src="../public/aigc/01-shake.webp" alt="碳酸摇晃趣味灯" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--1"><img src="../public/aigc/02-toaster.webp" alt="面包机定时灯具" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--2"><img src="../public/aigc/03-scale.webp" alt="光渐变重量探测器" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--3"><img src="../public/aigc/04-backpack.webp" alt="彝族服饰元素背包" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure><figure class="sw-frame sw-frame--4"><img src="../public/aigc/05-bookmark.webp" alt="苍山洱海叶脉书签" style="object-fit:cover" loading="lazy" decoding="async" draggable="false"></figure></div>
+  </section>
+
+  <section class="sw-outro" data-reveal>
+    <p class="sw-outro-line"><b>进展</b><span>概念提案 · 已完成可视化</span></p>
+    
+    <div class="sw-outro-fine"><span>作品集内所有项目所述功能均可实现。</span><span>资料：现有资料 · 功能可实现</span></div>
+    <a class="sw-outro-back" href="#cover" style="display:inline-flex;align-items:center;text-decoration:none">← 返回目录</a>
+  </section>
+
+  <a class="sw-next" href="#p-01" aria-label="下一个项目：《心景》疗愈灯具">
+    <img src="../public/xinjing/user-01.webp" alt="" loading="lazy" decoding="async">
+    <span class="sw-next-copy"><span class="sw-next-kicker">NEXT PROJECT <i>/</i> 01</span><strong>《心景》疗愈灯具</strong><em>→</em></span>
+  </a>
+</div>
+<script>
+document.querySelectorAll('.sw-film').forEach(function (el) {
+  var d = { down: false, x: 0, left: 0 };
+  el.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'touch') return;
+    d = { down: true, x: e.clientX, left: el.scrollLeft };
+    el.setPointerCapture && el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', function (e) { if (d.down) el.scrollLeft = d.left - (e.clientX - d.x); });
+  el.addEventListener('pointerup', function () { d.down = false; });
+  el.addEventListener('pointercancel', function () { d.down = false; });
+});
+</script>
+</body></html>

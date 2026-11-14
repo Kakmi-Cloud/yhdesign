@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>杨鸿 · 产品设计师作品集 — 专业评审报告</title>
+<style>
+  :root{
+    --paper:#faf9f6; --card:#ffffff; --ink:#151515; --ink2:#4d4d4d; --ink3:#77736c;
+    --line:#e3e0d9; --orange:#E67E33; --orange-soft:#fff2e7; --dark:#1c1c1e;
+    --good:#2f7d5d; --bad:#b4442c; --warn:#a8791b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px 90px}
+  .mono{font-family:ui-monospace,SFMono-Regular,Consolas,"JetBrains Mono",monospace}
+  .kicker{font:700 11px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
+  header.top{border-bottom:3px solid var(--ink);padding:46px 0 26px;margin-bottom:34px}
+  header.top h1{font-size:38px;line-height:1.25;margin:10px 0 8px;letter-spacing:-.02em}
+  header.top .sub{color:var(--ink2);font-size:14px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-size:12.5px;color:var(--ink3)}
+  .meta b{color:var(--ink);font-weight:600}
+  h2{font-size:24px;margin:56px 0 6px;padding-bottom:10px;border-bottom:1px solid var(--ink);letter-spacing:-.01em}
+  h2 .num{font:700 13px ui-monospace,Consolas,monospace;color:var(--orange);margin-right:12px;letter-spacing:.1em}
+  h3{font-size:17px;margin:28px 0 8px}
+  p{margin:8px 0 12px}
+  ul{margin:8px 0 12px;padding-left:20px}
+  li{margin:5px 0}
+  small,.small{font-size:12.5px;color:var(--ink3)}
+  code{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;background:#f1efe9;padding:1px 5px;border-radius:3px;color:#333}
+  .hero{display:grid;grid-template-columns:220px 1fr;gap:34px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-top:5px solid var(--orange);padding:30px 34px;margin-bottom:10px}
+  .score{text-align:center;border-right:1px solid var(--line);padding-right:26px}
+  .score .n{font:900 76px/1 ui-monospace,Consolas,monospace;letter-spacing:-.06em;color:var(--ink)}
+  .score .n span{font-size:26px;color:var(--ink3);letter-spacing:0}
+  .score .grade{display:inline-block;margin-top:12px;background:var(--orange);color:#fff;font-weight:700;font-size:13px;padding:4px 14px;border-radius:2px}
+  .score .split{margin-top:14px;font-size:12.5px;color:var(--ink2);line-height:1.9}
+  .verdict{font-size:16px;line-height:1.9}
+  .verdict strong{background:linear-gradient(transparent 62%,var(--orange-soft) 62%)}
+  table{width:100%;border-collapse:collapse;margin:16px 0 22px;font-size:13.5px;background:var(--card)}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#f3f1eb;font-weight:700;font-size:12.5px;letter-spacing:.02em}
+  td.c,th.c{text-align:center}
+  tr.total td{background:var(--dark);color:#fff;font-weight:700;border-color:var(--dark)}
+  .bar{height:9px;background:#ece9e2;border-radius:1px;overflow:hidden;min-width:90px}
+  .bar i{display:block;height:100%;background:var(--orange)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .box{background:var(--card);border:1px solid var(--line);padding:18px 20px}
+  .box h4{margin:0 0 10px;font-size:14px;letter-spacing:.02em}
+  .tag{display:inline-block;font:700 10px ui-monospace,Consolas,monospace;letter-spacing:.1em;padding:2px 7px;border-radius:2px;vertical-align:middle}
+  .t-a{background:#e8f2ec;color:var(--good)} .t-b{background:var(--orange-soft);color:#a4531c}
+  .t-c{background:#eceff4;color:#40547b} .t-d{background:#f6eef2;color:#8a4a6b}
+  .t-e{background:#f4f0e4;color:var(--warn)}
+  .dim{background:var(--card);border:1px solid var(--line);margin:18px 0;padding:0;overflow:hidden}
+  .dim-head{display:flex;align-items:center;gap:16px;padding:16px 22px;background:#f5f3ed;border-bottom:1px solid var(--line)}
+  .dim-head .idx{font:700 12px ui-monospace,Consolas,monospace;color:var(--orange);letter-spacing:.1em}
+  .dim-head h3{margin:0;font-size:18px;flex:1}
+  .dim-head .pts{font:700 22px ui-monospace,Consolas,monospace}
+  .dim-head .pts small{font-size:12px;color:var(--ink3);font-weight:400}
+  .dim-body{padding:18px 22px 22px}
+  .dim-body .row{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .dim-body .row:last-child{border-bottom:0}
+  .dim-body .lab{font:700 11px ui-monospace,Consolas,monospace;letter-spacing:.08em;color:var(--ink3);padding-top:3px}
+  .dim-body .lab.plus{color:var(--good)} .dim-body .lab.minus{color:var(--bad)}
+  .dim-body ul{margin:0;padding-left:18px}
+  .ev{font:600 11px ui-monospace,Consolas,monospace;background:#f1efe9;color:#5b554b;padding:1px 5px;border-radius:2px;margin-right:4px;white-space:nowrap}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+  .shot{background:var(--card);border:1px solid var(--line);padding:8px}
+  .shot a{display:block;overflow:hidden;background:#f0eee8;border:1px solid #e9e6df}
+  .shot img{display:block;width:100%;height:186px;object-fit:cover;object-position:top center;transition:transform .2s}
+  .shot a:hover img{transform:scale(1.02)}
+  .shot .cap{padding:9px 3px 3px;font-size:12px;line-height:1.55;color:var(--ink2)}
+  .shot .cap b{display:block;font:700 10.5px ui-monospace,Consolas,monospace;letter-spacing:.08em;color:var(--orange);margin-bottom:3px}
+  .pri{border-left:5px solid var(--line);background:var(--card);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 22px;margin:14px 0}
+  .pri.p0{border-left-color:var(--bad)} .pri.p1{border-left-color:var(--warn)} .pri.p2{border-left-color:#6b8fb3}
+  .pri .h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .pri .h b{font-size:16px}
+  .pri .lv{font:700 11px ui-monospace,Consolas,monospace;padding:2px 8px;color:#fff;border-radius:2px;background:#999}
+  .pri.p0 .lv{background:var(--bad)} .pri.p1 .lv{background:var(--warn)} .pri.p2 .lv{background:#6b8fb3}
+  .pri .expect{background:#f6f4ee;border:1px dashed var(--line);padding:10px 14px;margin-top:10px;font-size:13.5px}
+  .note{background:#fff8f1;border:1px solid #f0d7bf;padding:16px 20px;margin:16px 0;font-size:13.5px}
+  .note b{color:#a4531c}
+  .foot{margin-top:60px;padding-top:18px;border-top:1px solid var(--ink);font-size:12px;color:var(--ink3)}
+  @media (max-width:820px){
+    .hero,.grid2{grid-template-columns:1fr}.score{border-right:0;border-bottom:1px solid var(--line);padding:0 0 18px}
+    .gallery{grid-template-columns:repeat(2,1fr)}.dim-body .row{grid-template-columns:1fr;gap:3px}
+    .wrap{padding:0 16px 60px}header.top h1{font-size:28px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">Portfolio Design Review / 2026-11-12</div>
+  <h1>杨鸿 · 产品设计师作品集<br />专业评审报告</h1>
+  <div class="sub">对象：<code>portfolio-mobile-handoff.zip</code> 解压后本地构建的成品站点（React 18 + Vite 5 + Tailwind v4），含桌面「复古 OS / 长页」与手机端「首访列表 / 长页 / 8 个详情页」两套界面。</div>
+  <div class="meta">
+    <span><b>评审口径</b> 100 分制 · 7 维度加权</span>
+    <span><b>桌面视口</b> 1256×808</span>
+    <span><b>手机视口</b> 414×896 / DPR2 / 触摸仿真</span>
+    <span><b>证据规模</b> 23 张截图 + 11 组计算样式 + 源码走查</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="score">
+    <div class="n">75.6<span>/100</span></div>
+    <div class="grade">良好 · B+</div>
+    <div class="split">桌面端 <b>81.2</b><br />手机端 <b>70.5</b><br /><span class="small">（五大视觉/体验维度加权）</span></div>
+  </div>
+  <div class="verdict">
+    <p><strong>桌面端已经是一份完成度很高、有明确设计语言的作品集</strong>：黑白橙 + 巨型排版 + bento 网格 + 复古 OS 隐喻，详情页有六段式叙事与调研数据，工程层面还有历史栈、深链、按需加载与降载处理。</p>
+    <p>但<strong>手机端首访层与简历长页退化为「白纸 + 细线表格」</strong>，全站最核心的「产品」在两处关键首屏里几乎缺席（手机首访仅 44px 缩略图、手机长页 0 张大图、桌面详情首屏 808px 内无产品主图），加上子项目各自为政的字体/强调色、吸顶栏穿透与双返回、以及 reduced-motion 降级不彻底，把整体分数压在「良好」区间。</p>
+    <p class="small">一句话：不是做不出高级感，而是高级感没有被一致地铺到手机端与首屏，也没有让产品成为第一主角。</p>
+  </div>
+</div>
+<p class="small">本页所有分数与结论均可回溯到下方标注的证据编号（E 截图 / M 量化指标 / C 源码 / D 交互实测 / AB 对照实验）。未取证的项一律放入第八章「假设与需补充材料」，不参与扣分。</p>
+
+<h2><span class="num">01</span>评分体系：分制、权重、标准与判定依据</h2>
+
+<h3>1.1 分制与计分口径</h3>
+<ul>
+  <li><b>100 分制</b>。每个维度先按 100 分制评出「桌面分」与「手机分」，再按 <b>桌面 0.55 / 手机 0.45</b> 合成该维度得分，最后乘以权重；技术与无障碍两项为全站共性，不拆端。</li>
+  <li>桌面权重略高的理由：作品集投递与评审以桌面浏览为主，手机常承担转发/扫码后的第一印象与快速浏览。<b>此权重是本评审的设定，不是实测事实</b>（见 8.1）。</li>
+  <li>维度得分保留 1 位小数，总分保留 1 位小数；同一缺陷只在其主责维度扣一次，避免重复惩罚。</li>
+  <li>评分以本次本地构建产物（<code>npm run build</code> → <code>dist/</code>）在 headless Chrome 157 下的渲染为准，未使用线上版本。</li>
+</ul>
+
+<h3>1.2 维度与权重</h3>
+<table>
+  <thead><tr><th style="width:52px">#</th><th>维度</th><th class="c" style="width:70px">权重</th><th>考察点</th><th style="width:150px">主要依据类型</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>视觉风格</b></td><td class="c">18</td><td>色彩系统与对比、字体家族与字阶、跨页面/跨项目一致性、品牌识别度</td><td>E 截图 / M 颜色字体频率 / C 令牌</td></tr>
+    <tr><td>2</td><td><b>交互操作</b></td><td class="c">16</td><td>导航可发现性、状态反馈、返回/历史、搜索筛选、触控易用性、学习成本</td><td>D 点击实测 / C 状态机 / M 触控目标</td></tr>
+    <tr><td>3</td><td><b>版式排版</b></td><td class="c">16</td><td>网格系统、间距节奏、信息层级、对齐、遮挡与溢出、字阶跨度合理性</td><td>E 截图 / M scrollWidth / M 字号分布</td></tr>
+    <tr><td>4</td><td><b>内容呈现</b></td><td class="c">20</td><td>项目说明完整度、重点是否突出、叙事是否闭环（问题→过程→验证→结果）</td><td>C 数据字段 / M 字数 / E 章节截图</td></tr>
+    <tr><td>5</td><td><b>画面展现</b></td><td class="c">18</td><td>图像质量、裁切与适配、首屏产品占比、视觉冲击力</td><td>E 截图 / M object-fit 与自然尺寸</td></tr>
+    <tr><td>6</td><td><b>技术实现与性能</b><span class="tag t-c" style="margin-left:8px">补充</span></td><td class="c">6</td><td>构建健康度、拆包与按需加载、资源体积、外链依赖风险、动效降载</td><td>M 构建/资源 / C 配置</td></tr>
+    <tr><td>7</td><td><b>无障碍与包容性</b><span class="tag t-c" style="margin-left:8px">补充</span></td><td class="c">6</td><td>语义标题、替代文本、触控尺寸、最小字号、prefers-reduced-motion 落实</td><td>M DOM / AB 对照实验 / C 组件</td></tr>
+    <tr class="total"><td colspan="2">合计</td><td class="c">100</td><td colspan="2">五个必评维度占 88 分，补充维度占 12 分</td></tr>
+  </tbody>
+</table>
+
+<h3>1.3 评分档位标准（每个维度均按此判）</h3>
+<table>
+  <thead><tr><th class="c" style="width:90px">百分制</th><th>判定标准</th></tr></thead>
+  <tbody>
+    <tr><td class="c"><b>90–100</b></td><td>行业标杆：系统完整、无实质缺陷，可直接对外发布并在同类作品中形成辨识度</td></tr>
+    <tr><td class="c"><b>80–89</b></td><td>优秀：整体成熟，仅有个别不影响理解的优化项</td></tr>
+    <tr><td class="c"><b>70–79</b></td><td>良好：主要目标达成，存在明确、可定位、可修复的短板</td></tr>
+    <tr><td class="c"><b>60–69</b></td><td>合格：基本可用，但关键体验（首屏/主内容/主路径）有明显缺口</td></tr>
+    <tr><td class="c"><b>40–59</b></td><td>待改进：多处影响理解或转化，需要结构性重做</td></tr>
+    <tr><td class="c"><b>&lt;40</b></td><td>不合格：核心信息无法有效传达</td></tr>
+  </tbody>
+</table>
+
+<h3>1.4 判定依据分级与扣分规则</h3>
+<div class="grid2">
+  <div class="box"><h4>证据等级</h4>
+    <p><span class="tag t-a">E 视觉</span> 本机截图，编号 E01–E16，见第五章画廊。</p>
+    <p><span class="tag t-b">M 量化</span> DOM 计算样式、字号/颜色频率、图片自然尺寸与 object-fit、scrollWidth、触控尺寸、资源统计。</p>
+    <p><span class="tag t-c">C 源码</span> 具体文件与行号，例如 <code>src/index.css:38-55</code>。</p>
+    <p><span class="tag t-d">D 交互</span> 真实点击、输入、滚动后的状态。</p>
+    <p><span class="tag t-e">AB 对照</span> 独立会话在同一视图状态下的开关对照。</p>
+  </div>
+  <div class="box"><h4>避免误判的三条规则</h4>
+    <ul>
+      <li><b>懒加载不计为坏图</b>：<code>naturalWidth=0</code> 多来自未进入视口的 <code>loading="lazy"</code>；滚动后 <code>fig26.webp</code> 由 0×0 变为 558×418（M16），证明加载正常。</li>
+      <li><b>按钮内装饰图 <code>alt=""</code> 不扣分</b>：首访层 8 张缩略图所在按钮已有文字标签（C8），符合读屏去重做法；详情页缺 alt 另需区分装饰图，列为待复核。</li>
+      <li><b>桌面 40–55 个 &lt;44px 可点元素不直接扣分</b>：桌面以指针操作为主；仅在「触屏笔记本/平板」语境下作为风险提示。手机端实测 0 个不达标（M2）。</li>
+    </ul>
+  </div>
+</div>
+
+<h2><span class="num">02</span>评分总表</h2>
+<table>
+  <thead><tr><th style="width:170px">维度</th><th class="c">权重</th><th class="c">桌面分</th><th class="c">手机分</th><th>加权得分条形</th><th class="c">维度得分</th><th class="c">折合百分</th></tr></thead>
+  <tbody>
+    <tr><td>1 视觉风格</td><td class="c">18</td><td class="c">86</td><td class="c">69</td><td><div class="bar"><i style="width:78.4%"></i></div></td><td class="c"><b>14.1</b> / 18</td><td class="c">78.4</td></tr>
+    <tr><td>2 交互操作</td><td class="c">16</td><td class="c">84</td><td class="c">78</td><td><div class="bar"><i style="width:81.3%"></i></div></td><td class="c"><b>13.0</b> / 16</td><td class="c">81.3</td></tr>
+    <tr><td>3 版式排版</td><td class="c">16</td><td class="c">84</td><td class="c">75</td><td><div class="bar"><i style="width:80.0%"></i></div></td><td class="c"><b>12.8</b> / 16</td><td class="c">80.0</td></tr>
+    <tr><td>4 内容呈现</td><td class="c">20</td><td class="c">78</td><td class="c">68</td><td><div class="bar"><i style="width:73.5%"></i></div></td><td class="c"><b>14.7</b> / 20</td><td class="c">73.5</td></tr>
+    <tr><td>5 画面展现</td><td class="c">18</td><td class="c">75</td><td class="c">64</td><td><div class="bar"><i style="width:70.1%"></i></div></td><td class="c"><b>12.6</b> / 18</td><td class="c">70.1</td></tr>
+    <tr><td>6 技术实现与性能</td><td class="c">6</td><td class="c" colspan="2">80（不拆端）</td><td><div class="bar"><i style="width:80%"></i></div></td><td class="c"><b>4.8</b> / 6</td><td class="c">80.0</td></tr>
+    <tr><td>7 无障碍与包容性</td><td class="c">6</td><td class="c" colspan="2">60（不拆端）</td><td><div class="bar"><i style="width:60%"></i></div></td><td class="c"><b>3.6</b> / 6</td><td class="c">60.0</td></tr>
+    <tr class="total"><td>总分</td><td class="c">100</td><td class="c">81.2</td><td class="c">70.5</td><td>14.1+13.0+12.8+14.7+12.6+4.8+3.6</td><td class="c"><b>75.6</b></td><td class="c">75.6</td></tr>
+  </tbody>
+</table>
+<p class="small">计算示例（视觉风格）：<span class="mono">(86×0.55 + 69×0.45) / 100 × 18 = 14.10</span>。桌面 81.2 与手机 70.5 为前五个维度按权重归一后的分数；总分再把 88 分的五大维度与 12 分的补充维度相加。</p>
+
+<h2><span class="num">03</span>逐维度评审：优势、扣分原因与具体依据</h2>
+
+<div class="dim">
+  <div class="dim-head"><span class="idx">DIM 01</span><h3>视觉风格 · 色彩 / 字体 / 一致性</h3><span class="pts">14.1<small> / 18</small></span></div>
+  <div class="dim-body">
+    <div class="row"><span class="lab plus">优势</span><ul>
+      <li><b>令牌系统完整且被执行</b>：<span class="ev">C1</span> <code>src/index.css:38-55</code> 定义 <code>#FCFCFC</code> 纸白 / <code>#151515</code> 近黑 / <code>#E67E33</code> 橙 / <code>#E3E3E3</code> 分度线 / <code>1rem</code> 圆角；实测文本色频率 <code>rgb(21,21,21)</code> 334 次、橙色 96 次，说明不是写在文档里而是全站真在用 <span class="ev">M4</span>。</li>
+      <li><b>字体混排有张力</b>：<span class="ev">C1</span> Oswald（display）/ Instrument Serif（手写斜体）/ JetBrains Mono（工程标签）/ Noto Sans SC（正文）四套分工明确；<span class="ev">E02</span> 首屏 <code>CRAFTING</code> 超粗体 + <code>Experiences</code> 斜体 + 橙色大圆 + 轮廓字，形成强烈记忆点。</li>
+      <li><b>桌面视觉语言高度自洽</b>：硬阴影、圆角 bento、半调网点旋转徽章、深色引言卡、橙色小标签在 OS 桌面 / 长页 / 详情页三处重复出现 <span class="ev">E01</span><span class="ev">E05</span><span class="ev">E12</span>。</li>
+      <li><b>项目专属皮肤完成度高</b>：<span class="ev">E10</span> 08 猫冰的冰蓝网格展板、<span class="ev">E09</span> 07 的深黑沉浸式概念页，单页观感均可独立成稿。</li>
+    </ul></div>
+    <div class="row"><span class="lab minus">扣分</span><ul>
+      <li><b>手机端与桌面端像两个不同水准的站点</b>：<span class="ev">E07</span> 首访层与 <span class="ev">E14</span> 长页几乎没有大色块、圆角、网点、徽章、硬阴影，只剩白底细线；桌面已建立的视觉资产没有下放到 ≤1023px。<b>本项扣 3.2 分</b>（手机 86→69 的主因）。</li>
+      <li><b>跨项目字体与强调色不统一</b>：<span class="ev">M5</span> 01 详情页文本节点有 <code>Inter</code> 139 处、07 有 <code>Helvetica Neue</code> 141 处与 <code>ui-monospace</code> 70 处、07 强调色为 <code>#FF5B2E</code> 而非全局 <code>#E67E33</code>，08 引入冰蓝 + 深红；项目内成立，跨项目浏览时品牌被稀释。<b>扣 1.4 分</b>。</li>
+      <li><b>装饰压过可读性的个案</b>：<span class="ev">E02</span> 斜体 <code>Experiences</code> 横跨橙色圆、轮廓字 <code>DESIGN</code> 在 808px 处被切断；<span class="ev">E06</span> 巨型 <code>concept.</code> 下缘被下方大图叠压。<b>扣 1.0 分</b>。</li>
+    </ul></div>
+    <div class="row"><span class="lab">依据</span><div><span class="ev">E01</span><span class="ev">E02</span><span class="ev">E05</span><span class="ev">E07</span><span class="ev">E09</span><span class="ev">E10</span><span class="ev">E14</span> + <span class="ev">M4</span><span class="ev">M5</span> + <span class="ev">C1</span>（<code>index.css:9-62</code>）。</div></div>
+  </div>
+</div>
+
+<div class="dim">
+  <div class="dim-head"><span class="idx">DIM 02</span><h3>交互操作 · 导航 / 反馈 / 易用性</h3><span class="pts">13.0<small> / 16</small></span></div>
+  <div class="dim-body">
+    <div class="row"><span class="lab plus">优势</span><ul>
+      <li><b>桌面 OS 隐喻的反馈链非常完整</b>：<span class="ev">D1</span><span class="ev">E13</span> 点《心景》图标 → 图标橙底选中态 + 弹出带标题栏/最小化/关闭/滚动条/状态栏的窗口 + 任务栏新增 <code>01 ·《心景》疗愈灯具</code> 标签，窗口内容可滚（<code>os-window-body</code> scrollHeight 554 / client 383）。</li>
+      <li><b>状态机被认真处理</b>：<span class="ev">C5</span> <code>App.jsx:420-599</code> 把长页/胶片/详情/弹窗统一压进 <code>history.state.yhStack</code>，安卓返回键与 iOS 侧滑先关浮层再离站；<code>App.jsx:1211-1230</code> 支持 <code>#p=01</code> 深链单项目分享，Escape 关闭弹窗。</li>
+      <li><b>搜索是真功能</b>：<span class="ev">D2</span><span class="ev">C6</span> 输入「猫冰」后项目区确实过滤（「疗愈灯具」从 DOM 消失），并有清除按钮与空状态处理（<code>App.jsx:2421-2495</code>），不是装饰输入框。</li>
+      <li><b>手机端硬指标全达标</b>：<span class="ev">M2</span> 414 视口下 7 个场景 <code>scrollWidth=414</code> 无横向溢出；可见可点元素 9/26/63/32 个中 <b>&lt;44×44 的数量均为 0</b>；<span class="ev">C8</span> 首访层「一行 = 进详情 / 底部按钮 = 进简历」单一动作映射，学习成本极低。</li>
+    </ul></div>
+    <div class="row"><span class="lab minus">扣分</span><ul>
+      <li><b>搜索缺少即时反馈</b>：<span class="ev">D2</span><span class="ev">E16</span> 输入后视口仍停在首屏巨型标题，没有结果计数、没有自动定位到 <code>#projects</code>，用户很可能以为输入没生效。<b>扣 1.2 分</b>。</li>
+      <li><b>手机端导航冗余与主题割裂</b>：<span class="ev">E09</span> 07 详情页同时有统一顶栏「返回」和页内「← 返回作品集」，且白底顶栏压在深黑页面上；<span class="ev">E15</span> 左下浮动「≡ 列表」胶囊压住页脚文字。<b>扣 1.0 分</b>。</li>
+      <li><b>双模式入口需要解释成本</b>：<span class="ev">E02</span> 顶部常驻「ISSUE.05 // 交互工作台」提示条 + 「进入桌面模式 / 留在本页」，用一条通知条来教用户站点存在两套完全不同的界面，本身说明信息架构有分叉。<b>扣 0.6 分</b>。</li>
+      <li><b>桌面触屏场景风险（不计入扣分）</b>：<span class="ev">M3</span> 桌面 40–55 个可点元素小于 44px（61.5%–70.7%），如 <code>TOP 40×14</code>；指针操作无碍，触屏笔记本/平板会偏小。</li>
+    </ul></div>
+    <div class="row"><span class="lab">依据</span><div><span class="ev">E02</span><span class="ev">E09</span><span class="ev">E13</span><span class="ev">E15</span><span class="ev">E16</span> + <span class="ev">M2</span><span class="ev">M3</span> + <span class="ev">C5</span><span class="ev">C6</span><span class="ev">C7</span><span class="ev">C8</span>。</div></div>
+  </div>
+</div>
+
+<div class="dim">
+  <div class="dim-head"><span class="idx">DIM 03</span><h3>版式排版 · 网格 / 间距 / 信息层级</h3><span class="pts">12.8<small> / 16</small></span></div>
+  <div class="dim-body">
+    <div class="row"><span class="lab plus">优势</span><ul>
+      <li><b>bento 网格成熟</b>：<span class="ev">E05</span> 桌面详情首屏「巨型标题 / 深色引言 / 半调徽章 / 两个数据卡 / 橙色 Flexible 大卡」五类模块在 12 栏内对齐严谨；<span class="ev">E11</span> 手机端收敛为 2×2 卡 + 全宽橙卡，间距节奏统一。</li>
+      <li><b>章节编号体系清晰</b>：<span class="ev">E12</span> <code>02 CORE HIGHLIGHTS / 核心亮点</code> → <code>03 USERS &amp; SCENES / 目标用户与场景</code>，中英双标签 + 细分割线，长页滚读不迷路；<span class="ev">E14</span> 手机长页用 <code>SEC.03 / SEC.04 / SEC.05</code> 延续同一套语言。</li>
+      <li><b>字阶跨度服务于层级</b>：<span class="ev">M6</span> 实测 9px 工程标签 → 15/16px 正文 → 24/35/48/70px 标题 → 169.56px 首屏巨型字，层级不是靠颜色而是靠尺度建立。</li>
+      <li><b>锚点避让已考虑</b>：<span class="ev">C1</span> <code>index.css:77-81</code> <code>scroll-margin-top:88px</code>，长页另有 <code>78px</code> 覆盖（交接文档 §四.5）。</li>
+    </ul></div>
+    <div class="row"><span class="lab minus">扣分</span><ul>
+      <li><b>吸顶栏穿透与遮挡</b>：<span class="ev">E14</span><span class="ev">E15</span> 手机长页半透明顶栏下方能看见上一行的「PS / AI / Rhino」「日语 N2」，滚动时文字从页头透出；<span class="ev">E08</span> 详情页顶部一行黑色大字只露出下半截；<span class="ev">E10</span> 08 顶部 <code>CAT × ICE</code> 标签与另一行小字重叠。<b>扣 1.6 分</b>。</li>
+      <li><b>手机长页是纯表格排版</b>：<span class="ev">E14</span><span class="ev">E15</span> 2 列细线表格连续铺满，无图像、无色块节奏（仅「开始合作」深色块收尾），信息密度均匀到没有视觉重点。<b>扣 1.2 分</b>。</li>
+      <li><b>极小标签与多 H1</b>：<span class="ev">M6</span> 手机详情页仍有 118–191 个 &lt;15px 文本节点，08 页出现 8.8px/8px 标签；<span class="ev">M9</span> 长页与浮层同时存在 4 个 <code>H1</code>，语义层级与视觉层级不一致。<b>扣 0.8 分</b>（正文主字号 15/16px 达标，此项只针对标签与语义，不重复扣正文）。</li>
+    </ul></div>
+    <div class="row"><span class="lab">依据</span><div><span class="ev">E03</span><span class="ev">E05</span><span class="ev">E08</span><span class="ev">E10</span><span class="ev">E11</span><span class="ev">E12</span><span class="ev">E14</span><span class="ev">E15</span> + <span class="ev">M6</span><span class="ev">M9</span> + <span class="ev">C1</span>。</div></div>
+  </div>
+</div>
+
+<div class="dim">
+  <div class="dim-head"><span class="idx">DIM 04</span><h3>内容呈现 · 项目说明 / 重点突出 / 叙事完整</h3><span class="pts">14.7<small> / 20</small></span></div>
+  <div class="dim-body">
+    <div class="row"><span class="lab plus">优势</span><ul>
+      <li><b>结构化项目文案齐备</b>：<span class="ev">C2</span> <code>App.jsx:806-1199</code> 8 个项目各有 <code>overview / targetUsers / concept</code>（部分还有 <code>cmf / interaction</code>）与 <code>chartData</code>，例如 01 的「72.25% 受访者偶尔感到孤独 / 73.68% 偏好柔和暖光」直接把调研写进叙事 <span class="ev">E05</span> 的 <code>73%</code>、<code>209 Survey Samples</code> 数据卡。</li>
+      <li><b>详情页叙事分段完整</b>：<span class="ev">E05</span> 顶部导航 <code>HIGHLIGHTS → USERS → PROCESS → SYSTEM → MATERIAL → ITERATION</code>，<span class="ev">E12</span> 对应 <code>02 CORE HIGHLIGHTS</code>、<code>03 USERS &amp; SCENES</code>；手机端浮层内部 scrollHeight 达 8445 CSS px、正文 2785 字（01）/3685 字（07）/2883 字（08），且折叠默认全展开 <span class="ev">M11</span><span class="ev">E11</span>。</li>
+      <li><b>简历侧其实有硬核量化</b>：<span class="ev">C3</span> <code>App.jsx:772-793</code> 写到「概念验证周期 7 天 → 3 天」「3 套可落地外观方案」「5 套完整方案」「创意产出效率 +40%」「30+ 概念草图」「12 类应用场景」「比赛奖项通过」，不是空泛职责描述。</li>
+      <li><b>联系方式明确</b>：<span class="ev">E15</span> 「复制邮箱 / 下载简历 / 打电话」三个动作直接可用，转化路径短。</li>
+    </ul></div>
+    <div class="row"><span class="lab minus">扣分</span><ul>
+      <li><b>项目叙事止于「概念与过程」，缺结果与验证</b>：<span class="ev">C2</span> 8 个项目的字段里没有 <code>result / impact / verification</code> 一类结果字段；详情页展示的是调研数据与方案推演，看不到「是否打样、是否落地、用户反馈、迭代前后对比、个人复盘」。对设计岗评审，这是最影响说服力的一项。<b>扣 2.6 分</b>。</li>
+      <li><b>最有力的数字被折叠</b>：<span class="ev">C3</span><span class="ev">E03</span> 上述量化成果位于经历卡的展开态（截图里只有「+」），默认视图只显示公司名 + 职位标签；<span class="ev">M10</span> 手机长页全文仅 <b>552 字、0 张 &gt;200px 图片</b>，重点没有浮出来。<b>扣 2.0 分</b>。</li>
+      <li><b>手机长页「精选项目」只有一行指路</b>：<span class="ev">C4</span> <code>App.jsx:2173-2184</code> 明确是为避免与首访列表重复而做的有意取舍，但代价是：从「简历与能力」进来的访客看不到任何作品，必须再点一次「列表」。<b>扣 1.4 分</b>。</li>
+      <li><b>个别项目首屏无正文</b>：<span class="ev">E10</span> 08 猫冰首屏只有标题、slogan 与展板控件，项目说明在首屏之后；<span class="ev">E09</span> 07 首屏只有 <code>concept.</code> 与一句概念短语。<b>扣 1.0 分</b>。</li>
+    </ul></div>
+    <div class="row"><span class="lab">依据</span><div><span class="ev">E03</span><span class="ev">E05</span><span class="ev">E09</span><span class="ev">E10</span><span class="ev">E11</span><span class="ev">E12</span><span class="ev">E14</span> + <span class="ev">M10</span><span class="ev">M11</span> + <span class="ev">C2</span><span class="ev">C3</span><span class="ev">C4</span>。</div></div>
+  </div>
+</div>
+
+<div class="dim">
+  <div class="dim-head"><span class="idx">DIM 05</span><h3>画面展现 · 图像质量 / 裁切适配 / 视觉冲击力</h3><span class="pts">12.6<small> / 18</small></span></div>
+  <div class="dim-body">
+    <div class="row"><span class="lab plus">优势</span><ul>
+      <li><b>素材本身质量高</b>：<span class="ev">M7</span> 主图 <code>_fig20-backup-prototype.webp</code> 1500×1443、场景图 1376×768、IP 展板清晰；<span class="ev">E08</span> 手机 01 首屏 412×340 的白色模块化灯具渲染、<span class="ev">E10</span> 08 的猫冰主形象、<span class="ev">E13</span> OS 窗口内的暖光场景图都具备成品级观感。</li>
+      <li><b>产品主图遵守不裁切</b>：<span class="ev">M7</span> 手机 01 主图 <code>object-fit: contain</code>；08 页 29/46 张图为 <code>contain</code>（占比最高），符合交接文档「产品本体不得裁切/变形」的硬约束；实测无 <code>object-fit: fill</code> 导致的变形（deformed=0）。</li>
+      <li><b>桌面有强视觉锤</b>：<span class="ev">E02</span> 169px 巨型排版 + 橙色大圆、<span class="ev">E12</span> 宽幅产品 hero、<span class="ev">E06</span> 深黑全幅 concept 图，冲击力足。</li>
+    </ul></div>
+    <div class="row"><span class="lab minus">扣分</span><ul>
+      <li><b>关键首屏看不到产品</b>：<span class="ev">E05</span> 桌面 01 详情 808px 首屏只有标题与数据卡，宽幅产品 hero 在滚到约 820px 才出现 <span class="ev">E12</span>；<span class="ev">E07</span> 手机首访层 8 个项目只有约 44px 缩略图（其中 08、05 缩略后内容难辨）；<span class="ev">E14</span><span class="ev">E15</span> 手机长页 0 张大图。与「以产品为主」的目标直接冲突。<b>扣 3.0 分</b>。</li>
+      <li><b>cover 裁切比例偏高</b>：<span class="ev">M7</span> 手机 01 为 20/25 <code>cover</code>、手机 07 为 28/41、桌面 01 为 12/17；<span class="ev">M8</span> 典型样例 <code>scene-01.jpg</code> 1376×768（1.79）被塞进 330×116（2.85）的横条，纵向约 <b>37%</b> 画幅被裁掉，且未见 <code>object-position</code> 语义化配置。<b>扣 1.6 分</b>。</li>
+      <li><b>叠层轮盘遮挡信息</b>：<span class="ev">E04</span> 项目区后两张卡被主卡与视口右缘截断，项目名与说明只显示半截；<span class="ev">E06</span> 07 的 <code>concept.</code> 下缘被大图叠压、产品上的字样被画框切断。<b>扣 1.0 分</b>。</li>
+      <li><b>手机首访层没有主视觉</b>：<span class="ev">E07</span> 一屏 8 行同质列表 + 1 个底部按钮，无 Hero 图、无品牌图形，第一印象接近文件管理器而非设计师作品集。<b>扣 1.0 分</b>。</li>
+    </ul></div>
+    <div class="row"><span class="lab">依据</span><div><span class="ev">E02</span><span class="ev">E04</span><span class="ev">E05</span><span class="ev">E06</span><span class="ev">E07</span><span class="ev">E08</span><span class="ev">E10</span><span class="ev">E12</span><span class="ev">E13</span><span class="ev">E14</span> + <span class="ev">M7</span><span class="ev">M8</span><span class="ev">M16</span>。</div></div>
+  </div>
+</div>
+
+<div class="dim">
+  <div class="dim-head"><span class="idx">DIM 06</span><h3>补充维度 A · 技术实现与性能</h3><span class="pts">4.8<small> / 6</small></span></div>
+  <div class="dim-body">
+    <div class="row"><span class="lab plus">优势</span><ul>
+      <li><b>构建健康</b>：<span class="ev">M14</span> Vite 5.4.21 转换 2019 模块 5.45s 完成，仅有 1 条「CSS 注释里中文括号」的 minify 警告，不影响产物。</li>
+      <li><b>拆包与按需加载</b>：<span class="ev">M14</span> 主包 155.09 kB（gzip 51 kB），React / framer-motion / 图标各自独立成块，8 个详情页为独立 chunk（12.93–52.37 kB），首屏不必下载全部项目内容。</li>
+      <li><b>资源节制</b>：<span class="ev">M15</span> 图片 15–42 张懒加载、单图平均 &lt;10 kB（08 页 39 张共 365 kB），DOM 节点 1195–1927，未见失控膨胀；源码还有空闲降载、离屏暂停、Lenis 静止停帧（<code>README.md</code> §四）。</li>
+      <li><b>reduced-motion 有规则覆盖</b>：<span class="ev">M13 前置</span> 样式表中检出 <b>14 条</b> <code>@media (prefers-reduced-motion: reduce)</code> 规则（共 72–73 条 media 规则）。</li>
+    </ul></div>
+    <div class="row"><span class="lab minus">扣分</span><ul>
+      <li><b>外链字体是单点依赖</b>：<code>index.html:38-42</code> 从 Google Fonts 加载 5 个家族（Oswald / JetBrains Mono / Noto Sans SC / Noto Serif SC / Instrument Serif），实测 <code>document.fonts</code> 已加载 face 89–151 个；弱网、内网或被墙时会出现回退与首屏字移，且无自托管/子集化。<b>扣 0.8 分</b>（风险项，本次未做弱网实测，不加重扣罚）。</li>
+      <li><b>动效降级执行不彻底</b>：<span class="ev">AB</span> 见 DIM 07，规则存在但运行态仍有残留动画。<b>扣 0.4 分</b>（归在此处为工程实现，DIM 07 不再重复）。</li>
+    </ul></div>
+    <div class="row"><span class="lab">依据</span><div><span class="ev">M14</span><span class="ev">M15</span><span class="ev">M16</span><span class="ev">AB</span> + <code>index.html:38-42</code>、<code>vite.config.js:23-31</code>、<code>README.md</code> §四。</div></div>
+  </div>
+</div>
+
+<div class="dim">
+  <div class="dim-head"><span class="idx">DIM 07</span><h3>补充维度 B · 无障碍与包容性</h3><span class="pts">3.6<small> / 6</small></span></div>
+  <div class="dim-body">
+    <div class="row"><span class="lab plus">优势</span><ul>
+      <li><span class="ev">M2</span> 手机端可点元素 <b>100% ≥44×44</b>，无横向溢出；<span class="ev">M6</span> 正文主字号 15/16px；<span class="ev">M17</span> 图标按钮均带可读名称（noName=0），首访层缩略图用 <code>alt=""</code> 去重属正确做法。</li>
+      <li><span class="ev">C5</span> 深链 + 历史栈 + Escape 对键盘与移动端返回手势友好；<span class="ev">C7</span> 手机统一顶栏把返回固定为 96×44 热区。</li>
+      <li><span class="ev">AB</span> 打开 <code>prefers-reduced-motion: reduce</code> 后，运行中的动画元素 24 → 17、带 transition 的元素 199 → 174，说明降级链路确实生效了一部分。</li>
+    </ul></div>
+    <div class="row"><span class="lab minus">扣分</span><ul>
+      <li><b>降级不完整，未达「仅保留透明度」</b>：<span class="ev">AB</span> 独立会话同视图对照（两次 <code>.bento-detail-root</code> 均存在、正文均 2785 字）：reduce 下仍有 17 个运行动画，残留样本是 <code>animate-pulse</code>（2s 呼吸），且 <code>transform ≠ none</code> 的元素数 <b>10 → 10 没有下降</b>，与交接文档「关闭位移/缩放」硬约束不符。<b>扣 1.2 分</b>。</li>
+      <li><b>语义结构缺失</b>：<span class="ev">M9</span><span class="ev">C8</span> 手机首访层 <b>0 个 H1/H2/H3</b>，且整页根节点被标为 <code>role="dialog" aria-modal="true"</code>（<code>MobileProjectList.jsx:11</code>）——它是主入口而非模态框；桌面同一文档存在 2 个 H1，叠加浮层后共 4 个 H1。<b>扣 0.9 分</b>。</li>
+      <li><b>极小标签与替代文本待复核</b>：<span class="ev">M6</span> 08 页出现 8/8.8/9.28px 标签；<span class="ev">M17</span> 手机 07 详情 19/41、桌面 07 详情 11/33 张图缺 <code>alt</code>。<b>扣 0.3 分</b>（其中「是否为装饰图」尚未逐张判定，不加重扣罚，列为需补充材料）。</li>
+    </ul></div>
+    <div class="row"><span class="lab">依据</span><div><span class="ev">M2</span><span class="ev">M6</span><span class="ev">M9</span><span class="ev">M17</span><span class="ev">AB</span> + <span class="ev">C5</span><span class="ev">C7</span><span class="ev">C8</span> + 交接文档《手机端改造指令》§三。</div></div>
+  </div>
+</div>
+
+<h2><span class="num">04</span>AB 对照实验：reduced-motion 实测记录</h2>
+<p>为避免因会话状态不同得出假结论，两次均使用<b>全新独立标签页</b>、同一 URL（<code>/?plain=0#p=01</code>）、同一 414×896/DPR2 视口、等待 5s，确认两次 <code>.bento-detail-root</code> 均存在且正文同为 2785 字后，再统计计算样式：</p>
+<table>
+  <thead><tr><th>指标</th><th class="c">no-preference</th><th class="c">reduce</th><th>判读</th></tr></thead>
+  <tbody>
+    <tr><td>运行中动画元素数</td><td class="c">24</td><td class="c">17</td><td>减少 7 个，但仍有残留（<code>animate-pulse</code>）</td></tr>
+    <tr><td>transitionDuration &gt; 0 的元素数</td><td class="c">199</td><td class="c">174</td><td>减少 25 个</td></tr>
+    <tr><td>transform ≠ none 的元素数</td><td class="c">10</td><td class="c">10</td><td><b>未下降</b>，位移/缩放未被完全关闭</td></tr>
+    <tr><td>详情页是否打开 / 正文字数</td><td class="c">是 / 2785</td><td class="c">是 / 2785</td><td>两次视图状态一致，对照有效</td></tr>
+  </tbody>
+</table>
+<div class="note"><b>一处被主动排除的误判：</b>早先一次测试在「同一标签页反复导航到相同 hash」时出现 reduce 模式下详情页未打开。复测显示 <code>no-preference</code> 在相同操作下也同样打不开（<code>App.jsx:1211-1230</code> 的深链只在首次挂载 / hash 变化时触发），因此<b>与 reduced-motion 无关，属于测试方式问题，未计入任何扣分</b>。此处记录以保持判定链可追溯。</div>
+
+<h2><span class="num">05</span>证据画廊</h2>
+<p class="small">点击缩略图可查看原尺寸截图。文件名与 <code>review-assets/</code> 中文件一致；原始量化数据在 <code>.workbuddy/tmp/evidence/metrics.json</code>、<code>audit2.json</code>、<code>audit3.json</code>。</p>
+<div class="gallery">
+  <div class="shot"><a href="review-assets/01-desktop-os.png" target="_blank"><img src="review-assets/01-desktop-os.png" alt="桌面 OS 首屏" /></a><div class="cap"><b>E01 · 1256×808</b>桌面「复古 OS」首屏：左侧 8 个线性图标 + 点阵底 + 任务栏，右侧约 2/3 面积留白，无作品图。</div></div>
+  <div class="shot"><a href="review-assets/02-desktop-longpage-top.png" target="_blank"><img src="review-assets/02-desktop-longpage-top.png" alt="桌面长页首屏" /></a><div class="cap"><b>E02 · 1256×808</b>长页首屏：169px 巨型排版、橙色大圆、深色 Profile 窗、双模式提示条；无产品图。</div></div>
+  <div class="shot"><a href="review-assets/03-desktop-longpage-mid.png" target="_blank"><img src="review-assets/03-desktop-longpage-mid.png" alt="桌面经历区" /></a><div class="cap"><b>E03 · 滚动 1500px</b>经历时间轴 + 硬阴影卡 + 教育/工具/语言 bento；量化成果藏在「+」展开态。</div></div>
+  <div class="shot"><a href="review-assets/04-desktop-longpage-projects.png" target="_blank"><img src="review-assets/04-desktop-longpage-projects.png" alt="桌面项目轮盘" /></a><div class="cap"><b>E04 · 滚动 3100px</b>叠层项目卡轮盘 + 01–08 编号切换；后排卡片被主卡与视口右缘截断。</div></div>
+  <div class="shot"><a href="review-assets/05-desktop-detail-01.png" target="_blank"><img src="review-assets/05-desktop-detail-01.png" alt="桌面详情 01 首屏" /></a><div class="cap"><b>E05 · 详情 01 首屏</b>bento 五模块、73%/209 数据卡、半调徽章；808px 内无产品主图。</div></div>
+  <div class="shot"><a href="review-assets/06-desktop-detail-07.png" target="_blank"><img src="review-assets/06-desktop-detail-07.png" alt="桌面详情 07" /></a><div class="cap"><b>E06 · 详情 07 首屏</b>深黑沉浸 + 巨型 concept. + 全幅场景图；标题下缘被图叠压。</div></div>
+  <div class="shot"><a href="review-assets/07-mobile-landing.png" target="_blank"><img src="review-assets/07-mobile-landing.png" alt="手机首访列表" /></a><div class="cap"><b>E07 · 414×896 DPR2</b>手机首访层：8 行列表 + 44px 缩略图 + 底部橙色 CTA；无主视觉、无 H 标题。</div></div>
+  <div class="shot"><a href="review-assets/09-mobile-detail-01.png" target="_blank"><img src="review-assets/09-mobile-detail-01.png" alt="手机详情 01 首屏" /></a><div class="cap"><b>E08 · 手机详情 01</b>412×340 contain 主图、巨型标题、深色引言卡；顶部一行黑字被顶栏截断。</div></div>
+  <div class="shot"><a href="review-assets/10-mobile-detail-07.png" target="_blank"><img src="review-assets/10-mobile-detail-07.png" alt="手机详情 07" /></a><div class="cap"><b>E09 · 手机详情 07</b>深色概念页 + 白色统一顶栏；顶栏「返回」与页内「返回作品集」重复。</div></div>
+  <div class="shot"><a href="review-assets/11-mobile-detail-08.png" target="_blank"><img src="review-assets/11-mobile-detail-08.png" alt="手机详情 08" /></a><div class="cap"><b>E10 · 手机详情 08</b>猫冰 IP 展板精致，但顶部标签文字重叠、首屏无项目正文。</div></div>
+  <div class="shot"><a href="review-assets/14-mobile-detail-01-mid.png" target="_blank"><img src="review-assets/14-mobile-detail-01-mid.png" alt="手机详情中段" /></a><div class="cap"><b>E11 · 手机详情滚动 900</b>2×2 亮点卡 + 橙色 Flexible 卡 + 章节编号；内容充实、层级清楚。</div></div>
+  <div class="shot"><a href="review-assets/17-desktop-detail-01-mid.png" target="_blank"><img src="review-assets/17-desktop-detail-01-mid.png" alt="桌面详情中段" /></a><div class="cap"><b>E12 · 桌面详情滚动 820</b>宽幅产品 hero 在此才出现；02/03 章节编号体系清晰。</div></div>
+  <div class="shot"><a href="review-assets/19-desktop-os-window.png" target="_blank"><img src="review-assets/19-desktop-os-window.png" alt="OS 窗口交互" /></a><div class="cap"><b>E13 · 点击图标后</b>橙底选中态 + 复古窗口 + 任务栏标签，交互反馈完整。</div></div>
+  <div class="shot"><a href="review-assets/20-mobile-longpage-top.png" target="_blank"><img src="review-assets/20-mobile-longpage-top.png" alt="手机长页上部" /></a><div class="cap"><b>E14 · 手机长页</b>SEC.03/04 纯细线表格，552 字、0 张大图；半透明顶栏透出上一行文字。</div></div>
+  <div class="shot"><a href="review-assets/21-mobile-longpage-mid.png" target="_blank"><img src="review-assets/21-mobile-longpage-mid.png" alt="手机长页下部" /></a><div class="cap"><b>E15 · 手机长页下部</b>深色「开始合作」+ 三个转化按钮；浮动「列表」胶囊压住页脚。</div></div>
+  <div class="shot"><a href="review-assets/23-desktop-search-filter.png" target="_blank"><img src="review-assets/23-desktop-search-filter.png" alt="搜索过滤实测" /></a><div class="cap"><b>E16 · 输入「猫冰」后</b>过滤已生效（DOM 中「疗愈灯具」消失），但视口仍停在首屏、无结果计数。</div></div>
+</div>
+
+<h2><span class="num">06</span>最值得保留的亮点与主要问题</h2>
+<div class="grid2">
+  <div class="box"><h4>✅ 最值得保留（不要在下轮改版里丢掉）</h4>
+    <ol>
+      <li><b>桌面 OS 的完整交互闭环</b>：图标选中态 → 窗口（标题栏/最小化/关闭/滚动/状态栏）→ 任务栏标签 → history 栈返回，<span class="ev">E13</span>。这是全站最有辨识度的资产。</li>
+      <li><b>「黑白橙 + 4 套字体 + 硬阴影/网点/徽章」的设计语言</b>与 1rem 圆角令牌，<span class="ev">C1</span><span class="ev">E02</span><span class="ev">E05</span>。</li>
+      <li><b>详情页六段式叙事 + 调研数据卡</b>（73% / 209 samples / 雷达图），<span class="ev">E05</span><span class="ev">E12</span>，比常见的「贴图流」更有说服力。</li>
+      <li><b>手机端硬指标</b>：414 无横向溢出、可点元素 100% ≥44px、折叠默认全展开、主图 contain、正文 2785–3685 字 <span class="ev">M2</span><span class="ev">M7</span><span class="ev">M11</span>。</li>
+      <li><b>工程节制</b>：按需加载、拆包、懒加载、空闲降载、离屏暂停 <span class="ev">M14</span><span class="ev">M15</span>。</li>
+      <li><b>项目专属皮肤</b>：08 猫冰展板、07 深色概念页 <span class="ev">E09</span><span class="ev">E10</span>——保留个性，只需统一「共用令牌层」。</li>
+    </ol>
+  </div>
+  <div class="box"><h4>⚠️ 三个主要问题（按影响程度）</h4>
+    <ol>
+      <li><b>双端体验割裂</b>：桌面 81.2 分、手机 70.5 分，相差 10.7 分。手机首访层与长页没有继承桌面已建立的全部视觉资产，扫码/转发来的第一印象明显弱于桌面。<span class="ev">E07</span><span class="ev">E14</span></li>
+      <li><b>「产品为主」没有在首屏兑现</b>：桌面详情首屏 0 产品图（hero 在 820px 后）、手机首访仅 44px 缩略图、手机长页 0 大图。评审者要先滚动/再点击才看得到作品。<span class="ev">E05</span><span class="ev">E07</span><span class="ev">E12</span></li>
+      <li><b>一致性债与收尾质量</b>：子项目字体/强调色各自为政、吸顶栏穿透与双返回、多处 cover 裁切、语义标题缺失、reduced-motion 残留 pulse 与 transform。单看都不致命，合起来让人觉得「最后一轮打磨没做完」。<span class="ev">M5</span><span class="ev">M9</span><span class="ev">M13</span><span class="ev">AB</span></li>
+    </ol>
+  </div>
+</div>
+
+<h2><span class="num">07</span>修改意见：按影响程度与优先级</h2>
+<p class="small">「预期改善」为评审估算，非实测结果；每项都给出可复测的验证口径。优先级按「对总分与观感的影响 ÷ 改动成本」排序。</p>
+
+<div class="pri p0"><div class="h"><span class="lv">P0-1</span><b>手机首访层重建品牌主视觉 + 把产品放上首屏</b><span class="small">影响：画面展现 / 视觉风格 / 第一印象</span></div>
+  <p><b>问题</b>：<span class="ev">E07</span> 一屏 8 行同质列表，无 Hero、无品牌图形，产品只有 44px 缩略。</p>
+  <p><b>动作</b>：在 ≤1023px 的 <code>.ms-overlay</code> 顶部加一块 220–280px 的品牌区，复用桌面已有资产（Oswald 巨型 <code>YH.</code> / 橙圆或半调网点 / 深色引言条），并在其中放 1 张 300px 以上的当期主推产品渲染（<code>object-fit: contain</code>）；列表保留但改为「2 列大图卡 + 前 2 项优先」，或至少把首行做成大卡。<b>不要动产品原图文件</b>。</p>
+  <div class="expect"><b>预期改善</b>：首屏产品可见占比从近 0 提升到 25–35%（口径：产品图矩形 ∩ 0–896 ÷ 414×896），画面展现 12.6 → 约 14.5–15.0 / 18，视觉风格 14.1 → 约 15.2 / 18，综合分约 +2.0–2.8。<b>验证</b>：414×896 截图测主图 top 与占比、<code>scrollWidth ≤ 414</code>、可点元素仍 100% ≥44px。</div>
+</div>
+
+<div class="pri p0"><div class="h"><span class="lv">P0-2</span><b>桌面详情页把产品 hero 提到 808px 首屏内</b><span class="small">影响：画面展现 / 内容重点</span></div>
+  <p><b>问题</b>：<span class="ev">E05</span> 首屏被标题、数据卡、引言卡占满，<span class="ev">E12</span> 产品宽幅图在滚动约 820px 后出现。</p>
+  <p><b>动作</b>：调整 <code>.bento-detail-root</code> 首屏网格——把巨型标题压缩到 2 行，右侧或下方 35–40% 高度给产品主图（contain），数据卡下移到第二屏；或把现有宽幅 hero 整体上移到标题之后。保持桌面 1256×808 基线 <code>scrollHeight=6277 / scrollWidth=1256</code> 不变。</p>
+  <div class="expect"><b>预期改善</b>：首屏即有产品，画面展现 +1.2–1.8、内容呈现 +0.5；<b>验证</b>：1256×808 首屏截图存在 ≥300px 宽的产品图、<code>object-fit: contain</code>、桌面基线指标零回退。</div>
+</div>
+
+<div class="pri p0"><div class="h"><span class="lv">P0-3</span><b>手机长页「精选项目」补图与补重点</b><span class="small">影响：内容呈现 / 画面展现 / 转化路径</span></div>
+  <p><b>问题</b>：<span class="ev">C4</span> 为避免与首访列表重复，长页只留一行指路；结果 <span class="ev">M10</span> 全文 552 字、0 张大图，<span class="ev">C3</span> 的量化成果还全部折在「+」里。</p>
+  <p><b>动作</b>：不必恢复 8 个项目全量（会重复 951px），而是在 SEC.02 放 <b>3 张精选项目大图卡</b>（16:10、contain、各带一行「一句话成果」），并把经历卡里最有说服力的 3 条量化（7→3 天 / 5 套方案 / +40%）默认展开为可见摘要；其余仍可折叠。</p>
+  <div class="expect"><b>预期改善</b>：手机长页字数 552 → 750–900、大图 0 → 3，内容呈现 14.7 → 约 16.0 / 20，画面 +0.6；<b>验证</b>：docH 控制在 2000px 内、无横向溢出、<code>&gt;200px</code> 图片数 ≥3。</div>
+</div>
+
+<div class="pri p0"><div class="h"><span class="lv">P0-4</span><b>统一 sticky 顶栏：不透明、随主题、只留一个返回</b><span class="small">影响：版式 / 交互 / 观感</span></div>
+  <p><b>问题</b>：<span class="ev">E14</span><span class="ev">E15</span> 半透明顶栏透出上一行内容；<span class="ev">E09</span> 白顶栏压深色页且双返回；<span class="ev">E08</span> 顶部标题被截断；<span class="ev">E10</span> 标签文字重叠。</p>
+  <p><b>动作</b>：顶栏背景改为不透明且由页面主题变量驱动（深底页用深底顶栏）；删除 07 页内重复的「返回作品集」；给固定顶栏高度加统一的 <code>scroll-padding-top</code>，并复核每个详情页首个标题的 top ≥ 顶栏高度；08 顶部两行标签改为 flex 单行或错行。</p>
+  <div class="expect"><b>预期改善</b>：版式 12.8 → 约 14.0 / 16、交互 +0.4；<b>验证</b>：8 个详情页逐个截图检查首标题不与顶栏重叠、顶栏背景色与页面主色一致、返回入口仅 1 处。</div>
+</div>
+
+<div class="pri p1"><div class="h"><span class="lv">P1-1</span><b>建立跨项目共用令牌层，收敛字体与强调色</b><span class="small">影响：视觉一致性</span></div>
+  <p>把 <code>#E67E33 / #151515 / #FCFCFC</code> 与「1 个 display + 1 个正文 + 1 个 mono」写进所有详情页共用的一层 CSS；07 的 <code>#FF5B2E</code> 与 <code>Helvetica Neue</code>、01 的 <code>Inter</code> 改为引用变量，项目专属色（如 08 冰蓝）允许作为扩展色保留但需登记。<span class="ev">M5</span></p>
+  <div class="expect"><b>预期</b>：视觉风格 +1.0–1.5；<b>验证</b>：8 页统计 <code>fontFamily</code> 仅出现 3 个主族，强调色统一为 1 个主色 + 登记过的扩展色。</div>
+</div>
+
+<div class="pri p1"><div class="h"><span class="lv">P1-2</span><b>图像裁切治理与替代文本</b><span class="small">影响：画面展现 / 无障碍</span></div>
+  <p>产品主图全部 <code>contain</code>（现状已基本达标）；把 <span class="ev">M8</span> 一类 330×116 横条场景图改为 <code>contain</code> + 固定底色，或保留 cover 但补 <code>object-position</code> 与构图说明；逐张判定 07 页 19/41、桌面 07 页 11/33 缺 alt 的图是装饰图还是信息图，信息图补中文描述。<span class="ev">M7</span><span class="ev">M17</span></p>
+  <div class="expect"><b>预期</b>：画面 +0.8、无障碍 +0.3；<b>验证</b>：统计 <code>object-fit: cover</code> 比例明显下降、所有信息图 alt 非空、无 <code>fill</code> 变形。</div>
+</div>
+
+<div class="pri p1"><div class="h"><span class="lv">P1-3</span><b>搜索补即时反馈</b><span class="small">影响：交互可用性</span></div>
+  <p><span class="ev">D2</span> 输入后自动滚动到 <code>#projects</code>（或吸顶显示结果条），显示「找到 N 个项目 / 清除筛选」，并保留现有空状态。<span class="ev">C6</span></p>
+  <div class="expect"><b>预期</b>：交互 +0.6–1.0；<b>验证</b>：输入关键词 300ms 内结果区进入视口且计数正确。</div>
+</div>
+
+<div class="pri p1"><div class="h"><span class="lv">P1-4</span><b>给每个项目补「结果 / 验证」段落，形成叙事闭环</b><span class="small">影响：内容说服力（权重最高维度）</span></div>
+  <p><span class="ev">C2</span> 在 <code>overview → targetUsers → concept</code> 之后增加一段 <code>result</code>：是否打样/试产、用户测试反馈、迭代前后对比、量产或获奖情况、个人复盘。若确实尚未落地，就写「验证到哪一步、下一步是什么」——<b>不要编造数据</b>（见 8.2）。</p>
+  <div class="expect"><b>预期</b>：内容呈现 14.7 → 约 16.5 / 20，是单项提升最大的内容改动；<b>验证</b>：8 个项目均有结果段且能在详情页被检索到。</div>
+</div>
+
+<div class="pri p2"><div class="h"><span class="lv">P2-1</span><b>语义与 reduced-motion 收尾</b></div>
+  <p>① 手机首访层补 1 个 <code>&lt;h1&gt;</code>（如「杨鸿 · 产品设计师作品集」），移除根节点 <code>role="dialog" aria-modal="true"</code>，单文档只保留 1 个主 H1（浮层可用 <code>aria-modal</code> 单独标记）；② 把 8–11px 标签提到 ≥12px；③ 按 <span class="ev">AB</span> 清除 reduce 下残留的 <code>animate-pulse</code> 与 <code>transform</code>，使 reduce 状态仅保留 opacity 变化；④ 补 :focus-visible 走查。</p>
+  <div class="expect"><b>预期</b>：无障碍 3.6 → 约 5.0 / 6、版式 +0.3；<b>验证</b>：独立会话 AB 复测 <code>transform≠none</code> 归零、动画元素降到仅透明度类；axe/Lighthouse 无障碍项无严重告警。</div>
+</div>
+
+<div class="pri p2"><div class="h"><span class="lv">P2-2</span><b>字体加载策略与叠层轮盘可读性</b></div>
+  <p>① 5 个外链字体家族收敛到 3 个、自托管或中文子集化 + <code>font-display: swap</code>，降低弱网首屏字移；② <span class="ev">E04</span> 项目轮盘后排卡改为「露出边缘 + 明确序号」，避免文字被截半；③ <span class="ev">E02</span> 巨型斜体与橙圆交叠处加半透明底或微调字距保证对比。</p>
+  <div class="expect"><b>预期</b>：技术 +0.4、画面 +0.3；<b>验证</b>：弱网节流（Fast 3G）下首屏无布局跳动、轮盘 8 个项目名均可完整读出。</div>
+</div>
+
+<h2><span class="num">08</span>假设、取证边界与需补充的材料</h2>
+
+<h3>8.1 本报告的假设（非事实，若前提变化需重新加权）</h3>
+<ul>
+  <li><b>用途假设</b>：按「面向设计岗招聘 / 客户浏览的个人作品集」评审，因此把「内容说服力、产品呈现、首屏效率」放在较高权重。若定位是<b>纯实验性交互作品 / 个人玩票</b>，视觉与交互权重应上调、内容叙事权重下调，总分会明显不同。</li>
+  <li><b>端权重假设</b>：桌面 0.55 / 手机 0.45 为评审设定。若实际流量以手机为主（例如主要在微信里转发），应改为 0.3 / 0.7，总分会下降约 3–4 分。</li>
+  <li><b>版本假设</b>：以本次解压后本地 <code>npm ci &amp;&amp; npm run build</code> 的 <code>dist/</code> 为准；包内两份交接文档描述的是 2026-10 的历史状态，部分问题（如「折叠内容被藏」「07 叠层 12 帧不可读」）在<b>当前构建里已不成立</b>，本报告一律以实测为准，未按旧文档扣分。</li>
+  <li><b>字体/网络假设</b>：本机 headless Chrome 能访问 Google Fonts（桌面检出 89–151 个已加载 font face）。生产环境的字体可用性未实测，相关扣分仅按「依赖风险」计，不按「已发生故障」计。</li>
+</ul>
+
+<h3>8.2 未取证 / 需补充的材料（不臆测、不扣分）</h3>
+<table>
+  <thead><tr><th style="width:190px">缺口</th><th>为什么需要</th><th>对评分的影响</th></tr></thead>
+  <tbody>
+    <tr><td>真机与触摸手势实测</td><td>惯性滚动手感、长按/侧滑返回、点击延迟、iOS Safari 兼容性，headless 仿真无法还原</td><td>交互维度可能 ±1.5 分</td></tr>
+    <tr><td>帧率 / 长任务 / 弱网节流</td><td>本次只测了资源体积与 DOM 规模，未测滚动帧率、动画卡顿、Fast 3G 下首屏</td><td>技术维度可能 ±0.6 分</td></tr>
+    <tr><td>读屏与键盘走查（axe / NVDA / Tab 顺序）</td><td>alt 缺失是否属于装饰图、焦点可见性、模态焦点陷阱均未逐项验证</td><td>无障碍维度可能 ±0.8 分</td></tr>
+    <tr><td>产品原图 / 设计源文件</td><td>只能看到已压缩的 webp，无法判断原始渲染精度、是否被压缩损伤；「图像质量」评分基于成品观感与分辨率</td><td>画面维度可能 ±0.8 分</td></tr>
+    <tr><td>真实项目结果数据</td><td>报告建议补「结果/验证」段落，但<b>不掌握</b>打样、试产、用户测试、获奖、落地的真实情况，因此没有代写任何成果</td><td>内容维度目前按「缺结果字段」扣分；补齐后可回升 1.5–2 分</td></tr>
+    <tr><td>线上 URL / SEO / 埋点 / 用户反馈</td><td>无法评估真实访问路径、停留点、跳出率、招聘方反馈</td><td>未计入评分</td></tr>
+    <tr><td>目标岗位 JD 与投递场景</td><td>「重点突出」是相对目标岗位的；若投 IP 设计岗与投 UI 岗，项目排序与重点应不同</td><td>影响权重设定，非缺陷</td></tr>
+  </tbody>
+</table>
+<div class="note"><b>三处刻意不下的结论：</b>① <code>naturalWidth=0</code> 的图片不判为坏图（懒加载反证 M16）；② 首访层 8 个 <code>alt=""</code> 不判为无障碍缺陷（C8）；③ reduce 模式下深链未打开不判为 bug（复测证明与 reduce 无关，见第四章）。此外，详情页缺 alt 的图是否为装饰图、顶部被截断的标题是否为 sticky 覆盖还是布局偏移，均标注为「截图可见现象」，需真机复核后再定性，未据此加重扣分。</div>
+
+<h2><span class="num">09</span>附录：取证方法与环境</h2>
+<ul>
+  <li>站点：<code>portfolio-mobile-handoff/portfolio-upgrade</code> → <code>npm ci</code>（87 包）→ <code>npm run build</code>（Vite 5.4.21，2019 模块，5.45s）→ <code>npm run preview -- --port 8899 --strictPort --host 127.0.0.1</code>。</li>
+  <li>取证：headless Chrome 157 + CDP（无第三方测试库），11 个主场景 + 补充交互场景，共 23 张 PNG；桌面 1256×808 / DPR1，手机 414×896 / DPR2 / mobile+touch 仿真；每场景采集计算样式、字号/颜色/字体族频率、图片自然尺寸与 object-fit、可点元素尺寸、scrollWidth/Height、资源与 DOM 统计。</li>
+  <li>交互实测：图标点击开窗、底部 CTA 进长页（<code>button[data-action="open-resume"]</code>）、<code>input[type=search]</code> 输入「猫冰」、详情页浮层内滚动、独立会话 <code>prefers-reduced-motion</code> AB 对照。</li>
+  <li>数据文件：<code>.workbuddy/tmp/evidence/metrics.json</code>、<code>audit2.json</code>、<code>audit3.json</code>；截图：<code>review-assets/</code>。</li>
+  <li>参考材料（仅用于理解设计意图，不作为扣分依据）：包内《手机端改造指令.md》《进度与目标.md》、<code>README.md</code>、<code>src/</code> 源码注释。</li>
+</ul>
+
+<div class="foot">报告生成于 2026-11-12 · 评分为基于本地构建产物与可复现实测的评审意见，不构成对设计者能力或项目真实成果的评价 · 所有「预期改善」为估算值。</div>
+
+</div>
+</body>
+</html>

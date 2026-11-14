@@ -23,7 +23,7 @@ function friendlyError(error) {
   return '网络异常，留言没有送达，请稍后重试'
 }
 
-/** 提交一条留言。成功时返回写回的 id。 */
+/** 提交一条留言。成功时返回 { ok: true }。 */
 export async function submitMessage({ name, contact, message }) {
   const row = {
     visitor_name: String(name || '').trim().slice(0, MAX_NAME) || null,
@@ -33,16 +33,13 @@ export async function submitMessage({ name, contact, message }) {
   if (!row.message) return { ok: false, error: '留言内容不能为空' }
 
   try {
-    const { data, error } = await cloud.database
-      .from(TABLE)
-      .insert(row)
-      .select('id')
+    // 只做 INSERT，不挂 .select('id')：
+    // RLS 下 INSERT ... RETURNING 需要额外的 SELECT 策略配合，部分环境会
+    // 「行已写入但返回空数组」，旧实现把这种情况误判成失败，访客会看到
+    // 「留言没有被保存」但其实留言已经存进去了。写入是否成功以 error 为准。
+    const { error } = await cloud.database.from(TABLE).insert(row)
     if (error) return { ok: false, error: friendlyError(error) }
-    // 写回空数组 = RLS 拦下了写入，不能当成成功
-    if (!Array.isArray(data) || data.length === 0) {
-      return { ok: false, error: '留言没有被保存，请稍后重试' }
-    }
-    return { ok: true, id: data[0]?.id ?? null }
+    return { ok: true, id: null }
   } catch {
     return { ok: false, error: '网络异常，留言没有送达，请稍后重试' }
   }
