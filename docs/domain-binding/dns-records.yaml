@@ -1,0 +1,59 @@
+# YHDesign 双域名 DNS 关联清单
+# CNAME_TARGET_FROM_CONSOLE = EdgeOne 控制台「域名管理 → 添加自定义域名」弹窗给出的记录值
+# 该值由平台按项目生成，需以控制台实际显示为准，勿猜测。
+
+project:
+  edgeone_project: yhdesign
+  edgeone_project_id: makers-c7qbfgfareax
+  project_domain: yhdesign-hbqoscek.edgeone.cool
+  existing_live_site: https://wbapp-fqn8vurenmzjnkpqwdz5i0.app.workbuddy.host/?sharecode=C4MZTHEGVI
+  content_source: C:/Users/ASUS/WorkBuddy/2026-11-11-23-57-20/portfolio-mobile-handoff/portfolio-upgrade/dist/
+
+domains:
+  - name: yhdesign.online
+    registrar: 腾讯云（DNSPod）
+    role: primary
+    custom_domains_to_add_in_edgeone:
+      - yhdesign.online
+      - www.yhdesign.online
+    dns_records:
+      - type: CNAME
+        host: "@"
+        value: yhdesign-domainready-qsxatwf0.edgeone.cool
+        record_id: 2450552338
+        status: 已通过腾讯云 API 写入并全球生效（2026-11-14 19:48，TTL 600，ENABLE）
+        note: 若 EdgeOne 控制台给出的 CNAME 目标值不同，用 dnspod ModifyRecord 改此条即可
+      - type: CNAME
+        host: www
+        value: yhdesign-domainready-qsxatwf0.edgeone.cool
+        record_id: 2450551803
+        status: 已通过腾讯云 API 写入并全球生效（2026-11-14 19:48，TTL 600，ENABLE）
+    https: 申请免费证书 + 自动验证 + 强制 HTTP→HTTPS
+    redirect: none
+
+  - name: yhdesign.ink
+    registrar: 阿里云万网（NS dns31.hichina.com / dns32.hichina.com）
+    role: alias_and_redirect
+    custom_domains_to_add_in_edgeone:
+      - yhdesign.ink
+    dns_records:
+      - type: CNAME
+        host: "@"
+        value: CNAME_TARGET_FROM_CONSOLE
+        note: 阿里云侧需手动添加；如不支持根域名 CNAME，用弹窗给出的替代记录类型
+    https: 申请免费证书 + 自动验证
+    redirect:
+      type: 301
+      target: https://yhdesign.online
+      implement_via: EdgeOne 域名跳转规则（优先）或阿里云 URL 转发
+
+verification:
+  - https://yhdesign.online → 200，作品集首页，证书有效
+  - https://www.yhdesign.online → 200 或 301 到根域名
+  - https://yhdesign.ink → 301 到 https://yhdesign.online
+  - 原站 https://wbapp-fqn8vurenmzjnkpqwdz5i0.app.workbuddy.host/ → 仍 200，内容不变
+
+constraints:
+  - 加速区域含中国大陆时，自定义域名需已完成 ICP 备案；域名实名认证不等于备案
+  - 未备案时可选「全球（不含中国大陆）」区域，大陆访客访问受限
+  - 两个域名均复用同一份现有内容，不新建站点、不覆盖原网站 / git 备份 / 本地现成内容
