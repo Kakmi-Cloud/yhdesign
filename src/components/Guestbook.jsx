@@ -107,14 +107,24 @@ export default function Guestbook({ compact = false }) {
   // 收件箱在长页最底部（约 6000px）。打开 ?inbox=1 时自动滚过去，
   // 否则作者只会看到首屏、以为没有留言。长页里可能挂了两个实例
   // （桌面 page-shell / 手机 mob-contact），只滚动当前真正可见的那个。
+  // 上方图片懒加载会不断撑高页面，一次定位会被挤偏：320ms 先滚一次，
+  // 1500ms 再滚一次，window.load 后兜底一次。
   useEffect(() => {
     if (!inbox) return
-    const timer = window.setTimeout(() => {
+    const scrollNow = () => {
       const cards = [...document.querySelectorAll('.gb-card--inbox')]
       const visible = cards.find((el) => el.offsetParent !== null)
       if (visible) visible.scrollIntoView({ block: 'start', behavior: 'auto' })
-    }, 320)
-    return () => window.clearTimeout(timer)
+    }
+    const t1 = window.setTimeout(scrollNow, 320)
+    const t2 = window.setTimeout(scrollNow, 1500)
+    const onLoad = () => window.setTimeout(scrollNow, 200)
+    window.addEventListener('load', onLoad)
+    return () => {
+      window.clearTimeout(t1)
+      window.clearTimeout(t2)
+      window.removeEventListener('load', onLoad)
+    }
   }, [inbox])
 
   if (inbox) {
