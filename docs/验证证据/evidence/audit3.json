@@ -1,0 +1,145 @@
+{
+  "cta": "简历与能力 ↓",
+  "longTop": {
+    "docH": 1620,
+    "scrollW": 414,
+    "chars": 552,
+    "headings": [
+      "H2:个人经历",
+      "H2:精选项目",
+      "H2:个人优势",
+      "H3:产品概念可视化",
+      "H3:AI 工具驱动设计",
+      "H3:跨学科协作",
+      "H3:全流程跟进",
+      "H2:开始合作"
+    ],
+    "sections": [
+      "root",
+      "main",
+      "about",
+      "projects",
+      "strengths",
+      "contact"
+    ],
+    "animated": 22,
+    "transformed": 1,
+    "bigImgs": []
+  },
+  "longMid": {
+    "docH": 1620,
+    "scrollW": 414,
+    "chars": 552,
+    "headings": [
+      "H2:个人经历",
+      "H2:精选项目",
+      "H2:个人优势",
+      "H3:产品概念可视化",
+      "H3:AI 工具驱动设计",
+      "H3:跨学科协作",
+      "H3:全流程跟进",
+      "H2:开始合作"
+    ],
+    "sections": [
+      "root",
+      "main",
+      "about",
+      "projects",
+      "strengths",
+      "contact"
+    ],
+    "animated": 22,
+    "transformed": 0,
+    "bigImgs": []
+  },
+  "search": {
+    "value": "猫冰",
+    "hasCatIce": true,
+    "hasHealing": false,
+    "emptyState": false,
+    "snippet": "TOP EXP WORK EDGE END YANGHONG 首页 经历 项目 优势 联系 桌面模式 搜索精选项目 GET STARTED PRODUCT DESIGN · 2026 YH / 26届 · ISSUE EDITION 26届 · 2026 CRAFTING Experiences WITH PRODUCT & UI 查看项目 PROFILE ✳ 杨鸿 / 产品设计师。 用形态、材质与界面语言，把概念变成可被感知、可被使用的产品体验。致力于探索数字与实体的边界。 查看资料 → LOOK DEEP "
+  },
+  "motionNormal": {
+    "docH": 1550,
+    "scrollW": 414,
+    "chars": 2785,
+    "headings": [
+      "H2:个人经历",
+      "H2:精选项目",
+      "H1:HEALING EMOTIONS WITHMODULAR LIGHTING ",
+      "H1:《心景》疗愈灯具",
+      "H2:Flexible",
+      "H3:缓解情绪压力",
+      "H3:年轻城市人群",
+      "H3:情绪可视化",
+      "H3:温暖×科技×陪伴",
+      "H3:Design Process / 物理形态推演 · 过程档案",
+      "H3:《方阵》桌面灯",
+      "H3:《栖木》落地灯"
+    ],
+    "sections": [
+      "root",
+      "main",
+      "about",
+      "projects",
+      "b-hero-mobile",
+      "b-features",
+      "b-users",
+      "b-notes",
+      "sfg-strip",
+      "b-system",
+      "b-tech",
+      "b-material"
+    ],
+    "animated": 24,
+    "transformed": 10,
+    "bigImgs": [
+      {
+        "src": "_fig20-backup-prototype.webp",
+        "w": 412,
+        "top": 79,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "w": 330,
+        "top": 2185,
+        "fit": "cover"
+      },
+      {
+        "src": "",
+        "w": 330,
+        "top": 2319,
+        "fit": "cover"
+      },
+      {
+        "src": "",
+        "w": 376,
+        "top": 4131,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "w": 376,
+        "top": 4529,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "w": 376,
+        "top": 4926,
+        "fit": "contain"
+      }
+    ]
+  },
+  "motionReduced": {
+    "docH": 896,
+    "scrollW": 414,
+    "chars": 156,
+    "headings": [],
+    "sections": [],
+    "animated": 16,
+    "transformed": 0,
+    "bigImgs": []
+  }
+}

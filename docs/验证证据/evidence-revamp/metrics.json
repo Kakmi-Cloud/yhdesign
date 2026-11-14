@@ -1,0 +1,1802 @@
+{
+  "D01": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-specimen",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1161,
+    "cn": 662,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 17,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6314,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 14,
+    "under12samples": [
+      "SAMPLE / 01",
+      "01",
+      "02",
+      "03"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "基于独居青年情绪疗愈场景的灯具设计 · 本科毕业设计",
+    "sourceLine": "毕业论文（调研 / 制作）· 毕业设计展板与实物作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": true,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D02": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-specimen",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1193,
+    "cn": 720,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 15,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6339,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 13,
+    "under12samples": [
+      "SAMPLE / 02",
+      "YH — 02",
+      "YH — 02",
+      "YH — 02"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "数字化等待的物理疗愈装置 · 桌面交互装置设计",
+    "sourceLine": "产品渲染 · 用户旅程分镜 · 场景与交互说明作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D03": {
+    "sections": [
+      "sw-hero",
+      "sw-specimen",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1287,
+    "cn": 691,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 22,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6485,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 14,
+    "under12samples": [
+      "SAMPLE / 03",
+      "YH — 03",
+      "YH — 03",
+      "YH — 03"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "实习期间完成的灯具设计：材质探索与 AI 形态推演",
+    "sourceLine": "外观评审表（台灯 / 客厅吊灯）· AI 形态方案作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": true,
+      "malachite": true,
+      "unconfirmed": true
+    },
+    "jsErrors": []
+  },
+  "D04": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-specimen",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1191,
+    "cn": 708,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 16,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6704,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 14,
+    "under12samples": [
+      "SAMPLE / 04",
+      "01",
+      "02",
+      "03"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "把开灯变成一次动作 · 交互灯具系列设计",
+    "sourceLine": "七盏灯具成果图 · 交互说明 · 展板作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D05": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-spread",
+      "sw-signature",
+      "sw-invert",
+      "sw-specimen",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1205,
+    "cn": 710,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 19,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 8613,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 17,
+    "under12samples": [
+      "SAMPLE / 05",
+      "01",
+      "02",
+      "03"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "妆娘预约 / 服装租借 / 展会日程的界面流程设计",
+    "sourceLine": "界面成品稿 · 流程稿 · 信息架构作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D06": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-spread",
+      "sw-specimen",
+      "sw-signature",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1233,
+    "cn": 772,
+    "imgs": 28,
+    "broken": 0,
+    "loaded": 20,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6450,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 14,
+    "under12samples": [
+      "SAMPLE / 06",
+      "YH — 06",
+      "YH — 06",
+      "YH — 06"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "榫卯实木框架 + 可拆软包模块 · 产品与家具设计",
+    "sourceLine": "结构解析 · 材料样块 · 家居场景渲染作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D07": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-specimen",
+      "sw-spread",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1145,
+    "cn": 675,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 21,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6472,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 20,
+    "under12samples": [
+      "SAMPLE / 07",
+      "01",
+      "02",
+      "03"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "AIGC 辅助产品概念发散 · 六个方向",
+    "sourceLine": "六个概念效果图 · 交互与材质说明作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D08": {
+    "sections": [
+      "sw-hero",
+      "sw-signature",
+      "sw-statement",
+      "sw-specimen",
+      "sw-spread",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1145,
+    "cn": 615,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 21,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6359,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 14,
+    "under12samples": [
+      "SAMPLE / 08",
+      "YH — 08",
+      "YH — 08",
+      "YH — 08"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "温度驱动的猫冰 IP 形象系统 · 潮玩挂卡",
+    "sourceLine": "双态主视觉 · 三视图 · 表情系统与周边延展作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D01-full": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-specimen",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1161,
+    "cn": 662,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 17,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6314,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 14,
+    "under12samples": [
+      "SAMPLE / 01",
+      "01",
+      "02",
+      "03"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "基于独居青年情绪疗愈场景的灯具设计 · 本科毕业设计",
+    "sourceLine": "毕业论文（调研 / 制作）· 毕业设计展板与实物作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": true,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "D03-full": {
+    "sections": [
+      "sw-hero",
+      "sw-specimen",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1287,
+    "cn": 691,
+    "imgs": 27,
+    "broken": 0,
+    "loaded": 22,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "rootScrollW": 1241,
+    "rootClientW": 1241,
+    "rootScrollH": 6485,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 14,
+    "under12samples": [
+      "SAMPLE / 03",
+      "YH — 03",
+      "YH — 03",
+      "YH — 03"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "16px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "16px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "14px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "13px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "14px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      },
+      {
+        "cls": "EM",
+        "fs": "17px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "实习期间完成的灯具设计：材质探索与 AI 形态推演",
+    "sourceLine": "外观评审表（台灯 / 客厅吊灯）· AI 形态方案作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": true,
+      "malachite": true,
+      "unconfirmed": true
+    },
+    "jsErrors": []
+  },
+  "M01": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-specimen",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1153,
+    "cn": 662,
+    "imgs": 35,
+    "broken": 0,
+    "loaded": 30,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 5554,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 25,
+    "under12samples": [
+      "SAMPLE / 01",
+      "受访者年龄主要在 23–35 岁",
+      "论文问题五 · 情绪状态",
+      "POSITION"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "基于独居青年情绪疗愈场景的灯具设计 · 本科毕业设计",
+    "sourceLine": "毕业论文（调研 / 制作）· 毕业设计展板与实物作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": true,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "M03": {
+    "sections": [
+      "sw-hero",
+      "sw-specimen",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1279,
+    "cn": 691,
+    "imgs": 35,
+    "broken": 0,
+    "loaded": 33,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 5663,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 25,
+    "under12samples": [
+      "SAMPLE / 03",
+      "台灯 / 客厅吊灯",
+      "3.5W / 24V · 图纸记录值",
+      "SPECIMEN"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "实习期间完成的灯具设计：材质探索与 AI 形态推演",
+    "sourceLine": "外观评审表（台灯 / 客厅吊灯）· AI 形态方案作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": true,
+      "malachite": true,
+      "unconfirmed": true
+    },
+    "jsErrors": []
+  },
+  "M05": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-spread",
+      "sw-signature",
+      "sw-invert",
+      "sw-specimen",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1197,
+    "cn": 710,
+    "imgs": 35,
+    "broken": 0,
+    "loaded": 33,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 6087,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 28,
+    "under12samples": [
+      "SAMPLE / 05",
+      "建立信任与便捷感，让闲置物品流转与展会服务触",
+      "社区居民、cosplay / 漫展参与者、临",
+      "POSITION"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "妆娘预约 / 服装租借 / 展会日程的界面流程设计",
+    "sourceLine": "界面成品稿 · 流程稿 · 信息架构作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "M08": {
+    "sections": [
+      "sw-hero",
+      "sw-signature",
+      "sw-statement",
+      "sw-specimen",
+      "sw-spread",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1137,
+    "cn": 615,
+    "imgs": 35,
+    "broken": 0,
+    "loaded": 33,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 5469,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 25,
+    "under12samples": [
+      "SAMPLE / 08",
+      "另有周边应用与挂卡包装",
+      "冻结态 / 软化态",
+      "PLAY"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "温度驱动的猫冰 IP 形象系统 · 潮玩挂卡",
+    "sourceLine": "双态主视觉 · 三视图 · 表情系统与周边延展作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "M02": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-specimen",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1185,
+    "cn": 720,
+    "imgs": 35,
+    "broken": 0,
+    "loaded": 28,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 5617,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 24,
+    "under12samples": [
+      "SAMPLE / 02",
+      "将数字等待转化为物理仪式，缓解焦虑并提供情绪",
+      "数字游民、独居青年、长时间面对电脑的人群",
+      "POSITION"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "数字化等待的物理疗愈装置 · 桌面交互装置设计",
+    "sourceLine": "产品渲染 · 用户旅程分镜 · 场景与交互说明作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "M04": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-spread",
+      "sw-invert",
+      "sw-specimen",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1183,
+    "cn": 708,
+    "imgs": 35,
+    "broken": 0,
+    "loaded": 33,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 5662,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 25,
+    "under12samples": [
+      "SAMPLE / 04",
+      "把照明开关转化为可被感知的物理动作，用交互本",
+      "独居青年、有夜间情绪缓冲需求的人群",
+      "POSITION"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "把开灯变成一次动作 · 交互灯具系列设计",
+    "sourceLine": "七盏灯具成果图 · 交互说明 · 展板作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "M06": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-spread",
+      "sw-specimen",
+      "sw-signature",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1225,
+    "cn": 772,
+    "imgs": 36,
+    "broken": 0,
+    "loaded": 31,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 5630,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 25,
+    "under12samples": [
+      "SAMPLE / 06",
+      "榫卯实木框架 + 可拆软包模块，坐垫沿框架内",
+      "小户型与租房人群、需要低矮休闲椅的都市居住者",
+      "POSITION"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "榫卯实木框架 + 可拆软包模块 · 产品与家具设计",
+    "sourceLine": "结构解析 · 材料样块 · 家居场景渲染作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  },
+  "M07": {
+    "sections": [
+      "sw-hero",
+      "sw-statement",
+      "sw-signature",
+      "sw-specimen",
+      "sw-spread",
+      "sw-invert",
+      "sw-film-wrap",
+      "sw-outro",
+      "sw-next"
+    ],
+    "chars": 1137,
+    "cn": 675,
+    "imgs": 35,
+    "broken": 0,
+    "loaded": 33,
+    "scrollW": 414,
+    "clientW": 414,
+    "rootScrollW": 414,
+    "rootClientW": 414,
+    "rootScrollH": 5460,
+    "curtain": false,
+    "cube": true,
+    "cubeFaces": 4,
+    "signature": true,
+    "compare": true,
+    "frames": 5,
+    "captions": 3,
+    "under12": 37,
+    "under12samples": [
+      "SAMPLE / 07",
+      "每个概念均配使用方式说明",
+      "生活细节 / 云南在地题材",
+      "POSITION"
+    ],
+    "sizes": [
+      {
+        "cls": "sw-hero-sub",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-statement-long",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-sig-read",
+        "fs": "15px"
+      },
+      {
+        "cls": "P",
+        "fs": "15px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--l",
+        "fs": "11px"
+      },
+      {
+        "cls": "sw-compare-cap sw-compare-cap--r",
+        "fs": "11px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "SPAN",
+        "fs": "13px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      },
+      {
+        "cls": "EM",
+        "fs": "15px"
+      }
+    ],
+    "clicksUnder44": 0,
+    "feasibility": 1,
+    "truncated": false,
+    "redundant": false,
+    "fullSubtitle": "AIGC 辅助产品概念发散 · 六个方向",
+    "sourceLine": "六个概念效果图 · 交互与材质说明作品集内所有项目所述功能均可实现。",
+    "key": {
+      "landed": false,
+      "proto": false,
+      "malachite": false,
+      "unconfirmed": false
+    },
+    "jsErrors": []
+  }
+}

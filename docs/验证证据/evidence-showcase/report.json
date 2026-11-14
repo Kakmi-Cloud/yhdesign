@@ -1,0 +1,432 @@
+{
+  "desktop-01": {
+    "hasShowcase": true,
+    "title": "《心景》疗愈灯具",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 347,
+    "rootChineseChars": 173,
+    "sections": 7,
+    "heroRatio": 0.91,
+    "heroImg": {
+      "nw": 1500,
+      "nh": 837,
+      "fit": "cover",
+      "box": {
+        "w": 1464,
+        "h": 877,
+        "top": -67
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 8
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 1241,
+      "rootClientW": 1241,
+      "docScrollW": 1256,
+      "docClientW": 1256
+    },
+    "scrollH": 5120,
+    "key": {
+      "landed": true,
+      "prototyping": false,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": true
+    },
+    "fnLabels": [
+      "01  进门即亮",
+      "02  睡前渐暗",
+      "03  夜起指引",
+      "04  模块可动"
+    ],
+    "badges": [
+      "毕业设计 · 已落地"
+    ],
+    "next": "《慢行者》"
+  },
+  "mobile-01": {
+    "hasShowcase": true,
+    "title": "《心景》疗愈灯具",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 316,
+    "rootChineseChars": 173,
+    "sections": 7,
+    "heroRatio": 0.82,
+    "heroImg": {
+      "nw": 1500,
+      "nh": 837,
+      "fit": "cover",
+      "box": {
+        "w": 489,
+        "h": 867,
+        "top": -66
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 8
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 414,
+      "rootClientW": 414,
+      "docScrollW": 414,
+      "docClientW": 414
+    },
+    "scrollH": 4057,
+    "key": {
+      "landed": true,
+      "prototyping": false,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": true
+    },
+    "fnLabels": [
+      "01  进门即亮",
+      "02  睡前渐暗",
+      "03  夜起指引",
+      "04  模块可动"
+    ],
+    "badges": [
+      "毕业设计 · 已落地"
+    ],
+    "next": "《慢行者》"
+  },
+  "desktop-03": {
+    "hasShowcase": true,
+    "title": "实习灯具设计",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 382,
+    "rootChineseChars": 209,
+    "sections": 7,
+    "heroRatio": 0.91,
+    "heroImg": {
+      "nw": 1200,
+      "nh": 900,
+      "fit": "cover",
+      "box": {
+        "w": 1464,
+        "h": 877,
+        "top": -67
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 9
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 1241,
+      "rootClientW": 1241,
+      "docScrollW": 1256,
+      "docClientW": 1256
+    },
+    "scrollH": 5160,
+    "key": {
+      "landed": false,
+      "prototyping": true,
+      "malachite": true,
+      "notConfirmed": true,
+      "feasible": true,
+      "thesis": false
+    },
+    "fnLabels": [
+      "01  3000K 柔光",
+      "02  孔雀石贴边",
+      "03  金属结构",
+      "04  系列化适配"
+    ],
+    "badges": [
+      "实习项目 · 打样落地阶段"
+    ],
+    "next": "情绪疗愈灯具"
+  },
+  "mobile-03": {
+    "hasShowcase": true,
+    "title": "实习灯具设计",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 351,
+    "rootChineseChars": 209,
+    "sections": 7,
+    "heroRatio": 0.82,
+    "heroImg": {
+      "nw": 1200,
+      "nh": 900,
+      "fit": "cover",
+      "box": {
+        "w": 489,
+        "h": 867,
+        "top": -66
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 9
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 414,
+      "rootClientW": 414,
+      "docScrollW": 414,
+      "docClientW": 414
+    },
+    "scrollH": 4102,
+    "key": {
+      "landed": false,
+      "prototyping": true,
+      "malachite": true,
+      "notConfirmed": true,
+      "feasible": true,
+      "thesis": false
+    },
+    "fnLabels": [
+      "01  3000K 柔光",
+      "02  孔雀石贴边",
+      "03  金属结构",
+      "04  系列化适配"
+    ],
+    "badges": [
+      "实习项目 · 打样落地阶段"
+    ],
+    "next": "情绪疗愈灯具"
+  },
+  "desktop-05": {
+    "hasShowcase": true,
+    "title": "UI界面流程设计",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 297,
+    "rootChineseChars": 147,
+    "sections": 7,
+    "heroRatio": 0.91,
+    "heroImg": {
+      "nw": 375,
+      "nh": 812,
+      "fit": "cover",
+      "box": {
+        "w": 1464,
+        "h": 877,
+        "top": -67
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 9
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 1241,
+      "rootClientW": 1241,
+      "docScrollW": 1256,
+      "docClientW": 1256
+    },
+    "scrollH": 5048,
+    "key": {
+      "landed": false,
+      "prototyping": false,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": false
+    },
+    "fnLabels": [
+      "01  服务聚合",
+      "02  决策信息",
+      "03  闭环操作"
+    ],
+    "badges": [
+      "界面设计 · 流程完整"
+    ],
+    "next": "产品概念设计"
+  },
+  "mobile-05": {
+    "hasShowcase": true,
+    "title": "UI界面流程设计",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 266,
+    "rootChineseChars": 147,
+    "sections": 7,
+    "heroRatio": 0.82,
+    "heroImg": {
+      "nw": 375,
+      "nh": 812,
+      "fit": "cover",
+      "box": {
+        "w": 489,
+        "h": 867,
+        "top": -66
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 9
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 414,
+      "rootClientW": 414,
+      "docScrollW": 414,
+      "docClientW": 414
+    },
+    "scrollH": 3901,
+    "key": {
+      "landed": false,
+      "prototyping": false,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": false
+    },
+    "fnLabels": [
+      "01  服务聚合",
+      "02  决策信息",
+      "03  闭环操作"
+    ],
+    "badges": [
+      "界面设计 · 流程完整"
+    ],
+    "next": "产品概念设计"
+  },
+  "mobile-08": {
+    "hasShowcase": true,
+    "title": "猫冰 CAT-ICE : THERMAL LAB",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 268,
+    "rootChineseChars": 123,
+    "sections": 7,
+    "heroRatio": 0.82,
+    "heroImg": {
+      "nw": 1500,
+      "nh": 938,
+      "fit": "cover",
+      "box": {
+        "w": 489,
+        "h": 867,
+        "top": -66
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 9
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 414,
+      "rootClientW": 414,
+      "docScrollW": 414,
+      "docClientW": 414
+    },
+    "scrollH": 3901,
+    "key": {
+      "landed": false,
+      "prototyping": false,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": false
+    },
+    "fnLabels": [
+      "01  温度轴驱动",
+      "02  形态联动",
+      "03  快捷档位",
+      "04  延展系统"
+    ],
+    "badges": [
+      "IP 设计 · 系统完整"
+    ],
+    "next": "模块化木质座椅"
+  },
+  "desktop-07": {
+    "hasShowcase": true,
+    "title": "产品概念设计",
+    "h1Count": 1,
+    "h2Count": 0,
+    "rootChars": 311,
+    "rootChineseChars": 152,
+    "sections": 7,
+    "heroRatio": 0.91,
+    "heroImg": {
+      "nw": 1600,
+      "nh": 1000,
+      "fit": "cover",
+      "box": {
+        "w": 1464,
+        "h": 877,
+        "top": -67
+      }
+    },
+    "images": {
+      "total": 12,
+      "broken": 0,
+      "loaded": 9
+    },
+    "buttons": {
+      "total": 4,
+      "under44": 0
+    },
+    "overflow": {
+      "rootScrollW": 1241,
+      "rootClientW": 1241,
+      "docScrollW": 1256,
+      "docClientW": 1256
+    },
+    "scrollH": 5048,
+    "key": {
+      "landed": false,
+      "prototyping": false,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": false
+    },
+    "fnLabels": [
+      "01  摇晃蓄光",
+      "02  双控件定时",
+      "03  重量可视化",
+      "04  在地题材"
+    ],
+    "badges": [
+      "概念提案 · 六个方向"
+    ],
+    "next": "《心景》疗愈灯具"
+  }
+}

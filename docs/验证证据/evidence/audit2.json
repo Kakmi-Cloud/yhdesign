@@ -1,0 +1,867 @@
+{
+  "clickCTA": "DIV | 简历与能力 ↓",
+  "mLongTop": {
+    "y": 0,
+    "docH": 896,
+    "scrollW": 414,
+    "clientW": 414,
+    "scrollables": [],
+    "headings": [],
+    "bigImgs": [],
+    "chars": 156,
+    "animated": 23,
+    "transformed": 0
+  },
+  "mLongMid": {
+    "y": 0,
+    "docH": 896,
+    "scrollW": 414,
+    "clientW": 414,
+    "scrollables": [],
+    "headings": [],
+    "bigImgs": [],
+    "chars": 156,
+    "animated": 23,
+    "transformed": 0
+  },
+  "mDetailTop": {
+    "y": 0,
+    "docH": 1550,
+    "scrollW": 414,
+    "clientW": 414,
+    "scrollables": [
+      {
+        "cls": "bento-detail-root fixed inset-0 overflow-y-au",
+        "sh": 8445,
+        "ch": 896,
+        "tag": "DIV"
+      }
+    ],
+    "headings": [
+      {
+        "t": "H2",
+        "x": "个人经历"
+      },
+      {
+        "t": "H2",
+        "x": "精选项目"
+      },
+      {
+        "t": "H1",
+        "x": "HEALING EMOTIONS WITHMODULAR LIGHTING EXPERIENCE"
+      },
+      {
+        "t": "H1",
+        "x": "《心景》疗愈灯具"
+      },
+      {
+        "t": "H2",
+        "x": "Flexible"
+      },
+      {
+        "t": "H3",
+        "x": "缓解情绪压力"
+      },
+      {
+        "t": "H3",
+        "x": "年轻城市人群"
+      },
+      {
+        "t": "H3",
+        "x": "情绪可视化"
+      },
+      {
+        "t": "H3",
+        "x": "温暖×科技×陪伴"
+      },
+      {
+        "t": "H3",
+        "x": "Design Process / 物理形态推演 · 过程档案"
+      }
+    ],
+    "bigImgs": [
+      {
+        "src": "_fig20-backup-prototype.webp",
+        "nat": "1500x1443",
+        "w": 412,
+        "h": 340,
+        "top": 79,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 330,
+        "h": 116,
+        "top": 2185,
+        "fit": "cover"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 330,
+        "h": 116,
+        "top": 2319,
+        "fit": "cover"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 4131,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 4529,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 4926,
+        "fit": "contain"
+      }
+    ],
+    "chars": 2785,
+    "animated": 24,
+    "transformed": 10
+  },
+  "mDetailMid": {
+    "y": 654,
+    "docH": 1550,
+    "scrollW": 414,
+    "clientW": 414,
+    "scrollables": [
+      {
+        "cls": "bento-detail-root fixed inset-0 overflow-y-au",
+        "sh": 8445,
+        "ch": 896,
+        "tag": "DIV"
+      }
+    ],
+    "headings": [
+      {
+        "t": "H2",
+        "x": "个人经历"
+      },
+      {
+        "t": "H2",
+        "x": "精选项目"
+      },
+      {
+        "t": "H1",
+        "x": "HEALING EMOTIONS WITHMODULAR LIGHTING EXPERIENCE"
+      },
+      {
+        "t": "H1",
+        "x": "《心景》疗愈灯具"
+      },
+      {
+        "t": "H2",
+        "x": "Flexible"
+      },
+      {
+        "t": "H3",
+        "x": "缓解情绪压力"
+      },
+      {
+        "t": "H3",
+        "x": "年轻城市人群"
+      },
+      {
+        "t": "H3",
+        "x": "情绪可视化"
+      },
+      {
+        "t": "H3",
+        "x": "温暖×科技×陪伴"
+      },
+      {
+        "t": "H3",
+        "x": "Design Process / 物理形态推演 · 过程档案"
+      }
+    ],
+    "bigImgs": [
+      {
+        "src": "_fig20-backup-prototype.webp",
+        "nat": "1500x1443",
+        "w": 412,
+        "h": 340,
+        "top": -821,
+        "fit": "contain"
+      },
+      {
+        "src": "scene-01.jpg",
+        "nat": "1376x768",
+        "w": 330,
+        "h": 116,
+        "top": 1285,
+        "fit": "cover"
+      },
+      {
+        "src": "scene-02.webp",
+        "nat": "1376x768",
+        "w": 330,
+        "h": 116,
+        "top": 1419,
+        "fit": "cover"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 3231,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 3629,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 4026,
+        "fit": "contain"
+      }
+    ],
+    "chars": 2785,
+    "animated": 24,
+    "transformed": 10
+  },
+  "mDetailLate": {
+    "y": 654,
+    "docH": 1550,
+    "scrollW": 414,
+    "clientW": 414,
+    "scrollables": [
+      {
+        "cls": "bento-detail-root fixed inset-0 overflow-y-au",
+        "sh": 8445,
+        "ch": 896,
+        "tag": "DIV"
+      }
+    ],
+    "headings": [
+      {
+        "t": "H2",
+        "x": "个人经历"
+      },
+      {
+        "t": "H2",
+        "x": "精选项目"
+      },
+      {
+        "t": "H1",
+        "x": "HEALING EMOTIONS WITHMODULAR LIGHTING EXPERIENCE"
+      },
+      {
+        "t": "H1",
+        "x": "《心景》疗愈灯具"
+      },
+      {
+        "t": "H2",
+        "x": "Flexible"
+      },
+      {
+        "t": "H3",
+        "x": "缓解情绪压力"
+      },
+      {
+        "t": "H3",
+        "x": "年轻城市人群"
+      },
+      {
+        "t": "H3",
+        "x": "情绪可视化"
+      },
+      {
+        "t": "H3",
+        "x": "温暖×科技×陪伴"
+      },
+      {
+        "t": "H3",
+        "x": "Design Process / 物理形态推演 · 过程档案"
+      }
+    ],
+    "bigImgs": [
+      {
+        "src": "_fig20-backup-prototype.webp",
+        "nat": "1500x1443",
+        "w": 412,
+        "h": 340,
+        "top": -2121,
+        "fit": "contain"
+      },
+      {
+        "src": "scene-01.jpg",
+        "nat": "1376x768",
+        "w": 330,
+        "h": 116,
+        "top": -15,
+        "fit": "cover"
+      },
+      {
+        "src": "scene-02.webp",
+        "nat": "1376x768",
+        "w": 330,
+        "h": 116,
+        "top": 119,
+        "fit": "cover"
+      },
+      {
+        "src": "fig26.webp",
+        "nat": "558x418",
+        "w": 376,
+        "h": 228,
+        "top": 1931,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 2329,
+        "fit": "contain"
+      },
+      {
+        "src": "",
+        "nat": "0x0",
+        "w": 376,
+        "h": 228,
+        "top": 2726,
+        "fit": "contain"
+      }
+    ],
+    "chars": 2785,
+    "animated": 24,
+    "transformed": 10
+  },
+  "reduced": {
+    "y": 0,
+    "docH": 896,
+    "scrollW": 414,
+    "clientW": 414,
+    "scrollables": [],
+    "headings": [],
+    "bigImgs": [],
+    "chars": 156,
+    "animated": 16,
+    "transformed": 0
+  },
+  "dDetailTop": {
+    "y": 0,
+    "docH": 6277,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "scrollables": [
+      {
+        "cls": "bento-detail-root fixed inset-0 overflow-y-au",
+        "sh": 5339,
+        "ch": 808,
+        "tag": "DIV"
+      }
+    ],
+    "headings": [
+      {
+        "t": "H1",
+        "x": "CRAFTING Experiences WITH PRODUCT & UI"
+      },
+      {
+        "t": "H2",
+        "x": "杨鸿 / 产品设计师。"
+      },
+      {
+        "t": "H1",
+        "x": "DESIGN"
+      },
+      {
+        "t": "H2",
+        "x": "个人经历"
+      },
+      {
+        "t": "H3",
+        "x": "东莞宝辉灯饰有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "东莞新力威丝印有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "中财上智研究院品牌视觉体系升级设计比赛"
+      },
+      {
+        "t": "H3",
+        "x": "教育"
+      },
+      {
+        "t": "H3",
+        "x": "在读时间"
+      },
+      {
+        "t": "H3",
+        "x": "设计工具"
+      }
+    ],
+    "bigImgs": [
+      {
+        "src": "user-01.webp",
+        "nat": "1500x837",
+        "w": 192,
+        "h": 161,
+        "top": 3271,
+        "fit": "cover"
+      },
+      {
+        "src": "slowwalker-render.jpeg",
+        "nat": "1024x656",
+        "w": 166,
+        "h": 128,
+        "top": 3306,
+        "fit": "cover"
+      },
+      {
+        "src": "01-glass-drops.webp",
+        "nat": "1500x1500",
+        "w": 164,
+        "h": 104,
+        "top": 3337,
+        "fit": "cover"
+      },
+      {
+        "src": "02-campfire.webp",
+        "nat": "1400x1045",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      },
+      {
+        "src": "card-portrait.webp",
+        "nat": "1080x1700",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "contain"
+      },
+      {
+        "src": "hero.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      },
+      {
+        "src": "ui-cos-2.webp",
+        "nat": "375x812",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      },
+      {
+        "src": "aigc-board.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      }
+    ],
+    "chars": 5335,
+    "animated": 7,
+    "transformed": 48
+  },
+  "dDetailMid": {
+    "y": 820,
+    "docH": 6277,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "scrollables": [
+      {
+        "cls": "bento-detail-root fixed inset-0 overflow-y-au",
+        "sh": 5339,
+        "ch": 808,
+        "tag": "DIV"
+      }
+    ],
+    "headings": [
+      {
+        "t": "H1",
+        "x": "CRAFTING Experiences WITH PRODUCT & UI"
+      },
+      {
+        "t": "H2",
+        "x": "杨鸿 / 产品设计师。"
+      },
+      {
+        "t": "H1",
+        "x": "DESIGN"
+      },
+      {
+        "t": "H2",
+        "x": "个人经历"
+      },
+      {
+        "t": "H3",
+        "x": "东莞宝辉灯饰有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "东莞新力威丝印有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "中财上智研究院品牌视觉体系升级设计比赛"
+      },
+      {
+        "t": "H3",
+        "x": "教育"
+      },
+      {
+        "t": "H3",
+        "x": "在读时间"
+      },
+      {
+        "t": "H3",
+        "x": "设计工具"
+      }
+    ],
+    "bigImgs": [
+      {
+        "src": "user-01.webp",
+        "nat": "1500x837",
+        "w": 192,
+        "h": 161,
+        "top": 2451,
+        "fit": "cover"
+      },
+      {
+        "src": "slowwalker-render.jpeg",
+        "nat": "1024x656",
+        "w": 166,
+        "h": 128,
+        "top": 2486,
+        "fit": "cover"
+      },
+      {
+        "src": "01-glass-drops.webp",
+        "nat": "1500x1500",
+        "w": 164,
+        "h": 104,
+        "top": 2517,
+        "fit": "cover"
+      },
+      {
+        "src": "02-campfire.webp",
+        "nat": "1400x1045",
+        "w": 175,
+        "h": 81,
+        "top": 2555,
+        "fit": "cover"
+      },
+      {
+        "src": "card-portrait.webp",
+        "nat": "1080x1700",
+        "w": 175,
+        "h": 81,
+        "top": 2555,
+        "fit": "contain"
+      },
+      {
+        "src": "hero.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 2555,
+        "fit": "cover"
+      },
+      {
+        "src": "ui-cos-2.webp",
+        "nat": "375x812",
+        "w": 175,
+        "h": 81,
+        "top": 2555,
+        "fit": "cover"
+      },
+      {
+        "src": "aigc-board.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 2555,
+        "fit": "cover"
+      }
+    ],
+    "chars": 5335,
+    "animated": 7,
+    "transformed": 51
+  },
+  "dDetailLate": {
+    "y": 1900,
+    "docH": 6277,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "scrollables": [
+      {
+        "cls": "bento-detail-root fixed inset-0 overflow-y-au",
+        "sh": 5339,
+        "ch": 808,
+        "tag": "DIV"
+      }
+    ],
+    "headings": [
+      {
+        "t": "H1",
+        "x": "CRAFTING Experiences WITH PRODUCT & UI"
+      },
+      {
+        "t": "H2",
+        "x": "杨鸿 / 产品设计师。"
+      },
+      {
+        "t": "H1",
+        "x": "DESIGN"
+      },
+      {
+        "t": "H2",
+        "x": "个人经历"
+      },
+      {
+        "t": "H3",
+        "x": "东莞宝辉灯饰有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "东莞新力威丝印有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "中财上智研究院品牌视觉体系升级设计比赛"
+      },
+      {
+        "t": "H3",
+        "x": "教育"
+      },
+      {
+        "t": "H3",
+        "x": "在读时间"
+      },
+      {
+        "t": "H3",
+        "x": "设计工具"
+      }
+    ],
+    "bigImgs": [
+      {
+        "src": "user-01.webp",
+        "nat": "1500x837",
+        "w": 192,
+        "h": 161,
+        "top": 1371,
+        "fit": "cover"
+      },
+      {
+        "src": "slowwalker-render.jpeg",
+        "nat": "1024x656",
+        "w": 166,
+        "h": 128,
+        "top": 1406,
+        "fit": "cover"
+      },
+      {
+        "src": "01-glass-drops.webp",
+        "nat": "1500x1500",
+        "w": 164,
+        "h": 104,
+        "top": 1437,
+        "fit": "cover"
+      },
+      {
+        "src": "02-campfire.webp",
+        "nat": "1400x1045",
+        "w": 175,
+        "h": 81,
+        "top": 1475,
+        "fit": "cover"
+      },
+      {
+        "src": "card-portrait.webp",
+        "nat": "1080x1700",
+        "w": 175,
+        "h": 81,
+        "top": 1475,
+        "fit": "contain"
+      },
+      {
+        "src": "hero.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 1475,
+        "fit": "cover"
+      },
+      {
+        "src": "ui-cos-2.webp",
+        "nat": "375x812",
+        "w": 175,
+        "h": 81,
+        "top": 1475,
+        "fit": "cover"
+      },
+      {
+        "src": "aigc-board.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 1475,
+        "fit": "cover"
+      }
+    ],
+    "chars": 5335,
+    "animated": 7,
+    "transformed": 51
+  },
+  "clickIcon": "SPAN | 《心景》疗愈灯具",
+  "osWindow": {
+    "y": 0,
+    "docH": 6277,
+    "scrollW": 1256,
+    "clientW": 1256,
+    "scrollables": [
+      {
+        "cls": "os-window-body",
+        "sh": 554,
+        "ch": 383,
+        "tag": "DIV"
+      }
+    ],
+    "headings": [
+      {
+        "t": "H1",
+        "x": "CRAFTING Experiences WITH PRODUCT & UI"
+      },
+      {
+        "t": "H2",
+        "x": "杨鸿 / 产品设计师。"
+      },
+      {
+        "t": "H1",
+        "x": "DESIGN"
+      },
+      {
+        "t": "H2",
+        "x": "个人经历"
+      },
+      {
+        "t": "H3",
+        "x": "东莞宝辉灯饰有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "东莞新力威丝印有限公司"
+      },
+      {
+        "t": "H3",
+        "x": "中财上智研究院品牌视觉体系升级设计比赛"
+      },
+      {
+        "t": "H3",
+        "x": "教育"
+      },
+      {
+        "t": "H3",
+        "x": "在读时间"
+      },
+      {
+        "t": "H3",
+        "x": "设计工具"
+      }
+    ],
+    "bigImgs": [
+      {
+        "src": "user-01.webp",
+        "nat": "1500x837",
+        "w": 192,
+        "h": 161,
+        "top": 3271,
+        "fit": "cover"
+      },
+      {
+        "src": "slowwalker-render.jpeg",
+        "nat": "1024x656",
+        "w": 166,
+        "h": 128,
+        "top": 3306,
+        "fit": "cover"
+      },
+      {
+        "src": "01-glass-drops.webp",
+        "nat": "1500x1500",
+        "w": 164,
+        "h": 104,
+        "top": 3337,
+        "fit": "cover"
+      },
+      {
+        "src": "02-campfire.webp",
+        "nat": "1400x1045",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      },
+      {
+        "src": "card-portrait.webp",
+        "nat": "1080x1700",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "contain"
+      },
+      {
+        "src": "hero.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      },
+      {
+        "src": "ui-cos-2.webp",
+        "nat": "375x812",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      },
+      {
+        "src": "aigc-board.webp",
+        "nat": "1600x1000",
+        "w": 175,
+        "h": 81,
+        "top": 3375,
+        "fit": "cover"
+      }
+    ],
+    "chars": 3448,
+    "animated": 6,
+    "transformed": 42
+  }
+}

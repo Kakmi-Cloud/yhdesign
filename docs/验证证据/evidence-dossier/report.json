@@ -1,0 +1,544 @@
+{
+  "desktop-01": {
+    "hasDossier": true,
+    "h1Count": 3,
+    "h1": [
+      "CRAFTING\nExperiences\nWITH\nPRODUCT & UI",
+      "DESIGN",
+      "《心景》疗愈灯具"
+    ],
+    "h2": [
+      "可实现功能",
+      "调研依据",
+      "设计推导",
+      "规格与材料",
+      "进展与落地",
+      "图像档案",
+      "资料来源与说明"
+    ],
+    "secIds": [
+      "pf-top",
+      "pf-functions",
+      "pf-research",
+      "pf-design",
+      "pf-spec",
+      "pf-build",
+      "pf-gallery",
+      "pf-notes"
+    ],
+    "bodyChars": 5778,
+    "scrollW": 1241,
+    "clientW": 1241,
+    "docScrollW": 1256,
+    "docClientW": 1256,
+    "hero": {
+      "nw": 1500,
+      "nh": 837,
+      "fit": "contain",
+      "box": {
+        "w": 596,
+        "h": 467
+      }
+    },
+    "images": {
+      "total": 11,
+      "broken": 0,
+      "loaded": 5
+    },
+    "buttons": {
+      "total": 14,
+      "under44": 0
+    },
+    "smallChinese": 143,
+    "smallSamples": [
+      {
+        "t": "首页",
+        "fs": "11px"
+      },
+      {
+        "t": "经历",
+        "fs": "11px"
+      },
+      {
+        "t": "项目",
+        "fs": "11px"
+      },
+      {
+        "t": "优势",
+        "fs": "11px"
+      },
+      {
+        "t": "联系",
+        "fs": "11px"
+      }
+    ],
+    "badges": [
+      "毕业设计 · 已落地"
+    ],
+    "keyText": {
+      "landed": true,
+      "prototyping": true,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": true
+    },
+    "statusList": [
+      "毕业设计 · 已落地",
+      "设计方案 · 资料完整",
+      "实习项目 · 打样落地阶段",
+      "设计方案 · 交互验证",
+      "IP 设计 · 系统完整",
+      "家具设计 · 结构方案",
+      "界面设计 · 流程完整",
+      "概念提案 · 六个方向"
+    ]
+  },
+  "mobile-01": {
+    "hasDossier": true,
+    "h1Count": 3,
+    "h1": [
+      "CraftingExperiencesWITHProduct & UI",
+      "DESIGN",
+      "《心景》疗愈灯具"
+    ],
+    "h2": [
+      "可实现功能",
+      "调研依据",
+      "设计推导",
+      "规格与材料",
+      "进展与落地",
+      "图像档案",
+      "资料来源与说明"
+    ],
+    "secIds": [
+      "pf-top",
+      "pf-functions",
+      "pf-research",
+      "pf-design",
+      "pf-spec",
+      "pf-build",
+      "pf-gallery",
+      "pf-notes"
+    ],
+    "bodyChars": 3226,
+    "scrollW": 414,
+    "clientW": 414,
+    "docScrollW": 414,
+    "docClientW": 414,
+    "hero": {
+      "nw": 1500,
+      "nh": 837,
+      "fit": "contain",
+      "box": {
+        "w": 375,
+        "h": 291
+      }
+    },
+    "images": {
+      "total": 11,
+      "broken": 0,
+      "loaded": 5
+    },
+    "buttons": {
+      "total": 14,
+      "under44": 0
+    },
+    "smallChinese": 101,
+    "smallSamples": [
+      {
+        "t": "首页",
+        "fs": "11px"
+      },
+      {
+        "t": "经历",
+        "fs": "11px"
+      },
+      {
+        "t": "项目",
+        "fs": "11px"
+      },
+      {
+        "t": "优势",
+        "fs": "11px"
+      },
+      {
+        "t": "联系",
+        "fs": "11px"
+      }
+    ],
+    "badges": [
+      "毕业设计 · 已落地"
+    ],
+    "keyText": {
+      "landed": true,
+      "prototyping": true,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": true
+    },
+    "statusList": [
+      "毕业设计 · 已落地",
+      "设计方案 · 资料完整",
+      "实习项目 · 打样落地阶段",
+      "设计方案 · 交互验证",
+      "IP 设计 · 系统完整",
+      "家具设计 · 结构方案",
+      "界面设计 · 流程完整",
+      "概念提案 · 六个方向"
+    ]
+  },
+  "desktop-03": {
+    "hasDossier": true,
+    "h1Count": 3,
+    "h1": [
+      "CRAFTING\nExperiences\nWITH\nPRODUCT & UI",
+      "DESIGN",
+      "实习灯具设计"
+    ],
+    "h2": [
+      "可实现功能",
+      "调研依据",
+      "设计推导",
+      "规格与材料",
+      "进展与落地",
+      "图像档案",
+      "资料来源与说明"
+    ],
+    "secIds": [
+      "pf-top",
+      "pf-functions",
+      "pf-research",
+      "pf-design",
+      "pf-spec",
+      "pf-build",
+      "pf-gallery",
+      "pf-notes"
+    ],
+    "bodyChars": 5672,
+    "scrollW": 1241,
+    "clientW": 1241,
+    "docScrollW": 1256,
+    "docClientW": 1256,
+    "hero": {
+      "nw": 1200,
+      "nh": 900,
+      "fit": "cover",
+      "box": {
+        "w": 596,
+        "h": 467
+      }
+    },
+    "images": {
+      "total": 11,
+      "broken": 0,
+      "loaded": 5
+    },
+    "buttons": {
+      "total": 14,
+      "under44": 0
+    },
+    "smallChinese": 142,
+    "smallSamples": [
+      {
+        "t": "首页",
+        "fs": "11px"
+      },
+      {
+        "t": "经历",
+        "fs": "11px"
+      },
+      {
+        "t": "项目",
+        "fs": "11px"
+      },
+      {
+        "t": "优势",
+        "fs": "11px"
+      },
+      {
+        "t": "联系",
+        "fs": "11px"
+      }
+    ],
+    "badges": [
+      "实习项目 · 打样落地阶段"
+    ],
+    "keyText": {
+      "landed": true,
+      "prototyping": true,
+      "malachite": true,
+      "notConfirmed": true,
+      "feasible": true,
+      "thesis": false
+    },
+    "statusList": [
+      "毕业设计 · 已落地",
+      "设计方案 · 资料完整",
+      "实习项目 · 打样落地阶段",
+      "设计方案 · 交互验证",
+      "IP 设计 · 系统完整",
+      "家具设计 · 结构方案",
+      "界面设计 · 流程完整",
+      "概念提案 · 六个方向"
+    ]
+  },
+  "mobile-03": {
+    "hasDossier": true,
+    "h1Count": 3,
+    "h1": [
+      "CraftingExperiencesWITHProduct & UI",
+      "DESIGN",
+      "实习灯具设计"
+    ],
+    "h2": [
+      "可实现功能",
+      "调研依据",
+      "设计推导",
+      "规格与材料",
+      "进展与落地",
+      "图像档案",
+      "资料来源与说明"
+    ],
+    "secIds": [
+      "pf-top",
+      "pf-functions",
+      "pf-research",
+      "pf-design",
+      "pf-spec",
+      "pf-build",
+      "pf-gallery",
+      "pf-notes"
+    ],
+    "bodyChars": 3120,
+    "scrollW": 414,
+    "clientW": 414,
+    "docScrollW": 414,
+    "docClientW": 414,
+    "hero": {
+      "nw": 1200,
+      "nh": 900,
+      "fit": "cover",
+      "box": {
+        "w": 375,
+        "h": 291
+      }
+    },
+    "images": {
+      "total": 11,
+      "broken": 0,
+      "loaded": 5
+    },
+    "buttons": {
+      "total": 14,
+      "under44": 0
+    },
+    "smallChinese": 100,
+    "smallSamples": [
+      {
+        "t": "首页",
+        "fs": "11px"
+      },
+      {
+        "t": "经历",
+        "fs": "11px"
+      },
+      {
+        "t": "项目",
+        "fs": "11px"
+      },
+      {
+        "t": "优势",
+        "fs": "11px"
+      },
+      {
+        "t": "联系",
+        "fs": "11px"
+      }
+    ],
+    "badges": [
+      "实习项目 · 打样落地阶段"
+    ],
+    "keyText": {
+      "landed": true,
+      "prototyping": true,
+      "malachite": true,
+      "notConfirmed": true,
+      "feasible": true,
+      "thesis": false
+    },
+    "statusList": [
+      "毕业设计 · 已落地",
+      "设计方案 · 资料完整",
+      "实习项目 · 打样落地阶段",
+      "设计方案 · 交互验证",
+      "IP 设计 · 系统完整",
+      "家具设计 · 结构方案",
+      "界面设计 · 流程完整",
+      "概念提案 · 六个方向"
+    ]
+  },
+  "mobile-08": {
+    "hasDossier": true,
+    "h1Count": 3,
+    "h1": [
+      "CraftingExperiencesWITHProduct & UI",
+      "DESIGN",
+      "猫冰 CAT-ICE : THERMAL LAB"
+    ],
+    "h2": [
+      "可实现功能",
+      "调研依据",
+      "设计推导",
+      "规格与材料",
+      "进展与落地",
+      "图像档案",
+      "资料来源与说明"
+    ],
+    "secIds": [
+      "pf-top",
+      "pf-functions",
+      "pf-research",
+      "pf-design",
+      "pf-spec",
+      "pf-build",
+      "pf-gallery",
+      "pf-notes"
+    ],
+    "bodyChars": 2655,
+    "scrollW": 414,
+    "clientW": 414,
+    "docScrollW": 414,
+    "docClientW": 414,
+    "hero": {
+      "nw": 1500,
+      "nh": 938,
+      "fit": "contain",
+      "box": {
+        "w": 375,
+        "h": 291
+      }
+    },
+    "images": {
+      "total": 11,
+      "broken": 0,
+      "loaded": 6
+    },
+    "buttons": {
+      "total": 14,
+      "under44": 0
+    },
+    "smallChinese": 90,
+    "smallSamples": [
+      {
+        "t": "首页",
+        "fs": "11px"
+      },
+      {
+        "t": "经历",
+        "fs": "11px"
+      },
+      {
+        "t": "项目",
+        "fs": "11px"
+      },
+      {
+        "t": "优势",
+        "fs": "11px"
+      },
+      {
+        "t": "联系",
+        "fs": "11px"
+      }
+    ],
+    "badges": [
+      "IP 设计 · 系统完整"
+    ],
+    "keyText": {
+      "landed": true,
+      "prototyping": true,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": false
+    },
+    "statusList": [
+      "毕业设计 · 已落地",
+      "设计方案 · 资料完整",
+      "实习项目 · 打样落地阶段",
+      "设计方案 · 交互验证",
+      "IP 设计 · 系统完整",
+      "家具设计 · 结构方案",
+      "界面设计 · 流程完整",
+      "概念提案 · 六个方向"
+    ]
+  },
+  "mobile-landing": {
+    "hasDossier": false,
+    "h1Count": 2,
+    "h1": [
+      "CraftingExperiencesWITHProduct & UI",
+      "DESIGN"
+    ],
+    "h2": [],
+    "secIds": [],
+    "bodyChars": 247,
+    "scrollW": 414,
+    "clientW": 414,
+    "docScrollW": 414,
+    "docClientW": 414,
+    "hero": null,
+    "images": {
+      "total": 17,
+      "broken": 0,
+      "loaded": 16
+    },
+    "buttons": {
+      "total": 115,
+      "under44": 0
+    },
+    "smallChinese": 58,
+    "smallSamples": [
+      {
+        "t": "首页",
+        "fs": "11px"
+      },
+      {
+        "t": "经历",
+        "fs": "11px"
+      },
+      {
+        "t": "项目",
+        "fs": "11px"
+      },
+      {
+        "t": "优势",
+        "fs": "11px"
+      },
+      {
+        "t": "联系",
+        "fs": "11px"
+      }
+    ],
+    "badges": [],
+    "keyText": {
+      "landed": true,
+      "prototyping": true,
+      "malachite": false,
+      "notConfirmed": false,
+      "feasible": true,
+      "thesis": false
+    },
+    "statusList": [
+      "毕业设计 · 已落地",
+      "设计方案 · 资料完整",
+      "实习项目 · 打样落地阶段",
+      "设计方案 · 交互验证",
+      "IP 设计 · 系统完整",
+      "家具设计 · 结构方案",
+      "界面设计 · 流程完整",
+      "概念提案 · 六个方向"
+    ]
+  }
+}

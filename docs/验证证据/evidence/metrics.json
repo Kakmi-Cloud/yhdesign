@@ -1,0 +1,6186 @@
+{
+  "01-desktop-os": {
+    "scene": "01-desktop-os",
+    "url": "http://127.0.0.1:8899/",
+    "viewport": {
+      "w": 1256,
+      "h": 808,
+      "dpr": 1,
+      "scrollW": 1256,
+      "scrollH": 6277,
+      "clientW": 1256,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": true,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 89
+    },
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "CRAFTING Experiences WITH PRODUCT & UI",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "杨鸿 / 产品设计师。",
+        "fs": "20.096px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H1",
+        "text": "DESIGN",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "94.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "东莞宝辉灯饰有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "东莞新力威丝印有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "中财上智研究院品牌视觉体系升级设计比赛",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "教育",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "在读时间",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "设计工具",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "语言",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《心景》疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《慢行者》",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "实习灯具设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "猫冰 CAT-ICE : THERMAL LAB",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "模块化木质座椅",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "UI界面流程设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人优势",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念可视化",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "AI 工具驱动设计",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "跨学科协作",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "全流程跟进",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H2",
+        "text": "开始合作",
+        "fs": "113.04px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "10",
+        288
+      ],
+      [
+        "37.68",
+        108
+      ],
+      [
+        "11",
+        48
+      ],
+      [
+        "9",
+        33
+      ],
+      [
+        "12",
+        26
+      ],
+      [
+        "14",
+        23
+      ],
+      [
+        "169.56",
+        11
+      ],
+      [
+        "15",
+        9
+      ],
+      [
+        "113.04",
+        9
+      ],
+      [
+        "40",
+        8
+      ],
+      [
+        "73.6",
+        8
+      ],
+      [
+        "13",
+        6
+      ],
+      [
+        "35.168",
+        6
+      ],
+      [
+        "62.8",
+        6
+      ]
+    ],
+    "under15": {
+      "textNodes": 425,
+      "samples": [
+        {
+          "text": "TOP",
+          "fs": 9,
+          "cls": "text-[9px] font-black uppercase tracking-[0.2em] transi"
+        },
+        {
+          "text": "首页",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 border-b-"
+        },
+        {
+          "text": "经历",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "项目",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "优势",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "联系",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "桌面模式",
+          "fs": 11,
+          "cls": "os-entry-header hidden h-10 shrink-0 items-center gap-2"
+        },
+        {
+          "text": "Get Started",
+          "fs": 11,
+          "cls": "block bg-[#151515] px-4 py-2 text-[11px] font-black upp"
+        },
+        {
+          "text": "PRODUCT DESIGN · 2026",
+          "fs": 9,
+          "cls": ""
+        },
+        {
+          "text": "YH / 26届 · ISSUE EDITION",
+          "fs": 9,
+          "cls": "hidden md:inline"
+        },
+        {
+          "text": "26届 · 2026",
+          "fs": 9,
+          "cls": "rounded-full bg-[#151515] px-3 py-1 text-[#E67E33]"
+        },
+        {
+          "text": "查看项目",
+          "fs": 11,
+          "cls": "mt-8 inline-flex w-fit -rotate-2 items-center gap-2 bg-"
+        },
+        {
+          "text": "Profile",
+          "fs": 10,
+          "cls": "bg-[#E67E33] px-3 py-1 text-[10px] font-black uppercase"
+        },
+        {
+          "text": "用形态、材质与界面语言，把概念变成可被感知、可被使用的产品体验。致力",
+          "fs": 14.4,
+          "cls": "font-medium leading-[1.9] text-white/85"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        334
+      ],
+      [
+        "rgb(230, 126, 51)",
+        96
+      ],
+      [
+        "rgb(255, 255, 255)",
+        96
+      ],
+      [
+        "rgb(107, 107, 107)",
+        18
+      ],
+      [
+        "rgba(21, 21, 21, 0.6)",
+        11
+      ],
+      [
+        "rgb(77, 77, 77)",
+        8
+      ],
+      [
+        "rgb(63, 63, 63)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.55)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.06)",
+        6
+      ],
+      [
+        "oklab(0.999994 0.0000455678 0.0000200868 / 0.75)",
+        6
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "JetBrains Mono",
+        313
+      ],
+      [
+        "Oswald",
+        172
+      ],
+      [
+        "Noto Sans SC",
+        139
+      ],
+      [
+        "Instrument Serif",
+        11
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(230, 126, 51)",
+        36
+      ],
+      [
+        "rgba(21, 21, 21, 0.12)",
+        32
+      ],
+      [
+        "rgb(21, 21, 21)",
+        25
+      ],
+      [
+        "rgba(21, 21, 21, 0.35)",
+        22
+      ],
+      [
+        "rgb(255, 255, 255)",
+        21
+      ],
+      [
+        "rgb(252, 252, 252)",
+        13
+      ],
+      [
+        "rgb(17, 17, 17)",
+        12
+      ],
+      [
+        "rgb(32, 36, 44)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.15)",
+        3
+      ],
+      [
+        "rgb(27, 28, 34)",
+        3
+      ]
+    ],
+    "images": {
+      "total": 9,
+      "visible": 9,
+      "missingAlt": 0,
+      "lazy": 8,
+      "objectFit": {
+        "cover": 8,
+        "contain": 1
+      },
+      "broken": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "brokenCount": 8,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "avatar.webp",
+          "dev": 14.7
+        }
+      ],
+      "coveredCount": 1,
+      "samples": [
+        {
+          "src": "avatar.webp",
+          "nat": "735x627",
+          "disp": "68x68",
+          "fit": "cover",
+          "alt": "杨鸿头像"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "192x161",
+          "fit": "cover",
+          "alt": "《心景》疗愈灯具 作品封面"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "166x128",
+          "fit": "cover",
+          "alt": "《慢行者》 作品封面"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "164x104",
+          "fit": "cover",
+          "alt": "实习灯具设计 作品封面"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "情绪疗愈灯具 作品封面"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "175x81",
+          "fit": "contain",
+          "alt": "猫冰 CAT-ICE : THERMAL LAB 作品封面"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "模块化木质座椅 作品封面"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "UI界面流程设计 作品封面"
+        },
+        {
+          "src": "",
+          "nat": "0x0",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "产品概念设计 作品封面"
+        }
+      ]
+    },
+    "clickables": {
+      "total": 65,
+      "under44": 40,
+      "ratio": 61.5,
+      "samples": [
+        {
+          "tag": "A",
+          "text": "TOP",
+          "size": "40x14"
+        },
+        {
+          "tag": "A",
+          "text": "EXP",
+          "size": "39x14"
+        },
+        {
+          "tag": "A",
+          "text": "WORK",
+          "size": "51x14"
+        },
+        {
+          "tag": "A",
+          "text": "EDGE",
+          "size": "48x14"
+        },
+        {
+          "tag": "A",
+          "text": "END",
+          "size": "41x14"
+        },
+        {
+          "tag": "A",
+          "text": "YANGHONG",
+          "size": "147x24"
+        },
+        {
+          "tag": "A",
+          "text": "首页",
+          "size": "27x19"
+        },
+        {
+          "tag": "A",
+          "text": "经历",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "项目",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "优势",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "联系",
+          "size": "27x17"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "桌面模式",
+          "size": "103x40"
+        }
+      ],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 6,
+      "transitionElements": 99,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 1,
+      "footer": 1
+    },
+    "performance": {
+      "resources": 19,
+      "transferKB": 561,
+      "imgCount": 1,
+      "imgKB": 34,
+      "domNodes": 1458
+    },
+    "textChars": 3335
+  },
+  "02-desktop-longpage-top": {
+    "scene": "02-desktop-longpage-top",
+    "url": "http://127.0.0.1:8899/?plain=1",
+    "viewport": {
+      "w": 1256,
+      "h": 808,
+      "dpr": 1,
+      "scrollW": 1241,
+      "scrollH": 6277,
+      "clientW": 1241,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": true,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 89
+    },
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "CRAFTING Experiences WITH PRODUCT & UI",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "杨鸿 / 产品设计师。",
+        "fs": "20.096px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H1",
+        "text": "DESIGN",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "94.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "东莞宝辉灯饰有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "东莞新力威丝印有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "中财上智研究院品牌视觉体系升级设计比赛",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "教育",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "在读时间",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "设计工具",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "语言",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《心景》疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《慢行者》",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "实习灯具设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "猫冰 CAT-ICE : THERMAL LAB",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "模块化木质座椅",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "UI界面流程设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人优势",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念可视化",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "AI 工具驱动设计",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "跨学科协作",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "全流程跟进",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H2",
+        "text": "开始合作",
+        "fs": "113.04px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "10",
+        285
+      ],
+      [
+        "37.68",
+        108
+      ],
+      [
+        "11",
+        38
+      ],
+      [
+        "12",
+        26
+      ],
+      [
+        "14",
+        23
+      ],
+      [
+        "9",
+        18
+      ],
+      [
+        "169.56",
+        11
+      ],
+      [
+        "15",
+        9
+      ],
+      [
+        "113.04",
+        9
+      ],
+      [
+        "40",
+        8
+      ],
+      [
+        "73.6",
+        8
+      ],
+      [
+        "13",
+        6
+      ],
+      [
+        "35.168",
+        6
+      ],
+      [
+        "62.8",
+        6
+      ]
+    ],
+    "under15": {
+      "textNodes": 400,
+      "samples": [
+        {
+          "text": "TOP",
+          "fs": 9,
+          "cls": "text-[9px] font-black uppercase tracking-[0.2em] transi"
+        },
+        {
+          "text": "首页",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 border-b-"
+        },
+        {
+          "text": "经历",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "项目",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "优势",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "联系",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "桌面模式",
+          "fs": 11,
+          "cls": "os-entry-header hidden h-10 shrink-0 items-center gap-2"
+        },
+        {
+          "text": "Get Started",
+          "fs": 11,
+          "cls": "block bg-[#151515] px-4 py-2 text-[11px] font-black upp"
+        },
+        {
+          "text": "PRODUCT DESIGN · 2026",
+          "fs": 9,
+          "cls": ""
+        },
+        {
+          "text": "YH / 26届 · ISSUE EDITION",
+          "fs": 9,
+          "cls": "hidden md:inline"
+        },
+        {
+          "text": "26届 · 2026",
+          "fs": 9,
+          "cls": "rounded-full bg-[#151515] px-3 py-1 text-[#E67E33]"
+        },
+        {
+          "text": "查看项目",
+          "fs": 11,
+          "cls": "mt-8 inline-flex w-fit -rotate-2 items-center gap-2 bg-"
+        },
+        {
+          "text": "Profile",
+          "fs": 10,
+          "cls": "bg-[#E67E33] px-3 py-1 text-[10px] font-black uppercase"
+        },
+        {
+          "text": "用形态、材质与界面语言，把概念变成可被感知、可被使用的产品体验。致力",
+          "fs": 14.4,
+          "cls": "font-medium leading-[1.9] text-white/85"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        325
+      ],
+      [
+        "rgb(230, 126, 51)",
+        96
+      ],
+      [
+        "rgb(255, 255, 255)",
+        96
+      ],
+      [
+        "rgba(21, 21, 21, 0.6)",
+        11
+      ],
+      [
+        "rgb(77, 77, 77)",
+        8
+      ],
+      [
+        "rgb(63, 63, 63)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.55)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.06)",
+        6
+      ],
+      [
+        "oklab(0.999994 0.0000455678 0.0000200868 / 0.75)",
+        6
+      ],
+      [
+        "rgb(85, 85, 85)",
+        6
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "JetBrains Mono",
+        297
+      ],
+      [
+        "Oswald",
+        170
+      ],
+      [
+        "Noto Sans SC",
+        131
+      ],
+      [
+        "Instrument Serif",
+        11
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(230, 126, 51)",
+        36
+      ],
+      [
+        "rgba(21, 21, 21, 0.12)",
+        32
+      ],
+      [
+        "rgb(21, 21, 21)",
+        25
+      ],
+      [
+        "rgba(21, 21, 21, 0.35)",
+        22
+      ],
+      [
+        "rgb(255, 255, 255)",
+        21
+      ],
+      [
+        "rgb(17, 17, 17)",
+        12
+      ],
+      [
+        "rgb(32, 36, 44)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.15)",
+        3
+      ],
+      [
+        "rgb(27, 28, 34)",
+        3
+      ],
+      [
+        "rgba(21, 21, 21, 0.4)",
+        2
+      ]
+    ],
+    "images": {
+      "total": 9,
+      "visible": 9,
+      "missingAlt": 0,
+      "lazy": 8,
+      "objectFit": {
+        "cover": 8,
+        "contain": 1
+      },
+      "broken": [
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp"
+      ],
+      "brokenCount": 6,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "avatar.webp",
+          "dev": 14.7
+        },
+        {
+          "src": "user-01.webp",
+          "dev": 33.3
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 16.9
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "dev": 58.4
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 61.8
+        },
+        {
+          "src": "hero.webp",
+          "dev": 35.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 369.3
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 35.5
+        }
+      ],
+      "coveredCount": 8,
+      "samples": [
+        {
+          "src": "avatar.webp",
+          "nat": "735x627",
+          "disp": "68x68",
+          "fit": "cover",
+          "alt": "杨鸿头像"
+        },
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "192x161",
+          "fit": "cover",
+          "alt": "《心景》疗愈灯具 作品封面"
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "166x128",
+          "fit": "cover",
+          "alt": "《慢行者》 作品封面"
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "164x104",
+          "fit": "cover",
+          "alt": "实习灯具设计 作品封面"
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "情绪疗愈灯具 作品封面"
+        },
+        {
+          "src": "card-portrait.webp",
+          "nat": "1080x1700",
+          "disp": "175x81",
+          "fit": "contain",
+          "alt": "猫冰 CAT-ICE : THERMAL LAB 作品封面"
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "模块化木质座椅 作品封面"
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "UI界面流程设计 作品封面"
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "产品概念设计 作品封面"
+        }
+      ]
+    },
+    "clickables": {
+      "total": 58,
+      "under44": 41,
+      "ratio": 70.7,
+      "samples": [
+        {
+          "tag": "A",
+          "text": "TOP",
+          "size": "40x14"
+        },
+        {
+          "tag": "A",
+          "text": "EXP",
+          "size": "39x14"
+        },
+        {
+          "tag": "A",
+          "text": "WORK",
+          "size": "51x14"
+        },
+        {
+          "tag": "A",
+          "text": "EDGE",
+          "size": "48x14"
+        },
+        {
+          "tag": "A",
+          "text": "END",
+          "size": "41x14"
+        },
+        {
+          "tag": "A",
+          "text": "YANGHONG",
+          "size": "147x24"
+        },
+        {
+          "tag": "A",
+          "text": "首页",
+          "size": "27x19"
+        },
+        {
+          "tag": "A",
+          "text": "经历",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "项目",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "优势",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "联系",
+          "size": "27x17"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "桌面模式",
+          "size": "103x40"
+        }
+      ],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 6,
+      "transitionElements": 92,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 1,
+      "footer": 1
+    },
+    "performance": {
+      "resources": 51,
+      "transferKB": 426,
+      "imgCount": 9,
+      "imgKB": 421,
+      "domNodes": 1399
+    },
+    "textChars": 3167
+  },
+  "03-desktop-longpage-mid": {
+    "scene": "03-desktop-longpage-mid",
+    "url": "http://127.0.0.1:8899/?plain=1",
+    "viewport": {
+      "w": 1256,
+      "h": 808,
+      "dpr": 1,
+      "scrollW": 1241,
+      "scrollH": 6277,
+      "clientW": 1241,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": true,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 89
+    },
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "CRAFTING Experiences WITH PRODUCT & UI",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "杨鸿 / 产品设计师。",
+        "fs": "20.096px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H1",
+        "text": "DESIGN",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "94.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "东莞宝辉灯饰有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "东莞新力威丝印有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "中财上智研究院品牌视觉体系升级设计比赛",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "教育",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "在读时间",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "设计工具",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "语言",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《心景》疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《慢行者》",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "实习灯具设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "猫冰 CAT-ICE : THERMAL LAB",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "模块化木质座椅",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "UI界面流程设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人优势",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念可视化",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "AI 工具驱动设计",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "跨学科协作",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "全流程跟进",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H2",
+        "text": "开始合作",
+        "fs": "113.04px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "10",
+        285
+      ],
+      [
+        "37.68",
+        108
+      ],
+      [
+        "11",
+        38
+      ],
+      [
+        "12",
+        26
+      ],
+      [
+        "14",
+        23
+      ],
+      [
+        "9",
+        18
+      ],
+      [
+        "169.56",
+        11
+      ],
+      [
+        "15",
+        9
+      ],
+      [
+        "113.04",
+        9
+      ],
+      [
+        "40",
+        8
+      ],
+      [
+        "73.6",
+        8
+      ],
+      [
+        "13",
+        6
+      ],
+      [
+        "35.168",
+        6
+      ],
+      [
+        "62.8",
+        6
+      ]
+    ],
+    "under15": {
+      "textNodes": 400,
+      "samples": [
+        {
+          "text": "EXP",
+          "fs": 9,
+          "cls": "text-[9px] font-black uppercase tracking-[0.2em] transi"
+        },
+        {
+          "text": "首页",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "经历",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 border-b-"
+        },
+        {
+          "text": "项目",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "优势",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "联系",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "桌面模式",
+          "fs": 11,
+          "cls": "os-entry-header hidden h-10 shrink-0 items-center gap-2"
+        },
+        {
+          "text": "Get Started",
+          "fs": 11,
+          "cls": "block bg-[#151515] px-4 py-2 text-[11px] font-black upp"
+        },
+        {
+          "text": "PRODUCT DESIGN · 2026",
+          "fs": 9,
+          "cls": ""
+        },
+        {
+          "text": "YH / 26届 · ISSUE EDITION",
+          "fs": 9,
+          "cls": "hidden md:inline"
+        },
+        {
+          "text": "26届 · 2026",
+          "fs": 9,
+          "cls": "rounded-full bg-[#151515] px-3 py-1 text-[#E67E33]"
+        },
+        {
+          "text": "查看项目",
+          "fs": 11,
+          "cls": "mt-8 inline-flex w-fit -rotate-2 items-center gap-2 bg-"
+        },
+        {
+          "text": "Profile",
+          "fs": 10,
+          "cls": "bg-[#E67E33] px-3 py-1 text-[10px] font-black uppercase"
+        },
+        {
+          "text": "用形态、材质与界面语言，把概念变成可被感知、可被使用的产品体验。致力",
+          "fs": 14.4,
+          "cls": "font-medium leading-[1.9] text-white/85"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        325
+      ],
+      [
+        "rgb(230, 126, 51)",
+        96
+      ],
+      [
+        "rgb(255, 255, 255)",
+        96
+      ],
+      [
+        "rgba(21, 21, 21, 0.6)",
+        11
+      ],
+      [
+        "rgb(77, 77, 77)",
+        8
+      ],
+      [
+        "rgb(63, 63, 63)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.55)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.06)",
+        6
+      ],
+      [
+        "oklab(0.999994 0.0000455678 0.0000200868 / 0.75)",
+        6
+      ],
+      [
+        "rgb(85, 85, 85)",
+        6
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "JetBrains Mono",
+        297
+      ],
+      [
+        "Oswald",
+        170
+      ],
+      [
+        "Noto Sans SC",
+        131
+      ],
+      [
+        "Instrument Serif",
+        11
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(230, 126, 51)",
+        37
+      ],
+      [
+        "rgba(21, 21, 21, 0.12)",
+        32
+      ],
+      [
+        "rgb(21, 21, 21)",
+        25
+      ],
+      [
+        "rgba(21, 21, 21, 0.35)",
+        22
+      ],
+      [
+        "rgb(255, 255, 255)",
+        21
+      ],
+      [
+        "rgb(17, 17, 17)",
+        12
+      ],
+      [
+        "rgb(32, 36, 44)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.15)",
+        3
+      ],
+      [
+        "rgb(27, 28, 34)",
+        3
+      ],
+      [
+        "rgba(21, 21, 21, 0.4)",
+        2
+      ]
+    ],
+    "images": {
+      "total": 9,
+      "visible": 9,
+      "missingAlt": 0,
+      "lazy": 8,
+      "objectFit": {
+        "cover": 8,
+        "contain": 1
+      },
+      "broken": [
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp"
+      ],
+      "brokenCount": 6,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "avatar.webp",
+          "dev": 14.7
+        },
+        {
+          "src": "user-01.webp",
+          "dev": 33.3
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 16.9
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "dev": 58.4
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 61.8
+        },
+        {
+          "src": "hero.webp",
+          "dev": 35.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 369.3
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 35.5
+        }
+      ],
+      "coveredCount": 8,
+      "samples": [
+        {
+          "src": "avatar.webp",
+          "nat": "735x627",
+          "disp": "68x68",
+          "fit": "cover",
+          "alt": "杨鸿头像"
+        },
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "192x161",
+          "fit": "cover",
+          "alt": "《心景》疗愈灯具 作品封面"
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "166x128",
+          "fit": "cover",
+          "alt": "《慢行者》 作品封面"
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "164x104",
+          "fit": "cover",
+          "alt": "实习灯具设计 作品封面"
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "情绪疗愈灯具 作品封面"
+        },
+        {
+          "src": "card-portrait.webp",
+          "nat": "1080x1700",
+          "disp": "175x81",
+          "fit": "contain",
+          "alt": "猫冰 CAT-ICE : THERMAL LAB 作品封面"
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "模块化木质座椅 作品封面"
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "UI界面流程设计 作品封面"
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "产品概念设计 作品封面"
+        }
+      ]
+    },
+    "clickables": {
+      "total": 58,
+      "under44": 41,
+      "ratio": 70.7,
+      "samples": [
+        {
+          "tag": "A",
+          "text": "TOP",
+          "size": "40x14"
+        },
+        {
+          "tag": "A",
+          "text": "EXP",
+          "size": "39x14"
+        },
+        {
+          "tag": "A",
+          "text": "WORK",
+          "size": "51x14"
+        },
+        {
+          "tag": "A",
+          "text": "EDGE",
+          "size": "48x14"
+        },
+        {
+          "tag": "A",
+          "text": "END",
+          "size": "41x14"
+        },
+        {
+          "tag": "A",
+          "text": "YANGHONG",
+          "size": "147x24"
+        },
+        {
+          "tag": "A",
+          "text": "首页",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "经历",
+          "size": "27x19"
+        },
+        {
+          "tag": "A",
+          "text": "项目",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "优势",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "联系",
+          "size": "27x17"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "桌面模式",
+          "size": "103x40"
+        }
+      ],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 6,
+      "transitionElements": 92,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 1,
+      "footer": 1
+    },
+    "performance": {
+      "resources": 51,
+      "transferKB": 8,
+      "imgCount": 9,
+      "imgKB": 3,
+      "domNodes": 1399
+    },
+    "textChars": 3167
+  },
+  "04-desktop-longpage-projects": {
+    "scene": "04-desktop-longpage-projects",
+    "url": "http://127.0.0.1:8899/?plain=1",
+    "viewport": {
+      "w": 1256,
+      "h": 808,
+      "dpr": 1,
+      "scrollW": 1241,
+      "scrollH": 6277,
+      "clientW": 1241,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": true,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 89
+    },
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "CRAFTING Experiences WITH PRODUCT & UI",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "杨鸿 / 产品设计师。",
+        "fs": "20.096px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H1",
+        "text": "DESIGN",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "94.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "东莞宝辉灯饰有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "东莞新力威丝印有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "中财上智研究院品牌视觉体系升级设计比赛",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "教育",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "在读时间",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "设计工具",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "语言",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《心景》疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《慢行者》",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "实习灯具设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "猫冰 CAT-ICE : THERMAL LAB",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "模块化木质座椅",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "UI界面流程设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人优势",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念可视化",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "AI 工具驱动设计",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "跨学科协作",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "全流程跟进",
+        "fs": "24px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H2",
+        "text": "开始合作",
+        "fs": "113.04px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "10",
+        285
+      ],
+      [
+        "37.68",
+        108
+      ],
+      [
+        "11",
+        38
+      ],
+      [
+        "12",
+        26
+      ],
+      [
+        "14",
+        23
+      ],
+      [
+        "9",
+        18
+      ],
+      [
+        "169.56",
+        11
+      ],
+      [
+        "15",
+        9
+      ],
+      [
+        "113.04",
+        9
+      ],
+      [
+        "40",
+        8
+      ],
+      [
+        "73.6",
+        8
+      ],
+      [
+        "13",
+        6
+      ],
+      [
+        "35.168",
+        6
+      ],
+      [
+        "62.8",
+        6
+      ]
+    ],
+    "under15": {
+      "textNodes": 400,
+      "samples": [
+        {
+          "text": "WORK",
+          "fs": 9,
+          "cls": "text-[9px] font-black uppercase tracking-[0.2em] transi"
+        },
+        {
+          "text": "首页",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "经历",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "项目",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 border-b-"
+        },
+        {
+          "text": "优势",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "联系",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "桌面模式",
+          "fs": 11,
+          "cls": "os-entry-header hidden h-10 shrink-0 items-center gap-2"
+        },
+        {
+          "text": "Get Started",
+          "fs": 11,
+          "cls": "block bg-[#151515] px-4 py-2 text-[11px] font-black upp"
+        },
+        {
+          "text": "PRODUCT DESIGN · 2026",
+          "fs": 9,
+          "cls": ""
+        },
+        {
+          "text": "YH / 26届 · ISSUE EDITION",
+          "fs": 9,
+          "cls": "hidden md:inline"
+        },
+        {
+          "text": "26届 · 2026",
+          "fs": 9,
+          "cls": "rounded-full bg-[#151515] px-3 py-1 text-[#E67E33]"
+        },
+        {
+          "text": "查看项目",
+          "fs": 11,
+          "cls": "mt-8 inline-flex w-fit -rotate-2 items-center gap-2 bg-"
+        },
+        {
+          "text": "Profile",
+          "fs": 10,
+          "cls": "bg-[#E67E33] px-3 py-1 text-[10px] font-black uppercase"
+        },
+        {
+          "text": "用形态、材质与界面语言，把概念变成可被感知、可被使用的产品体验。致力",
+          "fs": 14.4,
+          "cls": "font-medium leading-[1.9] text-white/85"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        325
+      ],
+      [
+        "rgb(230, 126, 51)",
+        96
+      ],
+      [
+        "rgb(255, 255, 255)",
+        96
+      ],
+      [
+        "rgba(21, 21, 21, 0.6)",
+        11
+      ],
+      [
+        "rgb(77, 77, 77)",
+        8
+      ],
+      [
+        "rgb(63, 63, 63)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.55)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.06)",
+        6
+      ],
+      [
+        "oklab(0.999994 0.0000455678 0.0000200868 / 0.75)",
+        6
+      ],
+      [
+        "rgb(85, 85, 85)",
+        6
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "JetBrains Mono",
+        297
+      ],
+      [
+        "Oswald",
+        170
+      ],
+      [
+        "Noto Sans SC",
+        131
+      ],
+      [
+        "Instrument Serif",
+        11
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(230, 126, 51)",
+        37
+      ],
+      [
+        "rgba(21, 21, 21, 0.12)",
+        32
+      ],
+      [
+        "rgb(21, 21, 21)",
+        25
+      ],
+      [
+        "rgba(21, 21, 21, 0.35)",
+        22
+      ],
+      [
+        "rgb(255, 255, 255)",
+        21
+      ],
+      [
+        "rgb(17, 17, 17)",
+        12
+      ],
+      [
+        "rgb(32, 36, 44)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.15)",
+        3
+      ],
+      [
+        "rgb(27, 28, 34)",
+        3
+      ],
+      [
+        "rgba(21, 21, 21, 0.4)",
+        2
+      ]
+    ],
+    "images": {
+      "total": 9,
+      "visible": 9,
+      "missingAlt": 0,
+      "lazy": 8,
+      "objectFit": {
+        "cover": 8,
+        "contain": 1
+      },
+      "broken": [
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp"
+      ],
+      "brokenCount": 6,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "avatar.webp",
+          "dev": 14.7
+        },
+        {
+          "src": "user-01.webp",
+          "dev": 33.3
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 16.9
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "dev": 58.4
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 61.8
+        },
+        {
+          "src": "hero.webp",
+          "dev": 35.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 369.3
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 35.5
+        }
+      ],
+      "coveredCount": 8,
+      "samples": [
+        {
+          "src": "avatar.webp",
+          "nat": "735x627",
+          "disp": "68x68",
+          "fit": "cover",
+          "alt": "杨鸿头像"
+        },
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "192x161",
+          "fit": "cover",
+          "alt": "《心景》疗愈灯具 作品封面"
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "166x128",
+          "fit": "cover",
+          "alt": "《慢行者》 作品封面"
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "164x104",
+          "fit": "cover",
+          "alt": "实习灯具设计 作品封面"
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "情绪疗愈灯具 作品封面"
+        },
+        {
+          "src": "card-portrait.webp",
+          "nat": "1080x1700",
+          "disp": "175x81",
+          "fit": "contain",
+          "alt": "猫冰 CAT-ICE : THERMAL LAB 作品封面"
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "模块化木质座椅 作品封面"
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "UI界面流程设计 作品封面"
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "产品概念设计 作品封面"
+        }
+      ]
+    },
+    "clickables": {
+      "total": 58,
+      "under44": 41,
+      "ratio": 70.7,
+      "samples": [
+        {
+          "tag": "A",
+          "text": "TOP",
+          "size": "40x14"
+        },
+        {
+          "tag": "A",
+          "text": "EXP",
+          "size": "39x14"
+        },
+        {
+          "tag": "A",
+          "text": "WORK",
+          "size": "51x14"
+        },
+        {
+          "tag": "A",
+          "text": "EDGE",
+          "size": "48x14"
+        },
+        {
+          "tag": "A",
+          "text": "END",
+          "size": "41x14"
+        },
+        {
+          "tag": "A",
+          "text": "YANGHONG",
+          "size": "147x24"
+        },
+        {
+          "tag": "A",
+          "text": "首页",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "经历",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "项目",
+          "size": "27x19"
+        },
+        {
+          "tag": "A",
+          "text": "优势",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "联系",
+          "size": "27x17"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "桌面模式",
+          "size": "103x40"
+        }
+      ],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 6,
+      "transitionElements": 92,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 1,
+      "footer": 1
+    },
+    "performance": {
+      "resources": 51,
+      "transferKB": 8,
+      "imgCount": 9,
+      "imgKB": 3,
+      "domNodes": 1399
+    },
+    "textChars": 3167
+  },
+  "05-desktop-detail-01": {
+    "scene": "05-desktop-detail-01",
+    "url": "http://127.0.0.1:8899/?plain=1#p=01",
+    "viewport": {
+      "w": 1256,
+      "h": 808,
+      "dpr": 1,
+      "scrollW": 1256,
+      "scrollH": 6277,
+      "clientW": 1256,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": true,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 125
+    },
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "CRAFTING Experiences WITH PRODUCT & UI",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "杨鸿 / 产品设计师。",
+        "fs": "20.096px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H1",
+        "text": "DESIGN",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "94.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "东莞宝辉灯饰有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "东莞新力威丝印有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "中财上智研究院品牌视觉体系升级设计比赛",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "教育",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "在读时间",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "设计工具",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "语言",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《心景》疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《慢行者》",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "实习灯具设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "猫冰 CAT-ICE : THERMAL LAB",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "模块化木质座椅",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "UI界面流程设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H1",
+        "text": "HEALING EMOTIONS WITHMODULAR LIGHTING EXPERIENCE",
+        "fs": "62.8px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "Flexible",
+        "fs": "60px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "《心景》疗愈灯具",
+        "fs": "44px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "缓解情绪压力",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "年轻城市人群",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪可视化",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "温暖×科技×陪伴",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "Design Process 物理形态推演 · 过程档案",
+        "fs": "26px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《方阵》桌面灯",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《栖木》落地灯",
+        "fs": "16px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "10",
+        304
+      ],
+      [
+        "37.68",
+        108
+      ],
+      [
+        "11",
+        75
+      ],
+      [
+        "12",
+        54
+      ],
+      [
+        "14",
+        47
+      ],
+      [
+        "9",
+        36
+      ],
+      [
+        "13",
+        34
+      ],
+      [
+        "16",
+        25
+      ],
+      [
+        "24",
+        11
+      ],
+      [
+        "169.56",
+        11
+      ],
+      [
+        "62.8",
+        10
+      ],
+      [
+        "15",
+        9
+      ],
+      [
+        "113.04",
+        9
+      ],
+      [
+        "18",
+        8
+      ]
+    ],
+    "under15": {
+      "textNodes": 556,
+      "samples": [
+        {
+          "text": "WORK",
+          "fs": 9,
+          "cls": "text-[9px] font-black uppercase tracking-[0.2em] transi"
+        },
+        {
+          "text": "首页",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "经历",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "项目",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 border-b-"
+        },
+        {
+          "text": "优势",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "联系",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "桌面模式",
+          "fs": 11,
+          "cls": "os-entry-header hidden h-10 shrink-0 items-center gap-2"
+        },
+        {
+          "text": "Get Started",
+          "fs": 11,
+          "cls": "block bg-[#151515] px-4 py-2 text-[11px] font-black upp"
+        },
+        {
+          "text": "PRODUCT DESIGN · 2026",
+          "fs": 9,
+          "cls": ""
+        },
+        {
+          "text": "YH / 26届 · ISSUE EDITION",
+          "fs": 9,
+          "cls": "hidden md:inline"
+        },
+        {
+          "text": "26届 · 2026",
+          "fs": 9,
+          "cls": "rounded-full bg-[#151515] px-3 py-1 text-[#E67E33]"
+        },
+        {
+          "text": "查看项目",
+          "fs": 11,
+          "cls": "mt-8 inline-flex w-fit -rotate-2 items-center gap-2 bg-"
+        },
+        {
+          "text": "Profile",
+          "fs": 10,
+          "cls": "bg-[#E67E33] px-3 py-1 text-[10px] font-black uppercase"
+        },
+        {
+          "text": "用形态、材质与界面语言，把概念变成可被感知、可被使用的产品体验。致力",
+          "fs": 14.4,
+          "cls": "font-medium leading-[1.9] text-white/85"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        326
+      ],
+      [
+        "rgb(230, 126, 51)",
+        119
+      ],
+      [
+        "rgb(255, 255, 255)",
+        107
+      ],
+      [
+        "rgb(17, 17, 17)",
+        91
+      ],
+      [
+        "oklab(0 0 0 / 0.45)",
+        15
+      ],
+      [
+        "oklab(0 0 0 / 0.55)",
+        15
+      ],
+      [
+        "rgba(21, 21, 21, 0.6)",
+        11
+      ],
+      [
+        "rgb(77, 77, 77)",
+        8
+      ],
+      [
+        "rgb(63, 63, 63)",
+        8
+      ],
+      [
+        "rgba(21, 21, 21, 0.55)",
+        8
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "JetBrains Mono",
+        343
+      ],
+      [
+        "Oswald",
+        193
+      ],
+      [
+        "Inter",
+        139
+      ],
+      [
+        "Noto Sans SC",
+        131
+      ],
+      [
+        "Instrument Serif",
+        11
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(255, 255, 255)",
+        52
+      ],
+      [
+        "rgb(230, 126, 51)",
+        51
+      ],
+      [
+        "rgba(21, 21, 21, 0.12)",
+        32
+      ],
+      [
+        "rgb(21, 21, 21)",
+        25
+      ],
+      [
+        "rgba(21, 21, 21, 0.35)",
+        22
+      ],
+      [
+        "rgb(17, 17, 17)",
+        20
+      ],
+      [
+        "rgb(28, 28, 30)",
+        14
+      ],
+      [
+        "rgb(253, 253, 253)",
+        9
+      ],
+      [
+        "rgb(32, 36, 44)",
+        8
+      ],
+      [
+        "rgba(17, 17, 17, 0.12)",
+        7
+      ]
+    ],
+    "images": {
+      "total": 17,
+      "visible": 16,
+      "missingAlt": 0,
+      "lazy": 15,
+      "objectFit": {
+        "cover": 12,
+        "contain": 5
+      },
+      "broken": [
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp"
+      ],
+      "brokenCount": 6,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "avatar.webp",
+          "dev": 14.7
+        },
+        {
+          "src": "user-01.webp",
+          "dev": 33.3
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 16.9
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "dev": 58.4
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 61.8
+        },
+        {
+          "src": "hero.webp",
+          "dev": 35.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 369.3
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 35.5
+        }
+      ],
+      "coveredCount": 12,
+      "samples": [
+        {
+          "src": "avatar.webp",
+          "nat": "735x627",
+          "disp": "68x68",
+          "fit": "cover",
+          "alt": "杨鸿头像"
+        },
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "192x161",
+          "fit": "cover",
+          "alt": "《心景》疗愈灯具 作品封面"
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "166x128",
+          "fit": "cover",
+          "alt": "《慢行者》 作品封面"
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "164x104",
+          "fit": "cover",
+          "alt": "实习灯具设计 作品封面"
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "情绪疗愈灯具 作品封面"
+        },
+        {
+          "src": "card-portrait.webp",
+          "nat": "1080x1700",
+          "disp": "175x81",
+          "fit": "contain",
+          "alt": "猫冰 CAT-ICE : THERMAL LAB 作品封面"
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "模块化木质座椅 作品封面"
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "UI界面流程设计 作品封面"
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "产品概念设计 作品封面"
+        },
+        {
+          "src": "_fig20-backup-prototype.webp",
+          "nat": "1500x1443",
+          "disp": "1119x438",
+          "fit": "cover",
+          "alt": "《心景》疗愈灯具"
+        },
+        {
+          "src": "scene-01.jpg",
+          "nat": "1376x768",
+          "disp": "400x116",
+          "fit": "cover",
+          "alt": "深夜睡前刷屏触点"
+        },
+        {
+          "src": "scene-02.webp",
+          "nat": "1376x768",
+          "disp": "400x116",
+          "fit": "cover",
+          "alt": "昏暗房间电脑前独处"
+        }
+      ]
+    },
+    "clickables": {
+      "total": 69,
+      "under44": 48,
+      "ratio": 69.6,
+      "samples": [
+        {
+          "tag": "A",
+          "text": "TOP",
+          "size": "40x14"
+        },
+        {
+          "tag": "A",
+          "text": "EXP",
+          "size": "39x14"
+        },
+        {
+          "tag": "A",
+          "text": "WORK",
+          "size": "51x14"
+        },
+        {
+          "tag": "A",
+          "text": "EDGE",
+          "size": "48x14"
+        },
+        {
+          "tag": "A",
+          "text": "END",
+          "size": "41x14"
+        },
+        {
+          "tag": "A",
+          "text": "YANGHONG",
+          "size": "147x24"
+        },
+        {
+          "tag": "A",
+          "text": "首页",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "经历",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "项目",
+          "size": "27x19"
+        },
+        {
+          "tag": "A",
+          "text": "优势",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "联系",
+          "size": "27x17"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "桌面模式",
+          "size": "103x40"
+        }
+      ],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 7,
+      "transitionElements": 131,
+      "styleSheets": 7,
+      "mediaRules": 73,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 1,
+      "footer": 2
+    },
+    "performance": {
+      "resources": 58,
+      "transferKB": 177,
+      "imgCount": 16,
+      "imgKB": 172,
+      "domNodes": 1833
+    },
+    "textChars": 5335
+  },
+  "06-desktop-detail-07": {
+    "scene": "06-desktop-detail-07",
+    "url": "http://127.0.0.1:8899/?plain=1#p=07",
+    "viewport": {
+      "w": 1256,
+      "h": 808,
+      "dpr": 1,
+      "scrollW": 1256,
+      "scrollH": 6277,
+      "clientW": 1256,
+      "overflowX": false
+    },
+    "title": "产品概念设计 | 杨鸿作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": true,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 137
+    },
+    "headings": [
+      {
+        "tag": "H1",
+        "text": "CRAFTING Experiences WITH PRODUCT & UI",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "杨鸿 / 产品设计师。",
+        "fs": "20.096px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H1",
+        "text": "DESIGN",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "94.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "东莞宝辉灯饰有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "东莞新力威丝印有限公司",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "中财上智研究院品牌视觉体系升级设计比赛",
+        "fs": "25.12px",
+        "ff": "\"Noto Sans SC\""
+      },
+      {
+        "tag": "H3",
+        "text": "教育",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "在读时间",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "设计工具",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "语言",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "87.92px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《心景》疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《慢行者》",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "实习灯具设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪疗愈灯具",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "猫冰 CAT-ICE : THERMAL LAB",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "模块化木质座椅",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "UI界面流程设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念设计",
+        "fs": "40px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H1",
+        "text": "concept.",
+        "fs": "178.352px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "六个概念，从生活细节到在地文化。",
+        "fs": "37.68px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "一次生成很多， 挑出最值得做的那一个。",
+        "fs": "45.216px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "碳酸摇晃趣味灯",
+        "fs": "40.192px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "面包机定时灯具",
+        "fs": "40.192px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "光渐变重量探测器",
+        "fs": "40.192px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "从云南的针脚、 叶脉与林子出发。",
+        "fs": "42.704px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "彝族服饰元素时尚背包",
+        "fs": "40.192px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "苍山洱海叶脉书签",
+        "fs": "40.192px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "野生菌仿生灯",
+        "fs": "40.192px",
+        "ff": "\"Helvetica Neue\""
+      }
+    ],
+    "fontSizes": [
+      [
+        "10",
+        310
+      ],
+      [
+        "37.68",
+        110
+      ],
+      [
+        "14",
+        84
+      ],
+      [
+        "11",
+        69
+      ],
+      [
+        "12",
+        52
+      ],
+      [
+        "16",
+        22
+      ],
+      [
+        "15",
+        19
+      ],
+      [
+        "9",
+        18
+      ],
+      [
+        "13",
+        13
+      ],
+      [
+        "169.56",
+        11
+      ],
+      [
+        "113.04",
+        9
+      ],
+      [
+        "40",
+        8
+      ],
+      [
+        "73.6",
+        8
+      ],
+      [
+        "17",
+        7
+      ]
+    ],
+    "under15": {
+      "textNodes": 550,
+      "samples": [
+        {
+          "text": "WORK",
+          "fs": 9,
+          "cls": "text-[9px] font-black uppercase tracking-[0.2em] transi"
+        },
+        {
+          "text": "首页",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "经历",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "项目",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 border-b-"
+        },
+        {
+          "text": "优势",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "联系",
+          "fs": 11,
+          "cls": "cursor-pointer transition-colors duration-150 text-[#4d"
+        },
+        {
+          "text": "桌面模式",
+          "fs": 11,
+          "cls": "os-entry-header hidden h-10 shrink-0 items-center gap-2"
+        },
+        {
+          "text": "Get Started",
+          "fs": 11,
+          "cls": "block bg-[#151515] px-4 py-2 text-[11px] font-black upp"
+        },
+        {
+          "text": "PRODUCT DESIGN · 2026",
+          "fs": 9,
+          "cls": ""
+        },
+        {
+          "text": "YH / 26届 · ISSUE EDITION",
+          "fs": 9,
+          "cls": "hidden md:inline"
+        },
+        {
+          "text": "26届 · 2026",
+          "fs": 9,
+          "cls": "rounded-full bg-[#151515] px-3 py-1 text-[#E67E33]"
+        },
+        {
+          "text": "查看项目",
+          "fs": 11,
+          "cls": "mt-8 inline-flex w-fit -rotate-2 items-center gap-2 bg-"
+        },
+        {
+          "text": "Profile",
+          "fs": 10,
+          "cls": "bg-[#E67E33] px-3 py-1 text-[10px] font-black uppercase"
+        },
+        {
+          "text": "用形态、材质与界面语言，把概念变成可被感知、可被使用的产品体验。致力",
+          "fs": 14.4,
+          "cls": "font-medium leading-[1.9] text-white/85"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        325
+      ],
+      [
+        "rgb(230, 126, 51)",
+        96
+      ],
+      [
+        "rgb(255, 255, 255)",
+        96
+      ],
+      [
+        "rgb(243, 241, 236)",
+        68
+      ],
+      [
+        "rgb(158, 164, 170)",
+        54
+      ],
+      [
+        "rgb(111, 117, 123)",
+        49
+      ],
+      [
+        "rgba(21, 21, 21, 0.6)",
+        11
+      ],
+      [
+        "rgb(255, 91, 46)",
+        11
+      ],
+      [
+        "rgb(77, 77, 77)",
+        8
+      ],
+      [
+        "rgb(63, 63, 63)",
+        8
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "JetBrains Mono",
+        297
+      ],
+      [
+        "Oswald",
+        170
+      ],
+      [
+        "Helvetica Neue",
+        141
+      ],
+      [
+        "Noto Sans SC",
+        131
+      ],
+      [
+        "ui-monospace",
+        71
+      ],
+      [
+        "Instrument Serif",
+        11
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(230, 126, 51)",
+        37
+      ],
+      [
+        "rgba(21, 21, 21, 0.12)",
+        32
+      ],
+      [
+        "rgb(21, 21, 21)",
+        25
+      ],
+      [
+        "rgba(21, 21, 21, 0.35)",
+        22
+      ],
+      [
+        "rgb(255, 255, 255)",
+        21
+      ],
+      [
+        "rgb(17, 17, 17)",
+        12
+      ],
+      [
+        "rgba(12, 13, 15, 0.72)",
+        9
+      ],
+      [
+        "rgb(32, 36, 44)",
+        8
+      ],
+      [
+        "rgb(255, 91, 46)",
+        8
+      ],
+      [
+        "rgb(20, 22, 25)",
+        7
+      ]
+    ],
+    "images": {
+      "total": 33,
+      "visible": 33,
+      "missingAlt": 11,
+      "lazy": 20,
+      "objectFit": {
+        "cover": 20,
+        "contain": 13
+      },
+      "broken": [
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp"
+      ],
+      "brokenCount": 6,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "avatar.webp",
+          "dev": 14.7
+        },
+        {
+          "src": "user-01.webp",
+          "dev": 33.3
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 16.9
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "dev": 58.4
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 61.8
+        },
+        {
+          "src": "hero.webp",
+          "dev": 35.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 369.3
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 35.5
+        }
+      ],
+      "coveredCount": 19,
+      "samples": [
+        {
+          "src": "avatar.webp",
+          "nat": "735x627",
+          "disp": "68x68",
+          "fit": "cover",
+          "alt": "杨鸿头像"
+        },
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "192x161",
+          "fit": "cover",
+          "alt": "《心景》疗愈灯具 作品封面"
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "166x128",
+          "fit": "cover",
+          "alt": "《慢行者》 作品封面"
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "164x104",
+          "fit": "cover",
+          "alt": "实习灯具设计 作品封面"
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "情绪疗愈灯具 作品封面"
+        },
+        {
+          "src": "card-portrait.webp",
+          "nat": "1080x1700",
+          "disp": "175x81",
+          "fit": "contain",
+          "alt": "猫冰 CAT-ICE : THERMAL LAB 作品封面"
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "模块化木质座椅 作品封面"
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "UI界面流程设计 作品封面"
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "175x81",
+          "fit": "cover",
+          "alt": "产品概念设计 作品封面"
+        },
+        {
+          "src": "01-shake-thumb.webp",
+          "nat": "320x180",
+          "disp": "1438x808",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-shake.webp",
+          "nat": "610x343",
+          "disp": "1089x612",
+          "fit": "contain",
+          "alt": "暗色卧室床头，圆柱形台灯透出柔和白光"
+        },
+        {
+          "src": "02-toaster-thumb.webp",
+          "nat": "320x320",
+          "disp": "1438x808",
+          "fit": "cover",
+          "alt": ""
+        }
+      ]
+    },
+    "clickables": {
+      "total": 92,
+      "under44": 55,
+      "ratio": 59.8,
+      "samples": [
+        {
+          "tag": "A",
+          "text": "TOP",
+          "size": "40x14"
+        },
+        {
+          "tag": "A",
+          "text": "EXP",
+          "size": "39x14"
+        },
+        {
+          "tag": "A",
+          "text": "WORK",
+          "size": "51x14"
+        },
+        {
+          "tag": "A",
+          "text": "EDGE",
+          "size": "48x14"
+        },
+        {
+          "tag": "A",
+          "text": "END",
+          "size": "41x14"
+        },
+        {
+          "tag": "A",
+          "text": "YANGHONG",
+          "size": "147x24"
+        },
+        {
+          "tag": "A",
+          "text": "首页",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "经历",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "项目",
+          "size": "27x19"
+        },
+        {
+          "tag": "A",
+          "text": "优势",
+          "size": "27x17"
+        },
+        {
+          "tag": "A",
+          "text": "联系",
+          "size": "27x17"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "桌面模式",
+          "size": "103x40"
+        }
+      ],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 7,
+      "transitionElements": 133,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "header": 2,
+      "footer": 2
+    },
+    "performance": {
+      "resources": 70,
+      "transferKB": 349,
+      "imgCount": 28,
+      "imgKB": 344,
+      "domNodes": 1927
+    },
+    "textChars": 5827
+  },
+  "07-mobile-landing": {
+    "scene": "07-mobile-landing",
+    "url": "http://127.0.0.1:8899/?plain=0",
+    "viewport": {
+      "w": 414,
+      "h": 896,
+      "dpr": 2,
+      "scrollW": 414,
+      "scrollH": 896,
+      "clientW": 414,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": false,
+      "jetbrains": false,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 69
+    },
+    "headings": [],
+    "fontSizes": [
+      [
+        "11",
+        9
+      ],
+      [
+        "12",
+        8
+      ],
+      [
+        "16",
+        8
+      ],
+      [
+        "15",
+        3
+      ],
+      [
+        "30",
+        1
+      ]
+    ],
+    "under15": {
+      "textNodes": 17,
+      "samples": [
+        {
+          "text": "产品设计师 · 26 届",
+          "fs": 11,
+          "cls": ""
+        },
+        {
+          "text": "01",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "02",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "03",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "04",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "08",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "IP 设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "06",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "05",
+          "fs": 11,
+          "cls": "ms-id"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        11
+      ],
+      [
+        "rgb(180, 85, 29)",
+        8
+      ],
+      [
+        "rgb(107, 104, 98)",
+        8
+      ],
+      [
+        "rgb(90, 87, 81)",
+        1
+      ],
+      [
+        "rgb(58, 55, 50)",
+        1
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "Noto Sans SC",
+        19
+      ],
+      [
+        "JetBrains Mono",
+        9
+      ],
+      [
+        "Oswald",
+        1
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(244, 242, 237)",
+        9
+      ],
+      [
+        "rgb(252, 252, 252)",
+        1
+      ],
+      [
+        "rgb(230, 126, 51)",
+        1
+      ]
+    ],
+    "images": {
+      "total": 17,
+      "visible": 8,
+      "missingAlt": 8,
+      "lazy": 15,
+      "objectFit": {
+        "cover": 16,
+        "contain": 1
+      },
+      "broken": [
+        "slowwalker-render.jpeg",
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp"
+      ],
+      "brokenCount": 7,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "user-01.webp",
+          "dev": 44.2
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 35.9
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 25.4
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 116.5
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 37.5
+        }
+      ],
+      "coveredCount": 7,
+      "samples": [
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1500x938",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        }
+      ]
+    },
+    "clickables": {
+      "total": 9,
+      "under44": 0,
+      "ratio": 0,
+      "samples": [],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 23,
+      "transitionElements": 154,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 2,
+      "footer": 1
+    },
+    "performance": {
+      "resources": 64,
+      "transferKB": 8,
+      "imgCount": 10,
+      "imgKB": 3,
+      "domNodes": 1195
+    },
+    "textChars": 156
+  },
+  "08-mobile-longpage": {
+    "scene": "08-mobile-longpage",
+    "url": "http://127.0.0.1:8899/?plain=0",
+    "viewport": {
+      "w": 414,
+      "h": 896,
+      "dpr": 2,
+      "scrollW": 414,
+      "scrollH": 896,
+      "clientW": 414,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": false,
+      "jetbrains": false,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 69
+    },
+    "headings": [],
+    "fontSizes": [
+      [
+        "11",
+        9
+      ],
+      [
+        "12",
+        8
+      ],
+      [
+        "16",
+        8
+      ],
+      [
+        "15",
+        3
+      ],
+      [
+        "30",
+        1
+      ]
+    ],
+    "under15": {
+      "textNodes": 17,
+      "samples": [
+        {
+          "text": "产品设计师 · 26 届",
+          "fs": 11,
+          "cls": ""
+        },
+        {
+          "text": "01",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "02",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "03",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "04",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "08",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "IP 设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "06",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "05",
+          "fs": 11,
+          "cls": "ms-id"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        11
+      ],
+      [
+        "rgb(180, 85, 29)",
+        8
+      ],
+      [
+        "rgb(107, 104, 98)",
+        8
+      ],
+      [
+        "rgb(90, 87, 81)",
+        1
+      ],
+      [
+        "rgb(58, 55, 50)",
+        1
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "Noto Sans SC",
+        19
+      ],
+      [
+        "JetBrains Mono",
+        9
+      ],
+      [
+        "Oswald",
+        1
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(244, 242, 237)",
+        9
+      ],
+      [
+        "rgb(252, 252, 252)",
+        1
+      ],
+      [
+        "rgb(230, 126, 51)",
+        1
+      ]
+    ],
+    "images": {
+      "total": 17,
+      "visible": 8,
+      "missingAlt": 8,
+      "lazy": 15,
+      "objectFit": {
+        "cover": 16,
+        "contain": 1
+      },
+      "broken": [
+        "slowwalker-render.jpeg",
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp"
+      ],
+      "brokenCount": 7,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "user-01.webp",
+          "dev": 44.2
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 35.9
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 25.4
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 116.5
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 37.5
+        }
+      ],
+      "coveredCount": 7,
+      "samples": [
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1500x938",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        }
+      ]
+    },
+    "clickables": {
+      "total": 9,
+      "under44": 0,
+      "ratio": 0,
+      "samples": [],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 23,
+      "transitionElements": 154,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 2,
+      "footer": 1
+    },
+    "performance": {
+      "resources": 64,
+      "transferKB": 8,
+      "imgCount": 10,
+      "imgKB": 3,
+      "domNodes": 1195
+    },
+    "textChars": 156
+  },
+  "09-mobile-detail-01": {
+    "scene": "09-mobile-detail-01",
+    "url": "http://127.0.0.1:8899/?plain=0#p=01",
+    "viewport": {
+      "w": 414,
+      "h": 896,
+      "dpr": 2,
+      "scrollW": 414,
+      "scrollH": 1550,
+      "clientW": 414,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": false,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 136
+    },
+    "headings": [
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H1",
+        "text": "HEALING EMOTIONS WITHMODULAR LIGHTING EXPERIENCE",
+        "fs": "35.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H1",
+        "text": "《心景》疗愈灯具",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "Flexible",
+        "fs": "32px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "缓解情绪压力",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "年轻城市人群",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪可视化",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "温暖×科技×陪伴",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "Design Process / 物理形态推演 · 过程档案",
+        "fs": "20px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《方阵》桌面灯",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《栖木》落地灯",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "《叠木》壁灯",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "无线电磁供电",
+        "fs": "14px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "2000K-3000K 暖光",
+        "fs": "14px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "磁吸滑轨系统",
+        "fs": "14px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "人体感应辅助",
+        "fs": "14px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "✓ 交互验证 / 定性反馈",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "✱ 问题与解决 / 工程迭代",
+        "fs": "11px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "个人优势",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念可视化",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "AI 工具驱动设计",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "跨学科协作",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "全流程跟进",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "开始合作",
+        "fs": "24px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "11",
+        66
+      ],
+      [
+        "15",
+        60
+      ],
+      [
+        "16",
+        31
+      ],
+      [
+        "12",
+        30
+      ],
+      [
+        "14",
+        30
+      ],
+      [
+        "9",
+        19
+      ],
+      [
+        "18",
+        18
+      ],
+      [
+        "10",
+        13
+      ],
+      [
+        "24",
+        6
+      ],
+      [
+        "20",
+        5
+      ],
+      [
+        "35.2",
+        4
+      ],
+      [
+        "13",
+        3
+      ],
+      [
+        "28",
+        2
+      ],
+      [
+        "48",
+        2
+      ]
+    ],
+    "under15": {
+      "textNodes": 162,
+      "samples": [
+        {
+          "text": "产品设计师 · 26 届",
+          "fs": 11,
+          "cls": ""
+        },
+        {
+          "text": "01",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "02",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "03",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "04",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "08",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "IP 设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "06",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "05",
+          "fs": 11,
+          "cls": "ms-id"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(17, 17, 17)",
+        92
+      ],
+      [
+        "rgb(21, 21, 21)",
+        44
+      ],
+      [
+        "rgb(90, 87, 81)",
+        24
+      ],
+      [
+        "rgb(230, 126, 51)",
+        21
+      ],
+      [
+        "rgb(38, 36, 33)",
+        20
+      ],
+      [
+        "oklab(0 0 0 / 0.45)",
+        15
+      ],
+      [
+        "rgb(255, 255, 255)",
+        11
+      ],
+      [
+        "rgb(58, 55, 50)",
+        10
+      ],
+      [
+        "oklab(0 0 0 / 0.6)",
+        9
+      ],
+      [
+        "rgb(180, 85, 29)",
+        8
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "Inter",
+        126
+      ],
+      [
+        "JetBrains Mono",
+        75
+      ],
+      [
+        "Noto Sans SC",
+        53
+      ],
+      [
+        "Oswald",
+        40
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(255, 255, 255)",
+        38
+      ],
+      [
+        "rgb(230, 126, 51)",
+        19
+      ],
+      [
+        "rgb(244, 242, 237)",
+        16
+      ],
+      [
+        "rgb(28, 28, 30)",
+        14
+      ],
+      [
+        "rgb(252, 252, 252)",
+        11
+      ],
+      [
+        "rgb(253, 253, 253)",
+        9
+      ],
+      [
+        "rgba(17, 17, 17, 0.12)",
+        7
+      ],
+      [
+        "rgb(217, 217, 217)",
+        6
+      ],
+      [
+        "rgb(35, 35, 38)",
+        6
+      ],
+      [
+        "rgb(17, 17, 17)",
+        5
+      ]
+    ],
+    "images": {
+      "total": 25,
+      "visible": 14,
+      "missingAlt": 8,
+      "lazy": 22,
+      "objectFit": {
+        "cover": 20,
+        "contain": 5
+      },
+      "broken": [
+        "slowwalker-render.jpeg",
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp",
+        "_fig20-backup-prototype.webp",
+        "fig09.webp"
+      ],
+      "brokenCount": 9,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "user-01.webp",
+          "dev": 44.2
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 35.9
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 25.4
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 116.5
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "scene-01.jpg",
+          "dev": 58.8
+        }
+      ],
+      "coveredCount": 9,
+      "samples": [
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1500x938",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "_fig20-backup-prototype.webp",
+          "nat": "1500x1443",
+          "disp": "412x340",
+          "fit": "contain",
+          "alt": "《心景》疗愈灯具"
+        },
+        {
+          "src": "scene-01.jpg",
+          "nat": "1376x768",
+          "disp": "330x116",
+          "fit": "cover",
+          "alt": "深夜睡前刷屏触点"
+        },
+        {
+          "src": "scene-02.webp",
+          "nat": "1376x768",
+          "disp": "330x116",
+          "fit": "cover",
+          "alt": "昏暗房间电脑前独处"
+        },
+        {
+          "src": "fig26.webp",
+          "nat": "558x418",
+          "disp": "376x228",
+          "fit": "contain",
+          "alt": "《方阵》桌面灯"
+        }
+      ]
+    },
+    "clickables": {
+      "total": 26,
+      "under44": 0,
+      "ratio": 0,
+      "samples": [],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 24,
+      "transitionElements": 199,
+      "styleSheets": 7,
+      "mediaRules": 73,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 1,
+      "nav": 2,
+      "header": 2,
+      "footer": 2
+    },
+    "performance": {
+      "resources": 71,
+      "transferKB": 10,
+      "imgCount": 17,
+      "imgKB": 5,
+      "domNodes": 1635
+    },
+    "textChars": 2785
+  },
+  "10-mobile-detail-07": {
+    "scene": "10-mobile-detail-07",
+    "url": "http://127.0.0.1:8899/?plain=0#p=07",
+    "viewport": {
+      "w": 414,
+      "h": 896,
+      "dpr": 2,
+      "scrollW": 414,
+      "scrollH": 1550,
+      "clientW": 414,
+      "overflowX": false
+    },
+    "title": "产品概念设计 | 杨鸿作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": false,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 136
+    },
+    "headings": [
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H1",
+        "text": "concept.",
+        "fs": "70.38px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "六个概念，从生活细节到在地文化。",
+        "fs": "25px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "一次生成很多， 挑出最值得做的那一个。",
+        "fs": "30px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "碳酸摇晃趣味灯",
+        "fs": "28px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "面包机定时灯具",
+        "fs": "28px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "光渐变重量探测器",
+        "fs": "28px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "从云南的针脚、 叶脉与林子出发。",
+        "fs": "28px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "彝族服饰元素时尚背包",
+        "fs": "28px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "苍山洱海叶脉书签",
+        "fs": "28px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "野生菌仿生灯",
+        "fs": "28px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "从一句提示词，到一个提案。",
+        "fs": "25px",
+        "ff": "\"Helvetica Neue\""
+      },
+      {
+        "tag": "H2",
+        "text": "个人优势",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "产品概念可视化",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "AI 工具驱动设计",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "跨学科协作",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "全流程跟进",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "开始合作",
+        "fs": "24px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "15",
+        83
+      ],
+      [
+        "14",
+        52
+      ],
+      [
+        "12",
+        42
+      ],
+      [
+        "11",
+        35
+      ],
+      [
+        "10",
+        34
+      ],
+      [
+        "9",
+        24
+      ],
+      [
+        "16",
+        21
+      ],
+      [
+        "18",
+        14
+      ],
+      [
+        "28",
+        8
+      ],
+      [
+        "13",
+        4
+      ],
+      [
+        "24",
+        4
+      ],
+      [
+        "30",
+        4
+      ],
+      [
+        "20",
+        2
+      ],
+      [
+        "25",
+        2
+      ]
+    ],
+    "under15": {
+      "textNodes": 191,
+      "samples": [
+        {
+          "text": "产品设计师 · 26 届",
+          "fs": 11,
+          "cls": ""
+        },
+        {
+          "text": "01",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "02",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "03",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "04",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "08",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "IP 设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "06",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "05",
+          "fs": 11,
+          "cls": "ms-id"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(21, 21, 21)",
+        65
+      ],
+      [
+        "rgb(158, 164, 170)",
+        53
+      ],
+      [
+        "rgb(243, 241, 236)",
+        48
+      ],
+      [
+        "rgb(111, 117, 123)",
+        46
+      ],
+      [
+        "rgb(38, 36, 33)",
+        29
+      ],
+      [
+        "rgb(90, 87, 81)",
+        21
+      ],
+      [
+        "rgb(255, 91, 46)",
+        11
+      ],
+      [
+        "rgb(180, 85, 29)",
+        8
+      ],
+      [
+        "rgb(107, 104, 98)",
+        8
+      ],
+      [
+        "rgb(12, 13, 15)",
+        8
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "Helvetica Neue",
+        141
+      ],
+      [
+        "Noto Sans SC",
+        77
+      ],
+      [
+        "ui-monospace",
+        70
+      ],
+      [
+        "JetBrains Mono",
+        28
+      ],
+      [
+        "Oswald",
+        16
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(244, 242, 237)",
+        20
+      ],
+      [
+        "rgb(252, 252, 252)",
+        15
+      ],
+      [
+        "rgb(255, 255, 255)",
+        9
+      ],
+      [
+        "rgba(12, 13, 15, 0.72)",
+        9
+      ],
+      [
+        "rgb(255, 91, 46)",
+        7
+      ],
+      [
+        "rgb(20, 22, 25)",
+        7
+      ],
+      [
+        "rgb(8, 9, 10)",
+        6
+      ],
+      [
+        "rgba(12, 13, 15, 0.77)",
+        6
+      ],
+      [
+        "rgba(12, 13, 15, 0.8)",
+        6
+      ],
+      [
+        "rgb(230, 126, 51)",
+        5
+      ]
+    ],
+    "images": {
+      "total": 41,
+      "visible": 32,
+      "missingAlt": 19,
+      "lazy": 27,
+      "objectFit": {
+        "cover": 28,
+        "contain": 13
+      },
+      "broken": [
+        "slowwalker-render.jpeg",
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp",
+        "05-bookmark.webp",
+        "06-mushroom.webp"
+      ],
+      "brokenCount": 9,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "user-01.webp",
+          "dev": 44.2
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 35.9
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 25.4
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 116.5
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "01-shake-thumb.webp",
+          "dev": 24.9
+        }
+      ],
+      "coveredCount": 19,
+      "samples": [
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1500x938",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-shake-thumb.webp",
+          "nat": "320x180",
+          "disp": "489x366",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-shake.webp",
+          "nat": "610x343",
+          "disp": "371x278",
+          "fit": "contain",
+          "alt": "暗色卧室床头，圆柱形台灯透出柔和白光"
+        },
+        {
+          "src": "02-toaster-thumb.webp",
+          "nat": "320x320",
+          "disp": "489x366",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "02-toaster.webp",
+          "nat": "395x395",
+          "disp": "362x271",
+          "fit": "contain",
+          "alt": ""
+        }
+      ]
+    },
+    "clickables": {
+      "total": 63,
+      "under44": 0,
+      "ratio": 0,
+      "samples": [],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 24,
+      "transitionElements": 215,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "header": 3,
+      "footer": 2
+    },
+    "performance": {
+      "resources": 83,
+      "transferKB": 13,
+      "imgCount": 29,
+      "imgKB": 8,
+      "domNodes": 1729
+    },
+    "textChars": 3685
+  },
+  "11-mobile-detail-08": {
+    "scene": "11-mobile-detail-08",
+    "url": "http://127.0.0.1:8899/?plain=0#p=08",
+    "viewport": {
+      "w": 414,
+      "h": 896,
+      "dpr": 2,
+      "scrollW": 414,
+      "scrollH": 1550,
+      "clientW": 414,
+      "overflowX": false
+    },
+    "title": "杨鸿 — 产品设计师作品集",
+    "lang": "zh-CN",
+    "fontsReady": {
+      "oswald": false,
+      "jetbrains": true,
+      "notoSansSC": true,
+      "notoSerifSC": true,
+      "loadedFaces": 151
+    },
+    "headings": [
+      {
+        "tag": "H2",
+        "text": "个人经历",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "精选项目",
+        "fs": "24px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H1",
+        "text": "猫冰 CAT—ICE",
+        "fs": "32px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "同一只猫， 两种温度。",
+        "fs": "48px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "冻 结 态",
+        "fs": "32px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "软 化 态",
+        "fs": "32px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "情绪冷冻体 猫冰 CAT—ICE",
+        "fs": "41.6px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "冻结态：社交防御的透明铠甲",
+        "fs": "19.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "软化态：独处时分的流体回归",
+        "fs": "19.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "正规三视图",
+        "fs": "48px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "心情变了， 冰也跟着变。",
+        "fs": "48px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "终于解放！",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "伤心结冰",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "自闭中",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "气鼓鼓",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "暗中观察",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "在做了…",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "今天躺平",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "委屈巴巴",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "有点害羞",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "突然愣住",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "给你加油",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "心动融化",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "嗨，见面啦",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "喝口冰的",
+        "fs": "16px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H2",
+        "text": "把相变， 带进日常。",
+        "fs": "48px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "双层透明挂件",
+        "fs": "19.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "双状态冰箱贴",
+        "fs": "19.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "冰品与饮品包装",
+        "fs": "19.2px",
+        "ff": "Oswald"
+      },
+      {
+        "tag": "H3",
+        "text": "情绪贴纸",
+        "fs": "19.2px",
+        "ff": "Oswald"
+      }
+    ],
+    "fontSizes": [
+      [
+        "15",
+        68
+      ],
+      [
+        "16",
+        33
+      ],
+      [
+        "11",
+        26
+      ],
+      [
+        "8.8",
+        25
+      ],
+      [
+        "12",
+        16
+      ],
+      [
+        "48",
+        9
+      ],
+      [
+        "9.6",
+        9
+      ],
+      [
+        "9.28",
+        7
+      ],
+      [
+        "8",
+        6
+      ],
+      [
+        "11.2",
+        6
+      ],
+      [
+        "19.2",
+        6
+      ],
+      [
+        "8.32",
+        6
+      ],
+      [
+        "18",
+        5
+      ],
+      [
+        "24",
+        5
+      ]
+    ],
+    "under15": {
+      "textNodes": 118,
+      "samples": [
+        {
+          "text": "产品设计师 · 26 届",
+          "fs": 11,
+          "cls": ""
+        },
+        {
+          "text": "01",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "02",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "03",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "04",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "08",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "IP 设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "06",
+          "fs": 11,
+          "cls": "ms-id"
+        },
+        {
+          "text": "产品设计",
+          "fs": 12,
+          "cls": "ms-meta"
+        },
+        {
+          "text": "05",
+          "fs": 11,
+          "cls": "ms-id"
+        }
+      ]
+    },
+    "colors": [
+      [
+        "rgb(38, 36, 33)",
+        62
+      ],
+      [
+        "rgb(21, 21, 21)",
+        38
+      ],
+      [
+        "rgb(255, 255, 255)",
+        37
+      ],
+      [
+        "rgb(51, 40, 43)",
+        25
+      ],
+      [
+        "rgb(90, 87, 81)",
+        21
+      ],
+      [
+        "rgb(194, 136, 95)",
+        16
+      ],
+      [
+        "rgb(189, 177, 180)",
+        13
+      ],
+      [
+        "rgb(180, 85, 29)",
+        8
+      ],
+      [
+        "rgb(107, 104, 98)",
+        8
+      ],
+      [
+        "rgb(58, 55, 50)",
+        7
+      ]
+    ],
+    "fontFamilies": [
+      [
+        "JetBrains Mono",
+        104
+      ],
+      [
+        "Noto Sans SC",
+        99
+      ],
+      [
+        "Oswald",
+        62
+      ]
+    ],
+    "backgrounds": [
+      [
+        "rgb(244, 242, 237)",
+        14
+      ],
+      [
+        "rgb(255, 255, 255)",
+        13
+      ],
+      [
+        "rgb(252, 252, 252)",
+        10
+      ],
+      [
+        "rgb(51, 40, 43)",
+        10
+      ],
+      [
+        "rgb(230, 126, 51)",
+        5
+      ],
+      [
+        "rgb(236, 231, 223)",
+        5
+      ],
+      [
+        "rgb(244, 241, 234)",
+        3
+      ],
+      [
+        "rgb(194, 136, 95)",
+        3
+      ],
+      [
+        "rgb(85, 34, 41)",
+        2
+      ],
+      [
+        "rgba(255, 255, 255, 0.04)",
+        2
+      ]
+    ],
+    "images": {
+      "total": 46,
+      "visible": 35,
+      "missingAlt": 8,
+      "lazy": 42,
+      "objectFit": {
+        "cover": 16,
+        "contain": 29,
+        "fill": 1
+      },
+      "broken": [
+        "slowwalker-render.jpeg",
+        "01-glass-drops.webp",
+        "02-campfire.webp",
+        "card-portrait.webp",
+        "hero.webp",
+        "ui-cos-2.webp",
+        "aigc-board.webp",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "brokenCount": 24,
+      "deformed": [],
+      "deformedCount": 0,
+      "coveredSamples": [
+        {
+          "src": "user-01.webp",
+          "dev": 44.2
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "dev": 35.9
+        },
+        {
+          "src": "02-campfire.webp",
+          "dev": 25.4
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "hero.webp",
+          "dev": 37.5
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "dev": 116.5
+        },
+        {
+          "src": "aigc-board.webp",
+          "dev": 37.5
+        }
+      ],
+      "coveredCount": 7,
+      "samples": [
+        {
+          "src": "user-01.webp",
+          "nat": "1500x837",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "slowwalker-render.jpeg",
+          "nat": "1024x656",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "01-glass-drops.webp",
+          "nat": "1500x1500",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "02-campfire.webp",
+          "nat": "1400x1045",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1500x938",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "hero.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "ui-cos-2.webp",
+          "nat": "375x812",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "aigc-board.webp",
+          "nat": "1600x1000",
+          "disp": "52x52",
+          "fit": "cover",
+          "alt": ""
+        },
+        {
+          "src": "frozen.webp",
+          "nat": "700x940",
+          "disp": "288x272",
+          "fit": "contain",
+          "alt": "猫冰冻结态"
+        },
+        {
+          "src": "frozen.webp",
+          "nat": "700x940",
+          "disp": "270x363",
+          "fit": "contain",
+          "alt": "冻结态猫冰"
+        },
+        {
+          "src": "melted.webp",
+          "nat": "1274x1234",
+          "disp": "270x262",
+          "fit": "contain",
+          "alt": "软化态猫冰"
+        },
+        {
+          "src": "frozen-front.webp",
+          "nat": "610x870",
+          "disp": "312x370",
+          "fit": "contain",
+          "alt": "猫冰冻结态正面"
+        }
+      ]
+    },
+    "clickables": {
+      "total": 32,
+      "under44": 0,
+      "ratio": 0,
+      "samples": [],
+      "noName": 0
+    },
+    "motion": {
+      "animatedElements": 32,
+      "transitionElements": 223,
+      "styleSheets": 6,
+      "mediaRules": 72,
+      "reducedMotionRules": 14
+    },
+    "landmarks": {
+      "main": 2,
+      "nav": 3,
+      "header": 3,
+      "footer": 2
+    },
+    "performance": {
+      "resources": 93,
+      "transferKB": 370,
+      "imgCount": 39,
+      "imgKB": 365,
+      "domNodes": 1546
+    },
+    "textChars": 2883
+  }
+}

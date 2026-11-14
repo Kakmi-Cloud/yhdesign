@@ -1,0 +1,483 @@
+{
+  "D01": {
+    "page": "xj-page",
+    "secs": [
+      "xj-hero",
+      "xj-lab",
+      "xj-spec",
+      "xj-steps",
+      "xj-func",
+      "xj-forms",
+      "xj-meaning",
+      "xj-scenes"
+    ],
+    "secCount": 8,
+    "imgs": 13,
+    "loaded": 13,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 2016,
+    "cn": 1379,
+    "status": true,
+    "next": true,
+    "barNav": 6,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "before": 16,
+      "tool": 1,
+      "readout": "16",
+      "filled": 16
+    },
+    "interactAfter": {
+      "filled": 17,
+      "readout": "17",
+      "tool": "长柱"
+    }
+  },
+  "M01": {
+    "page": "xj-page",
+    "secs": [
+      "xj-hero",
+      "xj-lab",
+      "xj-spec",
+      "xj-steps",
+      "xj-func",
+      "xj-forms",
+      "xj-meaning",
+      "xj-scenes"
+    ],
+    "secCount": 8,
+    "imgs": 13,
+    "loaded": 13,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 2008,
+    "cn": 1373,
+    "status": true,
+    "next": true,
+    "barNav": 6,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  },
+  "D02": {
+    "page": "sw-page",
+    "secs": [
+      "sw-hero",
+      "sw-track-sec",
+      "sw-stages",
+      "sw-views",
+      "sw-sketch"
+    ],
+    "secCount": 5,
+    "imgs": 16,
+    "loaded": 16,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1188,
+    "cn": 847,
+    "status": true,
+    "next": true,
+    "barNav": 4,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "screen": "80%",
+      "snail": "80%"
+    },
+    "interactAfter": {
+      "screen": "80%",
+      "snail": "80%"
+    }
+  },
+  "M02": {
+    "page": "sw-page",
+    "secs": [
+      "sw-hero",
+      "sw-track-sec",
+      "sw-stages",
+      "sw-views",
+      "sw-sketch"
+    ],
+    "secCount": 5,
+    "imgs": 16,
+    "loaded": 16,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1183,
+    "cn": 844,
+    "status": true,
+    "next": true,
+    "barNav": 4,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  },
+  "D03": {
+    "page": "il-page",
+    "secs": [
+      "il-hero",
+      "il-split",
+      "il-review",
+      "il-progress"
+    ],
+    "secCount": 4,
+    "imgs": 15,
+    "loaded": 15,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1463,
+    "cn": 1020,
+    "status": true,
+    "next": true,
+    "barNav": 4,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "cap": "棱纹玻璃水滴 · 蓝 / 粉 / 琥珀撞色"
+    },
+    "interactAfter": {
+      "cap": "音浪波浪灯 · 层叠曲面"
+    }
+  },
+  "M03": {
+    "page": "il-page",
+    "secs": [
+      "il-hero",
+      "il-split",
+      "il-review",
+      "il-progress"
+    ],
+    "secCount": 4,
+    "imgs": 15,
+    "loaded": 15,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1425,
+    "cn": 993,
+    "status": true,
+    "next": true,
+    "barNav": 4,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  },
+  "D04": {
+    "page": "hl-page",
+    "secs": [
+      "hl-hero",
+      "hl-gesture",
+      "hl-board",
+      "hl-material"
+    ],
+    "secCount": 4,
+    "imgs": 9,
+    "loaded": 9,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1149,
+    "cn": 849,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "title": "篝火灯",
+      "verb": "动作 · 添上木柴"
+    },
+    "interactAfter": {
+      "title": "负空间圆环灯"
+    }
+  },
+  "M04": {
+    "page": "hl-page",
+    "secs": [
+      "hl-hero",
+      "hl-gesture",
+      "hl-board",
+      "hl-material"
+    ],
+    "secCount": 4,
+    "imgs": 9,
+    "loaded": 9,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1143,
+    "cn": 843,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  },
+  "D05": {
+    "page": "ui-page",
+    "secs": [
+      "ui-hero",
+      "ui-flow-sec",
+      "ui-screens",
+      "ui-structure"
+    ],
+    "secCount": 4,
+    "imgs": 12,
+    "loaded": 12,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1136,
+    "cn": 849,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "title": "首页聚合"
+    },
+    "interactAfter": {
+      "title": "日程与数据"
+    }
+  },
+  "M05": {
+    "page": "ui-page",
+    "secs": [
+      "ui-hero",
+      "ui-flow-sec",
+      "ui-screens",
+      "ui-structure"
+    ],
+    "secCount": 4,
+    "imgs": 12,
+    "loaded": 12,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1128,
+    "cn": 843,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  },
+  "D06": {
+    "page": "ch-page",
+    "secs": [
+      "ch-hero",
+      "ch-colour",
+      "ch-module",
+      "ch-material"
+    ],
+    "secCount": 4,
+    "imgs": 8,
+    "loaded": 8,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1080,
+    "cn": 817,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "colour": "燕麦灰",
+      "hex": "#b8b5aa"
+    },
+    "interactAfter": {
+      "colour": "苔原绿"
+    }
+  },
+  "M06": {
+    "page": "ch-page",
+    "secs": [
+      "ch-hero",
+      "ch-colour",
+      "ch-module",
+      "ch-material"
+    ],
+    "secCount": 4,
+    "imgs": 8,
+    "loaded": 8,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1073,
+    "cn": 810,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  },
+  "D07": {
+    "page": "ac-page",
+    "secs": [
+      "ac-hero",
+      "ac-concepts",
+      "ac-yunnan",
+      "ac-process"
+    ],
+    "secCount": 4,
+    "imgs": 16,
+    "loaded": 16,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1385,
+    "cn": 933,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "open": 1,
+      "specs": 4
+    },
+    "interactAfter": {
+      "open": 1,
+      "specs": 3
+    }
+  },
+  "M07": {
+    "page": "ac-page",
+    "secs": [
+      "ac-hero",
+      "ac-concepts",
+      "ac-yunnan",
+      "ac-process"
+    ],
+    "secCount": 4,
+    "imgs": 16,
+    "loaded": 16,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1379,
+    "cn": 927,
+    "status": true,
+    "next": true,
+    "barNav": 3,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  },
+  "D08": {
+    "page": "ci-page",
+    "secs": [
+      "ci-hero",
+      "ci-console",
+      "ci-elements",
+      "ci-views",
+      "ci-emotions",
+      "ci-palette",
+      "ci-merch",
+      "ci-boards"
+    ],
+    "secCount": 8,
+    "imgs": 28,
+    "loaded": 28,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1574,
+    "cn": 1126,
+    "status": true,
+    "next": true,
+    "barNav": 6,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0,
+    "interact": {
+      "temp": "+38",
+      "state": "软化态",
+      "cat": "haracter/melted.webp"
+    },
+    "interactAfter": {
+      "temp": "+38",
+      "state": "软化态",
+      "cat": "haracter/melted.webp"
+    }
+  },
+  "M08": {
+    "page": "ci-page",
+    "secs": [
+      "ci-hero",
+      "ci-console",
+      "ci-elements",
+      "ci-views",
+      "ci-emotions",
+      "ci-palette",
+      "ci-merch",
+      "ci-boards"
+    ],
+    "secCount": 8,
+    "imgs": 28,
+    "loaded": 28,
+    "broken": 0,
+    "overflow": 0,
+    "docOverflow": 0,
+    "smallBtns": 0,
+    "tinyText": 0,
+    "chars": 1542,
+    "cn": 1112,
+    "status": true,
+    "next": true,
+    "barNav": 6,
+    "feas": 1,
+    "okPage": true,
+    "errors": 0
+  }
+}
