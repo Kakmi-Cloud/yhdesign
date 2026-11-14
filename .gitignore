@@ -2,6 +2,7 @@
 node_modules/
 dist/
 dist-standalone/
+dist-domainready/
 .edgeone/
 
 # 环境 / 凭证（绝不提交）

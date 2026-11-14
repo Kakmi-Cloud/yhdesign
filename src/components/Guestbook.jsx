@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { fetchMessages, submitMessage, isPreviewHost, PRIMARY_SITE_URL } from '../data/guestbook'
+import { fetchMessages, submitMessage } from '../data/guestbook'
 import './guestbook.css'
 
 /**
@@ -9,9 +9,8 @@ import './guestbook.css'
  *   · 默认        —— 访客提交表单。只显示「已送达」，不展示别人的留言。
  *   · ?inbox=1    —— 作者收件箱，列出云端全部留言（时间 / 昵称 / 联系方式 / 内容）。
  *
- * 留言写到部署平台对应的云端后端，不在访客浏览器里；主站走云数据库，
- * EdgeOne 预览入口走边缘函数。失败时一定给出明确提示 + 可点的主站链接，
- * 不会静默失败、也不会假装成功。
+ * 所有入口共用同一张留言表：主站走云 SDK，自定义域名走同源边缘函数代理。
+ * 失败时一定给出明确提示 + 可点的备用入口，不会静默失败、也不会假装成功。
  */
 const isInboxMode = () => {
   try {
@@ -63,7 +62,7 @@ function InboxView({ rows, loading, error, onReload, fallback }) {
       {error ? (
         <p className="gb-notice gb-notice--err" role="status">
           {error}
-          {fallback ? <a className="gb-fallback" href={fallback}>去主站收件箱 ↗</a> : null}
+          {fallback ? <a className="gb-fallback" href={fallback}>备用入口：主站 ↗</a> : null}
         </p>
       ) : null}
       {!loading && !error && rows.length === 0 ? (
@@ -178,13 +177,6 @@ export default function Guestbook({ compact = false }) {
           </p>
         </header>
 
-        {isPreviewHost() ? (
-          <p className="gb-banner" role="note">
-            这是海外预览入口，留言服务可能未开通。要给我留言，请到
-            <a href={PRIMARY_SITE_URL}>主站 ↗</a>；那里发的消息我一定能收到。
-          </p>
-        ) : null}
-
         <form className="gb-form" onSubmit={onSubmit}>
           <div className="gb-row">
             <label className="gb-field">
@@ -230,7 +222,7 @@ export default function Guestbook({ compact = false }) {
             <p className={`gb-notice ${notice.type === 'ok' ? 'gb-notice--ok' : 'gb-notice--err'}`} role="status">
               {notice.text}
               {notice.fallback ? (
-                <a className="gb-fallback" href={notice.fallback}>去主站留言 ↗</a>
+                <a className="gb-fallback" href={notice.fallback}>备用入口：主站 ↗</a>
               ) : null}
             </p>
           ) : null}

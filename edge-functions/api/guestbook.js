@@ -1,22 +1,31 @@
-// 访客留言 API —— EdgeOne 边缘函数 + KV 存储
+// 访客留言 API —— EdgeOne 边缘函数（统一云端 REST 代理）
 //
-// 路由：GET /api/guestbook  → 收件箱读取（最近 LIMIT 条，新→旧）
-//       POST /api/guestbook → 访客提交一条留言
+// 路由：GET /api/guestbook  → 收件箱读取（按时间倒序）
+//       POST /api/guestbook → 提交一条留言
 //
-// KV 绑定（在 EdgeOne Pages 控制台完成）：
-//   1. KV 存储 → 开通 → 创建命名空间（如 guestbook）
-//   2. 项目 yhdesign → 绑定该命名空间，变量名必须是 guestbook_kv
+// 为什么改：原实现只认 KV 绑定 guestbook_kv，而本项目未绑定（该绑定只能在
+// 控制台完成）。自定义域名 / 预览域名下一律返回 503 KV_NOT_BOUND，提交、
+// 保存、展示全部断开，失败提示还把访客赶去主站。
+// 现在统一代理到 guestbook_messages 表：主站走 SDK、自定义域名走本函数，
+// 两端写同一张表，任何入口的收件箱都能读到全部留言。
 //
-// 存储结构：单键 messages 存 JSON 数组（新→旧），最多保留 500 条。
-// V8 运行时：没有 Node 内置模块，只能用 Web 标准 API。
+// 服务端到服务端调用，不携带浏览器 Origin；使用公开 publishableKey +
+// RLS（anon 仅 SELECT / INSERT），不涉及任何管理员凭据。
+// V8 运行时：只用 Web 标准 API，无 Node 内置模块。
 
-const KEY = 'messages'
-const MAX_STORE = 500 // KV 里最多保留多少条
-const LIMIT_DEFAULT = 100 // GET 默认返回多少条
+const REST_URL =
+  'https://wbapp-fqn8vurenmzjnkpqwdz5i0.app.workbuddy.host/.cloud/database/rest/guestbook_messages'
+// 与 src/cloudPublicConfig.js 的 publishableKey 保持一致（公开值，可放前端）
+const ACCESS_KEY =
+  'wbpk_fQN8VuRENMzJnKPqWdZ5I0_y6gTz6GDbfq4RBSr7kGcr36hHVZtIN2R'
+const SELECT_FIELDS = 'id,visitor_name,contact,message,created_at'
 const MAX_MESSAGE = 500
 const MAX_NAME = 40
 const MAX_CONTACT = 120
-const DUPE_WINDOW_MS = 60 * 1000 // 60 秒内同内容视为重复提交
+const MAX_STORE = 500
+const LIMIT_DEFAULT = 100
+const DUPE_WINDOW_MS = 60 * 1000
+const UPSTREAM_TIMEOUT = 8000
 
 const json = (data, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -32,28 +41,58 @@ const clean = (v, max) =>
     .trim()
     .slice(0, max)
 
-// KV 没绑定时全局变量不存在。不要吞进笼统的 500，明确回一个
-// 「服务未开通」状态码，前端才能给出可操作的提示（去主站留言）。
-const hasKV = () => typeof guestbook_kv !== 'undefined'
-const KV_MISSING = () =>
-  json({ ok: false, code: 'KV_NOT_BOUND', error: '这个入口的留言存储还没开通' }, 503)
+const upstreamError = () =>
+  json({ ok: false, code: 'UPSTREAM_ERROR', error: '留言服务暂时不可用，请稍后重试' }, 502)
 
-const readList = async () => {
-  const raw = await guestbook_kv.get(KEY)
-  if (!raw) return []
-  const list = JSON.parse(raw)
-  return Array.isArray(list) ? list : []
+/** 带超时的上游请求。网络/解析异常收敛成 null，由调用方给出明确提示。 */
+async function callRest(path, init = {}) {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT)
+  try {
+    const res = await fetch(`${REST_URL}${path}`, {
+      ...init,
+      signal: controller.signal,
+      headers: {
+        'x-wb-webapp-access-key': ACCESS_KEY,
+        'content-type': 'application/json',
+        ...(init.headers || {}),
+      },
+    })
+    if (!res.ok) {
+      return { ok: false, status: res.status, body: await res.text().catch(() => '') }
+    }
+    const text = await res.text()
+    return { ok: true, status: res.status, data: text ? JSON.parse(text) : null }
+  } catch {
+    return null
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+const friendlyWriteError = (r) => {
+  const raw = String(r?.body || '')
+  if (raw.includes('23505')) return '这条留言已经提交过了'
+  if (raw.includes('42501') || r?.status === 401 || r?.status === 403) {
+    return '提交被拒绝，请稍后再试'
+  }
+  return '留言没有被保存，请稍后重试'
 }
 
 export async function onRequestGet({ request }) {
-  if (!hasKV()) return KV_MISSING()
+  let limit = LIMIT_DEFAULT
   try {
-    const limit = Math.min(Number(new URL(request.url).searchParams.get('limit')) || LIMIT_DEFAULT, MAX_STORE)
-    const list = await readList()
-    return json({ ok: true, messages: list.slice(0, limit) })
+    const asked = Number(new URL(request.url).searchParams.get('limit'))
+    if (asked > 0) limit = Math.min(asked, MAX_STORE)
   } catch {
-    return json({ ok: false, error: '留言服务暂时不可用，请稍后再试' }, 500)
+    // 查询串异常时用默认值，不影响读取
   }
+
+  const r = await callRest(`?select=${SELECT_FIELDS}&order=created_at.desc&limit=${limit}`)
+  if (!r || !r.ok) {
+    return json({ ok: false, code: 'UPSTREAM_ERROR', error: '暂时读不到留言，请稍后点「刷新留言」重试', messages: [] }, 502)
+  }
+  return json({ ok: true, messages: Array.isArray(r.data) ? r.data : [] })
 }
 
 export async function onRequestPost({ request }) {
@@ -66,32 +105,30 @@ export async function onRequestPost({ request }) {
 
   const message = clean(body?.message, MAX_MESSAGE)
   if (!message) return json({ ok: false, error: '留言内容不能为空' }, 400)
-  if (!hasKV()) return KV_MISSING()
 
-  try {
-    const list = await readList()
-
-    // 轻量防刷：60 秒内提交相同内容直接拒绝
-    const last = list[0]
+  // 轻量防刷：60 秒内提交相同内容直接拒绝（沿用原 KV 版规则）
+  const recent = await callRest('?select=message,created_at&order=created_at.desc&limit=1')
+  if (recent?.ok && Array.isArray(recent.data) && recent.data[0]) {
+    const last = recent.data[0]
     if (
-      last &&
       last.message === message &&
       Date.now() - new Date(last.created_at).getTime() < DUPE_WINDOW_MS
     ) {
       return json({ ok: false, error: '这条留言已经提交过了' }, 409)
     }
-
-    const row = {
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
-      visitor_name: clean(body?.name, MAX_NAME) || null,
-      contact: clean(body?.contact, MAX_CONTACT) || null,
-      message,
-      created_at: new Date().toISOString(),
-    }
-    list.unshift(row)
-    await guestbook_kv.put(KEY, JSON.stringify(list.slice(0, MAX_STORE)))
-    return json({ ok: true, id: row.id })
-  } catch {
-    return json({ ok: false, error: '留言没有被保存，请稍后重试' }, 500)
   }
+
+  const row = {
+    visitor_name: clean(body?.name, MAX_NAME) || null,
+    contact: clean(body?.contact, MAX_CONTACT) || null,
+    message,
+  }
+  const r = await callRest('', {
+    method: 'POST',
+    body: JSON.stringify(row),
+    headers: { Prefer: 'return=minimal' },
+  })
+  if (!r) return upstreamError()
+  if (!r.ok) return json({ ok: false, error: friendlyWriteError(r) }, 502)
+  return json({ ok: true, id: null })
 }
