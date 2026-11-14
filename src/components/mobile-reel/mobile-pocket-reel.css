@@ -1,0 +1,354 @@
+/* 手机端「30 秒工程胶片 + 规格抽屉」
+   深色放映厅：与首访轮盘（白底、酸纸）刻意分开，让"这是另一种看法"一眼可辨。
+   z 序：首访轮盘 150 < 本层 160 < 规格抽屉 180 < 原稿详情浮层 200。 */
+
+.mr-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 160;
+  display: flex;
+  flex-direction: column;
+  background: #151515;
+  color: #f4f1ea;
+  overscroll-behavior: contain;
+}
+
+/* --- 顶部 8 段进度条：已过 = 纸白，当前 = 橙条 3.5s 线性走满 --- */
+.mr-progress {
+  display: flex;
+  gap: 4px;
+  padding: 12px 14px 8px;
+}
+.mr-seg {
+  position: relative;
+  flex: 1;
+  height: 3px;
+  overflow: hidden;
+  background: rgba(244, 241, 234, 0.24);
+  border-radius: 2px;
+}
+.mr-seg.is-done {
+  background: #f4f1ea;
+}
+.mr-seg > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #e67e33;
+  animation-name: mr-fill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes mr-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.mr-close {
+  position: absolute;
+  top: 22px;
+  right: 10px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #f4f1ea;
+  background: rgba(21, 21, 21, 0.55);
+  border: 2px solid rgba(244, 241, 234, 0.4);
+  border-radius: 100px;
+}
+.mr-close svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: square;
+}
+
+/* --- 画面：整屏封面 + 底部渐变 + 文案 --- */
+.mr-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+.mr-slide {
+  position: absolute;
+  inset: 0;
+  animation: mr-in 260ms ease-out;
+}
+@keyframes mr-in {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+}
+.mr-slide > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mr-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(21, 21, 21, 0.94) 0%,
+    rgba(21, 21, 21, 0.6) 34%,
+    rgba(21, 21, 21, 0.06) 66%
+  );
+}
+.mr-copy {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2;
+}
+.mr-copy h2 {
+  margin: 8px 0 4px;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+}
+.mr-copy p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(244, 241, 234, 0.78);
+}
+.mr-hint {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(244, 241, 234, 0.62);
+}
+
+.mr-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.mr-badge strong {
+  padding: 3px 7px;
+  font-weight: 800;
+  color: #151515;
+  background: #e67e33;
+}
+.mr-badge em {
+  font-style: normal;
+  color: rgba(244, 241, 234, 0.7);
+}
+
+/* --- 左右翻页：44×44 触控下限，半透明免得压过画面 --- */
+.mr-step {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  color: #f4f1ea;
+  background: rgba(21, 21, 21, 0.42);
+  border: 2px solid rgba(244, 241, 234, 0.32);
+  border-radius: 100px;
+}
+.mr-step.is-prev {
+  left: 10px;
+}
+.mr-step.is-next {
+  right: 10px;
+}
+.mr-step svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: square;
+}
+
+/* --- 底部三颗 48px 动作键 --- */
+.mr-foot {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: #151515;
+}
+.mr-cta {
+  flex: 1;
+  min-height: 48px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #f4f1ea;
+  background: transparent;
+  border: 2px solid #f4f1ea;
+}
+.mr-cta.is-primary {
+  color: #151515;
+  background: #e67e33;
+  border-color: #151515;
+  box-shadow: 3px 3px 0 0 rgba(244, 241, 234, 0.85);
+}
+.mr-cta.is-ghost {
+  border-color: rgba(244, 241, 234, 0.45);
+}
+.mr-cta:active {
+  transform: translateY(1px);
+}
+
+/* --- 规格抽屉：底部 sheet，可下拉收起 --- */
+.mr-sheet-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+}
+.mr-sheet-scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(21, 21, 21, 0.5);
+  border: 0;
+}
+.mr-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 48px);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  padding: 0 18px max(16px, env(safe-area-inset-bottom, 16px));
+  color: #151515;
+  background: #f4f1ea;
+  border-top: 2px solid #151515;
+  animation: mr-sheet-up 220ms var(--ml-ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+@keyframes mr-sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+/* 手柄自身 ≥44px 高（20 + 6 + 18），别让"唯一能下拉的地方"变成细线 */
+.mr-sheet-grab {
+  display: block;
+  padding: 20px 0 18px;
+  touch-action: none;
+  cursor: grab;
+}
+.mr-sheet-grab::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 6px;
+  margin: 0 auto;
+  background: rgba(21, 21, 21, 0.35);
+  border-radius: 3px;
+}
+.mr-sheet-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mr-sheet-head .mr-badge em {
+  color: rgba(21, 21, 21, 0.6);
+}
+.mr-sheet-head h3 {
+  margin: 8px 0 4px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.mr-sheet-head p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(21, 21, 21, 0.62);
+}
+.mr-sheet-close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #151515;
+  background: transparent;
+  border: 2px solid rgba(21, 21, 21, 0.35);
+  border-radius: 100px;
+}
+.mr-sheet-close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: square;
+}
+
+.mr-specs {
+  margin: 14px 0 0;
+}
+/* 规格改成紧凑键值表：左列固定 84px，右侧值对齐同一基线，
+   比「标签一行 + 值一行」省掉一半高度。 */
+.mr-specs > div {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-top: 1px solid rgba(21, 21, 21, 0.16);
+}
+.mr-specs dt {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #b4551d;
+}
+.mr-specs dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.mr-sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+.mr-sheet-actions .mr-cta {
+  width: 100%;
+}
+.mr-sheet-actions .mr-cta.is-ghost {
+  color: #151515;
+  border-color: rgba(21, 21, 21, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mr-slide,
+  .mr-sheet {
+    animation: none;
+  }
+  .mr-seg > i {
+    animation: none;
+    width: 100%;
+  }
+}

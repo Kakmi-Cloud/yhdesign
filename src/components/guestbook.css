@@ -1,0 +1,197 @@
+/* ── 访客留言（云端版）──────────────────────────────────────────────
+   挂在深墨「开始合作」章节里，卡片本身用与「个人优势」一致的暖纸色票，
+   靠 1px 墨框 + 硬偏移与深色底拉开层次，不引入第三套配色。 */
+
+.gb-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.gb-card {
+  width: 100%;
+  max-width: 680px;
+  box-sizing: border-box;
+  padding: 30px 32px 26px;
+  background: #FBF6EC;
+  border: 1px solid #D9CDBA;
+  box-shadow: 8px 8px 0 0 rgba(255, 255, 255, 0.10);
+  color: #42332C;
+  font-family: 'Noto Sans SC', 'Inter', system-ui, sans-serif;
+  text-align: left;
+}
+
+.gb-card--inbox { max-width: 860px; scroll-margin-top: 96px; }
+
+.gb-back {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #6E6B9B;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-bottom: 1px solid #D9CDBA;
+}
+.gb-back:hover { color: #42332C; }
+.gb-back:focus-visible { outline: 2px solid #D97842; outline-offset: 3px; }
+.gb-card--compact { padding: 20px 18px 18px; box-shadow: 4px 4px 0 0 rgba(255,255,255,.10); }
+
+.gb-head { margin-bottom: 20px; }
+
+.gb-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: #6E6B9B;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.gb-title {
+  margin: 0 0 8px;
+  font-family: 'Oswald', 'Noto Sans SC', 'Inter', sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.gb-lede {
+  margin: 0;
+  color: #6E5C51;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.gb-form { display: flex; flex-direction: column; gap: 14px; }
+
+.gb-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gb-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+
+.gb-field > span {
+  color: #42332C;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.gb-field > span i { color: #8B7B6E; font-style: normal; font-weight: 500; }
+
+.gb-field input,
+.gb-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  background: #FFFDF8;
+  border: 1px solid #D9CDBA;
+  border-radius: 0;
+  color: #42332C;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  outline: none;
+  transition: border-color 140ms ease-out, box-shadow 140ms ease-out;
+}
+.gb-field textarea { resize: vertical; min-height: 96px; }
+.gb-field input::placeholder,
+.gb-field textarea::placeholder { color: #A99A8C; }
+.gb-field input:focus,
+.gb-field textarea:focus {
+  border-color: #6E6B9B;
+  box-shadow: 0 0 0 2px rgba(110, 107, 155, 0.16);
+}
+
+.gb-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.gb-count {
+  color: #8B7B6E;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.gb-btn {
+  min-height: 44px;
+  padding: 0 22px;
+  background: #42332C;
+  border: 1px solid #42332C;
+  border-radius: 0;
+  color: #FFF6E8;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+.gb-btn:hover:not(:disabled) { background: #6E6B9B; border-color: #6E6B9B; }
+.gb-btn:disabled { opacity: 0.6; cursor: default; }
+.gb-btn:focus-visible { outline: 2px solid #D97842; outline-offset: 2px; }
+
+.gb-btn--ghost {
+  min-height: 36px;
+  padding: 0 16px;
+  background: transparent;
+  border-color: #D9CDBA;
+  color: #42332C;
+}
+.gb-btn--ghost:hover:not(:disabled) { background: #F3EBDD; border-color: #6E6B9B; color: #42332C; }
+
+.gb-notice {
+  margin: 2px 0 0;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6;
+  border-left: 3px solid;
+}
+.gb-notice--ok { background: #EDF0E6; border-color: #6E6B9B; color: #42332C; }
+.gb-notice--err { background: #F9E7D6; border-color: #D97842; color: #7A4526; }
+
+/* ── 收件箱 ── */
+.gb-inbox-bar { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+.gb-empty { margin: 14px 0 0; color: #6E5C51; font-size: 13px; }
+
+.gb-list { list-style: none; margin: 0; padding: 0; }
+.gb-item {
+  padding: 14px 0;
+  border-top: 1px solid #E3D8C7;
+}
+.gb-item-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.gb-item-name { color: #42332C; font-size: 14px; font-weight: 800; }
+.gb-item-time {
+  color: #8B7B6E;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.gb-item-contact { margin: 5px 0 0; color: #6E6B9B; font-size: 12px; }
+.gb-item-text { margin: 8px 0 0; color: #42332C; font-size: 14px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
+
+@media (max-width: 767px) {
+  .gb-card { padding: 20px 18px 18px; box-shadow: 4px 4px 0 0 rgba(255,255,255,.10); }
+  .gb-row { grid-template-columns: 1fr; }
+  .gb-card--inbox { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gb-field input,
+  .gb-field textarea,
+  .gb-btn { transition: none; }
+}

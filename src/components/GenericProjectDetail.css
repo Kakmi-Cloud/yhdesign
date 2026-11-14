@@ -1,0 +1,270 @@
+/* 通用项目详情页（没有 Bento CONFIG 的项目，目前是 05 UI 界面流程设计）
+   手机优先：一列真图 + 折起的推导段；≥1024px 两列图 + 展开文案。
+   顶部留 64px 让开固定顶栏（.detail-mobile-bar：52px + 安全区）。
+   全部 gp- 前缀，不依赖 Tailwind，也不与其它详情页的类名互相影响。 */
+.gp-root {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #ffffff;
+  color: #111111;
+  -webkit-overflow-scrolling: touch;
+}
+.gp-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 16px 40px;
+}
+@media (min-width: 1024px) {
+  .gp-wrap { padding: 40px 32px 64px; }
+}
+
+.gp-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #e67e33;
+}
+.gp-title {
+  margin: 8px 0 0;
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 1024px) {
+  .gp-title { font-size: 52px; }
+}
+.gp-sub {
+  margin: 10px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(17, 17, 17, 0.72);
+}
+.gp-lead {
+  margin: 12px 0 0;
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(17, 17, 17, 0.62);
+}
+@media (min-width: 1024px) {
+  .gp-lead { font-size: 16px; }
+}
+
+.gp-sec {
+  margin-top: 28px;
+  scroll-margin-top: 72px;
+}
+@media (min-width: 1024px) {
+  .gp-sec { margin-top: 56px; }
+}
+.gp-h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #151515;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+.gp-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: #e67e33;
+  color: #fff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.gp-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+/* 手机端：6 张整屏截图竖着排 = 5.4 屏，页面直接失控。
+   改成一条横向吸附轨道（与 SketchFolderGallery 的 .sfg-papers 同一套交互），
+   一屏内横向翻，纵向高度从 ~5400px 压到 ~600px。 */
+@media (max-width: 1023px) {
+  /* 05 展具轨道：BG-06 十字准星网格 + 1px 墨框 + 硬阴影（Gemini 第 13 轮补丁 2/2） */
+  .gp-gallery {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding: 12px 10px 14px;
+    background-color: #f4f2ed;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M32 0H0v32' fill='none' stroke='%23dedad0' stroke-width='0.6'/%3E%3Cpath d='M13.5 16h5M16 13.5v5' stroke='%238a867e' stroke-width='0.8' stroke-opacity='0.55'/%3E%3C/svg%3E");
+    background-size: 32px 32px;
+    background-repeat: repeat;
+    border: 1px solid #151515;
+    box-shadow: 2px 2px 0 #151515;
+    -webkit-overflow-scrolling: touch;
+  }
+  .gp-shot {
+    flex: 0 0 58%;
+    scroll-snap-align: center;
+    border-radius: 0 !important;
+    border: 1px solid #151515 !important;
+    background: #fcfcfc !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gp-shot { flex: 0 0 42%; }
+}
+@media (min-width: 768px) {
+  .gp-gallery { grid-template-columns: 1fr 1fr; }
+}
+.gp-shot {
+  margin: 0;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f6f6f6;
+}
+.gp-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.gp-shot figcaption {
+  padding: 9px 12px;
+  border-top: 1px solid rgba(17, 17, 17, 0.08);
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(17, 17, 17, 0.6);
+}
+
+.gp-body {
+  margin: 0;
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(17, 17, 17, 0.72);
+}
+
+.gp-bars {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.gp-bars--sub { margin-top: -4px; }
+.gp-bars li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gp-bl {
+  flex: 0 0 92px;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(17, 17, 17, 0.62);
+}
+.gp-bt {
+  flex: 1 1 auto;
+  height: 8px;
+  border-radius: 999px;
+  background: #efefef;
+  overflow: hidden;
+}
+.gp-bt i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: #e67e33;
+}
+.gp-bv {
+  flex: 0 0 48px;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.gp-legend {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.gp-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(17, 17, 17, 0.72);
+}
+.gp-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.gp-legend b {
+  font-weight: 900;
+  color: #111111;
+}
+
+.gp-specs {
+  margin: 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+}
+.gp-specs > div {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+}
+.gp-specs dt {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #e67e33;
+}
+.gp-specs dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(17, 17, 17, 0.76);
+}
+
+.gp-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 34px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+}
+.gp-back {
+  min-height: 48px;
+  padding: 0 22px;
+  border: 2px solid #151515;
+  border-radius: 999px;
+  background: #151515;
+  color: #fcfcfc;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.gp-back:active { transform: translate(1px, 1px); }

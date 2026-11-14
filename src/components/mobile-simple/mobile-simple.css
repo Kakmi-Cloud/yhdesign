@@ -1,0 +1,204 @@
+/* 手机端首访层（极简·实用版）：一屏纸白项目列表。
+   只在 ≤1023px 渲染（App.jsx 的 isMobile 控制），文件里没有桌面端规则。
+   原则：纸白底 + 1px/2px 墨线 + 一个强调色（橙）；无物理动画、无多层入口。
+
+   —— 本轮（Gemini 第 11 轮）外观补丁，值全部来自它的指令：
+      1) 底色 #fff → #fcfcfc（对齐整站纸白）；底部内边距 18 → 14px。
+      2) 顶栏 padding 上 16→14、下 12→11；姓名 14→15px + 0.02em；副标 #6b6862 → #5a5751、行高 1.3 → 1.25。
+      3) 导语条化：padding 14px 20px 4px → 8px 20px，行高 1.6→1.45，色 #4b4842→#3a3732，
+         加暖灰底 #f4f2ed 与 1px 底边线。
+      4) 行内三层文字 → 两行：第一行 [编号 + 分类]，第二行 16px 加粗标题（单行省略号）；
+         缩略图 56→52px（暖灰占位底 + 1px 墨线），行高 76→74px，列表补底边封口线；
+         箭头 20→16px、色 #8a867e。
+      5) 底栏去掉顶边框（避免与列表底边双线），padding 18→12px；
+         CTA 字号 14→15px + 0.02em、高度 52→50px、加 2px 2px 0 #151515 硬阴影。 */
+
+.ms-overlay {
+  --ms-display: 'Oswald', 'Noto Sans SC', system-ui, sans-serif;
+  --ms-mono: 'JetBrains Mono', ui-monospace, monospace;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  background: #fcfcfc;
+  color: #151515;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: max(14px, env(safe-area-inset-bottom, 14px));
+  animation: ms-in 180ms ease-out both;
+}
+@keyframes ms-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ms-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: max(14px, env(safe-area-inset-top, 14px)) 20px 11px;
+  border-bottom: 2px solid #151515;
+}
+.ms-brand {
+  font: 900 30px/1 var(--ms-display);
+  letter-spacing: -0.035em;
+}
+.ms-who {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: right;
+}
+.ms-who strong {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.ms-who span {
+  font: 500 11px/1.25 var(--ms-mono);
+  color: #5a5751;
+}
+
+/* 导语 = 期刊索引横条：暖灰底 + 底边线，消除与第 1 行的粘连 */
+.ms-lede {
+  margin: 0;
+  padding: 8px 20px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #3a3732;
+  background: #f4f2ed;
+  border-bottom: 1px solid rgba(21, 21, 21, 0.14);
+}
+
+.ms-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(21, 21, 21, 0.14);
+}
+.ms-list > li + li {
+  border-top: 1px solid rgba(21, 21, 21, 0.14);
+}
+.ms-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 16px;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 74px;
+  padding: 10px 20px;
+  background: none;
+  border: 0;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+.ms-row:active {
+  background: #f4f2ed;
+}
+.ms-thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  background: #f4f2ed;
+  border: 1px solid rgba(21, 21, 21, 0.2);
+}
+/* 两行结构：第 1 行 = 橙色等宽编号 + 分类；第 2 行 = 16px 主标题（单行省略号） */
+.ms-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'id meta'
+    'title title'
+    'status status';
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 2px;
+  min-width: 0;
+}
+.ms-id {
+  grid-area: id;
+  font: 700 11px/1 var(--ms-mono);
+  letter-spacing: 0.1em;
+  color: #b4551d;
+}
+.ms-meta {
+  grid-area: meta;
+  font-size: 12px;
+  color: #6b6862;
+}
+.ms-title {
+  grid-area: title;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 进展状态：与项目文件档案页共用同一份口径 */
+.ms-status {
+  grid-area: status;
+  margin-top: 3px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #a4531c;
+}
+.ms-chev {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #8a867e;
+  stroke-width: 2;
+  stroke-linecap: square;
+}
+
+.ms-foot {
+  margin-top: auto;
+  padding: 12px 20px 0;
+}
+.ms-note {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: #6b6862;
+  text-align: center;
+}
+.ms-cta {
+  width: 100%;
+  min-height: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #151515;
+  background: #e67e33;
+  border: 2px solid #151515;
+  box-shadow: 2px 2px 0 #151515;
+}
+.ms-cta:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* 云端留言入口：次级按钮，不抢「简历与能力」的主操作 */
+.ms-msg {
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #42332C;
+  background: #FBF6EC;
+  border: 1px solid #D9CDBA;
+}
+.ms-msg:active { background: #F3EBDD; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-overlay { animation: none; }
+  .ms-cta:active { transform: none; box-shadow: 2px 2px 0 #151515; }
+}

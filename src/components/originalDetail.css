@@ -1,0 +1,210 @@
+/* ==========================================================================
+   OriginalDetailOverlay —— 手机端「查看完整项目」全屏浮层
+   --------------------------------------------------------------------------
+   这块浮层里装的不是 React 组件，而是**原稿自己的项目详情页**（离线单文件
+   yh-original.html），用 iframe 贴满整屏 + 一条 hash 深链指到对应项目。
+
+   为什么单独一个 CSS 文件：
+     这里要处理三件 Tailwind 表达不了的事 ——
+     ① 浮层自身的层叠顺序（必须压过入口页 z-150 与详情页 z-200）；
+     ② 返回按钮要落在 iOS 的 safe-area 之上（env(safe-area-inset-bottom)）；
+     ③ 加载遮罩用一条 indeterminate 进度带做"正在打开"的反馈。
+     几何与状态都集中在受控命名空间 yho- 下，退出即失效。
+
+   注意：所有选择器都带 .yho- 前缀，且不依赖 Tailwind 的 @theme 变量
+   （字体栈在这里自带一份），这样即使打包顺序变化也不会被压掉。
+   ========================================================================== */
+
+.yho-root {
+  --yho-ink: #171816;
+  --yho-mute: #656763;
+  --yho-line: #e7e8e3;
+  --yho-orange: #e67e33;
+  --yho-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --yho-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --yho-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  position: fixed;
+  inset: 0;
+  z-index: 300; /* 入口页 150 / 详情页 200 / 擦除带 320 → 取 300，压在页面之上、擦除带之下 */
+  overflow: hidden;
+  background: #fff;
+  overscroll-behavior: contain; /* 断掉滚动链，别让底下的主页跟着一起弹 */
+  color: var(--yho-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.yho-root,
+.yho-root *,
+.yho-root *::before,
+.yho-root *::after {
+  box-sizing: border-box;
+}
+
+/* --- 原稿：铺满整屏 ------------------------------------------------------- */
+.yho-frame {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
+
+/* --- 加载遮罩 ------------------------------------------------------------
+   原稿单文件里内嵌了 200 多张图，首次解析要一点时间。给一块白底 + 一条
+   走动的进度带，说明"在开"而不是"卡住了"。
+   注意它只到 z-2：返回按钮在 z-3，**任何时候都点得到** —— 用户不会被困在
+   这块遮罩后面。此外兜底定时器到点也会把它收掉（见 OriginalDetailOverlay.jsx）。 */
+.yho-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: opacity 0.44s ease, visibility 0.44s ease;
+}
+
+.yho-veil[data-hidden='true'] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.yho-veil-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 420px;
+  padding: 0 36px;
+  text-align: center;
+}
+
+/* 橙色实心方块 + 硬阴影：和站内 acid 印刷语言的"印章"手法一致 */
+.yho-mark {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 2px;
+  background: var(--yho-orange);
+  box-shadow: 5px 5px 0 0 var(--yho-ink);
+}
+
+.yho-kicker {
+  margin: 0;
+  font: 600 10px/1 var(--yho-mono);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--yho-mute);
+}
+
+.yho-title {
+  margin: 0;
+  font: 700 19px/1.4 var(--yho-sans);
+  letter-spacing: 0.01em;
+  color: var(--yho-ink);
+}
+
+.yho-bar {
+  position: relative;
+  width: 128px;
+  height: 2px;
+  overflow: hidden;
+  background: var(--yho-line);
+}
+
+.yho-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 42%;
+  background: var(--yho-orange);
+  animation: yho-run 1.15s cubic-bezier(0.5, 0.05, 0.45, 0.95) infinite;
+}
+
+@keyframes yho-run {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(340%);
+  }
+}
+
+.yho-note {
+  margin: 0;
+  font: 400 11px/1.6 var(--yho-sans);
+  color: #9a9c98;
+}
+
+/* --- 返回按钮 ------------------------------------------------------------
+   放屏幕底部居中：拇指区，单手一定够得到；也不和原稿详情页自己的页头
+   （左上角那枚「返回主视觉」）打架。
+   这根按钮是**唯一一处不依赖浏览器历史的出口** —— 它只改 React 状态，
+   所以哪怕历史栈被 iframe 搅乱了，也一定退得回去。 */
+.yho-back {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 46px;
+  padding: 0 22px;
+
+  border: 1.5px solid rgba(23, 24, 22, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow: 0 8px 26px rgba(23, 24, 22, 0.16);
+
+  color: var(--yho-ink);
+  font: 600 13.5px/1 var(--yho-sans);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s var(--yho-ease), box-shadow 0.2s var(--yho-ease);
+}
+
+.yho-back:hover {
+  box-shadow: 0 10px 30px rgba(23, 24, 22, 0.2);
+}
+
+.yho-back:active {
+  transform: translateX(-50%) scale(0.955);
+}
+
+.yho-back:focus-visible {
+  outline: 2px solid var(--yho-orange);
+  outline-offset: 3px;
+}
+
+.yho-back-ico {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--yho-orange);
+}
+
+/* --- 降级 ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .yho-veil {
+    transition-duration: 0.01ms;
+  }
+  .yho-bar::after {
+    animation: none;
+    width: 100%;
+    background: #d9dad5;
+  }
+  .yho-back {
+    transition: none;
+  }
+}

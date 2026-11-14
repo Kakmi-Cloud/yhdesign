@@ -1,0 +1,576 @@
+/* 手机端长页重做（≤767px）—— 风格方向 A「瑞士工程档案表 / Swiss Field Spec」
+   （Gemini 第 8 轮方案：长页与规格抽屉走方向 A；详情页 B；首访轮盘/胶片 C）
+   设计令牌（方向 A）：H1 28 / H2 22 / H3 17 / 正文 15 / 图注 10-12 / 行高 1.55
+   间距刻度 4·8·12·16·24；栅格 2 列（手机视口下把 4 列收成 2 列，4 列在 414px 装不下中文）
+   零圆角、1-2px 实线墨框、无阴影、等宽数字、动效 120ms ease-out。
+   作用域：只在 ≤767px 生效并覆盖长页四个章节；≥768px 的桌面长页一个像素都不动。
+   2026-11-14 修复：这里原来是 ≤1023px，但 App.jsx 的 isMobile 是 max-width:767px。
+   于是 768–1023px（平板竖屏 / 平板「请求桌面网站」）会渲染桌面 DOM，CSS 却把
+   桌面骨架整段 display:none，手机版 .mob-* 又根本没渲染 —— 四个章节高度全部塌陷，
+   文档只剩一屏，「简历及以下」完全看不到且滚不动。断点必须与 JS 一致。 */
+
+.mob-about,
+.mob-projects,
+.mob-strengths,
+.mob-contact {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* 桌面骨架在手机上让位：跑马灯带 / 巨型水印 / page-shell 正文 */
+  #about > .page-shell,
+  #about > .section-watermark,
+  #about > div[aria-hidden="true"],
+  #projects > .page-shell,
+  #projects > .section-watermark,
+  #projects > div[aria-hidden="true"],
+  #strengths > .page-shell,
+  #strengths > .section-watermark,
+  #strengths > div[aria-hidden="true"],
+  #contact > .page-shell,
+  #contact > .section-watermark,
+  #contact > div[aria-hidden="true"] {
+    display: none !important;
+  }
+
+  /* 联系章节原本 min-h-screen + py-24，手机上整屏空 */
+  #contact {
+    min-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 48px !important;
+  }
+
+  .mob-about,
+  .mob-projects,
+  .mob-strengths,
+  .mob-contact {
+    display: block;
+    padding: 20px 20px 22px;
+    background: #fcfcfc;
+    border-bottom: 1px solid #d8d4cc;
+    color: #151515;
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mob-projects {
+    padding: 14px 20px 16px;
+    background: #f4f2ed;
+  }
+
+  .mob-contact {
+    padding: 24px 20px 20px;
+    background: transparent;
+    border-bottom: 0;
+    color: #ffffff;
+  }
+
+  /* ---------- 节头 ---------- */
+  .mob-sechead {
+    margin-bottom: 12px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid #151515;
+  }
+
+  .mob-kicker {
+    display: block;
+    margin-bottom: 4px;
+    color: #5a5751;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .mob-kicker--light {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .mob-h1 {
+    margin: 0;
+    font-family: 'Oswald', 'Noto Sans SC', 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .mob-h1--light {
+    color: #ffffff;
+  }
+
+  .mob-lede {
+    margin: 6px 0 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #3a3732;
+  }
+
+  .mob-lede--light {
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .mob-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #5a5751;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- 顶部两格数据 ---------- */
+  .mob-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0 12px;
+    border: 1px solid #151515;
+    background: #f4f2ed;
+  }
+
+  .mob-stats > span {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 9px 12px;
+  }
+
+  .mob-stats > span + span {
+    border-left: 1px solid #151515;
+  }
+
+  .mob-stats b {
+    color: #151515;
+    font-family: 'Oswald', 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mob-stats i {
+    color: #5a5751;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- 经历：单行手风琴 ---------- */
+  .mob-exp-list {
+    border: 1px solid #151515;
+    border-bottom: 0;
+  }
+
+  .mob-exp {
+    border-bottom: 1px solid #151515;
+  }
+
+  .mob-exp-row {
+    display: flex;
+    width: 100%;
+    min-height: 54px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 0;
+    background: #ffffff;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mob-exp.is-open .mob-exp-row {
+    background: #f4f2ed;
+  }
+
+  .mob-exp-name {
+    color: #151515;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .mob-chip {
+    margin-left: auto;
+    padding: 3px 7px;
+    border: 1px solid #151515;
+    background: #e67e33;
+    color: #151515;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .mob-caret {
+    width: 20px;
+    color: #5a5751;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .mob-exp-body {
+    padding: 2px 12px 12px;
+    border-top: 1px dashed rgba(21, 21, 21, 0.25);
+    background: #f4f2ed;
+  }
+
+  .mob-li {
+    margin: 8px 0 0;
+    padding-left: 10px;
+    border-left: 2px solid #e67e33;
+    color: #262421;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .mob-li:nth-child(even) {
+    border-left-color: #151515;
+  }
+
+  /* ---------- 按钮与转接 ---------- */
+  .mob-cta {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 0 12px;
+    border: 2px solid #151515;
+    background: #151515;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 900;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .mob-cta--wide {
+    background: #e67e33;
+    color: #151515;
+  }
+
+  .mob-cta:active {
+    background: #e67e33;
+    color: #151515;
+  }
+
+  /* ---------- 教育 / 在读 / 工具 / 语言：2×2 规格格 ---------- */
+  .mob-specgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 14px 0 0;
+    border: 1px solid #151515;
+    border-right: 0;
+    border-bottom: 0;
+    background: #ffffff;
+  }
+
+  .mob-spec {
+    padding: 10px 12px;
+    border-right: 1px solid #151515;
+    border-bottom: 1px solid #151515;
+  }
+
+  .mob-spec dt {
+    color: #5a5751;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .mob-spec dd {
+    margin: 4px 0 0;
+    color: #151515;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .mob-spec dd + dd {
+    margin-top: 3px;
+    color: #5a5751;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+
+  /* 正文最小 15px（Gemini 第 10 轮评分标准：正文 <15px 一律不合格）
+     #hero 的说明段沿用桌面端 Tailwind 类 `font-medium leading-[1.9] text-white/85` = 14.4px，
+     手机端补足到 15px；标签/编号/装饰性英文（.mob-kicker / .mob-mono / .mob-meta）保持小字号。 */
+  #hero p.font-medium {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  /* ---------- 项目索引改为「一行指路」----------
+     2 列 8 格索引（.mob-index/.mob-card）曾是手机端长页最重的一块：951px，
+     等于 1.06 屏，而它陈列的 8 个项目与首访层列表完全同源、同样一跳进详情。
+     两套入口并存 = 用户要学两遍、页面长度翻倍。这里只留指路 + 48px 热区按钮。
+     .mob-index / .mob-card 的规则暂时保留，便于回滚。 */
+  .mob-projects-note {
+    padding: 0;
+  }
+
+  .mob-projects-note .mob-lede {
+    margin: 4px 0 0;
+  }
+
+  .mob-jump {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    border: 2px solid #151515;
+    background: #151515;
+    color: #f4f1ea;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+
+  .mob-jump:active {
+    transform: translate(1px, 1px);
+  }
+
+  /* ---------- 项目索引：2 列 8 格 ---------- */
+  .mob-index {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    border: 1px solid #151515;
+    background: #151515;
+  }
+
+  .mob-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 0 10px;
+    border: 0;
+    background: #ffffff;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mob-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .mob-card-id {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    padding: 1px 5px;
+    background: #151515;
+    color: #ffffff;
+    font-family: 'Oswald', 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+  }
+
+  .mob-card-sub {
+    padding: 0 9px;
+    color: #6b6862;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mob-card-title {
+    padding: 0 9px;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.25;
+  }
+
+  .mob-card-go {
+    padding: 0 9px;
+    color: #e67e33;
+    font-size: 11px;
+    font-weight: 900;
+  }
+
+  /* index.css 在 @media (max-width: 767px) 里有一条 `#projects p, #projects li, #projects span
+     { font-size: inherit }`（长页正文统一），ID 选择器优先级高于 `.mob-*` 单类名，
+     会把区块内的 p/span 文字撑回 16px。这里用 ID 作用域把字号抢回来。 */
+  #projects .mob-kicker {
+    font-size: 10px;
+  }
+
+  #projects .mob-lede {
+    font-size: 15px;
+  }
+
+  #projects .mob-card-id,
+  #projects .mob-card-go {
+    font-size: 11px;
+  }
+
+  #projects .mob-card-sub {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  #projects .mob-card-title {
+    font-size: 15px;
+  }
+
+  /* ---------- 优势 2×2 矩阵 ---------- */
+  .mob-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid #151515;
+    border-right: 0;
+    border-bottom: 0;
+    background: #ffffff;
+  }
+
+  .mob-cell {
+    padding: 11px 12px;
+    border-right: 1px solid #151515;
+    border-bottom: 1px solid #151515;
+  }
+
+  .mob-cell b {
+    display: block;
+    color: #e67e33;
+    font-family: 'Oswald', 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mob-cell h3 {
+    margin: 5px 0 4px;
+    color: #151515;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .mob-cell p {
+    margin: 0;
+    color: #3a3732;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  /* 2026-11-14：手机端优势矩阵跟桌面卡片墙用同一套新色票，
+     只作用于 #strengths，不改动其它章节的 .mob-matrix / .mob-cell。 */
+  #strengths .mob-strengths { background: #FBF6EC; }
+  #strengths .mob-matrix { border-color: #D9CDBA; background: #FBF6EC; }
+  #strengths .mob-cell { border-color: #D9CDBA; }
+  #strengths .mob-sechead { border-bottom-color: #D9CDBA; }
+  #strengths .mob-cell b { color: #6E6B9B; }
+  #strengths .mob-cell h3 { color: #42332C; }
+  #strengths .mob-cell p { color: #6E5C51; }
+
+  /* 手机长页里的云端留言卡片：去掉 .gb-wrap 自带的内边距，与 .mob-contact 对齐 */
+  .mob-guestbook { margin: 18px 0 4px; }
+  .mob-guestbook .gb-wrap { padding: 0; }
+  .mob-guestbook .gb-card { box-shadow: 3px 3px 0 0 rgba(255,255,255,.10); }
+
+  /* ---------- 联系 ---------- */
+  .mob-contact .mob-sechead {
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+  }
+
+  .mob-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .mob-act {
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border: 1.5px solid #151515;
+    background: #e67e33;
+    color: #151515;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 2px 2px 0 rgba(255, 255, 255, 0.88);
+    transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+    cursor: pointer;
+  }
+
+  .mob-act:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+
+  .mob-act--ghost {
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    box-shadow: none;
+  }
+
+  .mob-act--ghost:active {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translate(1px, 1px);
+  }
+
+  .mob-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.72);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+  }
+
+  /* 自研轮 D5：吸顶顶栏 70px 会压住锚点跳转后的章节头
+     （实测：从首访层「简历与能力」进来后跳到 #projects，SEC. 02 kicker
+     的 viewport top 只有 12px，被 70px 顶栏吃掉 58px）。
+     给章节与章节头留出顶栏高度 + 8px 呼吸位，锚点落点不再被遮。 */
+  #about,
+  #projects,
+  #strengths,
+  #contact,
+  .mob-sechead {
+    scroll-margin-top: 78px;
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .mob-about *,
+  .mob-projects *,
+  .mob-strengths *,
+  .mob-contact * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

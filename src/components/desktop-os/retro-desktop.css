@@ -1,0 +1,846 @@
+/* ==========================================================================
+   复古桌面 OS —— 酸纸印刷 + neo-brutalist
+   与站点其余部分共用同一套语言：纸白 #FCFCFC / 近黑 #151515 / 强调橙 #E67E33、
+   2–3px 硬描边、硬偏移阴影（不做柔光）、Oswald 做标题、JetBrains Mono 做等宽标签。
+   壁纸与图标全部是 CSS 渐变 + 内联 SVG，零位图文件。
+   ========================================================================== */
+
+html.yh-os-mode,
+html.yh-os-mode body {
+  /* 桌面模式下锁死文档滚动：底下那张长页保持原样但一动不动，
+     避免「桌面在动、后面的章节标题在动」这种穿帮。 */
+  overflow: hidden !important;
+}
+
+.os-desktop-root {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  width: 100vw;
+  z-index: 150; /* 盖住 header(50) / SectionRail(40) / ScrollProgress(100)，但低于详情页 z-[200] */
+  background-color: #fcfcfc;
+  color: #151515;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+}
+
+/* ── 壁纸：酸纸横竖印刷参考线 + 对角裁切 + 网点（纯 CSS） ───────────────── */
+.os-acid-wallpaper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: #fcfcfc;
+  background-image:
+    radial-gradient(rgba(21, 21, 21, 0.16) 1px, transparent 1px),
+    linear-gradient(to right, rgba(21, 21, 21, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 21, 21, 0.05) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(230, 126, 51, 0.05) 0%, transparent 55%);
+  background-size: 24px 24px, 96px 96px, 96px 96px, 100% 100%;
+}
+
+/* 四角工程准星：把"桌面"框成一张印刷校版纸 */
+.os-acid-wallpaper::before,
+.os-acid-wallpaper::after {
+  content: '';
+  position: absolute;
+  width: 148px;
+  height: 148px;
+  border: 0 solid rgba(21, 21, 21, 0.35);
+  pointer-events: none;
+}
+.os-acid-wallpaper::before {
+  top: 68px;
+  left: 24px;
+  border-left-width: 2px;
+  border-top-width: 2px;
+}
+.os-acid-wallpaper::after {
+  right: 24px;
+  bottom: 76px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+}
+
+/* 桌面左上角铭牌 */
+.os-plate {
+  position: absolute;
+  top: 22px;
+  left: 26px;
+  z-index: 9000; /* 全局铭牌：压在窗口之上（窗口 inline z 从 100 起递增） */
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+.os-plate b {
+  font-size: 30px;
+  line-height: 1;
+}
+.os-plate span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+}
+
+/* ── 退出桌面模式 / 进入长页 ─────────────────────────────────────────── */
+.os-exit {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  /* 实测踩到的坑：拖动窗口到右上角后，窗口会盖住这个按钮，force click 点不到
+     （elementFromPoint 命中的是 .os-window-frame）。退出是全局出口，必须永远可点，
+     所以给它一个高于一切窗口的 z —— 开始菜单里也有一份同功能入口。 */
+  z-index: 9001;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #fcfcfc;
+  border: 2px solid #151515;
+  box-shadow: 4px 4px 0 0 rgba(21, 21, 21, 0.9);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 120ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.os-exit:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 rgba(21, 21, 21, 0.9);
+}
+.os-exit:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 0 rgba(21, 21, 21, 0.9);
+}
+
+/* ── 桌面图标 ────────────────────────────────────────────────────────── */
+.os-desk {
+  position: absolute;
+  top: 92px;
+  left: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, 118px);
+  gap: 10px 18px;
+  align-content: start;
+}
+.os-icon-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px 12px;
+  background: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 120ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 120ms ease, border-color 120ms ease;
+}
+.os-icon-tile:hover {
+  background: #fcfcfc;
+  border-color: #151515;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 rgba(21, 21, 21, 0.9);
+}
+.os-icon-tile:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 0 rgba(21, 21, 21, 0.9);
+}
+.os-icon-tile[data-open='true'] .os-icon-glyph {
+  background: #e67e33;
+}
+.os-icon-glyph {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  background: #fcfcfc;
+  border: 2px solid #151515;
+  box-shadow: 3px 3px 0 0 rgba(21, 21, 21, 0.9);
+}
+.os-icon-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: #6b6b6b;
+}
+.os-icon-label {
+  font-size: 11px;
+  line-height: 1.25;
+  text-align: center;
+  font-weight: 700;
+  word-break: keep-all;
+  max-width: 112px;
+}
+
+/* ── 窗口 ────────────────────────────────────────────────────────────── */
+.os-window-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fcfcfc;
+  border: 3px solid #151515;
+  box-shadow: 6px 6px 0 0 rgba(21, 21, 21, 0.9);
+  will-change: transform;
+  touch-action: none;
+}
+.os-window-frame[data-focused='true'] {
+  box-shadow: 8px 8px 0 0 rgba(21, 21, 21, 0.95);
+}
+.os-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px 7px 12px;
+  border-bottom: 3px solid #151515;
+  background: #fcfcfc;
+  cursor: grab;
+}
+.os-window-frame[data-focused='true'] .os-window-bar {
+  background: #151515;
+  color: #fcfcfc;
+}
+.os-window-bar:active {
+  cursor: grabbing;
+}
+.os-window-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+.os-window-ref {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.os-win-btn {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  background: #fcfcfc;
+  color: #151515;
+  border: 2px solid #151515;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+}
+.os-win-btn:hover {
+  background: #e67e33;
+}
+.os-window-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.os-window-cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: #f4f1ea;
+  border-bottom: 3px solid #151515;
+  overflow: hidden;
+}
+.os-window-cover img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.os-window-meta {
+  padding: 14px 16px 18px;
+}
+.os-window-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+}
+.os-window-kicker i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: #e67e33;
+  box-shadow: 1px 1px 0 0 #151515;
+}
+.os-window-h {
+  margin: 8px 0 0;
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.1;
+}
+.os-window-desc {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.os-window-cta {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  background: #151515;
+  color: #fcfcfc;
+  border: 2px solid #151515;
+  box-shadow: 4px 4px 0 0 rgba(21, 21, 21, 0.9);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.os-window-cta:hover {
+  background: #e67e33;
+  color: #151515;
+}
+.os-window-hint {
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #8a8a8a;
+}
+
+/* ── 任务栏 ──────────────────────────────────────────────────────────── */
+.os-taskbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 700; /* 高于窗口（100+），低于开始菜单（800） */
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  background: #fcfcfc;
+  border-top: 3px solid #151515;
+}
+.os-start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 12px;
+  background: #151515;
+  color: #fcfcfc;
+  border: 2px solid #151515;
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+.os-start-btn[aria-expanded='true'] {
+  background: #e67e33;
+  color: #151515;
+}
+.os-task-items {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+.os-taskbar-item {
+  flex: 0 0 auto;
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 32px;
+  padding: 0 10px;
+  background: #fcfcfc;
+  color: #151515;
+  border: 2px solid #151515;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.os-taskbar-item:hover {
+  background: #f4f1ea;
+}
+.os-taskbar-item[data-focused='true'] {
+  background: #151515;
+  color: #fcfcfc;
+}
+.os-taskbar-item[data-minimized='true'] {
+  opacity: 0.62;
+  text-decoration: underline dotted;
+}
+.os-taskbar-clock {
+  flex: 0 0 auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  padding-left: 10px;
+  border-left: 2px solid #151515;
+}
+
+/* ── 开始菜单 ────────────────────────────────────────────────────────── */
+.os-startmenu {
+  position: absolute;
+  left: 12px;
+  bottom: 60px;
+  width: 268px;
+  background: #fcfcfc;
+  border: 3px solid #151515;
+  box-shadow: 6px 6px 0 0 rgba(21, 21, 21, 0.9);
+  padding: 10px;
+  z-index: 800; /* 高于任务栏(700)与窗口(100+) */
+}
+.os-startmenu-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  padding: 2px 4px 8px;
+}
+.os-startmenu-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 8px;
+  background: transparent;
+  border: 2px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.os-startmenu-item:hover {
+  border-color: #151515;
+  background: #f4f1ea;
+}
+.os-startmenu-item span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: #8a8a8a;
+  margin-left: auto;
+}
+
+/* ── 焦点可见性：键盘用户必须看得见自己在哪 ─────────────────────────── */
+.os-icon-tile:focus-visible,
+.os-win-btn:focus-visible,
+.os-window-cta:focus-visible,
+.os-taskbar-item:focus-visible,
+.os-start-btn:focus-visible,
+.os-startmenu-item:focus-visible,
+.os-exit:focus-visible,
+.os-window-frame:focus-visible {
+  outline: 2px dashed #e67e33;
+  outline-offset: 2px;
+}
+
+/* ── 长页里的「桌面模式」入口：三重曝光 ────────────────────────────────
+   用户反馈「桌面模式太过不显眼」：之前只有右下角一个 96×33 的白底胶囊，
+   没人注意到，甚至以为功能坏了。现在改成三层，按显眼程度递减：
+
+   1) 顶栏常驻键 .os-entry-header（在 App.jsx 的 header 里，每屏都在）
+   2) 首次引导条 .os-intro（深色横条，只出现到用户选择/关掉为止，
+      localStorage['yh_desktop_intro_seen'] = '1' 记忆）
+   3) 左下浮动胶囊 .os-relaunch（引导条关掉之后的常驻兜底入口）
+
+   层级：header z-50 < 引导条 z-96 < ScrollProgress z-100 < 详情浮层 z-200；
+   浮动胶囊 z-95，在右侧章节轨 z-40 之上、进度条与详情浮层之下。
+   浮动胶囊从右下移到左下，是为了躲开右侧的章节轨与滚动进度条。      */
+
+.os-entry-header {
+  /* 版式交给 Tailwind 类，这里只负责「不该出现时别出现」 */
+  white-space: nowrap;
+}
+
+/* 首访引导条：压在 sticky header 下沿的「期刊号外」横条（top 由 JS 实测 header 高度给出）。
+   刻意不贴 bottom —— 贴底横条会被当成 Cookie 同意条，用户会在没读之前无脑关掉。
+   暖酸纸 #F4F1EA + 黑橙 -45° 斜纹 + 等宽刊头，让它读起来像版式的一部分而不是弹窗。
+   z-48：高于右侧章节轨 z-40，低于 sticky header z-50、进度条 z-100、桌面 z-150、详情 z-200。 */
+.os-intro {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 48;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  padding: 9px 22px;
+  border-bottom: 2px solid #151515;
+  background: #f4f1ea;
+  color: #151515;
+  box-shadow: 0 5px 0 0 rgba(230, 126, 51, 0.85);
+  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+}
+.os-intro-mark {
+  width: 8px;
+  height: 26px;
+  background: repeating-linear-gradient(-45deg, #151515 0 4px, #e67e33 4px 8px);
+}
+.os-intro-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.os-intro-kicker {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: #b4551d;
+}
+.os-intro-text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #151515;
+}
+.os-intro-text b {
+  color: #b4551d;
+  font-weight: 900;
+}
+.os-intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.os-intro-go,
+.os-intro-later {
+  border: 2px solid #151515;
+  padding: 9px 13px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.os-intro-go {
+  background: #151515;
+  color: #fcfcfc;
+  font-weight: 900;
+}
+.os-intro-go:hover {
+  border-color: #151515;
+  background: #e67e33;
+  color: #151515;
+}
+.os-intro-later {
+  background: transparent;
+  color: #151515;
+}
+.os-intro-later:hover {
+  background: #151515;
+  color: #fcfcfc;
+}
+.os-intro-close {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(21, 21, 21, 0.45);
+  background: transparent;
+  color: #151515;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+.os-intro-close:hover {
+  border-color: #e67e33;
+  color: #b4551d;
+}
+.os-intro-go:focus-visible,
+.os-intro-later:focus-visible,
+.os-intro-close:focus-visible {
+  outline: 2px dashed #e67e33;
+  outline-offset: 2px;
+}
+
+/* 常驻兜底入口：左下角深色硬边按钮（引导条关掉之后才出现） */
+.os-relaunch {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 95;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 40px;
+  padding: 0 15px;
+  border: 2px solid #151515;
+  background: #151515;
+  color: #fcfcfc;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 0 #e67e33;
+  transform: translateZ(0);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease,
+    color 180ms ease, opacity 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.os-relaunch:hover {
+  background: #e67e33;
+  color: #151515;
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 0 #151515;
+}
+.os-relaunch:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 #151515;
+}
+.os-relaunch:focus-visible {
+  outline: 2px dashed #e67e33;
+  outline-offset: 3px;
+}
+/* 方向感知：向下读正文时收起，向上滚立刻回来；页脚附近也让位。
+   只改透明度与位移，不改 display，避免读屏/焦点顺序跳变。 */
+.os-relaunch.is-pill-hidden {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  pointer-events: none;
+}
+/* 橙色小方块：与桌面模式的壁纸/图标同一套语言，缓慢闪一下提示它是活的 */
+.os-relaunch-mark {
+  width: 9px;
+  height: 9px;
+  background: #e67e33;
+  box-shadow: 1.5px 1.5px 0 0 #fcfcfc;
+  animation: os-relaunch-blink 1.9s steps(1, end) infinite;
+}
+@keyframes os-relaunch-blink {
+  0%,
+  58% {
+    opacity: 1;
+  }
+  59%,
+  100% {
+    opacity: 0.25;
+  }
+}
+/* 详情页/光箱打开时（z-200）被盖住即可，不用额外隐藏 */
+@media print {
+  .os-intro,
+  .os-relaunch,
+  .os-entry-header {
+    display: none;
+  }
+}
+/* 减少动效：桌面模式本来就不进（硬降级），所以入口一并隐藏，避免点了没反应 */
+@media (prefers-reduced-motion: reduce) {
+  .os-intro,
+  .os-relaunch,
+  .os-entry-header {
+    display: none !important;
+  }
+}
+@media (max-width: 1023px) {
+  /* 桌面模式的「宽屏入口」在窄屏全部隐藏；
+     .os-pocket-launch 是窄屏专用的另一个入口（复用 .os-relaunch 的皮），见文件末尾的口袋版一节 */
+  .os-intro,
+  .os-relaunch:not(.os-pocket-launch) {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   口袋版（<1024px）—— 手机上也能进桌面模式
+   图标是 2×4 大格子（平板 4 列）；窗口改成从底部升起的 sheet（条头部下滑收起）；
+   任务栏多一个「长页模式」退出键。桌面端（≥1024px）一行都不受影响。
+   为什么不敢在窄屏用自由拖窗：手机上没有「桌面坐标」这个概念，手指拖拽会与
+   系统边缘返回手势、页面纵向滚动三方抢事件，所以只保留"下滑收起"这一种手势。
+   ========================================================================== */
+@media (max-width: 1023px) {
+  .os-pocket-launch {
+    display: inline-flex !important;
+    left: auto;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    height: 48px; /* 触摸目标下限 44px */
+    padding: 0 18px;
+    font-size: 13px;
+    z-index: 94; /* 低于概念播放器浮层 .ml-overlay(150)，首屏不打扰 */
+  }
+  .os-pocket-launch .os-relaunch-mark {
+    animation: none; /* 窄屏省电，不做闪烁 */
+  }
+
+  .os-desktop-root[data-pocket-mode='true'] .os-plate {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-exit {
+    top: 8px;
+    right: 8px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  /* 图标区：铺满整屏，可纵向滚动 */
+  .os-desktop-root[data-pocket-mode='true'] .os-desk {
+    position: absolute;
+    inset: 50px 10px 64px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+    gap: 10px;
+    align-content: stretch;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-icon-tile {
+    min-height: 64px;
+    padding: 8px 6px;
+    touch-action: manipulation;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-icon-glyph {
+    width: 46px;
+    height: 46px;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-icon-glyph svg {
+    width: 28px;
+    height: 28px;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-icon-index {
+    font-size: 8px;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-icon-label {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  /* 窗口 = 底部 sheet（位置由 CSS 决定，JSX 在这条分支里不写 inline 几何） */
+  .os-desktop-root[data-pocket-mode='true'] .os-window-frame {
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    top: auto;
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+    width: auto;
+    height: auto;
+    max-height: 66vh;
+    max-height: 66dvh;
+    box-shadow: 6px 6px 0 0 rgba(21, 21, 21, 0.9);
+    animation: os-sheet-up 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    touch-action: pan-y;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-window-bar {
+    min-height: 46px;
+    padding: 6px 6px 6px 10px;
+    touch-action: none; /* 条头部只负责下滑收起 */
+  }
+  .os-window-grab {
+    display: block;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 5px;
+    margin-right: 6px;
+    background: #151515;
+    opacity: 0.5;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-window-body {
+    max-height: calc(66vh - 46px);
+    max-height: calc(66dvh - 46px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-win-btn {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* 任务栏：留出安全区，所有目标 ≥40px（触摸下限 44px 由内边距补齐） */
+  .os-desktop-root[data-pocket-mode='true'] .os-taskbar {
+    height: calc(54px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    gap: 6px;
+  }
+  .os-desktop-root[data-pocket-mode='true'] .os-start-btn,
+  .os-desktop-root[data-pocket-mode='true'] .os-taskbar-item,
+  .os-desktop-root[data-pocket-mode='true'] .os-taskbar-exit {
+    min-height: 40px;
+    font-size: 11px;
+  }
+  .os-taskbar-exit {
+    flex: 0 0 auto;
+    border: 2px solid #151515;
+    background: #e67e33;
+    color: #151515;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+  .os-taskbar-exit:focus-visible {
+    outline: 2px dashed #e67e33;
+    outline-offset: 2px;
+  }
+}
+
+@keyframes os-sheet-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* 平板：一排 4 个图标，别把方块拉成巨型按钮 */
+  .os-desktop-root[data-pocket-mode='true'] .os-desk {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  .os-pocket-launch {
+    display: none !important;
+  }
+}
+
+/* 2026-11-14：访客留言簿窗口样式随功能一并移除。 */

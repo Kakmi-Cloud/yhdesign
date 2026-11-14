@@ -1,0 +1,2097 @@
+@import "tailwindcss";
+
+/* 不让 Tailwind 把 dist 里的旧构建产物当作类名来源 ——
+   否则上一版 CSS 里的 bg-[#EFFF66] 会被当成候选重新生成一遍，
+   于是旧色永远清不掉。只扫源码。 */
+@source "../src";
+@source not "../dist";
+
+@theme inline {
+  --color-background: var(--yang-background);
+  --color-foreground: var(--yang-foreground);
+  --color-card: var(--yang-card);
+  --color-card-foreground: var(--yang-card-foreground);
+  --color-primary: var(--yang-primary);
+  --color-primary-foreground: var(--yang-primary-foreground);
+  --color-secondary: var(--yang-secondary);
+  --color-secondary-foreground: var(--yang-secondary-foreground);
+  --color-muted: var(--yang-muted);
+  --color-muted-foreground: var(--yang-muted-foreground);
+  --color-accent: var(--yang-accent);
+  --color-accent-foreground: var(--yang-accent-foreground);
+  --color-border: var(--yang-border);
+  --color-ring: var(--yang-ring);
+
+  --radius-sm: calc(var(--yang-radius) * 0.5);
+  --radius-md: calc(var(--yang-radius) * 0.75);
+  --radius-lg: var(--yang-radius);
+  --radius-xl: calc(var(--yang-radius) * 1.25);
+  --radius-2xl: calc(var(--yang-radius) * 1.5);
+
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", serif;
+  --font-display: "Oswald", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-instrument: "Instrument Serif", Georgia, "Times New Roman", serif;
+}
+
+:root {
+  /* 首页统一语言：纸白底 / 近黑 / 中性灰阶 + 荧光橙 */
+  --yang-background: #fcfcfc;
+  --yang-foreground: #151515;
+  --yang-card: #ffffff;
+  --yang-card-foreground: #151515;
+  --yang-primary: #E67E33;
+  --yang-primary-foreground: #151515;
+  --yang-secondary: #151515;
+  --yang-secondary-foreground: #ffffff;
+  --yang-muted: #f2f2f2;
+  --yang-muted-foreground: #5a5a5a;
+  --yang-accent: #E67E33;
+  --yang-accent-foreground: #151515;
+  --yang-border: #e3e3e3;
+  --yang-ring: #E67E33;
+  --yang-radius: 1rem;
+
+  --shadow-color: 0 0% 0%;
+  --shadow-2xs: none;
+  --shadow-xs: 0 1px 2px 0 rgb(21 21 21 / 0.05);
+  --shadow-sm: 0 2px 8px 0 rgb(21 21 21 / 0.06);
+  --shadow-md: 0 6px 20px -6px rgb(21 21 21 / 0.1);
+  --shadow-lg: 0 16px 40px -16px rgb(21 21 21 / 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis 接管滚动时必须关掉原生平滑 ——
+   Lenis 内部是直接改 scrollTop 的，如果浏览器再对每次赋值做一次平滑动画，
+   两者叠加会明显发涩、跟手变差。
+   用 html.lenis 限定作用域：Lenis 会给 <html> 加这个类，
+   所以只有惯性滚动真正在跑的时候才生效，不影响别处。 */
+html.lenis {
+  scroll-behavior: auto;
+}
+
+/* 锚点跳转时给吸顶导航留出空间，避免标题被 header 遮住 */
+section[id],
+div[id] {
+  scroll-margin-top: 88px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--yang-background);
+  color: var(--yang-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+.font-instrument {
+  font-family: var(--font-instrument);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Premium texture backgrounds — neutral grayscale */
+.texture-grain {
+  background-color: var(--yang-card);
+  background-image:
+    radial-gradient(circle at 20% 30%, hsl(0 0% 85% / 0.14) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, hsl(0 0% 88% / 0.12) 0%, transparent 45%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+.texture-dots {
+  background-color: #e6e6e6;
+  background-image:
+    radial-gradient(circle, hsl(0 0% 55% / 0.2) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.texture-lines {
+  background-color: #e6e6e6;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 48px,
+      hsl(0 0% 65% / 0.14) 48px,
+      hsl(0 0% 65% / 0.14) 49px
+    );
+}
+
+.texture-grid {
+  background-color: #e6e6e6;
+  background-image:
+    linear-gradient(hsl(0 0% 65% / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(0 0% 65% / 0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.texture-waves {
+  background-color: #e6e6e6;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 50%, hsl(0 0% 88% / 0.5), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 20%, hsl(0 0% 86% / 0.45), transparent),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q15 20 30 30 T60 30' fill='none' stroke='hsl(0 0% 75% / 0.18)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.texture-amber {
+  background: linear-gradient(135deg, #e6e6e6 0%, #dcdcdc 50%, #e8e8e8 100%);
+  position: relative;
+}
+.texture-amber::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 70% 30%, hsl(24 100% 55% / 0.06) 0%, transparent 35%),
+    radial-gradient(circle at 30% 80%, hsl(0 0% 50% / 0.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.texture-soft {
+  background: linear-gradient(160deg, #e6e6e6 0%, #efefef 100%);
+  position: relative;
+}
+.texture-soft::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Decorative blobs */
+.blob {
+  position: absolute;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  filter: blur(0px);
+  pointer-events: none;
+}
+
+.blob-amber {
+  background: linear-gradient(135deg, hsl(25 90% 60% / 0.15), hsl(35 85% 58% / 0.1));
+}
+
+.blob-cream {
+  background: linear-gradient(135deg, hsl(35 40% 90% / 0.5), hsl(30 35% 88% / 0.3));
+}
+
+/* Project number watermark */
+.project-number {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 600;
+  line-height: 1;
+  color: hsl(35 20% 50% / 0.12);
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Spec sheet grid */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.spec-item {
+  padding: 0.875rem 1rem;
+  border-radius: 1rem;
+  background: hsl(40 20% 96% / 0.8);
+  border: 1px solid hsl(35 20% 85% / 0.5);
+}
+
+.spec-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yang-muted-foreground);
+  margin-bottom: 0.35rem;
+}
+
+.spec-value {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--yang-foreground);
+}
+
+/* Panel spec sheet (colored project panels) */
+.panel-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+}
+
+.panel-spec-item {
+  padding: 0.75rem 0.875rem;
+  border-radius: 0.875rem;
+  background: hsl(40 20% 98% / 0.45);
+  border: 1px solid hsl(35 20% 70% / 0.25);
+}
+
+/* Technical divider */
+.tech-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--yang-border) 0%, transparent 100%);
+}
+
+/* Hero watermark */
+.hero-watermark {
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 22vw, 20rem);
+  font-weight: 600;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: hsl(35 15% 50% / 0.06);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Section background watermark — giant decorative word, never blocks content */
+.section-watermark {
+  position: absolute;
+  left: 50%;
+  bottom: -0.06em;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  color: rgba(0, 0, 0, 0.035);
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.07);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0) 50%);
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0) 50%);
+}
+
+/* Centered variant for hero — fades at top and bottom so headline stays readable */
+.section-watermark-center {
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  color: rgba(0, 0, 0, 0.05);
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.09);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,1) 45%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,1) 45%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0) 100%);
+}
+
+/* Hero glassmorphism theme */
+.bg-hero-glass {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  position: relative;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.hero-blob-1 {
+  width: 45vw;
+  height: 45vw;
+  max-width: 600px;
+  max-height: 600px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, transparent 70%);
+  top: -10%;
+  right: -5%;
+  animation: blob-float-1 18s ease-in-out infinite alternate;
+}
+
+.hero-blob-2 {
+  width: 38vw;
+  height: 38vw;
+  max-width: 500px;
+  max-height: 500px;
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.28) 0%, transparent 70%);
+  bottom: 10%;
+  left: -8%;
+  animation: blob-float-2 22s ease-in-out infinite alternate;
+}
+
+.hero-blob-3 {
+  width: 30vw;
+  height: 30vw;
+  max-width: 400px;
+  max-height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, transparent 70%);
+  top: 40%;
+  left: 35%;
+  animation: blob-float-3 20s ease-in-out infinite alternate;
+}
+
+@keyframes blob-float-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-40px, 60px) scale(1.1); }
+}
+
+@keyframes blob-float-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, -40px) scale(1.08); }
+}
+
+@keyframes blob-float-3 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-30px, -30px) scale(1.12); }
+}
+
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.hero-glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2rem;
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.hero-corner-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.text-hero-primary {
+  color: #E67E33;
+}
+
+.text-hero-muted {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.text-hero-dark {
+  color: #0f172a;
+}
+
+/* Swiss hero theme — neutral base + single orange accent */
+.bg-hero-warm {
+  background: var(--yang-background);
+  position: relative;
+}
+
+/* Layered orange panel — Swiss geometric accent with depth */
+.hero-geo-block {
+  position: absolute;
+  top: clamp(120px, 16vh, 200px);
+  right: clamp(20px, 6vw, 96px);
+  width: clamp(240px, 24vw, 400px);
+  height: clamp(240px, 24vw, 400px);
+  border-radius: 1.5rem;
+  background: linear-gradient(150deg, #ff8a3d 0%, #ff4a10 48%, #d92c00 100%);
+  box-shadow:
+    0 24px 60px rgba(217, 44, 0, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* soft light sweep */
+.hero-geo-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 120% at 18% 12%, rgba(255, 255, 255, 0.28) 0%, transparent 42%),
+    radial-gradient(90% 90% at 85% 90%, rgba(0, 0, 0, 0.16) 0%, transparent 46%);
+}
+
+/* grain / paper texture */
+.hero-geo-block::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+
+/* hollow ring — negative space */
+.hero-geo-ring {
+  position: absolute;
+  top: -22%;
+  right: -16%;
+  width: 68%;
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+/* diagonal stripe field */
+.hero-geo-stripes {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46%;
+  height: 46%;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.14) 0,
+    rgba(0, 0, 0, 0.14) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  opacity: 0.6;
+}
+
+/* small offset square — layered geometry */
+.hero-geo-square {
+  position: absolute;
+  right: 16%;
+  bottom: 12%;
+  width: 22%;
+  aspect-ratio: 1;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 0.35rem;
+  transform: rotate(12deg);
+}
+
+.hero-geo-text {
+  position: absolute;
+  left: 12%;
+  bottom: 10%;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: #1a1816;
+}
+
+.hero-geo-idx {
+  position: absolute;
+  top: 12%;
+  left: 12%;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+
+
+.hero-warm-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 170, 140, 0.25);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 4px 24px rgba(80, 50, 20, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.hero-fused {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.panel-liquid-glass {
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 1.75rem;
+  box-shadow:
+    0 8px 32px rgba(26, 24, 22, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.2) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.panel-liquid-glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-corner-label-warm {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(26, 24, 22, 0.5);
+}
+
+.text-warm-heading {
+  color: #1a1816;
+}
+
+.text-warm-body {
+  color: #4a4540;
+}
+
+.text-warm-muted {
+  color: #6b6560;
+}
+
+.text-warm-muted-fused {
+  color: rgba(108, 101, 96, 0.5);
+}
+
+.text-warm-body-fused {
+  color: rgba(74, 69, 64, 0.78);
+}
+
+.text-warm-heading-fused {
+  color: rgba(26, 24, 22, 0.82);
+}
+
+.border-warm-border {
+  border-color: rgba(26, 24, 22, 0.28);
+}
+
+.quote-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+}
+
+.quote-line {
+  font-size: clamp(2.2rem, 8vw, 4.5rem);
+  color: #1a1816;
+  white-space: nowrap;
+  transform: translateZ(0);
+}
+
+.quote-stack-fused .quote-line {
+  color: rgba(26, 24, 22, 0.4);
+  font-weight: 600;
+}
+
+.quote-stack-right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* Swiss tag cloud — identity quick-glance */
+.hero-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hero-tag {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--yang-border);
+  border-radius: 999px;
+  color: var(--yang-foreground);
+  background: transparent;
+  white-space: nowrap;
+}
+
+.hero-tag:hover {
+  background: var(--yang-primary);
+  color: var(--yang-primary-foreground);
+  border-color: var(--yang-primary);
+}
+
+/* Swiss section number — chapter index */
+.hero-section-num {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(26, 24, 22, 0.55);
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .quote-line {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hero accent block */
+.hero-accent-block {
+  background: linear-gradient(160deg, #E67E33 0%, #E6B639 100%);
+  color: #fff;
+}
+
+/* Corner label */
+.corner-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yang-muted-foreground);
+}
+
+/* Reveal animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Experience drawer animation */
+.drawer-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .drawer-content {
+  grid-template-rows: 1fr;
+}
+
+/* Scroll reveal */
+/* 同样不挂 will-change：.reveal 在全页有上百个（每个区块、每张卡都是），
+   常驻 will-change 会让它们在滚动全程都占着合成层。这是一次性的
+   0.8s 过渡，浏览器对进行中的 transform/opacity 过渡本来就会提层。 */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+.reveal-delay-5 { transition-delay: 400ms; }
+.reveal-delay-6 { transition-delay: 480ms; }
+
+/* Stagger load animation helpers */
+.stagger-1 { animation-delay: 80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+.stagger-4 { animation-delay: 320ms; }
+.stagger-5 { animation-delay: 400ms; }
+
+/* Line clamp fallback */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Chart animations */
+.bar-fill {
+  width: 0;
+  animation: bar-fill 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes bar-fill {
+  to {
+    width: var(--target-width);
+  }
+}
+
+.radar-polygon {
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
+  animation: radar-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.radar-dot {
+  opacity: 0;
+  animation: dot-fade 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+@keyframes radar-pop {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dot-fade {
+  to { opacity: 1; }
+}
+
+.donut-segment {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: donut-draw 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes donut-draw {
+  to {
+    stroke-dashoffset: var(--donut-offset);
+  }
+}
+
+.progress-ring {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: progress-draw 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes progress-draw {
+  to {
+    stroke-dashoffset: var(--progress-offset);
+  }
+}
+
+.chart-card {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: card-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.chart-card:nth-child(1) { animation-delay: 0.1s; }
+.chart-card:nth-child(2) { animation-delay: 0.2s; }
+.chart-card:nth-child(3) { animation-delay: 0.3s; }
+.chart-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes card-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Stroke text for rhythmic slogan */
+.stroke-text {
+  -webkit-text-stroke: 2px black;
+  color: transparent;
+}
+
+@media (max-width: 768px) {
+  .stroke-text {
+    -webkit-text-stroke: 1.5px black;
+  }
+}
+
+/* Neo-brutalist decorative motion */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-2deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+
+/* Hand-drawn newspaper pattern background */
+.hero-pattern-bg {
+  background-color: #efefef;
+  background-image:
+    radial-gradient(circle at 20% 25%, hsl(0 0% 88% / 0.5) 0%, transparent 35%),
+    radial-gradient(circle at 80% 75%, hsl(0 0% 90% / 0.4) 0%, transparent 35%),
+    url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q30 26 60 30 T120 30' fill='none' stroke='hsl(0 0% 70% / 0.12)' stroke-width='1.5'/%3E%3Cpath d='M0 60 Q30 56 60 60 T120 60' fill='none' stroke='hsl(0 0% 70% / 0.12)' stroke-width='1.5'/%3E%3Cpath d='M0 90 Q30 86 60 90 T120 90' fill='none' stroke='hsl(0 0% 70% / 0.12)' stroke-width='1.5'/%3E%3Ccircle cx='30' cy='20' r='2' fill='hsl(0 0% 45% / 0.12)'/%3E%3Ccircle cx='90' cy='50' r='2' fill='hsl(0 0% 45% / 0.12)'/%3E%3Ccircle cx='50' cy='100' r='2' fill='hsl(0 0% 45% / 0.12)'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 140px 140px;
+}
+
+/* Halftone dots — newsprint texture */
+.halftone {
+  background-image: radial-gradient(circle, hsl(0 0% 45% / 0.18) 1.5px, transparent 1.5px);
+  background-size: 10px 10px;
+}
+
+/* Vertical text */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Hand-drawn irregular border */
+.hand-drawn {
+  border: 3px solid black;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+/* Organic wobble animation */
+@keyframes wobble {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(2deg) translateY(-6px); }
+}
+
+.animate-wobble {
+  animation: wobble 5s ease-in-out infinite;
+}
+
+/* ===== 全站容器：1200-1440px 居中安全版心（Soft Bento 呼吸感） ===== */
+.page-shell {
+  margin-inline: auto;
+  width: min(100%, 1320px);
+  padding-inline: clamp(1.25rem, 4vw, 2.75rem);
+}
+
+/* ===== Hero：纯白极净背景，与全站同一语言 ===== */
+.hero-section {
+  background-color: #ffffff;
+}
+
+/* ============================================================
+   Soft Bento 基础层（柔和便当盒 / 液态玻璃 / 弥散柔影）
+   ============================================================ */
+
+/* 便当卡基础：白底 + 微冷描边 + 大半径圆角 + 弥散低透明柔影 */
+.bento-card {
+  background: #ffffff;
+  border: 1px solid rgba(21, 21, 21, 0.06);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 30px rgb(21 21 21 / 0.04);
+}
+
+/* 浅灰微冷底卡：用于区域衬托，制造轻量层级 */
+.bento-tint {
+  background: #f4f5f8;
+  border: 1px solid rgba(21, 21, 21, 0.04);
+  border-radius: 1.75rem;
+}
+
+/* 液态玻璃：毛玻璃悬浮（导航 / 浮层用） */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.06);
+}
+
+/* 柔和弥散投影（替代一切无模糊硬影） */
+.soft-shadow {
+  box-shadow: 0 8px 30px rgb(21 21 21 / 0.05);
+}
+.soft-shadow-lg {
+  box-shadow: 0 24px 60px -20px rgb(21 21 21 / 0.12);
+}
+
+/* 便当分隔：章节间圆角浅灰过渡块 */
+.section-bridge {
+  height: clamp(2rem, 4vw, 3rem);
+  width: 100%;
+  background: transparent;
+}
+
+/* ============================================================
+   Acid Poster 辅助层（先锋杂志 / 酸性机能海报：网点与裁切）
+   ============================================================ */
+/* 原先这里还有一条 .acid-noise（240px 细颗粒 turbulence），
+   它和 body::after 的 260px 噪点是同一种东西、只有尺度差一点点，
+   和后来那层 canvas 粗颗粒又差很多 —— 三层不同尺度的不规则噪点
+   叠在一起就是"乱"。现在不规则噪点全站只保留 body::after 一层，
+   这个类已删除。规则网点（.acid-dots）是另一种装置，保留。 */
+/* 印刷网点底纹：规则网格，是印刷语言而不是噪点。
+   全站只留它 + body::after 那层细纸纹，两层各一个尺度 ——
+   "不规则噪点"叠两层会互相打架，规则网点不会。 */
+.acid-dots {
+  background-image: radial-gradient(rgba(17, 17, 17, 0.16) 1.1px, transparent 1.1px);
+  background-size: 22px 22px;
+}
+/* 警戒斜纹（黑 × 荧光橙） */
+.acid-hazard {
+  background: repeating-linear-gradient(-45deg, #111 0 12px, #E67E33 12px 24px);
+}
+/* 大字描边（酸性空心字） */
+.acid-outline {
+  -webkit-text-stroke: 2.5px #151515;
+  color: transparent;
+}
+.acid-outline-yellow {
+  -webkit-text-stroke: 2.5px #E67E33;
+  color: transparent;
+}
+/* 微缩 mono 标注（海报副信息） */
+.acid-microlabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+/* 慢速自转（酸星等图形用） */
+@keyframes acid-spin {
+  to { transform: rotate(360deg); }
+}
+.acid-spin {
+  animation: acid-spin 14s linear infinite;
+}
+
+/* ============================================================
+   动效层 v1 —— 「呼吸 / 动态 / 小动画」
+   手法取自 ReactBits（SplitText / ScrollVelocity / CountUp /
+   ClickSpark / StarBorder / StickerPeel / SpotlightCard / Shuffle），
+   按本页的酸纸印刷语言改写：橙色单一强调色、硬边、直角、错版套印感。
+   所有组件的类名都加了 `mo-` 前缀，避免与 ReactBits 原版的全局类名
+   （.scroller / .parallax / .sticker-main …）相撞。
+
+   一条纪律：**输入驱动与自主呼吸不是二选一。**
+   指针/滚动决定揭示与纵深；外加一个不看输入的自主时钟
+   （跑马灯基础速度、扫描光带、呼吸光晕）——
+   否则对"还没动过手的人"这页就是一张静止的图。
+
+   —— 关于印刷肌理（重要，改过一次）——
+   这里原本还有一层会动的 canvas 颗粒（ReactBits Noise 的手法）。
+   它和 hero 的 .acid-noise、全站的 body::after 三层不同尺度的
+   不规则噪点叠在一起，纯色区发浑、照片发脏，用户反馈是"看着好乱"。
+   结论：**问题不在强度，在层数与尺度** —— 两种不同尺度的噪点
+   会互相打架。现在不规则噪点全站只保留 body::after 一层（opacity 0.045），
+   规则网点保留 .acid-dots（0.05，22px），canvas 颗粒已删除。
+   要把纸面再调干净，唯一的旋钮就是 body::after 的 opacity。
+   ============================================================ */
+
+:root {
+  /* —— 动效 token —— */
+  --mo-breath: 7.2s;            /* 呼吸周期 */
+  --mo-spin: 14s;               /* 自转周期 */
+  --mo-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --mo-ease-acid: cubic-bezier(0.16, 1, 0.3, 1);
+  --mo-ink: #151515;
+  --mo-accent: #E67E33;
+}
+
+/* ---------- ① 呼吸：自主时钟，不依赖任何输入 ---------- */
+
+/* 色块呼吸：缓慢的缩放 + 透明度起伏。位移用 transform，
+   不触发布局；周期 7.2s 与 9s 错开，避免整页同频像心跳。 */
+@keyframes mo-breath {
+  0%, 100% { transform: scale(1);     opacity: 0.92; }
+  50%      { transform: scale(1.055); opacity: 1; }
+}
+.mo-breath { animation: mo-breath var(--mo-breath) var(--mo-ease-out) infinite; will-change: transform, opacity; }
+
+/* 硬影呼吸：酸纸的硬投影非常容易"死"——让它随呼吸推远 2px，
+   像纸被抬起又落回。这是本页最贴合印刷语言的一处呼吸。 */
+@keyframes mo-shadow-breath {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(-2px, -2px, 0); }
+}
+.mo-lift { animation: mo-shadow-breath 5.6s var(--mo-ease-out) infinite; will-change: transform; }
+
+/* 扫描光带：一条极窄的橙色竖带横穿整块。自主走。
+   与"指针纵深"互补——它证明页面即使没人操作也在运行。 */
+@keyframes mo-sweep {
+  0%   { transform: translate3d(-130%, 0, 0); opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translate3d(330%, 0, 0); opacity: 0; }
+}
+.mo-sweep {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 8%;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(230,126,51,0) 0%, rgba(230,126,51,0.55) 50%, rgba(230,126,51,0) 100%);
+  animation: mo-sweep 6.4s linear infinite;
+  will-change: transform, opacity;
+}
+
+/* ── #strengths「个人优势」新配色：暖纸 / 深可可 / 雾紫 / 蜜橙 ──────────
+   2026-11-14：这一节原本是黑底橙字跑马灯 + 纯黑/荧光橙/白渐变卡，
+   与相邻章节割裂。跑马灯扫光和水印只在本节内改成同色系的柔和值，
+   不影响其它章节复用 .mo-sweep / .section-watermark。 */
+#strengths .mo-sweep {
+  background: linear-gradient(90deg, rgba(110,107,155,0) 0%, rgba(110,107,155,0.26) 50%, rgba(110,107,155,0) 100%);
+}
+#strengths .section-watermark {
+  color: rgba(66, 51, 44, 0.035);
+  -webkit-text-stroke-color: rgba(66, 51, 44, 0.09);
+}
+
+/* 滚动提示的上下浮动。
+   原本是 framer-motion 的 JS 无限动画 —— 那会让 framer 的**两条**内部帧循环
+   一直保持着（动画驱动循环 + 渲染批处理循环都写死 keepAlive），
+   首屏静止时实测每帧注册 2 次 rAF。改成纯 CSS 后这项开销直接归零：
+   合成器自己跑，主线程完全不参与，视觉完全一致。
+   它同样属于"无限动画"，离屏 / 长时间无人操作时由 <OffscreenPause/> 停表。 */
+@keyframes mo-cue-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.mo-cue-float { animation: mo-cue-float 1.6s ease-in-out infinite; }
+
+/* 减少动效：直接不挂动画，而不是"挂了再暂停" ——
+   少一条无限动画存在于渲染树里，也就少一处需要被停表的对象。 */
+@media (prefers-reduced-motion: reduce) {
+  .mo-cue-float { animation: none; }
+}
+
+/* ---------- ② 逐字揭示（SplitHeading 的落点样式） ----------
+   拆出来的元素由每帧写 transform/opacity；这里只负责"它们长什么样"。 */
+/* 注意：这里**不加** overflow:hidden。裁切版（clip）另给一个类 ——
+   漏字的斜体字臂、英文的降部都伸到行盒外面，一律裁掉会切字。
+   需要"从缝里推上来"观感的地方再单独加 .mo-split-clip。 */
+.mo-split {
+  display: block;
+  white-space: normal;
+  word-wrap: break-word;
+}
+.mo-split-clip { overflow: hidden; }
+.mo-split-line { display: block; overflow: hidden; }
+/* 这里**故意不写** will-change。
+   逐字拆开后，一个标题就是几十个 span；给它们常驻 will-change
+   等于给每个字都申请一块独立合成层 —— 一次首屏实测下来整页有
+   200+ 个常驻层，显存与合成开销全花在"已经在屏幕外、且动画早
+   就结束"的字上，是这台机器上滚动手感发涩的主因之一。
+   而 transform/opacity 动画本身走的就是合成器：浏览器会在动画
+   真正运行的那段时间自己提层，跑完自动回收。framer-motion 在
+   动画期间也会自行挂 will-change。所以这里交给它们按需申请，
+   比常驻正确也更快。 */
+.mo-split-char,
+.mo-split-word { display: inline-block; }
+/* 逐字拆开后，浏览器可以在任意两个字之间断行 —— 会把英文单词从中间劈开。
+   逐词模式下给每个词上 nowrap，断行仍只发生在空格处。 */
+.mo-split-word { white-space: nowrap; }
+
+/* ---------- ③ 滚动速度跑马灯（ScrollVelocity 的机制） ---------- */
+.mo-ticker {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.mo-ticker-scroller {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+.mo-ticker-scroller > span { flex-shrink: 0; }
+
+/* ---------- ④ 贴纸角掀起（StickerPeel 的机制，去掉 draggable） ----------
+   原版是 clip-path 裁 + 一个 scaleY(-1) 的镜像 flap，不是 3D transform。
+   这里照搬同一机制，只把"拖拽"换成"悬停/按下"，省掉 Draggable 插件。
+   定位用自定义属性承载，避免 :hover 与 inline style 打架。 */
+.mo-sticker {
+  --mo-peel-hover: 34%;
+  --mo-peel-active: 46%;
+  --mo-cut: -1px;
+  --mo-cut-end: calc(100% + 1px);
+  position: relative;
+  display: inline-block;
+}
+.mo-sticker-face {
+  position: relative;
+  z-index: 2;
+  clip-path: polygon(
+    var(--mo-cut) var(--mo-cut),
+    var(--mo-cut-end) var(--mo-cut),
+    var(--mo-cut-end) var(--mo-cut-end),
+    var(--mo-cut) var(--mo-cut-end)
+  );
+  transition: clip-path 0.6s ease-out;
+}
+.mo-sticker:hover .mo-sticker-face,
+.mo-sticker:focus-within .mo-sticker-face {
+  clip-path: polygon(
+    var(--mo-cut) var(--mo-peel-hover),
+    var(--mo-cut-end) var(--mo-peel-hover),
+    var(--mo-cut-end) var(--mo-cut-end),
+    var(--mo-cut) var(--mo-cut-end)
+  );
+}
+.mo-sticker:active .mo-sticker-face {
+  clip-path: polygon(
+    var(--mo-cut) var(--mo-peel-active),
+    var(--mo-cut-end) var(--mo-peel-active),
+    var(--mo-cut-end) var(--mo-cut-end),
+    var(--mo-cut) var(--mo-cut-end)
+  );
+}
+/* 掀开后露出的"纸背"：警戒斜纹（黑 × 橙）。
+   折痕线用伪元素钉在撕开边缘上，随掀开量一起走 ——
+   原版是靠一个镜像 flap 层，但那层要算两次百分比高度
+   （translateY 的百分比按自身高度解析，不是容器高度），
+   很容易算错；一条折痕线用同样成本拿到九成的观感。 */
+.mo-sticker-back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(21,21,21,0.94) 0 6px,
+    rgba(230,126,51,0.9) 6px 12px
+  );
+}
+.mo-sticker-back::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--mo-peel-hover);
+  height: 2px;
+  background: var(--mo-accent);
+  box-shadow: 0 1px 0 rgba(21, 21, 21, 0.85);
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+.mo-sticker:hover .mo-sticker-back::after,
+.mo-sticker:focus-within .mo-sticker-back::after { opacity: 1; }
+
+/* ---------- ⑤ 环绕光线边框（StarBorder 的机制，改成橙） ----------
+   原版两层 radial-gradient 光带 + 平移淡出，没有 blur。
+   颜色从 white 换成橙，容器底色仍是黑，用于主 CTA。 */
+.mo-starborder {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  padding: 2px 0;
+}
+.mo-starborder-band {
+  position: absolute;
+  width: 300%;
+  height: 55%;
+  opacity: 0.7;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--mo-accent), transparent 10%);
+  z-index: 0;
+}
+.mo-starborder-band.is-bottom {
+  bottom: -14px; right: -250%;
+  animation: mo-star-bottom var(--mo-star-speed, 6s) linear infinite alternate;
+}
+.mo-starborder-band.is-top {
+  top: -14px; left: -250%;
+  animation: mo-star-top var(--mo-star-speed, 6s) linear infinite alternate;
+}
+@keyframes mo-star-bottom {
+  0%   { transform: translate(0, 0);     opacity: 1; }
+  100% { transform: translate(-100%, 0); opacity: 0; }
+}
+@keyframes mo-star-top {
+  0%   { transform: translate(0, 0);    opacity: 1; }
+  100% { transform: translate(100%, 0); opacity: 0; }
+}
+
+/* ---------- ⑥ 光标聚光（SpotlightCard 的机制） ----------
+   原版 ::before + radial-gradient + 三个 CSS 变量，JS 只写变量。
+   颜色从白改成橙（原版假设暗底，本页是白纸，必须改）。 */
+.mo-spot {
+  position: relative;
+  isolation: isolate;
+}
+.mo-spot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    circle at var(--mo-mx, 50%) var(--mo-my, 50%),
+    var(--mo-spot-color, rgba(230, 126, 51, 0.22)),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.mo-spot:hover::before,
+.mo-spot:focus-within::before { opacity: 1; }
+.mo-spot > * { position: relative; z-index: 1; }
+
+/* ---------- ⑦ mono 标注洗牌（Shuffle 的机制，改成纯 React 实现） ----------
+   原版是为大字做的（GSAP 拆字 + 每个字符一条 strip + ScrollTrigger，
+   收尾还要把 DOM 还原）。这里只给 9-11px 的技术标注用，
+   于是改成**声明式**的同一机制：每个字符一列、列里叠 rolls+1 个格子、
+   悬停时整列上移一格一格地过。两端都放真实字符，所以静止与结束
+   都是正确文本，中间才是乱码滚过 —— 也就是老虎机的读感。
+   没有 DOM 改写、没有插件、没有需要 revert 的东西。 */
+.mo-shuffle {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.mo-shuffle-char {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+  position: relative;
+}
+.mo-shuffle-cell {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+}
+
+/* ---------- ⑧ 点击迸发：错版套印（ClickSpark 的机制 + 本页自己的点子） ----------
+   粒子是 canvas 画的（每帧重绘、400ms 寿命、径向均匀分布）。
+   本页把单色换成**两套版**：黑版与橙版各偏 1.6px 画一遍 ——
+   印刷里叫套印不准（misregistration），正好是酸纸的语言。 */
+.mo-spark-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ---------- ⑤ 页面转场：擦除带（PageWipe） ----------
+   只在"进入"时播放一次，作为切换的引子。带内沿用全站警示斜纹，
+   所以它是印刷语言的一部分，而不是凭空插进来的特效条。
+   位移用百分比：280% = 106vh 落在视口下方、-120% = -45.6vh 升出上方，
+   两端都在画外，任何视口高度下起止位置都成立。
+   z-index 高于详情页(200)与弹窗(100)，才能盖在两者之上掠过。 */
+.mo-wipe {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 38vh;
+  z-index: 320;
+  pointer-events: none;
+  background-color: var(--mo-accent);
+  border-top: 5px solid var(--mo-ink);
+  border-bottom: 5px solid var(--mo-ink);
+}
+/* 前缘的警示斜纹：带子上升时最先出现的一条硬边 */
+.mo-wipe::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 13px;
+  background: repeating-linear-gradient(-45deg, var(--mo-ink) 0 10px, var(--mo-accent) 10px 20px);
+}
+.mo-wipe::after {
+  content: "✦";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  line-height: 1;
+  color: var(--mo-ink);
+}
+
+/* ---------- ⑥ 像素揭示层（PixelReveal） ----------
+   盖在卡片图上，自己不吃指针事件 —— 卡片的点击与键盘行为完全不受影响，
+   监听挂在父容器上（见 PixelReveal.jsx）。 */
+.mo-pixel {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+.mo-pixel-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 降级：以上全部在 reduced-motion 下停掉 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .mo-breath,
+  .mo-lift,
+  .mo-sweep,
+  .mo-wipe,
+  .mo-starborder-band { animation: none !important; }
+  .mo-sweep,
+  .mo-wipe,
+  .ink-bloom,
+  .mo-spark-canvas { display: none !important; }
+  .mo-breath { opacity: 0.96 !important; transform: none !important; }
+  .mo-lift { transform: none !important; }
+  .mo-sticker-face,
+  .mo-sticker-back::after { transition: none !important; }
+  .mo-sticker:hover .mo-sticker-face,
+  .mo-sticker:active .mo-sticker-face { clip-path: none !important; }
+  .mo-sticker-back { display: none !important; }
+  .mo-split-char,
+  .mo-split-word { will-change: auto !important; }
+}
+
+/* --- Acid 章节滚动条：已由 <VelocityTicker/> 取代。 ---
+   旧的 `acid-ticker` 是 CSS 定时器（32s/48s linear 常量、内容必须恰好双份
+   才能 -50% 无缝、hover 时整条停住）。新的是滚动速度驱动：
+   静止时按基础速度自走、滚动时速度被叠加放大、往回滚方向翻转、
+   位移对一份拷贝宽度取模 —— 不需要内容恰好双份，也不再有定时器常量。
+   类名与关键帧一并删掉，避免留下"看起来还能用"的死代码。 */
+
+/* ---------- ⑨ 页面转场：墨洗（InkBloom） ----------
+   「完整经历 ↗」的转场。圆心取 hero 那块荧光橙圆球的实时中心，
+   一个纯色橙圆从小长到盖满整屏，满版那一拍换页，再把半径收回去。
+
+   必须纯色（#E67E33），不能加渐变、不能加描边：
+   橙圆本身就是纯色圆，clip-path 半径小于球半径（约 310px）时整个藏在球里 ——
+   橙盖橙，看不出变化；半径越过球边那一刻两者边缘重合，于是没有接缝。
+   一旦覆盖层上有渐变或描边，接缝立刻现形。
+
+   半径用 px（--r），不用百分比：circle() 的百分比按参考框 sqrt(w²+h²)/√2 解析，
+   一旦浏览器按别的参考解析、或参考框不是视口，四角就永远盖不满 —— 而且这是静默的
+   （页面照常跑，只是满版那一拍还能看见旧内容）。--r 由 InkBloom.jsx 按
+   "圆心到四个视口角的最远距离 × 1.02"算出，覆盖是算术保证。
+
+   ── 关键帧表为什么是这一串"怪"数字，而不是一条顺眼的曲线 ──
+   判据是**逐帧视口覆盖比例的最大跳变**（眼睛读的是"屏幕被吃掉多少"，不是半径）。
+   圆的覆盖率对半径极度非线性 —— 实测中段半径动 81px 就改 12.5% 覆盖，
+   两端要 300px 才改同样的量。所以单条 cubic-bezier 必然在中段超速：
+   离线扫遍候选曲线，最好的一条也只到 12.6%/帧，旧版 ease-in-expo 是 29.9%/帧。
+
+   解法是反解：让**覆盖率随时间线性**（8 等分，每段 12.5%），
+   再算出每个时刻该有的半径，写成 offset 距离百分比。
+   得到的表（--r 的 0 / 0.236 / 0.333 / 0.407 / 0.474 / 0.540 / 0.614 / 0.728 / 1）
+   实测涨开 5.0%/帧、收回 4.7%/帧 —— 比旧版柔和约 6 倍。
+   重算方法：把 coverage(r) = area(circle(r) ∩ 视口)/视口面积 的反函数取 8 等分。
+
+   相位（总 1400ms，与 InkBloom.jsx 的 COVER/HOLD/CLEAR 一一对应）：
+     0 → 40%      560ms  涨开（8 段覆盖率线性；起手段本来就藏在球里，慢一点是白送的）
+     40 → 55.7%   220ms  满版节拍 —— 走位与换页都发生在这里
+     55.7 → 100%  620ms  收回（同一张表反向；全程 linear，段内就是覆盖率线性）
+
+   全程 animation-timing-function 保持 linear：每一段靠关键帧位置均分，
+   段内插值即"覆盖率线性"，这正是要的形状 —— 不要再给它叠一条缓动曲线，
+   一叠就把中段又推快了（那正是上一版突兀的原因）。
+
+   z-index 380 压在详情页(200)、弹窗(100)、擦除带(320) 之上。 */
+.ink-bloom {
+  position: fixed;
+  inset: 0;
+  z-index: 380;
+  pointer-events: none;
+  background-color: #E67E33;
+  clip-path: circle(0px at var(--bx, 50%) var(--by, 50%));
+  animation: ink-bloom var(--bloom-dur, 1400ms) linear forwards;
+  will-change: clip-path;
+}
+
+@keyframes ink-bloom {
+  /* —— 涨开 0 → 40%：半径按覆盖率反解表递增 —— */
+  0% { clip-path: circle(0px at var(--bx, 50%) var(--by, 50%)); }
+  5% { clip-path: circle(calc(var(--r, 200vmax) * 0.236) at var(--bx, 50%) var(--by, 50%)); }
+  10% { clip-path: circle(calc(var(--r, 200vmax) * 0.333) at var(--bx, 50%) var(--by, 50%)); }
+  15% { clip-path: circle(calc(var(--r, 200vmax) * 0.407) at var(--bx, 50%) var(--by, 50%)); }
+  20% { clip-path: circle(calc(var(--r, 200vmax) * 0.474) at var(--bx, 50%) var(--by, 50%)); }
+  25% { clip-path: circle(calc(var(--r, 200vmax) * 0.540) at var(--bx, 50%) var(--by, 50%)); }
+  30% { clip-path: circle(calc(var(--r, 200vmax) * 0.614) at var(--bx, 50%) var(--by, 50%)); }
+  35% { clip-path: circle(calc(var(--r, 200vmax) * 0.728) at var(--bx, 50%) var(--by, 50%)); }
+  40% { clip-path: circle(var(--r, 200vmax) at var(--bx, 50%) var(--by, 50%)); }
+  /* —— 满版 40 → 55.7%：保持盖满，走位与换页在这里发生 —— */
+  55.7% { clip-path: circle(var(--r, 200vmax) at var(--bx, 50%) var(--by, 50%)); }
+  /* —— 收回 55.7 → 100%：同一张表反向 —— */
+  61.2% { clip-path: circle(calc(var(--r, 200vmax) * 0.728) at var(--bx, 50%) var(--by, 50%)); }
+  66.8% { clip-path: circle(calc(var(--r, 200vmax) * 0.614) at var(--bx, 50%) var(--by, 50%)); }
+  72.3% { clip-path: circle(calc(var(--r, 200vmax) * 0.540) at var(--bx, 50%) var(--by, 50%)); }
+  77.9% { clip-path: circle(calc(var(--r, 200vmax) * 0.474) at var(--bx, 50%) var(--by, 50%)); }
+  83.4% { clip-path: circle(calc(var(--r, 200vmax) * 0.407) at var(--bx, 50%) var(--by, 50%)); }
+  88.9% { clip-path: circle(calc(var(--r, 200vmax) * 0.333) at var(--bx, 50%) var(--by, 50%)); }
+  94.5% { clip-path: circle(calc(var(--r, 200vmax) * 0.236) at var(--bx, 50%) var(--by, 50%)); }
+  100% { clip-path: circle(0px at var(--bx, 50%) var(--by, 50%)); }
+}
+
+/* --- 全站酸性纸面覆层：固定噪点（不拦截交互） ---
+   这层原先写的是 opacity 0.14，而且 z-index 拉满，压在所有内容与照片之上。
+   它和 hero 里的 .acid-noise（原 0.5）、.acid-dots（0.09）、
+   以及后来加的会动的 .mo-grain 叠在一起 —— 四层噪点互相加强，
+   纯色区发浑、照片发脏，整页读起来是"乱"。
+   现在压到 0.045：只在纸面上留一点"纸的触感"，
+   视线不会停在这里。想让纸更干净就继续往下调，
+   调到 0 就是纯色底。 */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 260px 260px;
+}
+
+/* 时间线锯齿：奇数数据行桌面端右推 4%（自定义类，不依赖 Tailwind JIT 扫描） */
+@media (min-width: 1024px) {
+  .acid-tl-shift {
+    transform: translateX(4%);
+  }
+}
+.acid-tl-marker {
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+.acid-tl-marker > span {
+  transform: rotate(-45deg);
+}
+
+/* --- 去便当化：整页把圆角柔卡碾成锋利的印刷切边（保留 rounded-full 圆形） --- */
+.acid-frame [class*='rounded-[28px]'],
+.acid-frame [class*='rounded-[32px]'],
+.acid-frame [class*='rounded-[24px]'],
+.acid-frame [class*='rounded-2xl'],
+.acid-frame [class*='rounded-3xl'],
+.acid-frame [class*='rounded-xl'] {
+  border-radius: 2px;
+}
+/* 碾掉弥散柔影与玻璃毛边，露出平版印刷的“贴纸”边 */
+.acid-frame [class*='shadow-['],
+.acid-frame .soft-shadow,
+.acid-frame .soft-shadow-lg,
+.acid-frame .bento-card,
+.acid-frame .bento-tint {
+  box-shadow: none;
+}
+.acid-frame .bento-card,
+.acid-frame .bento-tint {
+  background: #ffffff;
+  border: 2px solid #151515;
+  border-radius: 2px;
+}
+
+/* --- Acid 硬影印章（acid-frame 的去阴影规则会压掉任意 shadow-[…] 类，故用显式类承载；不受全局连坐） --- */
+.stamp-ink { box-shadow: 4px 4px 0 0 #151515; }
+.stamp-ink-lg { box-shadow: 8px 8px 0 0 #151515; }
+.stamp-acid { box-shadow: 4px 4px 0 0 #E67E33; }
+.stamp-acid-lg { box-shadow: 8px 8px 0 0 #E67E33; }
+.stamp-hard-lg { box-shadow: 12px 12px 0 0 #151515; }
+.stamp-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stamp-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 12px 12px 0 0 #151515;
+}
+.stamp-border {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #151515;
+}
+
+/* --- 卡片 hover 引导：硬阴影 + 轻微抬升（粗野主义语言） ---
+   这里的 box-shadow 用显式类承载，而不是 Tailwind 的 hover:shadow-[…]：
+   页面上 <main> 带着 .acid-frame，其中一条
+   `.acid-frame [class*='shadow-['] { box-shadow: none }` 会把**任意**任意值阴影类
+   直接压掉（见上方"去便当化"）。写 hover:shadow-[6px_6px_0_#151515] 在这里是失效的，
+   而且不报错、静默不生效 —— 所以沿用文件里已有的做法：显式类不受全局连坐。 */
+.brutal-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.brutal-card:hover {
+  transform: translate(-2px, -4px);
+  box-shadow: 8px 8px 0 #151515;
+}
+
+/* 减少动效偏好：去掉位移，但保留"变硬影"这条反馈 ——
+   否则 hover 就完全没有可点暗示了，等于把这个功能整体关掉。 */
+@media (prefers-reduced-motion: reduce) {
+  .brutal-card { transition: none !important; }
+  .brutal-card:hover { transform: none !important; }
+}
+
+/* ============================================================
+   猫冰 CAT-ICE : THERMAL LAB —— 极端工业潮玩挂卡
+   只服务一个页面（src/components/CatIceDetailPage.jsx）。
+   ------------------------------------------------------------
+   为什么自己一套：这一页要的是**另一种视觉语言** ——
+   荧光冰蓝 × 熔岩热橙的极冷极热撞色、工业挂卡的硬边与网点、
+   以及"由温度驱动"的相变动效。跟全站的酸纸印刷（acid- / stamp-）
+   和动效层（mo-）混用会互相稀释，所以类名一律走 `ci-` 前缀。
+
+   关于停表：这里**不登记任何清单**。<OffscreenPause/> 用
+   document.getAnimations() 自己找 iterations:Infinity 的动画，
+   离屏或长时间无人操作时统一 animation-play-state: paused。
+   以后往这一节加无限动画，不需要再去别处补名字。
+
+   关于阴影：一律走行内 style。因为页面 <main> 上的 .acid-frame
+   有一条 `.acid-frame [class*='shadow-['] { box-shadow: none }`，
+   会把任意值阴影类静默压掉（不报错）。硬边立体感的挂卡承受不起。
+   ============================================================ */
+
+:root {
+  --ci-ice: #00F0FF;   /* 荧光冰蓝 —— 冷端主色 */
+  --ci-lava: #FF4500;  /* 熔岩热橙 —— 热端主色 */
+  --ci-ink: #0A0A0A;   /* 工业黑 */
+  --ci-bone: #F4F1EA;  /* 挂卡纸白 */
+  --ci-vial: #061420;  /* 冰晶仓深底 */
+}
+
+/* ---------- ① 冰霜粒子：冷端的"空气" ----------
+   粒子从仓顶飘落。位移 + 透明度，纯合成器属性；
+   --ci-drift 让每颗走不同的斜向，避免整片同向像下雨。 */
+@keyframes ci-frost {
+  0%   { transform: translate3d(0, -16%, 0) scale(0.5); opacity: 0; }
+  16%  { opacity: 0.95; }
+  78%  { opacity: 0.8; }
+  100% { transform: translate3d(var(--ci-drift, 10px), 360%, 0) scale(1); opacity: 0; }
+}
+.ci-frost {
+  animation: ci-frost var(--ci-dur, 6s) linear infinite;
+  animation-delay: var(--ci-delay, 0s);
+  will-change: transform, opacity;
+}
+
+/* ---------- ② 凝结水滴：热端的相变证据 ----------
+   水滴先"鼓起来"再沿壁滑落，落到底部消失。
+   cubic-bezier(.4,0,.7,1) 是慢起快走 —— 水挂不住才掉。 */
+@keyframes ci-drip {
+  0%   { transform: translate3d(0, 0, 0) scaleY(0.55); opacity: 0; }
+  14%  { opacity: 1; }
+  68%  { transform: translate3d(0, 168px, 0) scaleY(1.2); opacity: 1; }
+  100% { transform: translate3d(0, 236px, 0) scaleY(0.5); opacity: 0; }
+}
+.ci-drip {
+  animation: ci-drip var(--ci-dur, 4.6s) cubic-bezier(0.4, 0, 0.7, 1) infinite;
+  animation-delay: var(--ci-delay, 0s);
+  will-change: transform, opacity;
+}
+
+/* ---------- ③ 镭射虹彩：角标随视角流动 ----------
+   用 background-position 走动，而不是新建渐变 —— 只重绘那一小块。 */
+@keyframes ci-holo {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 220% 50%; }
+}
+.ci-holo {
+  background-image: linear-gradient(
+    100deg,
+    #00F0FF 0%, #7DF9FF 14%, #FFFFFF 26%, #FF9AD5 40%,
+    #FF4500 56%, #FFD36E 70%, #7DF9FF 84%, #00F0FF 100%
+  );
+  background-size: 220% 100%;
+  animation: ci-holo 5.2s linear infinite;
+}
+
+/* ---------- ④ 仓体扫描线：证明这台仪器在运行 ---------- */
+@keyframes ci-scan {
+  0%   { transform: translate3d(0, -110%, 0); opacity: 0; }
+  12%  { opacity: 0.5; }
+  88%  { opacity: 0.5; }
+  100% { transform: translate3d(0, 780%, 0); opacity: 0; }
+}
+.ci-scan {
+  animation: ci-scan 5.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform, opacity;
+}
+
+/* ---------- ⑤ 低温颤抖：冻僵的猫在抖 ----------
+   幅度刻意压在 1px 内 —— 再大就从"冷"变成"故障"了。
+   只做 translate，不涉及 transform-origin，SVG <g> 上也能安全生效。 */
+@keyframes ci-shiver {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  20%      { transform: translate3d(-0.9px, 0.5px, 0); }
+  45%      { transform: translate3d(0.8px, -0.6px, 0); }
+  70%      { transform: translate3d(-0.5px, -0.4px, 0); }
+  85%      { transform: translate3d(0.6px, 0.3px, 0); }
+}
+.ci-shiver { animation: ci-shiver 0.18s linear infinite; }
+.ci-shiver-soft { animation: ci-shiver 0.26s linear infinite; }
+
+/* ---------- ⑥ 流挂摆动：软化态的液体尾巴 ---------- */
+/* ---------- ⑦ 仪表呼吸：冷端壳体的微光 ---------- */
+@keyframes ci-shell {
+  0%, 100% { opacity: 0.88; }
+  50%      { opacity: 1; }
+}
+.ci-shell { animation: ci-shell 4.4s ease-in-out infinite; }
+
+/* ---------- ⑧ 指示灯 ---------- */
+@keyframes ci-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+.ci-blink { animation: ci-blink 1.5s steps(1, end) infinite; }
+
+/* ---------- 温控滑杆（THERMAL SLIDER） ----------
+   input 自身完全透明，可视轨道由旁边一层 div 画 —— 轨道要同时承载
+   "冷端蓝 / 热端橙 / 刻度 / 0°C 相变线"，这些用伪元素表达太挤。
+   只需给原生 thumb 做造型，所以 :active / :focus 的反馈仍然是免费的。 */
+.ci-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: grab;
+  /* 触屏上横向拖动才是意图；纵向留给页面滚动 */
+  touch-action: pan-y;
+}
+.ci-slider:active { cursor: grabbing; }
+.ci-slider:focus { outline: none; }
+
+/* 原生轨道要保留 12px 的实体高度：webkit 的滑块是**贴着轨道顶边**摆的，
+   轨道塌成 0 高的话拇指会浮到输入框上沿去。留出高度 + 负 margin 才能正中。 */
+.ci-slider::-webkit-slider-runnable-track {
+  height: 12px;
+  background: transparent;
+  border: none;
+}
+.ci-slider::-moz-range-track {
+  height: 12px;
+  background: transparent;
+  border: none;
+}
+
+/* 滑块本体：铬合金旋钮 + 当前相态色的光晕（--ci-thumb 由组件按温度写入） */
+.ci-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  /* (轨道 12px - 拇指 34px) / 2 —— 抵消 webkit 的顶边对齐 */
+  margin-top: -11px;
+  border-radius: 999px;
+  border: 3px solid var(--ci-ink);
+  background:
+    radial-gradient(circle at 32% 26%, #ffffff 0%, #ffffff 20%, var(--ci-thumb, #00F0FF) 64%, #0A0A0A 100%);
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.92),
+    0 5px 0 rgba(10, 10, 10, 0.9),
+    0 0 24px var(--ci-thumb, #00F0FF);
+  transition: box-shadow 0.2s ease;
+}
+.ci-slider::-moz-range-thumb {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 3px solid var(--ci-ink);
+  background:
+    radial-gradient(circle at 32% 26%, #ffffff 0%, #ffffff 20%, var(--ci-thumb, #00F0FF) 64%, #0A0A0A 100%);
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.92),
+    0 5px 0 rgba(10, 10, 10, 0.9),
+    0 0 24px var(--ci-thumb, #00F0FF);
+}
+.ci-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.92),
+    0 0 0 6px var(--ci-thumb, #00F0FF),
+    0 5px 0 rgba(10, 10, 10, 0.9);
+}
+
+/* ---------- ⑨ 音频波形条 ----------
+   推杆有音效这件事必须被"看见"，否则用户会以为这页是哑的。
+   三根条错开相位，读起来是"在出声"而不是"在加载"。
+   scaleY 只动合成器属性；transform-origin 定在底边，才是音量条的样子。 */
+@keyframes ci-eq {
+  0%, 100% { transform: scaleY(0.3); }
+  50%      { transform: scaleY(1); }
+}
+.ci-eq-bar {
+  transform-origin: 50% 100%;
+  animation: ci-eq 0.85s ease-in-out infinite;
+}
+
+/* 减少动效：不是"挂上再暂停"，而是根本不挂 ——
+   少一条无限动画存在于渲染树里，也就少一处需要被停表的对象。
+   相变信息仍然完全可读，它由温度数值、颜色和参数条承载，
+   动画只是把这件事说得更响。 */
+@media (prefers-reduced-motion: reduce) {
+  .ci-frost,
+  .ci-drip,
+  .ci-scan,
+  .ci-shiver,
+  .ci-shiver-soft,
+  .ci-shell,
+  .ci-blink,
+  .ci-eq-bar { animation: none; }
+  .ci-holo { animation: none; background-position: 40% 50%; }
+}
+
+
+/* ==========================================================================
+   手机端详情页统一顶栏 + 正文可读性（仅 <1024px）
+   --------------------------------------------------------------------------
+   背景：React 详情页在手机上高达 10.2 屏（9181px），各页自己的返回键是
+   position:static 的英文 Return（89x38，随页面滚走），第 5 屏想退出时既找不到
+   返回键也看不清 12px 的正文。这里在动效层里加一条固定顶栏（z-210），
+   并把手机端正文统一到 15px/1.7。
+   只在 isMobile 时渲染 + 这里再兜一层 max-width，桌面端零影响。
+   ========================================================================== */
+.detail-mobile-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 210;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 4px 10px;
+  padding-top: max(4px, env(safe-area-inset-top, 0px));
+  background: #FCFCFC;
+  border-bottom: 2px solid #151515;
+}
+.detail-mobile-back {
+  flex: 0 0 auto;
+  min-width: 96px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid #151515;
+  background: #151515;
+  color: #FCFCFC;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 3px 3px 0 0 #E67E33;
+}
+.detail-mobile-back:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 #E67E33; }
+.detail-mobile-jumps {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+.detail-mobile-jumps button {
+  min-width: 56px;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 2px solid #151515;
+  background: #F4F1EA;
+  color: #151515;
+  font-size: 13px;
+  font-weight: 800;
+}
+.detail-mobile-jumps button:active { background: #E67E33; }
+
+/* 详情页正文：手机上一律 15px / 1.7（图注与参数标签留 12px 下限）。
+   不用 !important —— 各页用内联 fontSize 写死的装饰性数字标签应当保持原样。 */
+@media (max-width: 1023px) {
+  [class*="z-[200]"] p,
+  [class*="z-[200]"] li {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  [class*="z-[200]"] figcaption {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+@media print {
+  .detail-mobile-bar { display: none !important; }
+}
+/* 详情页「工程推导」折叠（<1024px 生效，桌面端保持全展开） */
+.detail-fold > summary.detail-fold-summary { display: none; }
+.detail-fold > summary.detail-fold-summary::-webkit-details-marker { display: none; }
+@media (max-width: 1023px) {
+  /* 详情页规格表正文：AILamp / HealingLamp 的 <dd> 走 Tailwind text-[13px]，
+     低于评分标准的正文下限 15px，手机端补足（标签/编号仍保持小字号）。 */
+  dd.text-\[13px\] {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .detail-fold {
+    margin: 40px 0 0;
+    border: 2px solid #151515;
+    background: #F4F1EA;
+  }
+  .detail-fold > summary.detail-fold-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 52px;
+    padding: 10px 14px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #151515;
+    cursor: pointer;
+    list-style: none;
+  }
+  .detail-fold[open] > summary.detail-fold-summary {
+    border-bottom: 2px solid #151515;
+  }
+  .detail-fold[open] > summary.detail-fold-summary span { transform: rotate(45deg); }
+  .detail-fold > summary.detail-fold-summary span {
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 160ms ease;
+  }
+  .detail-fold > section:first-of-type { margin-top: 24px !important; }
+  /* 展开态不再由外层锁高（Gemini 第 12 轮回传裁决 2，2026-10-14）：
+     旧规则 `.detail-fold[open]{max-height:430px;overflow-y:auto;overscroll-behavior:contain}`
+     与子元素规则形成**双重滚动容器** —— 实测（06 椅子首个折叠条）details clientHeight 428 /
+     scrollHeight 511、子容器 481/430，手指上滑先滚完子容器 51px，还要再触发外层 83px，
+     且外层滚动会把 <summary> 标题栏滚出视野，用户读完无法直接点标题收起。
+     现改为：外层不生成任何滚动容器，唯一滚动交给下方
+     `.detail-fold > *:not(summary)`（单次上滑即到底）。 */
+  /* 折叠条文案（DetailFold 组件用 b/em，避免被上面的 span 旋转规则带跑） */
+  .detail-fold-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .detail-fold-copy b { font-size: 15px; font-weight: 800; letter-spacing: 0; }
+  .detail-fold-copy em { font-size: 10px; font-style: normal; letter-spacing: 0.08em; opacity: 0.62; text-transform: uppercase; }
+}
+/* ==========================================================================
+   手机端长页（<768px）减重：8 屏 → 目标 3.6 屏
+   --------------------------------------------------------------------------
+   依据：Gemini 第 7 轮「决策 5：长页定位」。桌面端一律不受影响。
+   ========================================================================== */
+.hero-mobile-plate {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 96px;
+  padding: 34px 20px 14px;
+  border-bottom: 2px solid #151515;
+  background: #FFFFFF;
+}
+.hero-mobile-name {
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: #151515;
+}
+.hero-mobile-meta {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  color: #5a5751;
+}
+@media (min-width: 768px) {
+  .hero-mobile-plate { display: none; }
+}
+
+@media (max-width: 767px) {
+  /* 1) 开场换铭牌：桌面那块 90vh 大开场整段留在桌面端 */
+  #hero { display: none !important; }
+
+  /* 2) 正文 15px / 1.7（项目区的滑动卡组有自己的版式，排除掉）
+        不动内联 fontSize，避免踩坏装饰性数字 */
+  #main p,
+  #main li {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  #projects p,
+  #projects li,
+  #projects span,
+  .ml-overlay p,
+  .mr-overlay p {
+    font-size: inherit;
+  }
+
+  /* 3) about 与 strengths 之间不再留缝：strengths 顶部那条重复的
+        SKILLS 滚动带在手机上隐藏，两节直接相接 */
+  #strengths > div[aria-hidden='true']:first-child { display: none !important; }
+  #about { padding-bottom: 0 !important; }
+  #strengths { padding-top: 0 !important; }
+
+  /* 4) 结尾区不再是 min-h-screen 的整屏留白，按钮热区提到 48px */
+  #contact {
+    min-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 48px !important;
+    justify-content: flex-start !important;
+  }
+  #contact a,
+  #contact button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+/* 手机端长页第二轮压缩：只收装饰与间距，不动内容措辞。
+   依据实测各节高度（414×896）：about 2.01 屏 / projects 2.05 / strengths 1.72 / contact 1.27。 */
+@media (max-width: 767px) {
+  #main .page-shell { padding-left: 18px !important; padding-right: 18px !important; }
+  /* about：三张经历卡 + 4 行信息格（126px×4）的垂直内边距 */
+  #about .brutal-card { padding: 14px 14px !important; }
+  #about [class*='mb-14'] { margin-bottom: 18px !important; }
+  #about [class*='mt-16'] { margin-top: 24px !important; }
+  /* 反面教材：不要给 #about 的 4 行信息格加 padding —— 它们本身已带内边距，
+     再叠一层把 about 从 1803px 顶到 1889px（实测，已回退）。 */
+  /* contact：水印与页脚留给桌面端 */
+  #contact .section-watermark { display: none !important; }
+  #contact [class*='mb-12'] { margin-bottom: 18px !important; }
+  #contact [class*='mb-20'] { margin-bottom: 22px !important; }
+  #contact [class*='pt-20'] { padding-top: 0 !important; }
+  /* projects / strengths：区头的上留白 */
+  #projects > *:first-child,
+  #strengths > *:first-child { margin-top: 0 !important; }
+}
+
+/* 详情页折叠条手机端视觉（Gemini 第 12 轮 A 组补丁 3）：闭合态暖灰底 + 1px 墨框，
+   展开态切纸白底 + 2px 2px 0 硬阴影；条高由 ~70px 收到 ~54px。
+   注：选择器额外带上 .detail-fold-summary —— 上方既有规则用
+   `.detail-fold > summary.detail-fold-summary`（权重 0,2,1），
+   不带类名的 .detail-fold > summary（0,1,1）会被它压住；值与它给的一致。 */
+@media (max-width: 1023px) {
+  details.detail-fold,
+  .detail-fold {
+    margin: 10px 0;
+    border: 1px solid #151515;
+    border-radius: 0;
+    background: #f4f2ed;
+    color: #151515;
+    box-shadow: none;
+    transition: background-color 120ms ease-out, box-shadow 120ms ease-out;
+  }
+  details.detail-fold[open],
+  .detail-fold[open] {
+    /* 加固（Gemini 第 12 轮回传：防回退）：确保展开态 <details> 自身绝不生成滚动容器 */
+    max-height: none;
+    overflow: visible;
+    background: #fcfcfc;
+    box-shadow: 2px 2px 0 #151515;
+  }
+  .detail-fold > summary,
+  .detail-fold > summary.detail-fold-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 52px;
+    padding: 10px 14px;
+    color: #151515;
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .detail-fold > summary::-webkit-details-marker,
+  .detail-fold > summary::marker { display: none; content: ''; }
+  .detail-fold[open] > summary,
+  .detail-fold[open] > summary.detail-fold-summary {
+    background: #f4f2ed;
+    border-bottom: 1px solid #151515;
+  }
+  .detail-fold > summary:active { background: #eae6dd; }
+  /* 改判（用户：「以内容为主，不要把内容藏起来」）：
+     旧规则 `.detail-fold > *:not(summary){max-height:430px;overflow-y:auto;…}` 是第 12 轮
+     为「单次上滑即到底」引入的内层滚动容器。实测在 08 猫冰页造成灾难性后果：整页 5 个
+     <section>（真实高 1288–2785px）被逐个钳成 430px 的内滚动窗口，用户滚到每个区块都只见
+     430px 高的一条，其余内容全部藏在嵌套滚动里 —— 这就是「猫冰内容显示太少」的真正根因。
+     现将展开态折叠体内不再生成任何滚动容器（内容全部就位，只由页面滚动），保留正文字号。 */
+  .detail-fold > *:not(summary) {
+    max-height: none;
+    overflow: visible;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #262421;
+  }
+  .detail-fold p,
+  .detail-fold li { font-size: 15px; line-height: 1.6; color: #262421; }
+}

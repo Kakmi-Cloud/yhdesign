@@ -1,0 +1,378 @@
+/* ── 手机端「项目档案牌堆」首访层 ──────────────────────────────────────
+   画风沿用整站：暖纸底、深可可字、细墨框、硬偏移影、等宽编号、Oswald 标题；
+   雾紫 / 蜜橙只做点缀。与「个人优势」四张卡、留言卡片是同一套色票。 */
+
+.mcl-overlay {
+  --mcl-display: 'Oswald', 'Noto Sans SC', system-ui, sans-serif;
+  --mcl-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  background: #FBF6EC;
+  color: #42332C;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+  font-family: 'Noto Sans SC', 'Inter', system-ui, sans-serif;
+  animation: mcl-in 320ms ease-out both;
+}
+@keyframes mcl-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* 随卡片切换的环境光：只过渡 background-color，避免渐变无法插值 */
+.mcl-glow {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  width: 120vw;
+  height: 62vh;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  filter: blur(64px);
+  opacity: 0.72;
+  pointer-events: none;
+  transition: background-color 520ms ease;
+  z-index: 0;
+}
+
+.mcl-head,
+.mcl-lede,
+.mcl-stage,
+.mcl-controls,
+.mcl-hint,
+.mcl-foot { position: relative; z-index: 1; }
+
+.mcl-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: max(16px, env(safe-area-inset-top, 16px)) 20px 12px;
+  border-bottom: 2px solid #42332C;
+  animation: mcl-rise 420ms 40ms ease-out both;
+}
+.mcl-brand {
+  font: 900 32px/1 var(--mcl-display);
+  letter-spacing: -0.035em;
+}
+.mcl-who { display: flex; flex-direction: column; gap: 3px; text-align: right; }
+.mcl-who strong { font-size: 15px; font-weight: 800; letter-spacing: 0.02em; }
+.mcl-who span { font: 500 11px/1.3 var(--mcl-mono); color: #6E5C51; }
+
+.mcl-lede {
+  margin: 0;
+  padding: 10px 20px 4px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #6E5C51;
+  background: rgba(243, 235, 221, 0.55);
+  border-bottom: 1px solid #E3D8C7;
+  animation: mcl-rise 420ms 90ms ease-out both;
+}
+.mcl-lede b {
+  font: 800 12px/1 var(--mcl-mono);
+  color: #6E6B9B;
+  margin-right: 4px;
+}
+
+/* ── 牌堆舞台 ── */
+.mcl-stage {
+  flex: 1 1 auto;
+  min-height: 300px;
+  max-height: 450px;
+  margin: 18px 20px 0;
+}
+.mcl-deck {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+  animation: mcl-deal 560ms 120ms cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes mcl-deal {
+  from { opacity: 0; transform: translateY(34px) scale(.965); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes mcl-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.mcl-card {
+  --d: 0;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: #FFFDF8;
+  border: 2px solid #42332C;
+  box-shadow: 6px 6px 0 0 #DDD0BC;
+  overflow: hidden;
+  cursor: pointer;
+  transform-origin: 50% 100%;
+  transform:
+    translate3d(calc(var(--d) * 6px), calc(var(--d) * 13px), 0)
+    scale(calc(1 - var(--d) * 0.055))
+    rotate(calc(var(--d) * 1deg));
+  opacity: calc(1 - var(--d) * 0.17);
+  z-index: calc(10 - var(--d));
+  transition:
+    transform 460ms cubic-bezier(.22,.9,.24,1),
+    opacity 360ms ease,
+    box-shadow 360ms ease;
+  will-change: transform;
+}
+/* 后排卡只留一张整齐的纯色纸片：如果连封面和标题一起缩放，
+   露出来的那一截会变成一堆重叠的文字横条，看着像渲染坏了。
+   当前卡（depth=0）仍是完整的项目卡，切换时才把内容换上来。 */
+.mcl-card:not([data-depth="0"]) { background: #F1E7D6; }
+.mcl-card:not([data-depth="0"]) > * { visibility: hidden; }
+.mcl-card:not([data-depth="0"])::after {
+  content: attr(data-id) ' / FILE';
+  position: absolute;
+  top: 11px;
+  right: 13px;
+  font: 700 10px/1 var(--mcl-mono);
+  letter-spacing: 0.08em;
+  color: #A2937F;
+}
+/* 远处卡：取模会让 depth 从 0 直接跳到 7，插值会把卡片「补一段飞过去」。
+   直接无动画隐藏，视觉上就是干脆的吸附，不拖尾。 */
+.mcl-card[data-far="true"] {
+  opacity: 0;
+  pointer-events: none;
+  transition: none;
+}
+.mcl-card[data-leaving="left"] {
+  transform: translate3d(-116%, -26px, 0) rotate(-9deg);
+  opacity: 0;
+  transition: transform 190ms ease-in, opacity 190ms ease-in;
+}
+.mcl-card[data-leaving="right"] {
+  transform: translate3d(116%, -26px, 0) rotate(9deg);
+  opacity: 0;
+  transition: transform 190ms ease-in, opacity 190ms ease-in;
+}
+.mcl-card[data-depth="0"]:focus-visible { outline: 3px solid #D97842; outline-offset: 3px; }
+
+.mcl-media {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #F3EBDD;
+  border-bottom: 2px solid #42332C;
+  overflow: hidden;
+}
+.mcl-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.mcl-media-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(66,51,44,0) 55%, rgba(66,51,44,0.18) 100%);
+  pointer-events: none;
+}
+
+.mcl-card-top {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+}
+.mcl-card-top b {
+  padding: 3px 7px;
+  background: #42332C;
+  color: #FFF6E8;
+  font: 800 11px/1.2 var(--mcl-mono);
+  letter-spacing: 0.06em;
+}
+.mcl-card-top span {
+  padding: 3px 7px;
+  background: rgba(255, 253, 248, 0.92);
+  border: 1px solid #D9CDBA;
+  color: #42332C;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.mcl-card-body {
+  flex: 0 0 auto;
+  padding: 11px 46px 13px 14px;
+}
+.mcl-card-body h3 {
+  margin: 0 0 4px;
+  font-size: clamp(17px, 4.6vw, 21px);
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mcl-card-body p {
+  margin: 0;
+  color: #6E5C51;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.mcl-arrow {
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #42332C;
+  color: #FFF6E8;
+  font-size: 17px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ── 控制条 ── */
+.mcl-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* 后排卡向下露出约 40px，切换条要让开，不然会被纸片压住 */
+  margin: 48px 20px 0;
+  animation: mcl-rise 420ms 180ms ease-out both;
+}
+.mcl-nav {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  background: #FFFDF8;
+  border: 1px solid #D9CDBA;
+  color: #42332C;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.mcl-nav:active { background: #F3EBDD; }
+.mcl-dots { display: flex; align-items: center; justify-content: center; gap: 5px; flex: 1 1 auto; }
+.mcl-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  background: #D9CDBA;
+  border: 0;
+  cursor: pointer;
+  transition: width 220ms ease, background-color 220ms ease;
+}
+.mcl-dot.is-on { width: 22px; background: #6E6B9B; }
+.mcl-counter {
+  font: 800 12px/1 var(--mcl-mono);
+  color: #42332C;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.mcl-counter i { color: #A99A8C; font-style: normal; }
+
+.mcl-hint {
+  margin: 9px 20px 0;
+  text-align: center;
+  color: #8B7B6E;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  animation: mcl-rise 420ms 220ms ease-out both;
+}
+
+/* 档案参数条：三格等宽，切换卡片时整条淡入上浮 */
+.mcl-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 14px 20px 0;
+  border: 1px solid #D9CDBA;
+  background: rgba(255, 253, 248, 0.72);
+  animation: mcl-rise 320ms ease-out both;
+}
+.mcl-facts > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 9px 10px;
+}
+.mcl-facts > span + span { border-left: 1px solid #E3D8C7; }
+.mcl-facts i {
+  font: 700 9px/1 var(--mcl-mono);
+  letter-spacing: 0.12em;
+  color: #8B7B6E;
+  font-style: normal;
+}
+.mcl-facts b {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #42332C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── 底部操作 ── */
+.mcl-foot {
+  margin-top: auto;
+  padding: 14px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: mcl-rise 420ms 260ms ease-out both;
+}
+.mcl-msg,
+.mcl-cta {
+  width: 100%;
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.mcl-msg {
+  background: #FFFDF8;
+  border: 1px solid #D9CDBA;
+  color: #42332C;
+}
+.mcl-msg:active { background: #F3EBDD; }
+.mcl-cta {
+  min-height: 50px;
+  background: #42332C;
+  border: 2px solid #42332C;
+  box-shadow: 3px 3px 0 0 #D97842;
+  color: #FFF6E8;
+  font-size: 15px;
+}
+.mcl-cta:active { transform: translate(3px, 3px); box-shadow: none; }
+
+/* 小屏（≤700px 高）压缩舞台，保证两个底部按钮仍在一屏内 */
+@media (max-height: 720px) {
+  .mcl-stage { min-height: 240px; max-height: 300px; margin-top: 10px; }
+  .mcl-controls { margin-top: 40px; }
+  .mcl-hint, .mcl-facts { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcl-overlay, .mcl-deck, .mcl-head, .mcl-lede,
+  .mcl-controls, .mcl-hint, .mcl-facts, .mcl-foot { animation: none; }
+  .mcl-card { transition: opacity 120ms linear; }
+  .mcl-card[data-leaving] { transition: opacity 120ms linear; }
+  .mcl-glow, .mcl-dot { transition: none; }
+  .mcl-cta:active { transform: none; box-shadow: 3px 3px 0 0 #D97842; }
+}

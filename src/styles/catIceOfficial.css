@@ -1,0 +1,777 @@
+/* ==========================================================================
+   catIceOfficial.css —— 「猫冰 CAT-ICE 互动官网」原站样式（styles.css）的 React 移植
+   --------------------------------------------------------------------------
+   为什么整份规则都要加 `.catice-official` 作用域前缀：
+     styles.css 原本是一个独立站点的全局样式表，里面有 `body` / `img` / `a` /
+     `nav` / `footer` / `.mono` / `.reveal` / `::selection` 这类完全没有命名空间的
+     选择器。这份表现在要挂进作品集站点、作为项目 08 详情页的全屏浮层，如果原样
+     搬过来，`body{background:var(--paper)}`、`img{display:block}`、`footer{...}`
+     会直接打穿整个作品集页面。
+     最容易踩的一个具体例子：作品集 src/index.css 里已经有一条全局 `.reveal`
+     （translateY(28px) + 0.8s cubic-bezier(.22,1,.36,1)），和原站的 `.reveal`
+     （translateY(32px) + .75s ease）同名不同值。加上前缀后原站规则的特异性变成
+     (0,2,0)，稳定压过作品集那条 (0,1,0)，详情页拿到的才是原站的滚动手感；
+     反之不加前缀，两者特异性相同、胜负只取决于样式表注入顺序，早晚会翻车。
+
+   除作用域前缀外，本文件与原站 styles.css 逐条一一对应：声明值、书写顺序、两个
+   断点、四个关键帧全部原样保留。只有下面四处是为「搬进浮层」做的适配，均在对应
+   规则处就近注明了原因：
+     1. `:root` 变量改挂到 `.catice-official`（--temp / --melt 需要被组件实测改写）
+     2. `body` 的盒模型级样式改挂到 `.catice-official` 自身；`html{scroll-behavior}`
+        与 `*{box-sizing}` 去掉（前者由组件内的 scrollIntoView 负责，后者 Tailwind
+        v4 的 preflight 已经包含）
+     3. `.site-header` 由 `position: fixed` 改为 `position: sticky`
+     4. 原站是 `<a href="#...">` 的几处改成 `<button>`，对应地补了按钮复位与选择器扩展；
+        `.ice-layer` 是粒子宿主，`.header-right` / `.header-close` / `.footer-actions`
+        是浮层新增的返回入口
+   ========================================================================== */
+
+/* —— 原 :root：变量改挂在组件根节点上 ——
+   --temp / --melt 必须定义在这里而不是 :root：组件把它们作为内联 CSS 变量写在同一个
+   节点上（style={{'--temp': temp, '--melt': melt}}），下面的 hsl(calc(220 - var(--temp) * 1.5))
+   和 opacity: calc(.15 + var(--temp) * .012) 才能跟着滑杆实时变。
+   --melt 原站 :root 里没有声明（只由 JS 写入、本文件暂无消费方），这里补一个 0 作初值，
+   避免内联变量还没挂上时出现无效值。 */
+.catice-official {
+  --ink: #33282b;
+  --cream: #fffaf0;
+  --paper: #f5f2e9;
+  --orange: #ff7a2f;
+  --orange-soft: #ffbd73;
+  --ice: #b8c8ff;
+  --ice-deep: #626fa5;
+  --blue: #2737c9;
+  --acid: #c7ff3e;
+  --temp: 0;
+  --melt: 0;
+  --line: 2px solid var(--ink);
+
+  /* —— 字体：与作品集 src/index.css 的 --font-display / --font-sans / --font-mono 完全一致 ——
+     统一到作品集在用的三套字体后，本页不再有自己的字体身份。
+
+     改这套栈必须知道的两件事（旧版就是在这里踩空的）：
+     1. Oswald 由 index.html 全局加载，只有 500/600/700 三档，而且**不含任何中文字形**。
+        所以中文会按栈内顺序落到 Noto Sans SC（400/500/700/900 全档已加载）。
+        于是本页的字重规则变成：拉丁文字最高 700（Oswald 的上限，写 800/900 会被
+        浏览器钳到 700，层级直接塌掉）；900 只留给中文大字（Noto 有真正的 Black）。
+        旧版遍地 800/900，在 Oswald 上钳成同一个值、在中文上又全是 900，谁都不比谁重。
+     2. `.catice-official` 的 font-family 只能由 CSS 给。组件根节点上曾经挂着一层内联
+        fontFamily:'Microsoft YaHei'..., 内联优先级压过这里的变量，改 --body 是不生效的。 */
+  --display: "Oswald", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* 只开两档字重，够用且不会互相抵消 */
+  --w-black: 900; /* 仅中文超大标题 */
+  --w-bold: 700;  /* 拉丁标题 / 中文小标题 / 按钮 / 标签 */
+}
+
+/* —— 原 body：margin/color/background/font-family/overflow-x 挪到组件根节点自己身上。
+   overflow-x:hidden 不能省：.hero::after（34vw 的圆环，right:-8vw）和 .edition-sticker
+   （right:-2rem）都是故意出界的，没有这行根节点会长出横向滚动条。 */
+.catice-official {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body);
+  overflow-x: hidden;
+}
+
+/* —— preflight 补偿（移植必需，不是设计改动）——
+   原站是从零写的静态页，除了 styles.css 就只剩浏览器 UA 默认样式，很多地方是**借 UA
+   默认值**在排版。这份 CSS 现在活在 Tailwind v4 preflight 之下，而 preflight 做了三件
+   会静默改变排版的事：
+     · `*,::before,::after{ margin:0; padding:0; border:0 solid }` —— 段间距被清零；
+     · `h1…h6{ font-size:inherit; font-weight:inherit }` —— 标题不再是粗体（最明显：
+       14 张表情卡的标题、两张 phase-card 的标题会从 700 掉到 400）；
+     · `html{ line-height:1.5 }` —— 原站的继承行高是 normal，单行标签的高度会整体变高。
+   把这三处被拿走的 UA 默认值原样还回来。字号/字重/外边距在原 styles.css 里**显式写过**
+   的地方，选择器都比这里更具体（例如 .phase-card h3 是 (0,2,1)，这里只有 (0,1,1)），
+   一律不会被覆盖，所以只需要还原这一层“原站本来就没写、靠浏览器兜底”的默认值。
+   写在文件前部而不是尾部，也是为了让后面那些原站规则天然压过它。 */
+.catice-official { line-height: normal; }
+.catice-official p { margin: 1em 0; }
+.catice-official h1,
+.catice-official h2,
+.catice-official h3 { font-size: revert; font-weight: revert; }
+
+.catice-official img { display: block; max-width: 100%; }
+.catice-official button, .catice-official input { font: inherit; }
+.catice-official a { color: inherit; text-decoration: none; }
+.catice-official ::selection { background: var(--orange); color: #fff; }
+.catice-official .mono { font-family: var(--mono); letter-spacing: .06em; }
+
+/* —— 移植适配：原站的 .brand / nav / footer 里那几个入口是 <a href="#...">，
+   搬进浮层后必须改成 <button>（浮层里不能再改地址栏 hash，外层用 #p=08 做深链，
+   详见组件内注释）。这里补一条按钮复位，让它们在外观、光标、颜色上与原链接完全一致；
+   后面 nav 的下划线 hover 规则也同时命中 button，橙线动效不会丢。 */
+.catice-official nav a,
+.catice-official nav button,
+.catice-official .brand,
+.catice-official .footer-row button {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.catice-official .grain { position: fixed; inset: 0; pointer-events: none; opacity: .18; z-index: 100; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E"); mix-blend-mode: multiply; }
+.catice-official .cursor-ice { position: fixed; width: 20px; height: 20px; border: 2px solid rgba(91,108,176,.5); border-radius: 50% 50% 48% 52%; z-index: 110; pointer-events: none; transform: translate(-50%,-50%); backdrop-filter: blur(1px); transition: width .2s, height .2s, opacity .2s; }
+.catice-official .section-pad { padding: 9rem clamp(1.25rem,5vw,5.5rem); }
+/* 标签类统一走 mono 的 700（Consolas 有真粗体，700 是真粗；旧版的 800 只会合成假粗体） */
+.catice-official .eyebrow { margin: 0 0 1rem; font-family: var(--mono); font-size: .76rem; font-weight: var(--w-bold); letter-spacing: .14em; text-transform: uppercase; }
+.catice-official .eyebrow span { background: var(--ink); color: #fff; padding: .35rem .55rem; }
+.catice-official .section-index { position: absolute; top: 2rem; right: clamp(1.25rem,5vw,5.5rem); font-size: .7rem; }
+
+/* —— 为什么 header 从 fixed 改成 sticky ——
+   原站是整页文档滚动，fixed 让导航钉在视口顶；移植后这个详情页是一个
+   `fixed inset-0; overflow-y:auto` 的自滚动浮层，滚动发生在容器内部，fixed 元素虽然
+   仍会相对视口钉住，但它的"层"脱离了容器的滚动内容（外层 Lenis 已 stop，视口本身不滚），
+   语义上就变成了"悬浮在浮层之上的另一个东西"。改成 sticky 后它成为浮层滚动内容的一部分，
+   跟着容器一起滚、到顶吸附，行为与原站一致且层级干净。
+   三个附属改动与原因：
+     · z-index 90 → 40：原值 90 会盖住外层浮层的其它 UI（外层弹层在 z-[200] 里，
+       同层内还有 grain/cursor 在 100/110），40 刚好在吸顶栏这一档、不越权。
+     · margin-bottom: -70px（650px 断点下是 -60px）：原站 header 是覆盖式的、不占文档流，
+       hero 的 `padding-top:10rem` 与 `min-height:100svh` 都是按"视口顶部就是 hero 顶部"
+       算的。sticky 会占掉 70px 文档流，若不补偿，整个 hero 会被下推 70px、
+       首屏多出一条空白、区块高度也整体位移。用负外边距把后续内容拉回原位，
+       纵向几何与原站逐像素一致；header 本身是定位元素 + z-index，仍然覆盖在内容之上。
+     · left/right 保留原值：对 sticky 而言是空操作（block 元素已满宽、横向无处可粘），
+       保留只是为了避免改动原规则。 */
+.catice-official .site-header { position: sticky; z-index: 40; top: 0; left: 0; right: 0; margin-bottom: -70px; height: 70px; padding: 0 clamp(1rem,4vw,3.8rem); border-bottom: var(--line); display: flex; align-items: center; justify-content: space-between; background: rgba(255,250,240,.86); backdrop-filter: blur(16px); }
+.catice-official .brand { display: flex; align-items: center; gap: .65rem; font-weight: var(--w-bold); letter-spacing: -.01em; }
+.catice-official .brand b { font-family: var(--mono); font-size: .62rem; margin-left: .35rem; letter-spacing: .04em; }
+.catice-official .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50% 50% 45% 55%; color: #fff; background: var(--orange); transform: rotate(-7deg); }
+.catice-official nav { display: flex; gap: clamp(.8rem,3vw,2.5rem); font-size: .8rem; font-weight: var(--w-bold); }
+.catice-official nav a,
+.catice-official nav button { position: relative; }
+.catice-official nav a::after,
+.catice-official nav button::after { content:""; position:absolute; height: 2px; left:0; right:100%; bottom:-5px; background:var(--orange); transition:right .25s; }
+.catice-official nav a:hover::after,
+.catice-official nav button:hover::after { right:0; }
+.catice-official .header-temp { display: flex; align-items: center; gap: .5rem; font-family: var(--mono); font-size: .72rem; }
+.catice-official .header-temp i { width: 9px; height: 9px; border-radius: 50%; background: hsl(calc(220 - var(--temp) * 1.5),80%,55%); box-shadow: 0 0 0 5px color-mix(in srgb, var(--ice) 35%, transparent); }
+
+/* —— 移植新增：关闭入口 ——
+   原站是独立站点，没有"返回"这个概念；搬成浮层后必须有出口。视觉不另起炉灶，
+   直接复用原站 .action-btn 的语言（2px 墨色描边 / 悬停翻墨 / 3px 3px 硬阴影），
+   让它看起来就是原站自己的一个按钮。用 .header-right 包住温度与关闭按钮，
+   是为了让 .site-header 的 space-between 仍然只面对 3 个子元素，
+   brand / nav / 右侧组的横向分布与原站保持一致。 */
+.catice-official .header-right { display: flex; align-items: center; gap: .9rem; }
+.catice-official .header-close { padding: .55rem .8rem; border: 2px solid var(--ink); background: #fff; font-size: .72rem; font-weight: var(--w-bold); white-space: nowrap; cursor: pointer; box-shadow: 3px 3px 0 var(--ink); transition: .2s; }
+.catice-official .header-close:hover { color: #fff; background: var(--ink); transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+
+.catice-official .hero { position: relative; min-height: 100svh; padding-top: 10rem; display: grid; grid-template-columns: .9fr 1.15fr; gap: 4vw; align-items: center; overflow: hidden; background: radial-gradient(circle at 72% 34%, rgba(183,202,255,.55), transparent 30%), linear-gradient(135deg,#fffaf1 0 52%,#e9ecff 52% 100%); }
+.catice-official .hero::after { content:""; position:absolute; width:34vw; height:34vw; border:1px solid rgba(51,40,43,.15); border-radius:50%; right:-8vw; top:18vh; box-shadow: 0 0 0 5vw rgba(255,255,255,.22),0 0 0 10vw rgba(255,255,255,.12); }
+.catice-official .hero-serial { position:absolute; top:88px; left:clamp(1.25rem,5vw,5.5rem); font-size:.66rem; }
+.catice-official .hero-copy { z-index:2; align-self:start; padding-top:5vh; }
+.catice-official .hero h1 { margin:0; line-height:.78; font-family:var(--display); text-transform:uppercase; }
+/* —— 主标拆成两种字体，是这次统一字体时唯一必须"分家"的地方 ——
+   原站整条 h1 都是 Impact。Impact 没有中文字形，"猫冰"两个字其实一直是靠栈里的
+   微软雅黑兜底渲染的，而 scaleY(1.1) 是给 Impact 的窄高拉丁比例做的补偿 ——
+   对中文方块字来说，纵向拉伸只是把笔画压变形，得不偿失。统一字体后：
+   · .cn 明确走 --body（Noto Sans SC Black）。中文拿力量感不再靠拉伸和挤字距，
+     而是靠 900 这一档真 Black 字重；拉伸从 1.1 降到 1.04，只保留一点海报张力。
+   · 字距 -.09em 对拉丁是"紧缩"，对中文却是让笔画互相插入。中文的安全线在 -.04em
+     附近，收到这里，远看仍是紧咬的一块，近看笔画不打架。
+   · line-height 从 .72 提到 .92：.72 是为 Impact 那种超窄升部留的，Noto 的字身更高，
+     沿用会切到字脚；两行之间的咬合改由 .en 的负上边距单独控制，更可控。 */
+.catice-official .hero h1 .cn { display:block; font-family:var(--body); font-weight:var(--w-black); font-size:clamp(6.2rem,12.5vw,11.5rem); line-height:.92; letter-spacing:-.04em; transform:scaleY(1.04); transform-origin:left bottom; }
+/* .en 是 Oswald：窄体、笔画比 Impact 细。两处调整：
+   · 字距由 -.04em 翻正到 .02em —— Oswald 本身就是窄字面，再负字距会糊成一块，
+     改成微正字距后这 7 个字更像一行技术标注，也更贴它"空心描边"的身份。
+   · 上限由 6.5rem 收到 5.2rem。上限决定的是超宽屏（>1486px）上的观感：主标触到
+     11.5rem 上限后不再变大（墨宽 353），而 6.5rem 的副标墨宽 386 反而比主标宽，
+     "空心字托住实心字"的锁合变成空心字外扩一圈。5.2rem 时副标墨宽 334，
+     与主标 353 的比值稳定在 0.95，从 1440 到 4K 都不会走样。
+   描边 2px → 2.5px 把细笔画的墨量补回来。 */
+.catice-official .hero h1 .en { display:block; font-weight:var(--w-bold); color:transparent; -webkit-text-stroke:2.5px var(--ink); font-size:clamp(2.6rem,5.6vw,5.2rem); letter-spacing:.02em; margin-top:-.04em; }
+/* 口号是中文，走 900；行高由 1.05 放到 1.14 —— Noto 的标点占满全角，太紧会让
+   "，"" 。"顶到上下行。 */
+.catice-official .hero-slogan { font-size:clamp(1.5rem,3vw,3.2rem); font-weight:var(--w-black); letter-spacing:-.02em; line-height:1.14; margin:2rem 0 0; }
+.catice-official .hero-slogan em,
+.catice-official .section-heading em,
+.catice-official .mood-intro em,
+.catice-official .merch-heading em { color:var(--orange); font-style:normal; }
+
+.catice-official .blister-shell { position:relative; z-index:3; justify-self:end; width:min(100%,640px); padding:5.2rem 2rem 2rem; border:3px solid var(--ink); border-radius:2.4rem 2.4rem .6rem .6rem; background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(211,219,255,.56)); box-shadow:17px 20px 0 var(--ink); transform-style:preserve-3d; transition:transform .15s ease-out; }
+.catice-official .euro-slot { position:absolute; top:1.35rem; left:50%; width:100px; height:25px; border:2px solid var(--ink); border-radius:20px; background:var(--paper); transform:translateX(-50%); box-shadow:inset 0 3px 5px rgba(0,0,0,.15); }
+.catice-official .euro-slot i { position:absolute; width:25px; height:11px; left:50%; top:-10px; transform:translateX(-50%); border:2px solid var(--ink); border-bottom:0; background:var(--paper); border-radius:5px 5px 0 0; }
+.catice-official .edition-sticker { position:absolute; right:-2rem; top:1rem; width:94px; aspect-ratio:1; display:grid; place-content:center; text-align:center; color:var(--ink); background:var(--acid); border:2px solid var(--ink); clip-path:polygon(50% 0,61% 18%,82% 10%,81% 32%,100% 50%,81% 65%,88% 88%,63% 82%,50% 100%,38% 82%,14% 89%,18% 64%,0 50%,19% 34%,12% 12%,38% 18%); transform:rotate(9deg); filter:drop-shadow(4px 5px 0 var(--ink)); }
+.catice-official .edition-sticker b { font-family:var(--display); font-weight:var(--w-bold); font-size:1.6rem; line-height:1; letter-spacing:.01em; }
+.catice-official .edition-sticker span { font-family:var(--mono); font-size:.5rem; font-weight:var(--w-bold); }
+.catice-official .cold-ruler { position:absolute; left:.6rem; top:5.8rem; bottom:2rem; display:flex; flex-direction:column; align-items:center; justify-content:space-between; font-size:.5rem; opacity:.65; }
+.catice-official .cold-ruler i { width:1px; flex:1; margin:.3rem 0; background:repeating-linear-gradient(to bottom,var(--ink) 0 3px,transparent 3px 8px); }
+.catice-official .chamber { position:relative; height:430px; margin-left:1rem; overflow:hidden; display:flex; align-items:center; justify-content:center; border:2px solid rgba(72,72,113,.8); border-radius:1.8rem; background:linear-gradient(160deg,rgba(255,255,255,.78),rgba(177,196,255,.26)); box-shadow:inset 0 0 35px rgba(89,116,213,.19),inset 0 -18px 22px rgba(255,255,255,.7); }
+.catice-official .grid-lines { position:absolute; inset:0; opacity:.25; background-image:linear-gradient(rgba(39,55,201,.24) 1px,transparent 1px),linear-gradient(90deg,rgba(39,55,201,.24) 1px,transparent 1px); background-size:25px 25px; }
+.catice-official .hero-cat { position:absolute; z-index:3; width:78%; max-height:90%; object-fit:contain; opacity:0; transform:translateY(26px) scale(.94); filter:drop-shadow(0 22px 15px rgba(50,54,104,.2)); transition:opacity .55s,transform .7s cubic-bezier(.2,.8,.2,1),filter .6s; }
+.catice-official .hero-cat.is-active { opacity:1; transform:translateY(0) scale(1); }
+.catice-official .hero-melted.is-active { transform:translateY(25px) scale(1.05); }
+.catice-official .ice-glint { position:absolute; z-index:5; width:75px; height:220%; top:-65%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.72),transparent); transform:rotate(22deg); animation:sweep 5s ease-in-out infinite; pointer-events:none; }
+.catice-official .glint-a { left:12%; }
+.catice-official .glint-b { left:72%; animation-delay:2.2s; opacity:.5; }
+.catice-official .condensation i { position:absolute; z-index:4; width:8px; height:20px; border-radius:50% 50% 55% 55%; background:rgba(255,255,255,.8); box-shadow:0 0 0 1px rgba(110,128,195,.3); animation:drip 3.4s infinite ease-in; opacity:calc(.15 + var(--temp) * .012); }
+.catice-official .condensation i:nth-child(1){left:12%;top:10%;}
+.catice-official .condensation i:nth-child(2){left:83%;top:32%;animation-delay:.8s}
+.catice-official .condensation i:nth-child(3){left:74%;top:5%;animation-delay:1.7s}
+.catice-official .condensation i:nth-child(4){left:22%;top:58%;animation-delay:2.4s}
+.catice-official .state-watermark { position:absolute; z-index:1; right:-.2rem; bottom:-1.4rem; font-family:var(--display); font-weight:var(--w-bold); font-size:clamp(4rem,9vw,8.6rem); color:transparent; -webkit-text-stroke:1.5px rgba(39,55,201,.22); line-height:1; letter-spacing:.01em; }
+.catice-official .thermal-panel { margin:1rem 0 0 1rem; padding:1rem; border:2px solid var(--ink); background:rgba(255,255,255,.72); }
+.catice-official .thermal-label { display:flex; justify-content:space-between; align-items:end; }
+.catice-official .thermal-label span { font-size:.66rem; font-weight:var(--w-bold); }
+.catice-official .thermal-label strong { font-family:var(--display); font-weight:var(--w-bold); font-size:2.05rem; letter-spacing:.01em; }
+.catice-official #tempRange { width:100%; height:8px; margin:1rem 0 .4rem; border:1px solid var(--ink); border-radius:9px; appearance:none; background:linear-gradient(90deg,#526be1,#d9e4ff 32%,#ffe0af 55%,#ff6a2c); }
+.catice-official #tempRange::-webkit-slider-thumb { appearance:none; width:24px; height:24px; border:3px solid var(--ink); border-radius:50%; background:#fff; box-shadow:3px 3px 0 var(--ink); cursor:grab; }
+.catice-official .thermal-scale { display:flex; justify-content:space-between; font-size:.48rem; }
+.catice-official .state-actions { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-top:1rem; }
+.catice-official .action-btn { padding:.7rem; border:2px solid var(--ink); background:#fff; font-size:.75rem; font-weight:var(--w-bold); cursor:pointer; box-shadow:3px 3px 0 var(--ink); transition:.2s; }
+.catice-official .action-btn:hover,
+.catice-official .action-btn.active { color:#fff; background:var(--ink); transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+.catice-official .hero-note { position:absolute; left:clamp(1.25rem,5vw,5.5rem); bottom:5rem; width:min(34vw,420px); border-top:2px solid var(--ink); padding-top:1rem; display:grid; grid-template-columns:80px 1fr; gap:1rem; font-size:.78rem; line-height:1.7; }
+.catice-official .note-no { font-size:.6rem; }
+.catice-official .hero-note p { margin:0 }
+.catice-official .scroll-cue { position:absolute; right:1.5rem; bottom:2rem; font-size:.55rem; writing-mode:vertical-rl }
+.catice-official .scroll-cue span { display:inline-block; height:45px; width:1px; background:var(--ink); margin-bottom:.5rem; animation:scrollLine 1.8s infinite }
+
+/* —— 跑马灯：换 Oswald 后同样字号下整行更宽，位移距离 W 变大。
+   关键帧是 translateX(-100%)（走完一整份文案 W 的时间 = 22s），所以 W 一涨
+   线性速度就跟着涨、看起来"变急了"。把周期 22s → 24s 抵掉这次胀出来的宽度，
+   观感速度回到原站。字号不动：这一条是横向满 bleed 的图形元素，字高比字宽重要。 */
+.catice-official .ticker { display:flex; width:max-content; color:#fff; background:var(--ink); border-block:2px solid var(--ink); font-family:var(--display); font-weight:var(--w-bold); font-size:clamp(2rem,4vw,4rem); line-height:1; letter-spacing:.01em; padding:.75rem 0; overflow:hidden; }
+.catice-official .ticker div { animation:marquee 24s linear infinite; }
+
+.catice-official .concept { position:relative; background:var(--cream); }
+/* —— 标题列宽必须按"标点禁则"来算，不能按 N 个字乘字号 ——
+   中文的 ，。！？ 不允许出现在行首，浏览器会把它们和前一个字绑成不可断的单元。
+   于是 "同一只猫，" 的最小可断宽度不是 4 个字 + 1 个标点可以拆开算，
+   而是要么 5 个字整块（532px），要么断成 "同一只" + "猫，"。
+   旧版第一列只有 447px（800 - 48 的 1.1fr），5 个字放不下，标题被挤成
+   4 行、"猫，"和"度。"各占一行，橙色 em 那半句还被拆开。
+   改法：把 max-width 放宽到 1040，列比从 1.1/.75 调成 1.25/.75 ——
+   第一列稳定拿到 615px（5 个字 532px + 83px 余量），断点前也不会互相挤。 */
+.catice-official .section-heading { max-width:1040px; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); column-gap:3.5rem; align-items:end; }
+.catice-official .section-heading .eyebrow { grid-column:1/-1; }
+/* —— 五个区块大标题其实是**纯中文**（"同一只猫，两种温度。" / "正规三视图" /
+   "把相变，带进日常。" / "你的心情，今天几度？"），也就是全部落在 Noto Sans SC 上，
+   Oswald 只参与其中的数字与标点。所以这一组不能按"拉丁标题"的直觉调：
+   · 字号 8rem → 7.2rem：Noto 同字号下的字面比 Impact 满、字腔也大，
+     13rem 那套尺寸照搬过来会顶破 .section-heading 的 800px 宽度。
+   · 字距 -.055em → -.035em：-.055em 在 8rem 下是 -7px，对拉丁是干脆，
+     对中文已经让"同"和"一"的笔画搭上了；-.035em 保住紧咬的整体感又不粘连。
+   · 行高 .9 → 1.02：中文标点占满全角，.9 会让第二行顶到第一行的句号。
+   · 字重显式给 700（Noto 有真 Bold）。 */
+.catice-official .section-heading h2,
+.catice-official .views h2,
+.catice-official .mood-intro h2,
+.catice-official .merch-heading h2,
+.catice-official .finale h2 { font-family:var(--display); font-weight:var(--w-bold); font-size:clamp(3rem,6.4vw,7.2rem); letter-spacing:-.035em; line-height:1.02; margin:0; }
+.catice-official .section-intro { line-height:1.8; font-size:.9rem; margin:0; }
+.catice-official .phase-board { margin-top:6rem; display:grid; grid-template-columns:1fr 90px 1fr; align-items:stretch; border:var(--line); }
+.catice-official .phase-card { position:relative; min-width:0; padding:1.2rem; overflow:hidden; background:#f4f7ff; }
+.catice-official .phase-card + .phase-card { background:#fff0dd; }
+.catice-official .phase-meta { display:flex; justify-content:space-between; border-bottom:1px solid var(--ink); padding-bottom:.7rem; font-size:.62rem; }
+.catice-official .phase-visual { height:430px; display:grid; place-items:center; position:relative; }
+.catice-official .phase-visual::before { content:""; position:absolute; width:70%; aspect-ratio:1; border:1px solid rgba(51,40,43,.16); border-radius:50%; box-shadow:0 0 0 4rem rgba(255,255,255,.3); }
+.catice-official .phase-visual img { position:relative; z-index:1; width:80%; max-height:390px; object-fit:contain; filter:drop-shadow(0 16px 12px rgba(60,52,80,.18)); transition:transform .45s; }
+.catice-official .phase-card:hover img { transform:translateY(-10px) rotate(-2deg); }
+.catice-official .phase-warm:hover img { transform:translateY(5px) scale(1.04); }
+.catice-official .phase-card h3 { margin:0; font-weight:var(--w-bold); font-size:2rem; letter-spacing:.18em; }
+.catice-official .phase-card p { max-width:560px; line-height:1.8; font-size:.85rem }
+.catice-official .phase-card ul { display:flex; gap:.4rem; list-style:none; margin:1.5rem 0 0; padding:0; flex-wrap:wrap }
+.catice-official .phase-card li { border:1px solid; padding:.35rem .55rem; font-size:.65rem; font-weight:var(--w-bold); border-radius:2rem }
+.catice-official .phase-divider { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; border-inline:var(--line); background:var(--orange); color:#fff; }
+.catice-official .phase-divider span { width:50px; height:50px; display:grid; place-items:center; border:2px solid #fff; border-radius:50%; font-family:var(--display); font-weight:var(--w-bold); font-size:1.5rem; }
+.catice-official .phase-divider i { height:90px; width:1px; background:#fff; margin:1rem 0; }
+.catice-official .phase-divider b { font-family:var(--mono); font-size:.55rem; writing-mode:vertical-rl; letter-spacing:.13em }
+
+/* —— 03 设计说明（移植新增：原站没有这一节）——
+   位置在 02 双状态设定与 04 三视图之间，视觉上刻意与两个邻居都拉开：
+   concept 是 --paper 底的图形区、views 是 #e9edff 的冷蓝区，中间这一段取 --cream 暖白
+   （与 .merch 同色值，但中间隔着两个区块，不会连成一片），顶部补一条 2px 墨线切断
+   concept 的纸面色，做成一张"夹在包装里的说明卡"。
+   overflow:hidden 是为了兜住窄屏下可能溢出的小概率文字撑宽。 */
+.catice-official .note { position:relative; background:var(--cream); border-top:var(--line); overflow:hidden; }
+/* 标题区沿用 .section-heading 的 1.25/.75 两列结构与 3.5rem 列距，左列标题、右列题眼，
+   让这一节的表头与 concept / moods 的表头落在同一套栅格上。 */
+.catice-official .note-head { max-width:1040px; }
+.catice-official .note-head-grid { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); column-gap:3.5rem; align-items:end; }
+/* 字体与字距跟其它区块大标题同源，只把上下限各收一档（7.2rem → 5.8rem）：
+   这一节的主体是那三段论述，标题如果还按 7.2rem，五个字会把正文的分量压掉。
+   行高由 1.02 放到 1.04 —— 第二行是描边的拉丁混排，1.02 下描边笔画会贴到上一行。 */
+.catice-official .note-head h2 { font-family:var(--display); font-weight:var(--w-bold); font-size:clamp(2.6rem,5.6vw,5.8rem); letter-spacing:-.035em; line-height:1.04; margin:0; }
+/* 副标：照搬 .hero h1 .en 的"空心字压在实心字下方"的手法，字号取主标的 .56 倍
+   （主标 5.8rem 时副标 3.25rem，混排墨宽与主标接近，视觉重量不会超过主标）。 */
+.catice-official .note-head h2 .en { display:block; color:transparent; -webkit-text-stroke:2px var(--ink); font-size:.56em; letter-spacing:.02em; margin-top:.1em; }
+/* 题眼：全篇的被引句，用 900 中文大字重（Noto 有真 Black）压住右列。
+   外面那对引号交给 <em> 上橙色 —— 它是这一节唯一的橙色，标题区的视觉重心就落在句子上。
+   max-width 与行高 1.65 是为了在 .75 列宽里自然折成"冻成冰棍，/ 化成小猫。"两行，
+   不靠 <br> 硬折（窄屏列宽变化时硬折会变成三行）。 */
+.catice-official .note-quote { margin:0 0 .35rem; max-width:22ch; font-size:clamp(1.15rem,1.9vw,1.85rem); font-weight:var(--w-black); letter-spacing:-.01em; line-height:1.65; }
+.catice-official .note-quote em { color:var(--orange); font-style:normal; }
+/* 正文主体：整块做成 2px 墨框 + 9px 硬阴影的"说明卡"，与 .phase-board / .view-stage
+   / .merch-card 共用同一套边框语言，读者一眼能认出它是同一体系里的一个构件。 */
+.catice-official .note-body { position:relative; margin-top:5rem; border:var(--line); background:#fff; box-shadow:9px 9px 0 var(--ink); }
+/* 引子行：卡片的"抬头"，用 700 而不是正文的 400 把它与下面两栏正文分开，
+   底部一条 1px 细线（不是 2px 粗线）—— 卡内分隔用细线、卡片边界用粗线，
+   否则一张卡里会出现好几条同等重量的墨线，结构反而糊掉。 */
+.catice-official .note-lead { margin:0; padding:2rem clamp(1.2rem,2.6vw,2.6rem); border-bottom:1px solid var(--ink); font-size:clamp(.92rem,1.15vw,1.05rem); font-weight:var(--w-bold); line-height:1.75; }
+.catice-official .note-clauses { display:grid; grid-template-columns:1fr 1fr; }
+.catice-official .note-clause { min-width:0; padding:clamp(1.4rem,2.6vw,2.6rem); }
+/* 两栏之间的分隔仍走 2px 墨线（竖线是结构线，与卡片边界同级），
+   但左栏底色 #f4f7ff / 右栏 #fff0dd 与 .phase-card 的两个色值完全同源 ——
+   上一层"设定"用配色把冻结/软化分开，这一层"说明"沿用同一组色，
+   读者不需要重新学一次色彩语义。 */
+.catice-official .note-clause + .note-clause { border-left:var(--line); }
+.catice-official .note-clause.is-freeze { background:#f4f7ff; }
+.catice-official .note-clause.is-thaw { background:#fff0dd; }
+/* 条款头：照搬 .phase-meta 的两端对齐 + 细线，编号用冰蓝/橙把冷暖再标一次。
+   （颜色只给编号，不给温度值：温度是数据，读它的对比度要求比装饰高。） */
+.catice-official .note-clause-head { display:flex; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--ink); padding-bottom:.8rem; font-size:.6rem; }
+.catice-official .note-clause.is-freeze .note-clause-head span:first-child { color:var(--ice-deep); }
+.catice-official .note-clause.is-thaw .note-clause-head span:first-child { color:var(--orange); }
+/* 小标题 1.35 行高：两条标题都是"三个字 + 冒号 + 九个字"，1.9vw 下在单栏里折成两行，
+   行高再紧会让冒号与第二行首字贴上。 */
+.catice-official .note-clause h3 { margin:2.2rem 0 0; font-size:clamp(1.2rem,1.9vw,1.75rem); font-weight:var(--w-bold); line-height:1.35; letter-spacing:.01em; }
+/* 正文行高给到 2 —— 这是全页最长的一段连续文字（两栏各约 110 字），
+   1.8 在那两个色底上读起来已经偏挤；字号沿用 .phase-card p 的 .86rem 档，
+   整页的"说明文字"保持同一档字号。 */
+.catice-official .note-clause p { margin:1.2rem 0 0; font-size:.86rem; line-height:2; color:#4a3d40; }
+/* 结语：全文落点，跨两栏铺满卡片底部。用 1px 墨线与上面两栏切开，
+   左侧 4px 橙线（比正文的 2px 线更重）单独标记"这一段是结论"；
+   字号比正文大一档（.86 → .95/1.12），靠字号与线宽做层级，不靠加粗抢眼。 */
+.catice-official .note-close { padding:2.4rem clamp(1.2rem,2.6vw,2.6rem) 2.6rem; border-top:1px solid var(--ink); border-left:4px solid var(--orange); }
+.catice-official .note-close .mono { display:block; font-size:.55rem; color:var(--orange); letter-spacing:.16em; }
+.catice-official .note-close p { margin:1.1rem 0 0; max-width:74ch; font-size:clamp(.95rem,1.25vw,1.12rem); line-height:2.05; }
+
+.catice-official .views { position:relative; background:#e9edff; }
+.catice-official .views-head { display:flex; align-items:end; justify-content:space-between; gap:2rem; }
+.catice-official .segmented { display:flex; border:2px solid var(--ink); padding:.25rem; background:#fff; box-shadow:4px 4px 0 var(--ink); }
+.catice-official .view-switch { border:0; padding:.8rem 1.4rem; background:transparent; font-size:.74rem; font-weight:var(--w-bold); cursor:pointer }
+.catice-official .view-switch.active { background:var(--ink); color:#fff }
+.catice-official .view-stage { position:relative; margin-top:4rem; min-height:570px; padding:5rem 2rem 2rem; display:grid; grid-template-columns:1.1fr .8fr 1.1fr; align-items:end; gap:1.5rem; border:2px solid var(--ink); background-color:rgba(255,255,255,.55); background-image:linear-gradient(rgba(39,55,201,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(39,55,201,.12) 1px,transparent 1px); background-size:30px 30px; overflow:hidden; }
+.catice-official .measure-top { position:absolute; top:1rem; left:1rem; right:1rem; border-bottom:1px solid var(--ink); padding-bottom:.6rem; font-size:.6rem }
+.catice-official .baseline { position:absolute; left:0; right:0; bottom:5.5rem; border-top:2px dashed rgba(39,55,201,.35) }
+.catice-official .view-stage figure { position:relative; z-index:1; margin:0; display:flex; min-width:0; height:440px; flex-direction:column; align-items:center; justify-content:end; }
+.catice-official .view-stage img { width:100%; max-height:370px; object-fit:contain; filter:drop-shadow(0 15px 9px rgba(60,65,112,.15)); transition:opacity .25s,transform .4s; }
+.catice-official .view-stage figure:hover img { transform:translateY(-8px) }
+.catice-official .view-stage figcaption { margin-top:1rem; font-weight:var(--w-bold); letter-spacing:.16em }
+.catice-official .view-number { position:absolute; left:0; top:0; font-size:.58rem; background:var(--ink); color:#fff; padding:.35rem }
+.catice-official .spec-strip { display:grid; grid-template-columns:repeat(4,1fr); border:2px solid var(--ink); border-top:0; background:#fff }
+.catice-official .spec-strip span { padding:1rem; font-size:.55rem; border-right:1px solid }
+.catice-official .spec-strip span:last-child { border:0 }
+.catice-official .spec-strip b { display:block; color:var(--orange); font-size:.5rem; margin-bottom:.3rem }
+
+.catice-official .moods { background:var(--ink); color:#fff; padding-bottom:7rem; }
+/* 这一块长这样：心情变了，/ 冰也跟着变。 —— 第二行有 6 个字。
+   旧版 max-width:1100 是含 section-pad 的 88px 内边距的（border-box），
+   内容宽只有 924，第一列 603px，装不下 6 个字（638px），第二行会被拆成
+   "冰也跟着变" + "变。" 孤零零一行。放宽到 1220 后第一列 682px，两行各自成句。 */
+.catice-official .mood-intro { position:relative; max-width:1220px; display:grid; grid-template-columns:1.2fr .55fr; gap:3rem; align-items:end }
+.catice-official .mood-intro .section-index { color:var(--ice) }
+.catice-official .mood-intro .eyebrow { grid-column:1/-1 }
+.catice-official .mood-intro p:last-child { line-height:1.8; color:#cfc8c6; margin:0 }
+.catice-official .emotion-grid { padding:0 clamp(1.25rem,5vw,5.5rem); display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid #72666a; }
+.catice-official .emotion-card { position:relative; min-height:330px; padding:1rem; display:flex; flex-direction:column; justify-content:end; overflow:hidden; border-right:1px solid #72666a; border-bottom:1px solid #72666a; background:linear-gradient(155deg,#46383d,#2f272a); }
+.catice-official .emotion-card:nth-child(4n+1) { border-left:1px solid #72666a }
+.catice-official .emotion-card.feature { grid-column:span 2; grid-row:span 2; min-height:660px; background:var(--orange); color:var(--ink) }
+.catice-official .emotion-card.wide { grid-column:span 2 }
+.catice-official .emotion-card img { position:absolute; inset:1.8rem 1rem 4.3rem; width:calc(100% - 2rem); height:calc(100% - 6.1rem); object-fit:contain; transition:transform .5s cubic-bezier(.18,.8,.2,1),filter .4s; filter:drop-shadow(0 12px 8px rgba(0,0,0,.22)); }
+.catice-official .emotion-card:hover img { transform:scale(1.09) rotate(-2deg) }
+.catice-official .emotion-card h3 { position:relative; z-index:1; margin:0; font-size:1rem }
+.catice-official .emotion-card p { position:relative; z-index:1; margin:.25rem 0 0; font-size:.7rem }
+.catice-official .mood-code { position:absolute; z-index:2; left:1rem; top:1rem; font-size:.55rem; color:#bdb1b4 }
+.catice-official .feature .mood-code { color:var(--ink) }
+
+.catice-official .merch { position:relative; background:#fffaf0; overflow:hidden; }
+/* 拉丁水印：Oswald 700 之后笔画细了一档，字号 12vw → 11.2vw 让这块 14 字的
+   背景字仍然横向压满（换字体后同字号下它会明显变宽，容易顶出 .merch 的 overflow） */
+.catice-official .merch::before { content:"OBJECT LIBRARY"; position:absolute; top:5rem; right:-1rem; color:transparent; -webkit-text-stroke:1px rgba(51,40,43,.1); font-family:var(--display); font-weight:var(--w-bold); font-size:11.2vw; letter-spacing:.01em; white-space:nowrap }
+.catice-official .merch-heading { position:relative; z-index:1 }
+.catice-official .merch-track { margin-top:5rem; display:grid; grid-template-columns:repeat(4,minmax(260px,1fr)); gap:1rem; overflow-x:auto; padding-bottom:1rem; scroll-snap-type:x mandatory }
+.catice-official .merch-card { scroll-snap-align:start; border:var(--line); padding:1rem; background:#fff; box-shadow:7px 7px 0 var(--ink) }
+.catice-official .merch-no { font-size:.58rem; border-bottom:1px solid; padding-bottom:.7rem }
+.catice-official .merch-image { height:360px; display:grid; place-items:center; background:linear-gradient(145deg,#eff2ff,#fff4e4); margin:1rem 0; overflow:hidden }
+.catice-official .merch-image img { width:95%; height:95%; object-fit:contain; transition:transform .5s }
+.catice-official .merch-card:hover img { transform:scale(1.06) }
+.catice-official .merch-card h3 { margin:0; font-weight:var(--w-bold); font-size:1.2rem; letter-spacing:-.01em }
+.catice-official .merch-card p { font-size:.72rem; line-height:1.75; color:#716267 }
+
+/* —— 07 项目一方案板（移植新增，原站没有这一节）——
+   邻居是 06/OBJECTS（#fffaf0 暖白）与 finale（--orange 橙）。这一节取 04 三视图用过
+   的 #e9edff 冷蓝，做成"蓝图板"的底：三张展板本身是暖白纸面，压在冷底上边界才清楚；
+   若沿用 --cream 会和 06 的暖白连成一整片，方案板就浮不出来了。
+   position:relative 是必须的 —— .section-index 是 absolute，落在没有定位的父级上会
+   挂到 .catice-official 外层，编号会飘到整页右上角。 */
+.catice-official .scheme { position:relative; background:#e9edff; border-top:var(--line); overflow:hidden; }
+/* 背景水印沿用 .merch::before 的描边手法（透明填充 + 1px 墨色描边）。
+   字号 9.6vw 而不是 .merch 的 11.2vw：这里只有 12 个字符，按 11.2vw 铺不满，
+   会缩成一小块贴在右上角，反而不像"压满的背景字"。 */
+.catice-official .scheme::before { content:"SCHEME BOARD"; position:absolute; top:4.5rem; right:-1rem; color:transparent; -webkit-text-stroke:1px rgba(51,40,43,.1); font-family:var(--display); font-weight:var(--w-bold); font-size:9.6vw; letter-spacing:.01em; white-space:nowrap }
+/* —— 一张大图 + 两张小图：版式先立主次，再谈排布 ——
+   第一版是 1fr 单列全宽（1440 下每张 864×576，三张近 2500px 高，像把原图丢进来），
+   上一版是三列等宽（每张 383×255，三张一样大，读不出次序，板面也糊）。
+   这一版把次序直接写进尺寸：01 角色设定稿通栏放大居中当主图，
+   02 表情系统 / 03 周边应用并排落在下面当两张小图。
+   数字上：1440 下大板板面约 1120×746，小板约 600×400，主次一眼分得开；
+   三张的同属关系（项目一的 01 / 02 / 03）仍在同一节、同一视线里成立 ——
+   板上的分栏细节由 02~06 各节逐一展开，这里只负责"把源头亮一次"。
+   align-items:stretch：02 / 03 等高。两张并排的卡片若底部参差，
+   硬阴影的方板看起来就像没对齐而不是有意为之。 */
+.catice-official .scheme-track { position:relative; z-index:1; margin-top:4rem; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,1.7vw,1.75rem); align-items:stretch }
+/* 01 大板：跨两列，再在列里居中。
+   宽度写 min(100%, max(70%, 62vh × 1.5)) 而不是固定像素：板面是 3:2，高 = 宽 / 1.5，
+   所以 62vh × 1.5 这一支等价于"板面高度不超过 62vh" —— 矮屏（笔记本横条、横屏平板）上
+   大图会自动收窄，不会顶满一屏把下面那两张小图挤出视野；100% 那一支拦住超宽栏。
+   max(70%, …) 这一层是必需的：只有 vh 上限时，1440×700 这种"宽而矮"的窗口会算出
+   651px 的大板，而同一行的两张小板各 622px —— 尺寸几乎一样，"主图"就不再是主图了。
+   70% 是"在栏里明显更宽"的下限（大板 : 小板 ≈ 1.4 : 1），两者取大，
+   于是矮屏下由 70% 保住层级、矮而窄时由 100% 兜底。
+   justify-self:center 是 grid item 在行内定位的正解（item 上的 margin:auto 也有效，
+   但 justify-self 更明确，不会被 align-items:stretch 干扰）。
+   内边距给到 1.1rem、硬阴影给到 9px：主图不只是图大，框也该重一点。 */
+.catice-official .scheme-card { display:flex; flex-direction:column; border:var(--line); padding:.9rem; background:#fff; box-shadow:7px 7px 0 var(--ink); transition:box-shadow .25s ease }
+.catice-official .scheme-card:nth-child(1) { grid-column:1/-1; justify-self:center; width:min(100%, max(70%, calc(62vh * 1.5))); padding:1.1rem; box-shadow:9px 9px 0 var(--ink) }
+/* 悬停只推阴影、不推 transform：卡片同时挂着 .reveal，而 `.reveal.is-visible{transform:none}`
+   的选择器权重高于 `.scheme-card:hover`，位移会被吃掉；阴影这一层没有冲突。
+   大板单独再给一档（13px）：它比下面两张大的不只是图片。 */
+.catice-official .scheme-card:hover { box-shadow:10px 10px 0 var(--ink) }
+.catice-official .scheme-card:nth-child(1):hover { box-shadow:13px 13px 0 var(--ink) }
+.catice-official .scheme-card-head { display:flex; justify-content:space-between; gap:.6rem; border-bottom:1px solid var(--ink); padding-bottom:.6rem; font-size:.52rem; white-space:nowrap }
+/* —— 板面点击层：图片外包一层 <button>，点开看放大图 ——
+   为什么是 button 而不是给 <img> 挂 onClick：只有 button 自带焦点与键盘语义
+   （Tab 能到、回车能开），也才能用 :focus-visible 画焦点框。
+   图片到卡头的那 .85rem 间距从 img 挪到这里：button 默认是 inline-block，
+   img 的上下外边距能不能跟它正确合成要看浏览器，挂在 block 化的 button 上才是确定的。
+   默认外观整层抹掉（padding / border / background 全清零），只留两个线索：
+   cursor:zoom-in，以及右下角那颗悬停才浮出来的提示片（见下一条）。
+   提示片用绝对定位，所以 trigger 必须自带 position:relative —— 否则它会认下面的
+   .scheme（它是 position:relative）当参照，飞到整节的右下角去。 */
+.catice-official .scheme-zoom-trigger { position:relative; display:block; width:100%; margin:.85rem 0 0; padding:0; border:0; background:transparent; cursor:zoom-in; }
+/* 键盘用户看不出板面能不能点，橙色描边是这一层唯一能给的反馈 */
+.catice-official .scheme-zoom-trigger:focus-visible { outline:3px solid var(--orange); outline-offset:3px }
+/* 悬停提示：板面是浅色纸面，压一块深色小片上去既读得清又不抢戏。
+   只在 hover / focus 时出现（默认 opacity:0，不占视觉），手机上另有常显规则。 */
+.catice-official .scheme-zoom-trigger::after { content:"点击放大 ⤢"; position:absolute; right:.6rem; bottom:.6rem; padding:.32rem .55rem; background:rgba(51,40,43,.9); color:#fff; font-family:var(--mono); font-size:.5rem; letter-spacing:.12em; opacity:0; transition:opacity .2s ease }
+.catice-official .scheme-zoom-trigger:hover::after,
+.catice-official .scheme-zoom-trigger:focus-visible::after { opacity:1 }
+/* 展板是 1500×1000（3:2）的原图，宽度铺满卡片、比例写死，图未加载时就占住位置。
+   object-fit:contain + 同比例 = 无留白；万一以后换更窄的板，也只会两侧留白而不裁切。
+   1px 细线而不是 --line：板面自己已经带了粗边框语言，再加 2px 会变成"框套框"。 */
+.catice-official .scheme-card img { display:block; width:100%; aspect-ratio:3/2; object-fit:contain; border:1px solid rgba(51,40,43,.16) }
+/* 板下的说明收成单栏（三列下没有第二列的宽度了）：
+   标题 → 板面原句（橙）→ 一根细线 → 一段释义。细线是必需的 —— 窄栏里
+   "板上的原话"和"我们的话"挨在一起会连成一坨，靠这根线才分得开。 */
+.catice-official .scheme-card-body { padding:1.1rem .15rem .2rem }
+.catice-official .scheme-card-title h3 { margin:0; font-weight:var(--w-bold); font-size:clamp(1.15rem,1.5vw,1.5rem); letter-spacing:-.01em; line-height:1.15 }
+.catice-official .scheme-card-tagline { margin:.5rem 0 0; color:var(--orange); font-weight:var(--w-bold); font-size:.74rem; line-height:1.7 }
+.catice-official .scheme-card-desc { margin:.9rem 0 0; padding-top:.9rem; border-top:1px solid rgba(51,40,43,.18); color:#5c5053; font-size:.76rem; line-height:1.85 }
+
+/* —— 07 方案板放大层 ——
+   三张板共用一层，挂在猫冰根节点之内（不在外层作品集上另开浮层）：它就是这一页的东西，
+   关掉详情页时应该跟着一起消失。
+   z-index 取 120：猫冰自己的层序是 grain 100 < .ice-layer 108 < .ice-particle 109
+   < .cursor-ice 110。放大层必须压过冰晶光标 —— 否则白色光标会在深色遮罩上"穿"出来；
+   同时仍在根节点 z-[200] 的浮层里面，不会盖到外层作品集。
+   position:fixed 可以放心用：根节点没有 transform / filter，不会成为它的包含块，
+   遮罩铺的就是视口而不是某一节。 */
+.catice-official .scheme-lightbox { position:fixed; inset:0; z-index:120; display:grid; grid-template-rows:auto minmax(0,1fr); padding:1.1rem clamp(1rem,3vw,2.5rem) 1.5rem; background:rgba(18,14,16,.93); cursor:zoom-out; animation:schemeFade .22s ease both }
+/* 放大层打开时锁住底层滚动。根节点是 overflow-y-auto 的滚动容器，不禁用的话
+   滚轮会把这层遮罩背后的页面滚走（遮罩自己不可滚动，事件会链到父级）——
+   关掉放大层时会发现已经不在原来那一段了。overflow:hidden 不会重置 scrollTop，
+   关闭后位置仍在原地；代价是滚动条消失带来的约 15px 横向回流，藏在 93% 的深色遮罩下面看不见。
+   注意这条能压过根节点上的 Tailwind `overflow-y-auto`：本文件没有 @layer，
+   未分层的规则稳定优先于 utilities 层，与特异性无关。 */
+.catice-official.is-zoomed { overflow:hidden }
+/* 顶部条：左边编号、右边关闭。底线用半透明白 —— 深底上再用墨色线会消失。 */
+.catice-official .scheme-lightbox-bar { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-bottom:.75rem; border-bottom:1px solid rgba(255,255,255,.22); color:#fff; font-size:.58rem; letter-spacing:.14em }
+/* 关闭按钮：描边幽灵款。悬停换成 --acid 亮绿 —— 全页只有这一个可点的实心反馈点，
+   深底上要找得到。:focus-visible 与 hover 同款，键盘操作有同等反馈。 */
+.catice-official .scheme-lightbox-close { padding:.45rem .8rem; border:1px solid rgba(255,255,255,.5); background:transparent; color:#fff; font:inherit; letter-spacing:.14em; cursor:pointer; transition:.2s }
+.catice-official .scheme-lightbox-close:hover,
+.catice-official .scheme-lightbox-close:focus-visible { background:var(--acid); border-color:var(--acid); color:var(--ink) }
+/* 舞台：图 + 一行说明，垂直水平居中。
+   min-height:0 不能少 —— grid 行是 minmax(0,1fr)，但 flex 容器默认 min-height:auto，
+   不加这行，图会被"撑开"到超过分配高度，顶部条就被顶出视口了。 */
+.catice-official .scheme-lightbox-stage { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.9rem; min-height:0; padding-top:1.1rem; cursor:default }
+/* 图片本体：宽高双约束 + width/height:auto，浏览器会按 3:2 的固有比例等比缩放到
+   "两边都不越界"，等效 object-fit:contain 但不需要给它一个固定的盒子。
+   上限留 9.5rem ≈ 顶部条 + 底部说明 + 上下内边距，图不会压到关闭按钮。
+   边框沿用板语言（2px 墨色）+ 一圈半透明白描边：深底上墨色边框本来会糊进背景，
+   靠这圈白线把板面从遮罩里"切"出来。 */
+.catice-official .scheme-lightbox-stage img { display:block; max-width:100%; max-height:calc(100vh - 9.5rem); width:auto; height:auto; border:2px solid var(--ink); box-shadow:0 0 0 1px rgba(255,255,255,.3); background:#fff; animation:schemeZoom .24s cubic-bezier(.2,.8,.2,1) both }
+.catice-official .scheme-lightbox-caption { margin:0; color:rgba(255,255,255,.6); font-size:.55rem; letter-spacing:.14em }
+
+.catice-official .finale { min-height:90vh; position:relative; display:grid; grid-template-columns:1.2fr .8fr; align-items:center; overflow:hidden; background:var(--orange); border-top:var(--line) }
+.catice-official .finale-cat { position:relative; z-index:2 }
+.catice-official .finale-cat img { width:100%; filter:drop-shadow(0 25px 15px rgba(66,35,22,.22)) }
+.catice-official .finale-copy { position:relative; z-index:2 }
+.catice-official .finale-copy>span { font-size:.6rem }
+/* 收尾那句"你的心情，今天几度？"是 5 + 5 个字，落在 .finale 的 0.8fr 侧栏里
+   （1440 设计宽下约 505px）。按别的区块的 6.4vw 算，1200~1300 这一带会被挤到
+   4 行；所以这里单独用 6.6vw + 更小的上限，让 5 个字 + 标点的那 5 个字块始终
+   占不满侧栏。份量改由 900 这一档字重来给，不靠字号。 */
+.catice-official .finale h2 { font-weight:var(--w-black); font-size:clamp(3.2rem,6.6vw,7.6rem); letter-spacing:-.035em; margin:1rem 0 2.5rem }
+.catice-official .big-button { border:3px solid var(--ink); background:var(--acid); font-weight:var(--w-bold); padding:1rem 1.4rem; box-shadow:6px 6px 0 var(--ink); cursor:pointer; transition:.2s }
+.catice-official .big-button:hover { transform:translate(4px,4px); box-shadow:2px 2px 0 var(--ink) }
+.catice-official .big-button b { margin-left:3rem }
+.catice-official .finale-copy p { font-size:.78rem; font-weight:700 }
+.catice-official .finale-ring { position:absolute; width:70vw; aspect-ratio:1; border:2px solid rgba(51,40,43,.2); border-radius:50%; left:-15vw; top:-18vw; box-shadow:0 0 0 8vw rgba(255,255,255,.09),0 0 0 16vw rgba(255,255,255,.05) }
+
+.catice-official footer { background:var(--ink); color:#fff; padding:2rem clamp(1.25rem,5vw,5.5rem) }
+/* 页脚大字："CAT—ICE" 是纯拉丁，走 Oswald。Oswald 的窄字面 + 7 个字里还有一个长破折号，
+   15rem 下这块字只占页脚宽度的约一半，撑不住"收尾压轴"的角色，所以字号放到 17.5vw；
+   字距从 -.05em 收到 -.01em —— Oswald 自带窄侧边距，再加负字距会挤成一条，反而变小。
+   （上限取 18rem 而不是更大：650~700px 这一段仍走桌面内边距，字再大就会顶到页脚右边。） */
+.catice-official .footer-title { font-family:var(--display); font-weight:var(--w-bold); font-size:clamp(5.5rem,17.5vw,18rem); line-height:.85; letter-spacing:-.01em; color:transparent; -webkit-text-stroke:3px #fff }
+.catice-official .footer-row { display:flex; justify-content:space-between; gap:1rem; border-top:1px solid #76696d; padding-top:1rem; font-size:.55rem }
+/* 移植新增：页脚多了一个"返回作品集"出口。包一层 flex 容器，.footer-row 仍然只有 3 个
+   子元素，space-between 的分布与原站一致（左文案 / 中文案 / 右侧动作组）。 */
+.catice-official .footer-actions { display:flex; align-items:center; gap:1rem }
+
+.catice-official .reveal { opacity:0; transform:translateY(32px); transition:opacity .75s ease,transform .75s cubic-bezier(.2,.8,.2,1); }
+.catice-official .reveal.is-visible { opacity:1; transform:none }
+/* —— 移植新增：粒子宿主 ——
+   原站把冰晶粒子 append 到 document.body 上，卸载时由浏览器整页刷新兜底。
+   浮层里不行：关掉详情页后那些 850ms 才消散的粒子会留在外层作品集页面上。
+   所以给容器内一个 position:fixed 的空层当宿主，组件卸载时整层一起消失。
+   z-index 取 108，与原来的层序一致（grain 100 < 粒子层 108 < 粒子 109 < 光标 110）。 */
+.catice-official .ice-layer { position:fixed; inset:0; z-index:108; pointer-events:none; }
+.catice-official .ice-particle { position:fixed; z-index:109; pointer-events:none; width:5px; height:8px; background:rgba(220,231,255,.8); border:1px solid rgba(85,104,174,.35); border-radius:50%; animation:particle .8s forwards }
+
+@keyframes sweep{0%,20%{transform:translateX(-180px) rotate(22deg)}70%,100%{transform:translateX(600px) rotate(22deg)}}
+@keyframes drip{0%{transform:translateY(-20px);opacity:0}20%{opacity:.75}100%{transform:translateY(350px);opacity:0}}
+@keyframes marquee{to{transform:translateX(-100%)}}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes particle{to{transform:translate(var(--dx),var(--dy)) rotate(160deg);opacity:0}}
+/* 放大层：整层淡入 + 板面从 97% 推到 100%。
+   位移只给 3%、只给图（不给遮罩）—— 遮罩一缩放就会在边缘露出背后的页面底色。 */
+@keyframes schemeFade{from{opacity:0}to{opacity:1}}
+@keyframes schemeZoom{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+
+/* —— 07 方案板：一大两小在平板档不用改结构 ——
+   01 本来就跨两列、02 / 03 各占一列，1100px 下两栏各约 485px（板面约 425px），
+   板上的分栏还读得出来。这一档只把间距与上边距收一档。
+   真正需要回收的是 650px 以下：两列在 375px 上每栏只有 161px，板上任何字都糊了。 */
+@media (max-width: 1100px){
+  .catice-official .scheme-track{gap:1.25rem;margin-top:3.5rem}
+}
+
+@media (max-width: 1000px){
+  .catice-official .hero{grid-template-columns:1fr;padding-top:9rem;padding-bottom:7rem}
+  .catice-official .hero-copy{padding:0}
+  /* 换 Noto 900 之后中文主标的字面比雅黑更宽，窄屏要再让一档才不会顶到屏幕边 */
+  .catice-official .hero h1 .cn{font-size:clamp(5.4rem,21vw,10.6rem)}
+  /* —— 拉丁副标在窄屏要跟着主标一起缩，不能用桌面那条 5.6vw ——
+     桌面档两条字号是同步的（12.5vw / 5.6vw ≈ 1 : 0.45），但 1000px 以下主标被
+     推到 21vw 去填满单列，副标若还停在 5.6vw，就会早早掉到 2.6rem 的下限：
+     实测 700px 下主标 147px / 副标 41.6px，"猫冰"比"CAT—ICE"宽出一倍，
+     描边副标缩成一小条挂在巨字下面，原本那种"实心字压在空心字上"的锁合就散了。
+     按主标实际曲线反推：21vw 段需要 9.4vw（≈0.45 倍），主标触到 10.6rem 上限后
+     副标停在 4.75rem，比值全程稳定在 0.9 上下。 */
+  .catice-official .hero h1 .en{font-size:clamp(2.6rem,9.4vw,4.75rem)}
+  .catice-official .blister-shell{justify-self:center;width:min(92%,640px);margin-top:1rem}
+  .catice-official .hero-note{position:relative;left:auto;bottom:auto;width:100%;margin-top:1rem}
+  .catice-official .scroll-cue{display:none}
+  .catice-official .section-heading,
+  .catice-official .mood-intro{grid-template-columns:1fr}
+  .catice-official .phase-board{grid-template-columns:1fr}
+  .catice-official .phase-divider{height:70px;flex-direction:row;border-inline:0;border-block:var(--line)}
+  .catice-official .phase-divider i{height:1px;width:70px;margin:0 1rem}
+  .catice-official .phase-divider b{writing-mode:initial}
+  /* 设计说明：标题区与正文双栏一起收成单列。
+     .note-head-grid 的 align-items:end 是为桌面两列底部对齐准备的，单列下会把题眼
+     压到标题的正下方贴着，所以这里把对齐方式改回 start 并给题眼补一段上边距。 */
+  .catice-official .note-head-grid{grid-template-columns:1fr;align-items:start}
+  .catice-official .note-quote{max-width:none;margin-top:2rem}
+  /* 双栏变单栏后，竖的 2px 分隔线会变成一条悬空的横线，改用 border-top 接在上一栏底部 */
+  .catice-official .note-clauses{grid-template-columns:1fr}
+  .catice-official .note-clause + .note-clause{border-left:0;border-top:var(--line)}
+  .catice-official .view-stage{min-height:auto}
+  .catice-official .emotion-grid{grid-template-columns:repeat(2,1fr)}
+  .catice-official .emotion-card:nth-child(4n+1){border-left:0}
+  .catice-official .emotion-card:nth-child(2n+1){border-left:1px solid #72666a}
+  .catice-official .finale{grid-template-columns:1fr}
+  .catice-official .finale-copy{order:-1}
+  .catice-official .section-pad{padding-top:7rem;padding-bottom:7rem}
+  /* —— 手机端减负（2026-xx 第 10 轮）：以下四处都是"桌面留白"，单列手机上只贡献高度 ——
+     blister-shell 顶部的 5.2rem 是给 euro-slot 挂钩留的，单列时上方没有东西要避让；
+     chamber 430px 是桌面 640px 宽外壳里的展示舱，92% 宽的手机上同高度就是纯空白；
+     ticker 的字号在 414px 上会换行、证明条被撑成两行；
+     finale 的 90vh 在手机上等于 806px，而它的内容（图 + 标题 + 按钮）本来就不到 600px。
+     只收高度，不动字号曲线与版式：08 详情页 2.75 屏 → 2.35 屏。 */
+  .catice-official .blister-shell{margin-top:.5rem;padding-top:3.4rem}
+  .catice-official .chamber{height:320px}
+  .catice-official .ticker{font-size:clamp(1.3rem,4.6vw,1.9rem);padding:.5rem 0}
+  .catice-official .finale{min-height:0}
+}
+@media (max-width: 650px){
+  .catice-official .site-header{height:60px;margin-bottom:-60px}
+  .catice-official .site-header nav{display:none}
+  .catice-official .header-temp{font-size:.6rem}
+  /* 移植新增：窄屏下把右侧组收紧，保证「温度 + 返回作品集」两件东西不会被挤出 header */
+  .catice-official .header-right{gap:.5rem}
+  .catice-official .header-close{padding:.4rem .55rem;font-size:.6rem}
+  .catice-official .brand b{display:none}
+  .catice-official .hero{padding-top:6rem}
+  .catice-official .hero-serial{top:72px}
+  .catice-official .hero h1 .en{-webkit-text-stroke:1.5px var(--ink)}
+  /* 2026-xx 改判（用户：「以内容为主，不要把内容藏起来」+「猫冰的区域内容显示太少」）：
+     原 hero 高 1279px ≈ 1.43 屏，正文第一节从 1279px 才开始，首屏除了标题就是舱顶。
+     收字阶 / 留白 / 舱高（400→330），hero 降到 ~780px，正文抬头落进首屏；
+     取消 min-height:100svh，让 hero 按内容高度收，而不是先占满一屏。 */
+  .catice-official .hero{min-height:0;padding-top:4.5rem;padding-bottom:2.5rem}
+  .catice-official .hero-serial{top:62px}
+  .catice-official .hero h1 .cn{font-size:clamp(3.4rem,15.5vw,6.2rem)}
+  .catice-official .hero h1 .en{font-size:clamp(1.6rem,6.6vw,3rem)}
+  .catice-official .hero-slogan{font-size:clamp(1.2rem,4.6vw,1.7rem);margin:.9rem 0 0}
+  .catice-official .hero-note{font-size:.72rem;margin-top:.75rem}
+  /* 减负（第 10 轮）：4.3rem 的挂钩留白 + 330px 展示舱在 414px 上合起来 660px，
+     而舱里那只猫只有 78% 宽、90% 高的体量 —— 收到 3rem 仍是画面主体。
+     自研轮改判：260px 舱 + 78% 宽时，猫的实际绘制只有 172×230 = 首屏 10.7%，
+     不满足「首屏产品占面 ≥25%」；且猫图 700×940（ar 0.745）是竖向，
+     宽度先于高度成为瓶颈（必须先给宽度才能放大绘制面积）。
+     故舱高 400px、猫宽 92%（≤650px 档）：contain 绘制 274×368 = 100,832 px² = 首屏 27.2%，
+     top 415 不变（仍 ≤480）。
+     2026-xx 再改判：用户要求「以内容为主」。舱高 400→330（猫仍 92% 宽、绘制约 227×304），
+     换来首屏能看到正文抬头；首屏产品占面按新口径约 18.6%，用户已明确内容优先于该指标。 */
+  .catice-official .blister-shell{padding:3rem .9rem .9rem;border-radius:1.5rem;box-shadow:8px 10px 0 var(--ink)}
+  .catice-official .edition-sticker{width:70px;right:-.5rem}
+  .catice-official .chamber{height:330px;margin-left:0}
+  .catice-official .hero-cat{width:92%;max-height:92%}
+  .catice-official .thermal-panel{margin-left:0}
+  .catice-official .cold-ruler{display:none}
+  .catice-official .state-actions{grid-template-columns:1fr}
+  .catice-official .section-pad{padding-inline:1rem}
+  /* 收尾屏（橙底）在手机上内容不到 550px，却按桌面档吃 7rem 上下留白；
+     收到 4rem 后这一屏从 766px 降到 ~670px，仍是整页最后一眼的分量。 */
+  .catice-official .finale{padding-top:4rem;padding-bottom:4rem}
+  .catice-official .section-index{right:1rem}
+  .catice-official .section-heading{display:block}
+  .catice-official .section-intro{margin-top:1.5rem}
+  .catice-official .phase-board{margin-top:3rem}
+  .catice-official .phase-visual{height:300px}
+  .catice-official .views-head{align-items:start;flex-direction:column}
+  .catice-official .view-stage{grid-template-columns:1fr;padding-top:4rem}
+  .catice-official .view-stage figure{height:350px;border-bottom:1px dashed rgba(51,40,43,.3)}
+  .catice-official .baseline{display:none}
+  .catice-official .spec-strip{grid-template-columns:1fr 1fr}
+  .catice-official .emotion-grid{padding:0 1rem}
+  .catice-official .emotion-card,
+  .catice-official .emotion-card.feature,
+  .catice-official .emotion-card.wide{grid-column:span 1;grid-row:span 1;min-height:280px}
+  .catice-official .emotion-card.feature{grid-column:span 2;min-height:400px}
+  .catice-official .mood-intro{display:block}
+  .catice-official .mood-intro p:last-child{margin-top:1.5rem}
+  .catice-official .merch-track{grid-template-columns:repeat(4,82vw)}
+  .catice-official .merch-image{height:300px}
+  /* 07 方案板：手机档回收成单列 —— 两列在 375px 上每栏只有 161px（板面 ~139px），
+     板上任何标注都读不出来，等于白放。单列下板面约 321px（375px 屏），
+     与桌面那两张小板量级接近。
+     尺寸差在单列里必然被抹平，主次改由"框重"来承担：01 的内边距与硬阴影仍比 02 / 03 重一档，
+     单列不等于三张板退回同一种。卡片内边距同步减半、硬阴影跟着收（与 .merch-card 在这一档的手感一致）；
+     背景水印放大到 15vw —— 9.6vw 在 375px 上只有 36px，描边字会糊成一条灰边。 */
+  .catice-official .scheme::before{font-size:15vw;top:3.5rem}
+  .catice-official .scheme-track{grid-template-columns:1fr;margin-top:2.5rem;gap:1.75rem}
+  .catice-official .scheme-card{padding:.7rem;box-shadow:5px 5px 0 var(--ink)}
+  /* 单列下必须把 01 的 vh 上限去掉：62vh × 1.5 在矮屏（横屏手机、矮窗口）会算出
+     比下面两张还窄的宽度，"大图"反倒成了三张里最小的。单列就该铺满栏宽。 */
+  .catice-official .scheme-card:nth-child(1){width:100%;padding:.85rem;box-shadow:6px 6px 0 var(--ink)}
+  .catice-official .scheme-card:nth-child(1):hover{box-shadow:8px 8px 0 var(--ink)}
+  /* 触屏没有 hover：提示片在手机上常显（压到 65% 不抢戏），
+     否则"这块板可以点开放大"在手机端没有任何入口线索 */
+  .catice-official .scheme-zoom-trigger::after{opacity:.65}
+  .catice-official .scheme-card-body{padding:1rem .1rem .15rem}
+  .catice-official .finale{padding-top:6rem}
+  .catice-official .footer-row{flex-direction:column}
+  .catice-official .footer-actions{flex-wrap:wrap}
+  .catice-official .footer-title{-webkit-text-stroke:2px #fff}
+  .catice-official .cursor-ice{display:none}
+}
+/* 原站这里还有一条 html{scroll-behavior:auto}，因为 smooth 滚动已经不在 CSS 里做
+   （组件改用 scrollIntoView，并按 prefers-reduced-motion 决定是否平滑），
+   这条规则失去作用对象，故未保留；其余声明原样保留。 */
+@media (prefers-reduced-motion: reduce){
+  .catice-official .ticker div,
+  .catice-official .ice-glint,
+  .catice-official .condensation i,
+  .catice-official .scroll-cue span{animation:none}
+  .catice-official .reveal{opacity:1;transform:none;transition:none}
+  /* 放大层的淡入与 3% 推近同属"装饰性动效"：关掉后遮罩与板面直接到位，不影响任何操作 */
+  .catice-official .scheme-lightbox,
+  .catice-official .scheme-lightbox-stage img{animation:none}
+  .catice-official .scheme-zoom-trigger::after{transition:none}
+  .catice-official .hero-cat,
+  .catice-official .merch-image img,
+  .catice-official .emotion-card img{transition:none}
+}
+
+/* 手机端触控目标补偿（Gemini 第 10 轮标准：所有可点目标 >=44x44）。仅 <=1023px；桌面端不受影响。 */
+@media (max-width:1023px){
+.catice-official .brand{min-height:44px}
+.catice-official .header-close{min-height:44px;display:inline-flex;align-items:center}
+.catice-official .action-btn{min-height:44px}
+.catice-official .view-switch{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.catice-official .footer-actions button{min-height:44px;display:inline-flex;align-items:center;padding:.4rem .5rem}
+}
+/* g13-set2 · 08 底部按钮边框/阴影对齐（Gemini 原文；选择器按本仓实际类名落地） */
+@media (max-width:1023px){
+  .catice-official button,
+  .catice-official .header-close{border:1.5px solid #151515!important;box-shadow:2px 2px 0 #151515!important;border-radius:0!important}
+}
+
+/* ============================================================================
+   样张 A · 温润纸质展板（用户选定方向，先做 1 页样张；仅 <=1023px，桌面端零改动）
+   依据：49 张 Pinterest 参考的逐张量化（E:\deepseek\tmp\pin-refs-features.json）
+     · 亮底 27/49、暗底 5/49、平均饱和度 9.2%、竖版(≤0.8) 35/49
+     · 最高频强调色：陶土棕 #C28860(30.5%)、暖灰 #C0BAB8 / #DCD4D1 / #C5B7AF、
+       酒红 #552229 / #421D19 / #8F6769；单点朱红 #B2141F 仅 1 张
+     · 参考里反复出现「visible grids / grid guide」题材 → 版面感来自显式分度线
+   三条改法：① 纸面三档：卡面 #FCFCFC / 副面 #F4F2ED / 区块底 #ECE7DF
+            ② 强调色降饱和：#ff7a2f → #c2885f；主按钮改酒红；去掉酸绿 #c7ff3e
+            ③ 显式网格：每节标题上方一条 1px 分度尺（24px 刻度 + 38px 陶土定位段）
+   回滚：整块删除即可，不引入新选择器之外的结构依赖。
+   ============================================================================ */
+@media (max-width:1023px){
+  .catice-official{
+    --cream:#fcfcfc; --paper:#f4f2ed; --paper-deep:#ece7df;
+    --orange:#c2885f; --orange-soft:#e0c9b4; --acid:#552229;
+    --hairline:#d8d4cc;
+  }
+  /* ① 纸面三档：默认副面，读到正文的节用卡面，图版/卡片区落到区块底 */
+  .catice-official{background:var(--paper)}
+  .catice-official .site-header{background:rgba(252,252,252,.9);border-bottom:1px solid var(--hairline)}
+  .catice-official #concept,
+  .catice-official #views,
+  .catice-official #merch{background:var(--cream)}
+  .catice-official .view-stage figure,
+  .catice-official .phase-card,
+  .catice-official .emotion-card,
+  .catice-official .phase-visual{background:var(--paper-deep)}
+  /* ③ 显式分度尺：节标题上沿基线 + 24px 刻度 + 陶土定位段；节编号改酒红 */
+  .catice-official .section-heading{position:relative;padding-top:1.5rem;border-top:1px solid var(--hairline)}
+  .catice-official .section-heading::before{
+    content:"";position:absolute;top:-1px;left:0;right:0;height:6px;
+    background:
+      linear-gradient(var(--orange),var(--orange)) left top/38px 1px no-repeat,
+      repeating-linear-gradient(90deg,var(--hairline) 0 1px,transparent 1px 24px) left top/100% 6px no-repeat;
+  }
+  .catice-official .section-index{color:var(--acid)}
+  /* ② 降饱和后的收尾屏（自动取 --orange）与主按钮（原为酸绿，改酒红） */
+  .catice-official .big-button{background:var(--acid);color:#fff;border-width:2px;box-shadow:3px 3px 0 var(--ink)}
+  .catice-official .emotion-card.feature{background:var(--orange)}
+  /* ④ 内容为主：手机端每节上下 7rem(224px) 的桌面留白是"空"的主要来源
+     —— 6 节共占 1344px，占全页 4497px 的 30%。收到 3.25rem(52px)，
+     第 1 节抬头由 1192px 提到 ~1000px，首屏末尾即可看到"01 · 概念"。
+     同时把 hero 的纵向空气压实（不动任何文案、不删任何模块）。 */
+  .catice-official .section-pad{padding-top:3.25rem;padding-bottom:3.25rem}
+  .catice-official .hero{padding-top:3.5rem}
+  .catice-official .hero h1 .cn{font-size:clamp(3.2rem,14.5vw,5.4rem)}
+  .catice-official .hero-slogan{margin-top:.6rem}
+  .catice-official .hero-note{margin-top:.55rem}
+  .catice-official .blister-shell{padding:1.75rem .9rem .9rem}
+  .catice-official .chamber{height:300px}
+  .catice-official .ticker{padding:.25rem 0}
+}

@@ -1,0 +1,442 @@
+/* ============================================================
+   SketchFolderGallery V2 —— 放大字号 + 文件夹与图纸带融合
+   （按用户参考文件实现，保留其全部规则）
+   ============================================================ */
+
+.sfg {
+  --accent: #E67E33;
+  position: relative;
+  font-family: 'Inter', 'Noto Sans SC', 'PingFang SC', sans-serif;
+}
+
+/* —— 文件夹行 —— */
+.sfg-folders {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px 44px;
+  padding: 10px 8px 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.sfg-folder {
+  position: relative;
+  width: 160px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0.55;
+  filter: saturate(0.8);
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+.sfg-folder:hover,
+.sfg-folder.is-active {
+  opacity: 1;
+  filter: saturate(1);
+}
+.sfg-folder:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.sfg-folder__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 120px;
+  transform-origin: 50% 100%;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1.15);
+}
+/* hover：略为上浮放大作为"可点击"提示，不翻开 */
+.sfg-folder:hover .sfg-folder__inner { transform: translateY(-4px) scale(1.04); }
+/* 点击打开：先 pop 放大一下，再保持抬起 */
+.sfg-folder.is-active .sfg-folder__inner {
+  transform: translateY(-10px);
+  animation: sfg-folder-pop 0.4s cubic-bezier(0.2, 0.8, 0.3, 1.2);
+}
+
+@keyframes sfg-folder-pop {
+  0% { transform: translateY(-2px) scale(1.1); }
+  60% { transform: translateY(-12px) scale(0.99); }
+  100% { transform: translateY(-10px) scale(1); }
+}
+
+.sfg-folder__back {
+  position: absolute;
+  inset: 0;
+  background: #232326;
+  border: 2px solid #111;
+  border-radius: 8px 22px 22px 22px;
+  box-shadow: 6px 8px 0 rgba(17, 17, 17, 0.85);
+}
+.sfg-folder__tab {
+  position: absolute;
+  z-index: 2;
+  top: -15px;
+  left: 3px;
+  width: 58px;
+  height: 17px;
+  background: #232326;
+  border: 2px solid #111;
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.sfg-folder__papers { position: absolute; inset: 0; }
+.sfg-folder__paper {
+  position: absolute;
+  left: 7%;
+  width: 86%;
+  background: #fdfdfd;
+  border: 2px solid #111;
+  border-radius: 10px;
+  transition: transform 0.35s cubic-bezier(0.25, 0.6, 0.25, 1.15);
+}
+.sfg-folder__paper.p1 { bottom: -4px; height: 72%; z-index: 3; }
+.sfg-folder__paper.p2 { bottom: -8px; height: 64%; z-index: 2; transform: rotate(-2.5deg); }
+.sfg-folder__paper.p3 { bottom: -12px; height: 56%; z-index: 1; transform: rotate(3.5deg); }
+
+/* 点击打开后：纸角大幅下探、扇形展开（hover 不再自主翻开） */
+.sfg-folder.is-active .sfg-folder__paper.p1 { transform: translateY(24px) rotate(-6deg); }
+.sfg-folder.is-active .sfg-folder__paper.p2 { transform: translateY(18px) rotate(4deg); }
+.sfg-folder.is-active .sfg-folder__paper.p3 { transform: translateY(15px) rotate(-3deg); }
+
+.sfg-folder__front {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  background: #2c2c2f;
+  border: 2px solid #111;
+  border-radius: 8px 22px 22px 22px;
+  transform-origin: 50% 100%;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+/* 点击打开后：前盖翻起（hover 保持合上） */
+.sfg-folder.is-active .sfg-folder__front {
+  background: var(--accent);
+  transform: skew(18deg) scaleY(0.5);
+}
+
+.sfg-folder__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 18px;
+}
+.sfg-folder__name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.2;
+}
+.sfg-folder.is-active .sfg-folder__name {
+  background: var(--accent);
+  border: 1.5px solid #111;
+  border-radius: 999px;
+  padding: 3px 14px;
+  box-shadow: 2px 2px 0 rgba(17, 17, 17, 0.8);
+}
+.sfg-folder__fig {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: rgba(17, 17, 17, 0.5);
+}
+
+/* —— 图纸带：纸面承接层 —— */
+.sfg-strip {
+  position: relative;
+  margin-top: 30px;
+  padding: 28px 20px 18px;
+  background: #f6f5f0;
+  border: 2px solid #111;
+  border-radius: 22px;
+  box-shadow: 6px 6px 0 rgba(17, 17, 17, 0.18);
+}
+.sfg-strip::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 40px;
+  right: 40px;
+  border-top: 2px dashed rgba(17, 17, 17, 0.25);
+  z-index: 0;
+}
+
+.sfg-papers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.sfg-paper {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  animation: sfg-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1.1) both;
+}
+@keyframes sfg-in {
+  from { opacity: 0; transform: translateY(-18px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+.sfg-paper__card {
+  display: block;
+  background: #fff;
+  border: 2px solid #111;
+  border-radius: 16px;
+  box-shadow: 5px 5px 0 rgba(17, 17, 17, 0.85);
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.sfg-paper:hover .sfg-paper__card {
+  transform: translateY(-4px);
+  box-shadow: 7px 8px 0 rgba(17, 17, 17, 0.85);
+}
+
+.sfg-paper__imgwrap {
+  position: relative;
+  display: block;
+  background: #eee;
+}
+.sfg-paper__imgwrap img {
+  display: block;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+/* 仅有单张图纸的文件夹：通栏展示，宽幅图完整可见不裁切 */
+.sfg-papers--single {
+  grid-template-columns: 1fr;
+}
+.sfg-papers--single .sfg-paper__imgwrap {
+  background: #f6f5f0;
+}
+.sfg-papers--single .sfg-paper__imgwrap img {
+  height: 230px;
+  object-fit: contain;
+}
+.sfg-paper__zoomtag {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: var(--accent);
+  border: 1.5px solid #111;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #111;
+  box-shadow: 1.5px 1.5px 0 rgba(17, 17, 17, 0.8);
+}
+
+.sfg-paper__body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px 14px;
+}
+.sfg-paper__num {
+  flex: 0 0 auto;
+  background: #111;
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  border-radius: 8px;
+  padding: 5px 9px;
+  border: 1.5px solid #111;
+}
+.sfg-paper__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.sfg-paper__title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.25;
+}
+.sfg-paper__tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(17, 17, 17, 0.45);
+}
+
+.sfg-hint {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(17, 17, 17, 0.5);
+}
+
+/* 引导空态：未点击文件夹时 */
+.sfg-hint--guide {
+  margin: 6px 0;
+  padding: 30px 16px;
+  border: 2px dashed rgba(17, 17, 17, 0.28);
+  border-radius: 16px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+/* —— 放大查看 —— */
+.sfg-zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(17, 17, 17, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: zoom-out;
+  animation: sfg-zoom-in 0.2s ease both;
+}
+@keyframes sfg-zoom-in { from { opacity: 0; } to { opacity: 1; } }
+.sfg-zoom__box {
+  position: relative;
+  max-width: min(920px, 92vw);
+  max-height: 88vh;
+  background: #fff;
+  border: 2px solid #111;
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.55);
+  cursor: default;
+  overflow: auto;
+}
+.sfg-zoom__box img {
+  display: block;
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 13px;
+  background: #eee;
+}
+.sfg-zoom__cap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 4px 2px;
+}
+.sfg-zoom__num {
+  background: #111;
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+.sfg-zoom__title { font-size: 15px; font-weight: 800; color: #111; }
+.sfg-zoom__tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(17, 17, 17, 0.5);
+}
+.sfg-zoom__close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #111;
+  background: #111;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+.sfg-zoom__close:hover { transform: scale(1.1) rotate(90deg); }
+
+/* —— 兼容兜底：无图占位 —— */
+.sfg-paper__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 170px;
+  background: #eee;
+  color: rgba(17, 17, 17, 0.4);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.sfg-zoom__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  border-radius: 13px;
+  background: #eee;
+  color: rgba(17, 17, 17, 0.4);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* —— 移动端 —— */
+@media (max-width: 520px) {
+  .sfg-folders { gap: 18px 20px; }
+  .sfg-folder { width: 118px; }
+  .sfg-folder__inner { height: 92px; }
+  .sfg-paper__imgwrap img { height: 150px; }
+  .sfg-strip { padding: 22px 14px 14px; }
+}
+
+/* —— <1024px：图纸带改单轨横向 snap 画廊（手机上纵向堆叠会吃掉 1.5 屏） —— */
+@media (max-width: 1023px) {
+  .sfg-papers {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sfg-paper {
+    flex: 0 0 84%;
+    scroll-snap-align: center;
+  }
+  .sfg-papers--single {
+    display: block;
+  }
+  .sfg-papers--single .sfg-paper {
+    flex: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sfg-folder__inner, .sfg-folder__paper, .sfg-folder__front,
+  .sfg-paper, .sfg-paper__card, .sfg-zoom, .sfg-zoom__close {
+    animation: none;
+    transition: none;
+  }
+}
